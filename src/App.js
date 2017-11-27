@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './grid.css';
+import PropTypes from 'prop-types';
+
+import { Switch, Route } from 'react-router-dom'
 
 import Exchange from './exchange';
+import Test from './test';
+import Header from './partials/header'
+import Footer from './partials/footer'
 
-import PropTypes from 'prop-types';
+import 'material-components-web/dist/material-components-web.min.css';
+
 
 class App extends Component {
 
@@ -22,7 +28,6 @@ class App extends Component {
 
 
     componentDidMount() {
-        console.log('leee')
         console.log(this.contextTypes)
 
         this.App();
@@ -74,13 +79,21 @@ class App extends Component {
 
   render() {
 
-        let css = {
-            paddingTop: "20px"
-        }
-
     return (
-      <div className="App" style={css}>
-          <Exchange/>
+      <div className="App">
+          <Header/>
+          <div className="page-content">
+
+
+              <Switch>
+                  <Route exact path='/' component={Exchange}/>
+                  <Route exact path='/exchange' component={Exchange}/>
+                  <Route path='/test' component={Test} />
+              </Switch>
+          </div>
+          <Footer/>
+
+
       </div>
     );
   }
