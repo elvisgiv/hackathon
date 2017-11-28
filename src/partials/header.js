@@ -4,11 +4,10 @@ import logo from '../img/logos/galactic_logo_white.png';
 import account_icon from '../img/icons/account.svg';
 import down_icon from '../img/icons/down.svg';
 
-//import AlarmIcon from 'react-material-icons/icons/action/alarm.js';
-
-
 import { MenuAnchor, Menu, MenuItem, MenuDivider} from 'react-mdc-web/lib';
-//import { Ripple } from '@react-mdc/ripple/lib/Ripple';
+//import FaBeer from 'react-icons/lib/md/';
+
+import {MdCancel, MdChat, MdCheck} from 'react-icons/lib/md';
 
 
 export default class Header extends React.Component {
@@ -41,6 +40,10 @@ export default class Header extends React.Component {
                         <Link to='/exchange'>
                             <img src={logo} className="header-logo" />
                         </Link>
+
+                        <MdCancel />
+                        <MdChat />
+                        <MdCheck style={{fill: "red"}} />
                     </div>
 
                     <div className="fl-wrap fl-grow padd-left-md hidden">
