@@ -1,7 +1,8 @@
 import React from 'react'
+import ReactDOM from "react-dom";
+const isEmpty = require('lodash/isEmpty');
 
-
-export default class MetamaskConnector extends React.Component {
+export default class WalletConnector extends React.Component {
 
     constructor(props) {
         super(props);
@@ -11,15 +12,15 @@ export default class MetamaskConnector extends React.Component {
     }
 
     componentDidMount() {
-        this.Exchange();
-        this.interval = setInterval(() => this.Exchange(), 5000);
+        this.WalletConnector();
+        this.interval = setInterval(() => this.WalletConnector(), 5000);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
-    Exchange(){
+    WalletConnector(){
         this.fetchNetwork()
         this.fetchAccounts()
         this.fetchBalances()
@@ -39,8 +40,10 @@ export default class MetamaskConnector extends React.Component {
                     networkError: null,
                     networkId: netId,
                     web3connection: true
-
                 })
+
+                this.setNetworkName()
+
             }
         });
     }
@@ -54,6 +57,21 @@ export default class MetamaskConnector extends React.Component {
             return accounts;
         } catch (e) {
             return [];
+        }
+    }
+
+    setNetworkName() {
+        switch (this.state.networkId) {
+            case '1':
+                return this.setState({networkName: 'MAINNET'});
+            case '2':
+                return this.setState({networkName: 'MORDEN'});
+            case '42':
+                return this.setState({networkName: 'KOVAN'});
+            case '3':
+                return this.setState({networkName: 'ROPSTEN'});
+            default:
+                return this.setState({networkName: 'UNKNOWN'});
         }
     }
 
@@ -71,9 +89,6 @@ export default class MetamaskConnector extends React.Component {
         //web3.eth.getBalance(web3.eth.accounts[0],
         web3.eth.getBalance("0x8d12A197cB00D4747a1fe03395095ce2A5CC6819",
             function (error, balance) {
-                //console.log(error)
-                //console.log(balance.c.slice(-1).pop())
-                //console.log(balance.c[0])
                 self.setState({balance: balance.c[0]})
             }
         )
@@ -84,12 +99,14 @@ export default class MetamaskConnector extends React.Component {
 
     }
 
-
     render() {
-        return (<div/>);
+        return (
+           <div></div>
+        );
     }
-}
 
+
+}
 
 function getNetwork(networkId) {
     switch (networkId) {

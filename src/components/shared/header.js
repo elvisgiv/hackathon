@@ -12,9 +12,9 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            walletConnector: {}
         };
-
         this.openMenu = this.openMenu.bind(this)
     }
 
@@ -25,7 +25,18 @@ export default class Header extends React.Component {
         this.setState({open:true})
     }
 
+
+    componentWillReceiveProps(){
+        if (this.props.walletConnector){
+            this.setState({walletConnector: this.props.walletConnector.state})
+        }
+    }
+
     render() {
+        if(!this.props.walletConnector){
+            return <div>wait....</div>
+        }
+
         return (
             <div className="header">
                 <div className="header-inner fl-cont fl-center-h" >
@@ -39,7 +50,7 @@ export default class Header extends React.Component {
                         <div className="fl-cont">
                             <div className="fl-wrap fl-grow ">
                                 <Link to='/test'>
-                                    Test
+                                    test
                                 </Link>
                             </div>
 
@@ -50,8 +61,8 @@ export default class Header extends React.Component {
 
                                     </div>
                                     <div className="fl-wrap padd-left-10">
-                                        <p className="network-badge">MAINNET</p>
-                                        <p className="no-marg account-badge">0x45647896546786754</p>
+                                        <p className="network-badge">{this.state.walletConnector.networkName}</p>
+                                        <p className="no-marg account-badge">{this.state.walletConnector.ethAccounts}</p>
                                     </div>
                                     <div className="fl-wrap padd-left-10  gx-icon">
                                         <MdKeyboardArrowDown className="gx-icon"/>

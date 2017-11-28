@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Switch, Route } from 'react-router-dom'
 
+import WalletConnector from './components/wallet_connector';
 import Exchange from './components/exchange';
 import Test from './components/test';
 import Header from './components/shared/header'
@@ -15,31 +16,28 @@ class App extends Component {
     constructor(props, context) {
         super(props);
         this.state = {web3Context: context.web3};
-
         const web3Context = context.web3;
-
-        //console.log(props)
-        //console.log(context)
-
-
     }
 
-
     componentDidMount() {
-        console.log(this.contextTypes)
-
         this.App();
         this.interval = setInterval(() => this.App(), 5000);
     }
 
     App(){
-
         this.fetchNetwork()
         this.getAccounts()
-
-        console.log(this.state)
-
     }
+
+
+    walletConnectorSafe(){
+        if(!this.walletConnector){
+            return false
+        }else{
+            return this.walletConnector
+        }
+    }
+
 
     getAccounts() {
         try {
@@ -79,10 +77,13 @@ class App extends Component {
 
     return (
       <div className="App">
-          <Header/>
+          <Header walletConnector={this.walletConnector}/>
+
+          <WalletConnector ref={instance => { this.walletConnector = instance; }}/>
+
+
+
           <div className="page-content">
-
-
               <Switch>
                   <Route exact path='/' component={Exchange}/>
                   <Route exact path='/exchange' component={Exchange}/>
