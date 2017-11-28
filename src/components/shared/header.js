@@ -5,7 +5,7 @@ import account_icon from '../../images/icons/account.svg';
 import down_icon from '../../images/icons/down.svg';
 
 import { MenuAnchor, Menu, MenuItem, MenuDivider} from 'react-mdc-web/lib';
-import {MdCancel, MdChat, MdCheck} from 'react-icons/lib/md';
+import {MdAccountCircle, MdKeyboardArrowDown} from 'react-icons/lib/md';
 
 export default class Header extends React.Component {
 
@@ -46,39 +46,30 @@ export default class Header extends React.Component {
                             <div  className="fl-wrap  fl-center-h">
                                 <div className="gx-bage fl-cont fl-center-h hand-cursor" onClick={this.openMenu}>
                                     <div className="fl-wrap gx-icon">
-                                        <img src={account_icon} className="gx-icon"/>
+                                        <MdAccountCircle className="gx-icon"/>
+
                                     </div>
                                     <div className="fl-wrap padd-left-10">
                                         <p className="network-badge">MAINNET</p>
                                         <p className="no-marg account-badge">0x45647896546786754</p>
                                     </div>
                                     <div className="fl-wrap padd-left-10  gx-icon">
-                                        <img src={down_icon} className="sm-icon gr-icon gx-icon"/>
+                                        <MdKeyboardArrowDown className="gx-icon"/>
                                     </div>
 
                                 </div>
-                                <MenuAnchor>
+                                <MenuAnchor className="gx-mdc-menu">
                                     <Menu
                                         right
                                         open={this.state.open}
                                         onClose={()=>{this.setState({open:false})}}
                                     >
-                                        <MenuItem>
-                                            Andromeda
-                                        </MenuItem>
-                                        <MenuItem>
-                                            Black Eye Galaxy
-                                        </MenuItem>
-                                        <MenuItem>
-                                            Bode's Galaxy
-                                        </MenuItem>
-                                        <MenuItem>
-                                            Cartwheel Galaxy
-                                        </MenuItem>
-                                        <MenuDivider/>
-                                        <MenuItem>
-                                            Cosmos Redshift 7
-                                        </MenuItem>
+                                        <div>
+                                            <MdAccountCircle className="gx-icon"/>
+                                            <MdAccountCircle className="gx-icon"/>
+                                            <MdAccountCircle className="gx-icon"/>
+                                        </div>
+
                                     </Menu>
                                 </MenuAnchor>
 

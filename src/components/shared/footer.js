@@ -10,7 +10,7 @@ export default class Footer extends React.Component {
                     </div>
                     <div className="fl-wrap padd-ri-10 footer-company">
                         <Link to='/exchange' className="footer-link">
-                            <h6 className="no-marg footer-text">© 2017 Galactic Exchange</h6>
+                            <h6 className="no-marg footer-text">© {(new Date().getFullYear())} Galactic Exchange</h6>
                         </Link>
                     </div>
                     <div className="fl-wrap padd-left-10">
@@ -18,11 +18,8 @@ export default class Footer extends React.Component {
                             <h6 className="no-marg footer-text link">Privacy Policy</h6>
                         </a>
                     </div>
-
-
                     <div className="fl-wrap fl-grow">
                     </div>
-
                 </div>
 
             </div>
