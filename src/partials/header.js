@@ -4,11 +4,11 @@ import logo from '../img/logos/galactic_logo_white.png';
 import account_icon from '../img/icons/account.svg';
 import down_icon from '../img/icons/down.svg';
 
-import AlarmIcon from 'react-material-icons/icons/action/alarm.js';
+//import AlarmIcon from 'react-material-icons/icons/action/alarm.js';
 
 
 import { MenuAnchor, Menu, MenuItem, MenuDivider} from 'react-mdc-web/lib';
-import { Ripple } from '@react-mdc/ripple/lib/Ripple';
+//import { Ripple } from '@react-mdc/ripple/lib/Ripple';
 
 
 export default class Header extends React.Component {
@@ -65,7 +65,6 @@ export default class Header extends React.Component {
                                     </div>
 
                                 </div>
-                                <AlarmIcon/>
                                 <MenuAnchor>
                                     <Menu
                                         right
