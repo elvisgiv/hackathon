@@ -25,7 +25,6 @@ export default class Header extends React.Component {
         this.setState({open:true})
     }
 
-
     render() {
         return (
             <div className="header">
@@ -34,10 +33,6 @@ export default class Header extends React.Component {
                         <Link to='/exchange'>
                             <img src={logo} className="header-logo" />
                         </Link>
-
-                        <MdCancel />
-                        <MdChat />
-                        <MdCheck style={{fill: "red"}} />
                     </div>
 
                     <div className="fl-wrap fl-grow padd-left-md hidden">
