@@ -1,17 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import logo from '../img/logos/galactic_logo_white.png';
-import account_icon from '../img/icons/account.svg';
-import down_icon from '../img/icons/down.svg';
+import logo from '../../images/logos/galactic_logo_white.png';
+import account_icon from '../../images/icons/account.svg';
+import down_icon from '../../images/icons/down.svg';
 
 import { MenuAnchor, Menu, MenuItem, MenuDivider} from 'react-mdc-web/lib';
-//import FaBeer from 'react-icons/lib/md/';
-
 import {MdCancel, MdChat, MdCheck} from 'react-icons/lib/md';
 
-
 export default class Header extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -28,8 +24,6 @@ export default class Header extends React.Component {
     openMenu(){
         this.setState({open:true})
     }
-
-
 
 
     render() {

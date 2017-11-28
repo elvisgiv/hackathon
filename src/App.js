@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import './grid.css';
 import PropTypes from 'prop-types';
 
 import { Switch, Route } from 'react-router-dom'
 
-import Exchange from './exchange';
-import Test from './test';
-import Header from './partials/header'
-import Footer from './partials/footer'
+import Exchange from './components/exchange';
+import Test from './components/test';
+import Header from './components/shared/header'
+import Footer from './components/shared/footer'
 
 import 'material-components-web/dist/material-components-web.min.css';
-
 
 class App extends Component {
 
