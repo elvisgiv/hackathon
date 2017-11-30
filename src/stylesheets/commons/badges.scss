@@ -16,4 +16,8 @@
 .account-badge{
     font-weight: 500;
     font-size: 13px;
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

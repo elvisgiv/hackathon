@@ -4,7 +4,7 @@ import logo from '../../images/logos/galactic_logo_white.png';
 import account_icon from '../../images/icons/account.svg';
 import down_icon from '../../images/icons/down.svg';
 
-import { MenuAnchor, Menu, MenuItem, MenuDivider} from 'react-mdc-web/lib';
+import { MenuAnchor, Menu, MenuItem, MenuDivider, Button} from 'react-mdc-web/lib';
 import {MdAccountCircle, MdKeyboardArrowDown} from 'react-icons/lib/md';
 
 export default class Header extends React.Component {
@@ -48,10 +48,19 @@ export default class Header extends React.Component {
 
                     <div className="fl-wrap fl-grow padd-left-md hidden">
                         <div className="fl-cont">
-                            <div className="fl-wrap fl-grow ">
-                                <Link to='/test'>
-                                    test
+                            <div className="fl-wrap fl-grow fl-center-vert">
+                                <Link to='/test' className="marg-left-10">
+                                    <Button className="gx-btn gx-btn-def">
+                                        Markets
+                                    </Button>
                                 </Link>
+
+                                <Link to='/test' className="marg-left-10">
+                                    <Button className="gx-btn gx-btn-transp">
+                                        Help
+                                    </Button>
+                                </Link>
+
                             </div>
 
                             <div  className="fl-wrap  fl-center-h">
@@ -76,6 +85,8 @@ export default class Header extends React.Component {
                                         onClose={()=>{this.setState({open:false})}}
                                     >
                                         <div>
+                                            <p>Balance: {this.state.walletConnector.balance} ETH</p>
+
                                             <MdAccountCircle className="gx-icon"/>
                                             <MdAccountCircle className="gx-icon"/>
                                             <MdAccountCircle className="gx-icon"/>
