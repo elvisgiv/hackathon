@@ -1,10 +1,13 @@
 import React from 'react'
 import {Link, Switch, Route} from 'react-router-dom'
+import SearchInput, {createFilter} from 'react-search-input'
+import {MdSearch} from 'react-icons/lib/md';
 
-import MarketTest from './market'
 import 'material-components-web/dist/material-components-web.min.css';
 
-import {MdSearch} from 'react-icons/lib/md';
+
+
+const KEYS_TO_FILTERS = ['symbol']
 
 
 function getRandomInt(min, max) {
@@ -45,8 +48,14 @@ export default class Markets extends React.Component {
 
         this.state = {
             markets: generateMarketsData(),
-            timer: null
+            timer: null,
+            searchTerm: ''
         };
+        this.searchUpdated = this.searchUpdated.bind(this)
+    }
+
+    searchUpdated (term) {
+        this.setState({searchTerm: term})
     }
 
     componentDidMount() {
@@ -65,9 +74,9 @@ export default class Markets extends React.Component {
 
     render() {
 
-        //const filteredMarkets = this.state.coins.filter(createFilter(this.props.searchTerm, KEYS_TO_FILTERS));
+        const filteredMarkets = this.state.markets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
-        let markets = this.state.markets.map((item, i) => (
+        let markets = filteredMarkets.map((item, i) => (
             <div className="fl-cont market bord-bott" key={i.toString()}>
                 <div className="fl-wrap padd-ri-md">
                     <Link to={`/exchange/${item.symbol}`} className="undec white-text">
@@ -99,6 +108,7 @@ export default class Markets extends React.Component {
                     </div>
 
                     <div className="fl-wrap ">
+                        <SearchInput className="search-input" onChange={this.searchUpdated} />
                         <MdSearch className="gx-icon lt-gr-svg"/>
                     </div>
                 </div>
