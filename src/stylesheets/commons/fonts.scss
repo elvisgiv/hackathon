@@ -3,10 +3,19 @@ h1, h2, h3, h4, h5, h6, p, span {
   font-family: 'Roboto', sans-serif;
 }
 
-.link{
-  color: #266ad0 !important;
-}
+.link{  color: #266ad0 !important; }
 
 .lite-gr-text{
   color: #b5b5b5;
 }
+
+.regular{
+  font-weight: 400;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.undec{ text-decoration: none !important; }
+.inl{ display: inline !important; }

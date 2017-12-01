@@ -83,12 +83,10 @@ class App extends Component {
 
           <WalletConnector ref={instance => { this.walletConnector = instance; }}/>
 
-
-
           <div className="page-content">
               <Switch>
                   <Route exact path='/' component={Exchange}/>
-                  <Route exact path='/exchange' component={Exchange}/>
+                  <Route exact path='/exchange/:symbol' component={Exchange}/>
                   <Route path='/test' component={Test} />
               </Switch>
           </div>

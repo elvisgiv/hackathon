@@ -1,4 +1,7 @@
 import React from 'react'
+import {Link, Switch, Route} from 'react-router-dom'
+
+import MarketTest from './market'
 import 'material-components-web/dist/material-components-web.min.css';
 
 import {MdSearch} from 'react-icons/lib/md';
@@ -13,7 +16,7 @@ function getRandomArbitrary(min, max) {
 }
 
 const markets = [
-    'PPT', 'EOS', 'Qtum', 'Civic', 'StorjToken', '0x Token', 'Bytom', 'KickCoin', 'Veritaseum', 'eBTC', 'FunFair', 'Monetha', 'Salt'
+    'ppt', 'eos', 'qtum', 'cvc', 'storj', 'zrx', 'btm', 'kick', 'veri', 'ebtc', 'fun', 'mnt', 'salt'
 ]
 
 function generateMarketsData() {
@@ -52,7 +55,7 @@ export default class Markets extends React.Component {
                 this.setState({
                     markets: generateMarketsData()
                 });
-            }, 15000)
+            }, 4000)
         });
     }
 
@@ -64,20 +67,21 @@ export default class Markets extends React.Component {
 
         //const filteredMarkets = this.state.coins.filter(createFilter(this.props.searchTerm, KEYS_TO_FILTERS));
 
-
         let markets = this.state.markets.map((item, i) => (
-            <div className="fl-cont market bord-bott">
+            <div className="fl-cont market bord-bott" key={i.toString()}>
                 <div className="fl-wrap padd-ri-md">
-                    <h5 className="no-marg">{item.symbol}</h5>
+                    <Link to={`/exchange/${item.symbol}`} className="undec white-text">
+                        <h5 className="no-marg uppercase">{item.symbol}</h5>
+                    </Link>
                 </div>
                 <div className="fl-wrap padd-ri-md">
-                    <h5 className="no-marg">{item.price}</h5>
+                    <h5 className="regular no-marg">{item.price}</h5>
                 </div>
                 <div className="fl-wrap padd-ri-md">
-                    <h5 className="no-marg">{item.change}</h5>
+                    <h5 className={ 'regular no-marg ' + (item.change > 0 ? 'green-text' : 'red-text') } >{item.change}%</h5>
                 </div>
                 <div className="fl-wrap padd-ri-md">
-                    <h5 className="no-marg">{item.volume}</h5>
+                    <h5 className="regular no-marg">{item.volume}</h5>
                 </div>
             </div>
         ))
@@ -102,8 +106,6 @@ export default class Markets extends React.Component {
                 <div className="padd-10">
                     {markets}
                 </div>
-
-
 
             </div>
 

@@ -41,7 +41,7 @@ export default class Header extends React.Component {
             <div className="header">
                 <div className="header-inner fl-cont fl-center-h" >
                     <div className="fl-wrap padd-ri-md">
-                        <Link to='/exchange'>
+                        <Link to='/exchange/eos'>
                             <img src={logo} className="header-logo" />
                         </Link>
                     </div>
@@ -49,7 +49,7 @@ export default class Header extends React.Component {
                     <div className="fl-wrap fl-grow padd-left-md hidden">
                         <div className="fl-cont">
                             <div className="fl-wrap fl-grow fl-center-vert">
-                                <Link to='/exchange' className="marg-left-10">
+                                <Link to='/exchange/eos' className="marg-left-10">
                                     <Button className="gx-btn gx-btn-def">
                                         Exchange
                                     </Button>
