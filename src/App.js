@@ -6,6 +6,8 @@ import { Switch, Route } from 'react-router-dom'
 import WalletConnector from './components/wallet_connector';
 import Exchange from './components/exchange';
 import Test from './components/test';
+import Markets from './components/markets';
+
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
 

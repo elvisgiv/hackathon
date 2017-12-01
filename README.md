@@ -40,4 +40,10 @@ React wrapper for MDC: https://react-mdc.github.io/#/
 
 
 
+### Charts lib
+
+1) https://github.com/rrag/react-stockcharts
+2) https://github.com/amcharts/amcharts3-react
+
+
 

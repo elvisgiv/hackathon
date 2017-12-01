@@ -16,11 +16,15 @@ $gex-orange-bg: #ffb612;
 $gex-orange-link: #F57F17;
 
 $gex-purple: #673AB7;
-$gex-green: #5cce61;
+$gex-green: #02a765;
+$gex-red: #ad1e04;
 
 .green-bg{  background-color: #4fbf4e !important;  }
 .gex-bg{  background-color: $accent-color-gex !important;  }
 .lite-gr-bg{  background-color: $grey-color-gex !important;  }
+
+
+.gx-text-col{ color: $accent-color-gex !important;}
 
 
 .header-gr-svg{ fill: #cecece !important; }
@@ -39,3 +43,9 @@ $gex-green: #5cce61;
 .white-svg{  fill: #fff !important;  }
 
 .lite-gr{  color: #cecece; }
+
+
+
+
+.green-text{ color: $gex-green; }
+.red-text{ color: $gex-red; }

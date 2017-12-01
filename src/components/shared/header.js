@@ -5,7 +5,7 @@ import account_icon from '../../images/icons/account.svg';
 import down_icon from '../../images/icons/down.svg';
 
 import { MenuAnchor, Menu, MenuItem, MenuDivider, Button} from 'react-mdc-web/lib';
-import {MdAccountCircle, MdKeyboardArrowDown} from 'react-icons/lib/md';
+import {MdAccountCircle, MdKeyboardArrowDown, MdLanguage} from 'react-icons/lib/md';
 
 export default class Header extends React.Component {
 
@@ -49,9 +49,9 @@ export default class Header extends React.Component {
                     <div className="fl-wrap fl-grow padd-left-md hidden">
                         <div className="fl-cont">
                             <div className="fl-wrap fl-grow fl-center-vert">
-                                <Link to='/test' className="marg-left-10">
+                                <Link to='/exchange' className="marg-left-10">
                                     <Button className="gx-btn gx-btn-def">
-                                        Markets
+                                        Exchange
                                     </Button>
                                 </Link>
 
@@ -64,6 +64,24 @@ export default class Header extends React.Component {
                             </div>
 
                             <div  className="fl-wrap  fl-center-h">
+
+
+                                <Button className="gx-btn gx-btn-transp marg-ri-10">
+                                    <div className="fl-cont fl-center-vert">
+                                        <div className="fl-wrap marg-ri-sm">
+                                            <MdLanguage className="sm-icon gex-svg btn-icon"/>
+                                        </div>
+                                        <div className="fl-wrap gx-text-col marg-ri-sm">
+                                            English
+                                        </div>
+                                        <div className="fl-wrap">
+                                            <MdKeyboardArrowDown className="sm-icon gex-svg"/>
+                                        </div>
+                                    </div>
+
+                                </Button>
+
+
                                 <div className="gx-bage fl-cont fl-center-h hand-cursor" onClick={this.openMenu}>
                                     <div className="fl-wrap gx-icon">
                                         <MdAccountCircle className="gx-icon"/>
@@ -73,8 +91,8 @@ export default class Header extends React.Component {
                                         <p className="network-badge">{this.state.walletConnector.networkName}</p>
                                         <p className="no-marg account-badge">{this.state.walletConnector.ethAccounts}</p>
                                     </div>
-                                    <div className="fl-wrap padd-left-10  gx-icon">
-                                        <MdKeyboardArrowDown className="gx-icon"/>
+                                    <div className="fl-wrap padd-left-10">
+                                        <MdKeyboardArrowDown className="sm-icon lt-gr-svg"/>
                                     </div>
 
                                 </div>
