@@ -85,14 +85,12 @@ export default class WalletConnector extends React.Component {
         const {web3} = window;
         var self = this;
 
-
         //web3.eth.getBalance(web3.eth.accounts[0],
         web3.eth.getBalance("0x8d12A197cB00D4747a1fe03395095ce2A5CC6819",
             function (error, balance) {
                 self.setState({balance: balance.c[0]})
             }
         )
-
 
         //let balance = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]));
         //this.setState({balance: balance})
@@ -105,20 +103,4 @@ export default class WalletConnector extends React.Component {
         );
     }
 
-
-}
-
-function getNetwork(networkId) {
-    switch (networkId) {
-        case '1':
-            return 'MAINNET';
-        case '2':
-            return 'MORDEN';
-        case '42':
-            return 'KOVAN';
-        case '3':
-            return 'ROPSTEN';
-        default:
-            return 'UNKNOWN';
-    }
 }

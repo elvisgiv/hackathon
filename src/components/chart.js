@@ -73,10 +73,6 @@ function generateChartData() {
 
 
 
-
-
-
-
 export default  class Chart extends Component {
     constructor(props) {
         super(props);
