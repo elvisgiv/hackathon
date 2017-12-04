@@ -14,67 +14,7 @@ import Footer from './components/shared/footer'
 
 import 'material-components-web/dist/material-components-web.min.css';
 
-class App extends Component {
-
-    constructor(props, context) {
-        super(props);
-        this.state = {web3Context: context.web3};
-        const web3Context = context.web3;
-    }
-
-    componentDidMount() {
-        this.App();
-        this.interval = setInterval(() => this.App(), 5000);
-    }
-
-    App(){
-        this.fetchNetwork()
-        this.getAccounts()
-    }
-
-
-    walletConnectorSafe(){
-        if(!this.walletConnector){
-            return false
-        }else{
-            return this.walletConnector
-        }
-    }
-
-
-    getAccounts() {
-        try {
-            const { web3 } = window;
-            // throws if no account selected
-            const accounts = web3.eth.accounts;
-
-            this.setState({
-                accounts: accounts
-            });
-
-            return accounts;
-        } catch (e) {
-            return [];
-        }
-    }
-
-
-    fetchNetwork() {
-        const { web3 } = window;
-
-        web3 && web3.version && web3.version.getNetwork((err, netId) => {
-            if (err) {
-                this.setState({
-                    networkError: err
-                });
-            } else {
-                this.setState({
-                    networkError: null,
-                    networkId: netId
-                })
-            }
-        });
-    }
+export default class App extends Component {
 
   render() {
 
@@ -92,18 +32,12 @@ class App extends Component {
                   <Route path='/help' component={Help} />
               </Switch>
           </div>
+
           <Footer/>
-
-
       </div>
     );
   }
 }
 
-App.contextTypes = {
-    web3: PropTypes.object
-};
-
-export default App;
 
 
