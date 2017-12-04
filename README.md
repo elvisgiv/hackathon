@@ -46,4 +46,10 @@ React wrapper for MDC: https://react-mdc.github.io/#/
 2) https://github.com/amcharts/amcharts3-react
 
 
+### Search input
 
+https://www.npmjs.com/package/react-search-input
+
+### Pass data between components
+
+https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17

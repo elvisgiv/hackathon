@@ -77,22 +77,22 @@ export default class Markets extends React.Component {
         const filteredMarkets = this.state.markets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
         let markets = filteredMarkets.map((item, i) => (
-            <div className="fl-cont market bord-bott" key={i.toString()}>
-                <div className="fl-wrap padd-ri-md">
-                    <Link to={`/exchange/${item.symbol}`} className="undec white-text">
-                        <h5 className="no-marg uppercase">{item.symbol}</h5>
-                    </Link>
+            <Link to={`/exchange/${item.symbol}`} className="undec white-text">
+                <div className="fl-cont market bord-bott gx-list-element" key={i.toString()}>
+                    <div className="fl-wrap padd-ri-md">
+                            <h5 className="no-marg uppercase">{item.symbol}</h5>
+                    </div>
+                    <div className="fl-wrap padd-ri-md">
+                        <h5 className="regular no-marg">{item.price}</h5>
+                    </div>
+                    <div className="fl-wrap padd-ri-md">
+                        <h5 className={ 'regular no-marg ' + (item.change > 0 ? 'green-text' : 'red-text') } >{item.change}%</h5>
+                    </div>
+                    <div className="fl-wrap padd-ri-md">
+                        <h5 className="regular no-marg">{item.volume}</h5>
+                    </div>
                 </div>
-                <div className="fl-wrap padd-ri-md">
-                    <h5 className="regular no-marg">{item.price}</h5>
-                </div>
-                <div className="fl-wrap padd-ri-md">
-                    <h5 className={ 'regular no-marg ' + (item.change > 0 ? 'green-text' : 'red-text') } >{item.change}%</h5>
-                </div>
-                <div className="fl-wrap padd-ri-md">
-                    <h5 className="regular no-marg">{item.volume}</h5>
-                </div>
-            </div>
+            </Link>
         ))
 
 
@@ -101,15 +101,24 @@ export default class Markets extends React.Component {
         return (
             <div className="gx-card padd-md marg-30 no-marg-left">
 
-                <div className="fl-cont padd-10">
+                <div className="fl-cont  fl-center-vert padd-10 marg-bott-md">
 
                     <div className="fl-wrap fl-grow">
                         <h3 className="bold no-marg">Markets</h3>
                     </div>
 
                     <div className="fl-wrap ">
-                        <SearchInput className="search-input" onChange={this.searchUpdated} />
-                        <MdSearch className="gx-icon lt-gr-svg"/>
+
+                        <div className="fl-cont fl-center-h search-wrap">
+
+                            <div className="fl-wrap fl-grow">
+                                <SearchInput className="gx-search-input" onChange={this.searchUpdated} />
+                            </div>
+                            <div className="fl-wrap">
+                                <MdSearch className="sm-icon lt-gr-svg"/>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

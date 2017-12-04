@@ -102,12 +102,12 @@ export default class Header extends React.Component {
                                         open={this.state.open}
                                         onClose={()=>{this.setState({open:false})}}
                                     >
-                                        <div>
-                                            <p>Balance: {this.state.walletConnector.balance} ETH</p>
+                                        <div className="padd-30">
 
-                                            <MdAccountCircle className="gx-icon"/>
-                                            <MdAccountCircle className="gx-icon"/>
-                                            <MdAccountCircle className="gx-icon"/>
+                                            <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
+
+
+                                            <p>Balance: {this.state.walletConnector.balance} ETH</p>
                                         </div>
 
                                     </Menu>

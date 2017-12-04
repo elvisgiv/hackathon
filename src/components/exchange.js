@@ -29,7 +29,7 @@ export default class Exchange extends React.Component {
                         <div className="marg-30">
                             <div className="fl-cont fl-center-vert">
                                 <div className="fl-wrap fl-grow">
-                                    <h1 className="bold no-marg" >{this.state.symbol}</h1>
+                                    <h1 className="bold no-marg uppercase" >{this.state.symbol}</h1>
                                     <h6 className="no-marg lite-gr-text uppercase">{this.state.symbol}/ETH</h6>
                                 </div>
                                 <div className="fl-wrap">
