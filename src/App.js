@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom'
 import WalletConnector from './components/wallet_connector';
 import Exchange from './components/exchange';
 import Test from './components/test';
+import Help from './components/help';
 import Markets from './components/markets';
 
 import Header from './components/shared/header'
@@ -88,6 +89,7 @@ class App extends Component {
                   <Route exact path='/' component={Exchange}/>
                   <Route exact path='/exchange/:symbol' component={Exchange}/>
                   <Route path='/test' component={Test} />
+                  <Route path='/help' component={Help} />
               </Switch>
           </div>
           <Footer/>

@@ -53,3 +53,12 @@ https://www.npmjs.com/package/react-search-input
 ### Pass data between components
 
 https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
+Later - use *Redux* storage
+
+### Multilang support
+
+
+http://www.bebetterdeveloper.com/coding/getting-started-react-redux.html
+https://www.npmjs.com/package/react-language-selector
+
+Example with Redux: https://codepen.io/vigosan/pen/QEyoYg

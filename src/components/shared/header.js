@@ -5,7 +5,7 @@ import account_icon from '../../images/icons/account.svg';
 import down_icon from '../../images/icons/down.svg';
 
 import { MenuAnchor, Menu, MenuItem, MenuDivider, Button} from 'react-mdc-web/lib';
-import {MdAccountCircle, MdKeyboardArrowDown, MdLanguage} from 'react-icons/lib/md';
+import {MdAccountCircle, MdKeyboardArrowDown, MdLanguage, MdAccountBalanceWallet, MdMonetizationOn} from 'react-icons/lib/md';
 
 export default class Header extends React.Component {
 
@@ -55,9 +55,15 @@ export default class Header extends React.Component {
                                     </Button>
                                 </Link>
 
-                                <Link to='/test' className="marg-left-10">
+                                <Link to='/help' className="marg-left-10">
                                     <Button className="gx-btn gx-btn-transp">
                                         Help
+                                    </Button>
+                                </Link>
+
+                                <Link to='/test' className="marg-left-10">
+                                    <Button className="gx-btn gx-btn-transp">
+                                        Test
                                     </Button>
                                 </Link>
 
@@ -104,10 +110,38 @@ export default class Header extends React.Component {
                                     >
                                         <div className="padd-30">
 
-                                            <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
 
 
-                                            <p>Balance: {this.state.walletConnector.balance} ETH</p>
+
+                                            <div className="fl-cont fl-center-vert">
+                                                <div className="fl-wrap fl-grow">
+                                                    <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
+                                                </div>
+                                                <div className="fl-wrap">
+                                                    <h6 className="no-marg">Connected to Web3</h6>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div className="fl-cont fl-center-vert padd-top-md">
+                                                <div className="fl-wrap padd-ri-10">
+                                                    <MdAccountBalanceWallet className="sm-icon"/>
+                                                </div>
+                                                <div className="fl-wrap">
+                                                    {this.state.walletConnector.ethAccounts}
+                                                </div>
+                                            </div>
+
+                                            <div className="fl-cont fl-center-vert padd-top-10">
+                                                <div className="fl-wrap padd-ri-10">
+                                                    <MdMonetizationOn className="sm-icon"/>
+                                                </div>
+                                                <div className="fl-wrap">
+                                                    {this.state.walletConnector.balance} ETH
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </Menu>
