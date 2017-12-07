@@ -29,7 +29,6 @@ export default class Test extends React.Component {
         //let web3 = new Web3(new HttpProvider('http://10.1.0.11:8545'));
         web3.setProvider(new web3.providers.HttpProvider('http://10.1.0.11:8545'));
 
-
         this.setState({web3: web3})
 
         const contract = new EthContract(web3.eth)
@@ -45,11 +44,14 @@ export default class Test extends React.Component {
 
         //const filter = miniToken.NewNumber();
 
-        const filter = miniToken.NewNumber().new((error, result) => {
+        // todo => filter
+        /*const filter = miniToken.NewNumber().new((error, result) => {
            console.log('init')
            console.log(result)
            console.log(error)
-        });
+        });*/
+
+        const filter = {}
 
         //filter.watch().then((result) => {
         //    console.log('watch')

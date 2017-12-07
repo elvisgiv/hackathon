@@ -30,8 +30,6 @@ export default class Header extends React.Component {
 
     render() {
 
-        console.log('header render!')
-
         if(!this.state.walletConnector){
             return <div>wait....</div>
         }
