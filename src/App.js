@@ -23,8 +23,6 @@ export default class App extends Component {
     }
 
     updateWalletConnector(walletConnector){
-        console.log(walletConnector)
-        console.log('update!')
         this.setState({walletConnector: walletConnector})
     }
 

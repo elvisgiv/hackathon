@@ -107,9 +107,6 @@ export default class Header extends React.Component {
                                     >
                                         <div className="padd-30">
 
-
-
-
                                             <div className="fl-cont fl-center-vert">
                                                 <div className="fl-wrap fl-grow">
                                                     <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
@@ -118,8 +115,6 @@ export default class Header extends React.Component {
                                                     <h6 className="no-marg">Connected to Web3</h6>
                                                 </div>
                                             </div>
-
-
 
 
                                             <div className="fl-cont fl-center-vert padd-top-md">
