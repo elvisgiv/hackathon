@@ -24,6 +24,7 @@ export default class WalletConnector extends React.Component {
         this.fetchNetwork()
         this.fetchAccounts()
         this.fetchBalances()
+        this.props.updateWalletConnector(this.state)
     }
 
 

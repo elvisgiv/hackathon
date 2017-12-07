@@ -15,13 +15,27 @@ import 'material-components-web/dist/material-components-web.min.css';
 
 export default class App extends Component {
 
+
+    constructor(props){
+        super(props);
+        this.state = {walletConnector: {}}
+        this.updateWalletConnector = this.updateWalletConnector.bind(this)
+    }
+
+
+    updateWalletConnector(walletConnector){
+        this.setState({walletConnector: walletConnector})
+    }
+
   render() {
+
+    let walletConnector = this.state.walletConnector;
 
     return (
       <div className="App">
-          <Header walletConnector={this.walletConnector}/>
+          <Header walletConnector={walletConnector}/>
 
-          <WalletConnector ref={instance => { this.walletConnector = instance; }}/>
+          <WalletConnector updateWalletConnector={this.updateWalletConnector}/>
 
           <div className="page-content">
               <Switch>

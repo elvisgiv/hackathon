@@ -62,3 +62,8 @@ http://www.bebetterdeveloper.com/coding/getting-started-react-redux.html
 https://www.npmjs.com/package/react-language-selector
 
 Example with Redux: https://codepen.io/vigosan/pen/QEyoYg
+
+
+### Session storage
+
+Lib: https://github.com/bernabe9/redux-react-session

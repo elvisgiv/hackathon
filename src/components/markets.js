@@ -22,6 +22,28 @@ const markets = [
     'ppt', 'eos', 'qtum', 'cvc', 'storj', 'zrx', 'btm', 'kick', 'veri', 'ebtc', 'fun', 'mnt', 'salt'
 ]
 
+
+const mark = {
+    ppt: 'Populous',
+    eos: 'EOS',
+    qtum: 'Qtum',
+    cvc: 'Civic',
+    storj: 'Storj',
+    zrx: '0x',
+    btm: 'Bytom',
+    kick: 'KickCoin',
+    veri: 'Veritaseum',
+    ebtc: 'eBitcoin',
+    fun: 'FunFair',
+    rep: 'Augur',
+    salt: 'SALT',
+    gnt: 'Golem',
+    wtc: 'Walton',
+    knc: 'Kyber Network',
+    pay: 'TenX',
+}
+
+
 function generateMarketsData() {
     let marketsData = []
 
@@ -77,8 +99,8 @@ export default class Markets extends React.Component {
         const filteredMarkets = this.state.markets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
         let markets = filteredMarkets.map((item, i) => (
-            <Link to={`/exchange/${item.symbol}`} className="undec white-text">
-                <div className="fl-cont market bord-bott gx-list-element" key={i.toString()}>
+            <Link to={`/exchange/${item.symbol}`} className="undec white-text" key={i.toString()}>
+                <div className="fl-cont market bord-bott gx-list-element" >
                     <div className="fl-wrap padd-ri-md">
                             <h5 className="no-marg uppercase">{item.symbol}</h5>
                     </div>

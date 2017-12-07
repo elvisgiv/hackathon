@@ -18,22 +18,21 @@ export default class Header extends React.Component {
         this.openMenu = this.openMenu.bind(this)
     }
 
-    componentDidMount() {
-    }
-
     openMenu(){
         this.setState({open:true})
     }
 
-
     componentWillReceiveProps(){
         if (this.props.walletConnector){
-            this.setState({walletConnector: this.props.walletConnector.state})
+            this.setState({walletConnector: this.props.walletConnector})
         }
     }
 
     render() {
-        if(!this.props.walletConnector){
+
+        console.log('header render!')
+
+        if(!this.state.walletConnector){
             return <div>wait....</div>
         }
 
