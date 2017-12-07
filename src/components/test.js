@@ -1,34 +1,31 @@
 import React from 'react'
 import {Button} from 'react-mdc-web/lib';
 
-//const Eth = require('ethjs-query')
-// const HttpProvider = require('ethjs-provider-http');
-
 const Web3 = require('web3');
-const EthContract = require('ethjs-contract')
+const EthContract = require('ethjs-contract');
 
 // contract ABI and addr
-const jsonData = require('./data.json');
-const abi = jsonData['registration_abi']
-const contractAddress = jsonData['registration_address']
+const jsonData = require('../../test/data.json');
+const abi = jsonData['registration_abi'];
+const contractAddress = jsonData['registration_address'];
 
+const web3Provider = new Web3.providers.HttpProvider("http://10.1.0.11:8545");
 
 export default class Test extends React.Component {
 
-
     constructor(props) {
-        super(props)
+        super(props);
 
-        let web3 = new Web3(new Web3.providers.HttpProvider("http://10.1.0.11:8545"));
+        let web3 = new Web3(web3Provider);
         const contractCreator = new EthContract(web3.eth);
 
         this.state = {
             web3: web3,
             contractCreator: contractCreator,
             number: 9,
-        }
+        };
 
-        this.setNumber = this.setNumber.bind(this)
+        this.setNumber = this.setNumber.bind(this);
         this.getNumber = this.getNumber.bind(this)
     }
 
