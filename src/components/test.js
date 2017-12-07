@@ -1,6 +1,6 @@
 import React from 'react'
-import 'material-components-web/dist/material-components-web.min.css';
-import {Button} from 'react-mdc-web/lib';
+//import 'material-components-web/dist/material-components-web.min.css';
+import {Button, Textfield} from 'react-mdc-web/lib';
 
 const Eth = require('ethjs-query')
 const EthContract = require('ethjs-contract')
@@ -19,96 +19,101 @@ const contractAddress = jsonData['registration_address']
 
 export default class Test extends React.Component {
 
-    componentDidMount(){
-        //const eth = new Eth(web3.currentProvider)
-        //const httpProvider  = new HttpProvider('http://10.1.0.11:8545')
-        //const eth = new Eth(new HttpProvider('http://10.1.0.11:8545'))
 
-        //let web3 = new Web3(Web3.givenProvider || "ws://10.1.0.11:8546");
+    constructor(props) {
+        super(props)
+
         let web3 = new Web3("ws://10.1.0.11:8546");
-        //let web3 = new Web3(new HttpProvider('http://10.1.0.11:8545'));
         web3.setProvider(new web3.providers.HttpProvider('http://10.1.0.11:8545'));
-
-        this.setState({web3: web3})
-
         const contract = new EthContract(web3.eth)
 
-        this.initContract(contract)
+        this.state = {
+            web3: web3,
+            contract: contract,
+            number: 9,
+        }
 
-        this.callContract = this.callContract.bind(this)
+        this.setNumber = this.setNumber.bind(this)
+        this.getNumber = this.getNumber.bind(this)
+    }
+
+    componentDidMount(){
+        this.initContract(this.state.contract)
     }
 
     initContract (contract) {
+        // init contract
         const MiniToken = contract(abi)
         const miniToken = MiniToken.at(contractAddress)
 
-        //const filter = miniToken.NewNumber();
+        // init event watch
+        let filter = this.state.web3.eth.filter('resolved');
 
-        // todo => filter
-        /*const filter = miniToken.NewNumber().new((error, result) => {
-           console.log('init')
-           console.log(result)
-           console.log(error)
-        });*/
+        filter.watch(function (error, log) {
+            console.log('resss');
+            console.log(log);
+        });
 
-        const filter = { }
-
-        //filter.watch().then((result) => {
-        //    console.log('watch')
-        //    console.log(result)
-        //});
-
+        // save in state
         this.setState({ contract: miniToken, filter: filter })
-
     }
 
-    callContract(){
 
-        let account = this.state.web3.eth.accounts[0]
-        let self = this
+    setNumber(){
+        let account = this.state.web3.eth.accounts[0];
+        let self = this;
 
         this.state.web3.personal.unlockAccount(account, '123', 0, function(error, result){
             if(!error){
-                console.log(result);
-                console.log(account);
+                console.log("Unlocked: "+result+ " , addr: "+account);
 
-                let getData = self.state.contract.setNumber(9, {to:contractAddress, from: account});
+                let getData = self.state.contract.setNumber(self.state.number, {to:contractAddress, from: account});
+                //console.log(getData);
 
-                console.log(getData);
-
-                let resp = self.state.contract.getNumber()
-
-                console.log(resp);
-                //self.state.contract.transact({'from': account}).setNumber(9)
+                //let resp = self.state.contract.getNumber()
+                //console.log(resp);
             }
             else{
                 console.error(error);
             }
 
         })
-
-        //this.state.contract.transact({'from': web3.eth.accounts[0]}).setNumber(9)
-        //console.log(this.state.contract.transfer.call());
     }
 
+    getNumber(){
+
+        let self = this;
+
+        this.state.contract.getNumber().then(function(value){
+            console.log(value.out.words[0]);
+            self.setState({blockchainNumber: value.out.words[0]})
+        });
+    }
 
     render() {
         return (
 
             <div className="marg-30">
                 <h1 className="bold no-marg" >Test</h1>
-
                 <div className="padd-top-big">
 
-                    <Button className="gx-btn gx-btn-def" onClick={this.callContract}>
-                        Test call
+                    <input style={{width: '150px'}} type="number" value={this.state.number} onChange={(num) => this.setState({number: num.target.value})}/>
+
+                    <br/>
+                    <br/>
+                    <Button className="gx-btn gx-btn-def" onClick={this.setNumber}>
+                        Set number {this.state.number}
+                    </Button>
+                    <br/>
+                    <br/>
+                    <Button className="gx-btn gx-btn-def" onClick={this.getNumber}>
+                        Get number
                     </Button>
 
+                    <h2>{this.state.blockchainNumber}</h2>
+
+
                 </div>
-
-
-
-
             </div>
         );
     }
