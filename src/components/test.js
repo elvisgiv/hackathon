@@ -1,20 +1,16 @@
 import React from 'react'
-//import 'material-components-web/dist/material-components-web.min.css';
-import {Button, Textfield} from 'react-mdc-web/lib';
+import {Button} from 'react-mdc-web/lib';
 
-const Eth = require('ethjs-query')
-const EthContract = require('ethjs-contract')
-const HttpProvider = require('ethjs-provider-http');
+//const Eth = require('ethjs-query')
+// const HttpProvider = require('ethjs-provider-http');
 
 const Web3 = require('web3');
-//Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send
+const EthContract = require('ethjs-contract')
 
+// contract ABI and addr
 const jsonData = require('./data.json');
-
 const abi = jsonData['registration_abi']
 const contractAddress = jsonData['registration_address']
-
-//const address = '0xdeadbeef123456789000000000000'
 
 
 export default class Test extends React.Component {
@@ -23,13 +19,12 @@ export default class Test extends React.Component {
     constructor(props) {
         super(props)
 
-        let web3 = new Web3("ws://10.1.0.11:8546");
-        web3.setProvider(new web3.providers.HttpProvider('http://10.1.0.11:8545'));
-        const contract = new EthContract(web3.eth)
+        let web3 = new Web3(new Web3.providers.HttpProvider("http://10.1.0.11:8545"));
+        const contractCreator = new EthContract(web3.eth);
 
         this.state = {
             web3: web3,
-            contract: contract,
+            contractCreator: contractCreator,
             number: 9,
         }
 
@@ -37,24 +32,24 @@ export default class Test extends React.Component {
         this.getNumber = this.getNumber.bind(this)
     }
 
+
     componentDidMount(){
-        this.initContract(this.state.contract)
+        this.initContract(this.state.contractCreator)
     }
 
-    initContract (contract) {
-        //let TestContract = this.state.web3.eth.contract(abi)
-        let TestContract = contract(abi)
+
+    initContract (contractCreator) {
+        let self = this;
+
+        let TestContract = contractCreator(abi);
         let testContract = TestContract.at(contractAddress);
 
         let filter = this.state.web3.eth.filter(testContract.NewNumber);
-
-        let self = this;
         filter.watch((err, result) => {
             console.log('Event: NewNumber')
             self.getNumber()
         });
 
-        // save in state
         this.setState({ contract: testContract, filter: filter})
     }
 
@@ -65,31 +60,33 @@ export default class Test extends React.Component {
 
         this.state.web3.personal.unlockAccount(account, '123', 0, function(error, result){
             if(!error){
-                console.log("Unlocked: "+result+ " , addr: "+account);
-                self.state.contract.setNumber(self.state.number, {to:contractAddress, from: account});
+                console.log("Unlocked: " + result + " , addr: " + account);
+                self.state.contract.setNumber(self.state.number, {to: contractAddress, from: account});
             }
-            else{ console.error(error); }
+            else{
+                console.error(error);
+            }
 
         })
     }
 
+
     getNumber(){
         let self = this;
         this.state.contract.getNumber().then(function(value){
-            console.log(value.out.words[0]);
-            self.setState({blockchainNumber: value.out.words[0]})
+            let blockchainNumber = value.out.words[0];
+            self.setState({blockchainNumber: blockchainNumber})
         });
     }
 
+
     render() {
         return (
-
             <div className="marg-30">
                 <h1 className="bold no-marg" >Test</h1>
                 <div className="padd-top-big">
 
                     <input style={{width: '150px'}} type="number" value={this.state.number} onChange={(num) => this.setState({number: num.target.value})}/>
-
                     <br/>
                     <br/>
                     <Button className="gx-btn gx-btn-def" onClick={this.setNumber}>
@@ -107,4 +104,6 @@ export default class Test extends React.Component {
             </div>
         );
     }
+
+
 }
