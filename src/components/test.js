@@ -42,20 +42,20 @@ export default class Test extends React.Component {
     }
 
     initContract (contract) {
-        // init contract
-        const MiniToken = contract(abi)
-        const miniToken = MiniToken.at(contractAddress)
+        //let TestContract = this.state.web3.eth.contract(abi)
+        let TestContract = contract(abi)
+        let testContract = TestContract.at(contractAddress);
 
-        // init event watch
-        let filter = this.state.web3.eth.filter('resolved');
+        let filter = this.state.web3.eth.filter(testContract.NewNumber);
 
-        filter.watch(function (error, log) {
-            console.log('resss');
-            console.log(log);
+        let self = this;
+        filter.watch((err, result) => {
+            console.log('Event: NewNumber')
+            self.getNumber()
         });
 
         // save in state
-        this.setState({ contract: miniToken, filter: filter })
+        this.setState({ contract: testContract, filter: filter})
     }
 
 
@@ -66,24 +66,15 @@ export default class Test extends React.Component {
         this.state.web3.personal.unlockAccount(account, '123', 0, function(error, result){
             if(!error){
                 console.log("Unlocked: "+result+ " , addr: "+account);
-
-                let getData = self.state.contract.setNumber(self.state.number, {to:contractAddress, from: account});
-                //console.log(getData);
-
-                //let resp = self.state.contract.getNumber()
-                //console.log(resp);
+                self.state.contract.setNumber(self.state.number, {to:contractAddress, from: account});
             }
-            else{
-                console.error(error);
-            }
+            else{ console.error(error); }
 
         })
     }
 
     getNumber(){
-
         let self = this;
-
         this.state.contract.getNumber().then(function(value){
             console.log(value.out.words[0]);
             self.setState({blockchainNumber: value.out.words[0]})
@@ -111,7 +102,6 @@ export default class Test extends React.Component {
                     </Button>
 
                     <h2>{this.state.blockchainNumber}</h2>
-
 
                 </div>
             </div>
