@@ -11,8 +11,8 @@ const Web3 = require('web3');
 
 const jsonData = require('./data.json');
 
-const abi = jsonData['Test_abi']
-const contractAddress = jsonData['Test']
+const abi = jsonData['registration_abi']
+const contractAddress = jsonData['registration_address']
 
 //const address = '0xdeadbeef123456789000000000000'
 
@@ -51,7 +51,7 @@ export default class Test extends React.Component {
            console.log(error)
         });*/
 
-        const filter = {}
+        const filter = { }
 
         //filter.watch().then((result) => {
         //    console.log('watch')
@@ -88,7 +88,6 @@ export default class Test extends React.Component {
         })
 
         //this.state.contract.transact({'from': web3.eth.accounts[0]}).setNumber(9)
-
         //console.log(this.state.contract.transfer.call());
     }
 
