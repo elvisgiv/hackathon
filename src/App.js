@@ -22,8 +22,9 @@ export default class App extends Component {
         this.updateWalletConnector = this.updateWalletConnector.bind(this)
     }
 
-
     updateWalletConnector(walletConnector){
+        console.log(walletConnector)
+        console.log('update!')
         this.setState({walletConnector: walletConnector})
     }
 
@@ -31,22 +32,37 @@ export default class App extends Component {
 
     let walletConnector = this.state.walletConnector;
 
+
+    let content = <div></div>
+
+    if(!walletConnector.web3connection){
+         content = (
+             <div className="cont fl-center" style={{height: "calc(100vh - 65px)", textAlign: "center"}}>
+                <h1>Connecting to the Web3</h1>
+            </div>
+         )
+    }
+    else{
+        content = (
+            <div className="cont">
+                <Header walletConnector={walletConnector}/>
+                <div className="page-content">
+                    <Switch>
+                        <Route exact path='/' component={Exchange}/>
+                        <Route exact path='/exchange/:symbol' component={Exchange}/>
+                        <Route path='/test' component={Test} />
+                        <Route path='/help' component={Help} />
+                    </Switch>
+                </div>
+                <Footer/>
+            </div>
+        )
+    }
+
     return (
       <div className="App">
-          <Header walletConnector={walletConnector}/>
-
           <WalletConnector updateWalletConnector={this.updateWalletConnector}/>
-
-          <div className="page-content">
-              <Switch>
-                  <Route exact path='/' component={Exchange}/>
-                  <Route exact path='/exchange/:symbol' component={Exchange}/>
-                  <Route path='/test' component={Test} />
-                  <Route path='/help' component={Help} />
-              </Switch>
-          </div>
-
-          <Footer/>
+          {content}
       </div>
     );
   }
