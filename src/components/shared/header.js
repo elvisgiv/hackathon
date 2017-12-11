@@ -52,6 +52,12 @@ export default class Header extends React.Component {
                                     </Button>
                                 </Link>
 
+                                <Link to='/micropayments' className="marg-left-10">
+                                    <Button className="gx-btn gx-btn-transp">
+                                        Micropayments
+                                    </Button>
+                                </Link>
+
                                 <Link to='/help' className="marg-left-10">
                                     <Button className="gx-btn gx-btn-transp">
                                         Help

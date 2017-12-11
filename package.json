@@ -22,12 +22,9 @@
     "web3": "0.19.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4",
-
-
     "ethjs-contract": "^0.1.9",
     "ethjs-provider-http": "^0.1.6",
     "ethjs-query": "^0.3.2"
-
   },
   "scripts": {
     "start": "webpack-dev-server",

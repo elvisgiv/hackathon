@@ -7,6 +7,7 @@ import WalletConnector from './components/wallet_connector';
 import Exchange from './components/exchange';
 import Test from './components/test';
 import Help from './components/help';
+import Micropayments from './components/micropayments';
 
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
@@ -50,6 +51,7 @@ export default class App extends Component {
                             <Route exact path='/exchange/:symbol' component={Exchange}/>
                             <Route path='/test' component={Test}/>
                             <Route path='/help' component={Help}/>
+                            <Route path='/micropayments' component={Micropayments}/>
                         </Switch>
                     </div>
                     <Footer/>
