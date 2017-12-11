@@ -12,6 +12,15 @@ div{
 }
 
 
+.gx-list-element{
+  border-radius: 6px;
+}
+
 .gx-list-element:hover{
   background-color: #141b27;
+}
+
+
+.gx-list-selected{
+  background-color: rgba(28, 124, 209, 0.44) !important;
 }

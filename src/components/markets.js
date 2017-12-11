@@ -6,7 +6,6 @@ import {MdSearch} from 'react-icons/lib/md';
 import 'material-components-web/dist/material-components-web.min.css';
 
 
-
 const KEYS_TO_FILTERS = ['symbol']
 
 
@@ -48,8 +47,8 @@ function generateMarketsData() {
     let marketsData = []
 
 
-    for ( let i = 0; i < markets.length; i++ ) {
-        marketsData[ i ] = {
+    for (let i = 0; i < markets.length; i++) {
+        marketsData[i] = {
             symbol: markets[i],
             price: (Math.random() * getRandomInt(1, 3)).toFixed(4),
             volume: (Math.random() * getRandomInt(1000, 5000)).toFixed(4),
@@ -61,8 +60,6 @@ function generateMarketsData() {
 }
 
 
-
-
 export default class Markets extends React.Component {
 
     constructor(props) {
@@ -70,13 +67,15 @@ export default class Markets extends React.Component {
 
         this.state = {
             markets: generateMarketsData(),
+            selectedMarket: props.symbol,
             timer: null,
             searchTerm: ''
         };
         this.searchUpdated = this.searchUpdated.bind(this)
+        this.changeMarket = this.changeMarket.bind(this)
     }
 
-    searchUpdated (term) {
+    searchUpdated(term) {
         this.setState({searchTerm: term})
     }
 
@@ -94,21 +93,34 @@ export default class Markets extends React.Component {
         clearInterval(this.state.timer);
     }
 
+
+    componentWillReceiveProps() {
+        this.setState({selectedMarket: this.props.symbol})
+    }
+
+    changeMarket(symbol) {
+        this.currentMarket = symbol;
+        this.props.marketChanged();
+        console.log("Change to: " + symbol)
+    }
+
     render() {
 
         const filteredMarkets = this.state.markets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
-        let markets = filteredMarkets.map((item, i) => (
-            <Link to={`/exchange/${item.symbol}`} className="undec white-text" key={i.toString()}>
-                <div className="fl-cont market bord-bott gx-list-element" >
-                    <div className="fl-wrap padd-ri-md">
-                            <h5 className="no-marg uppercase">{item.symbol}</h5>
+        let marketsOld = filteredMarkets.map((item, i) => (
+            <Link to={`/exchange/${item.symbol}`} className="undec white-text" key={i.toString()}
+                  onClick={this.changeMarket}>
+                <div
+                    className={"fl-cont market bord-bottt gx-list-element " + (item.symbol == this.state.selectedMarket ? 'gx-list-selected' : '')}>
+                    <div className="fl-wrap padd-ri-md padd-left-10">
+                        <h5 className="no-marg uppercase">{item.symbol}</h5>
                     </div>
                     <div className="fl-wrap padd-ri-md">
                         <h5 className="regular no-marg">{item.price}</h5>
                     </div>
                     <div className="fl-wrap padd-ri-md">
-                        <h5 className={ 'regular no-marg ' + (item.change > 0 ? 'green-text' : 'red-text') } >{item.change}%</h5>
+                        <h5 className={'regular no-marg ' + (item.change > 0 ? 'green-text' : 'red-text')}>{item.change}%</h5>
                     </div>
                     <div className="fl-wrap padd-ri-md">
                         <h5 className="regular no-marg">{item.volume}</h5>
@@ -118,6 +130,9 @@ export default class Markets extends React.Component {
         ))
 
 
+        let markets = filteredMarkets.map((item, i) =>
+            <Market key={i.toString()} item={item} currentMarket={this.currentMarket} changeMarket={this.changeMarket}/>
+        )
 
 
         return (
@@ -134,7 +149,7 @@ export default class Markets extends React.Component {
                         <div className="fl-cont fl-center-h search-wrap">
 
                             <div className="fl-wrap fl-grow">
-                                <SearchInput className="gx-search-input" onChange={this.searchUpdated} />
+                                <SearchInput className="gx-search-input" onChange={this.searchUpdated}/>
                             </div>
                             <div className="fl-wrap">
                                 <MdSearch className="sm-icon lt-gr-svg"/>
@@ -154,4 +169,49 @@ export default class Markets extends React.Component {
 
         );
     }
+}
+
+
+class Market extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            selected: false
+        }
+
+        this._onClick = this._onClick.bind(this)
+    }
+
+    _onClick() {
+        this.props.changeMarket(this.props.item.symbol);
+    }
+
+    render() {
+        return (
+            <div>
+                <Link to={`/exchange/${this.props.item.symbol}`} className="undec white-text" onClick={this._onClick}>
+                    <div
+                        className={"fl-cont market bord-bottt gx-list-element " + (this.props.item.symbol === this.props.currentMarket ? 'gx-list-selected' : '')}>
+                        <div className="fl-wrap padd-ri-md padd-left-10">
+                            <h5 className="no-marg uppercase">{this.props.item.symbol}</h5>
+                        </div>
+                        <div className="fl-wrap padd-ri-md">
+                            <h5 className="regular no-marg">{this.props.item.price}</h5>
+                        </div>
+                        <div className="fl-wrap padd-ri-md">
+                            <h5 className={'regular no-marg ' + (this.props.item.change > 0 ? 'green-text' : 'red-text')}>{this.props.item.change}%</h5>
+                        </div>
+                        <div className="fl-wrap padd-ri-md">
+                            <h5 className="regular no-marg">{this.props.item.volume}</h5>
+                        </div>
+                    </div>
+                </Link>
+            </div>
+        )
+
+    }
+
+
 }

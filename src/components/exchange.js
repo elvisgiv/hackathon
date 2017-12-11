@@ -13,10 +13,17 @@ export default class Exchange extends React.Component {
         this.state = {
             symbol: props.match.params.symbol
         };
+
+        this.marketChanged = this.marketChanged.bind(this)
     }
 
     componentWillReceiveProps(){
         this.setState({symbol: this.props.match.params.symbol})
+    }
+
+
+    marketChanged(){
+        this.setState()
     }
 
 
@@ -29,7 +36,7 @@ export default class Exchange extends React.Component {
                         <div className="marg-30">
                             <div className="fl-cont fl-center-vert">
                                 <div className="fl-wrap fl-grow">
-                                    <h1 className="bold no-marg uppercase" >{this.state.symbol}</h1>
+                                    <h1 className="bold no-marg uppercase">{this.state.symbol}</h1>
                                     <h6 className="no-marg lite-gr-text uppercase">{this.state.symbol}/ETH</h6>
                                 </div>
                                 <div className="fl-wrap">
@@ -66,7 +73,7 @@ export default class Exchange extends React.Component {
                         </div>
                     </div>
                     <div className="fl-wrap markets-section">
-                        <Markets/>
+                        <Markets symbol={this.state.symbol} marketChanged={this.marketChanged}/>
                     </div>
 
                 </div>
