@@ -18,12 +18,12 @@ export default class Exchange extends React.Component {
     }
 
     componentWillReceiveProps(){
-        this.setState({symbol: this.props.match.params.symbol})
+        //this.setState({symbol: this.props.match.params.symbol})
     }
 
 
-    marketChanged(){
-        this.setState()
+    marketChanged(symbol){
+        this.setState({symbol: symbol});
     }
 
 

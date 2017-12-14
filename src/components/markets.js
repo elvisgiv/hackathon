@@ -100,40 +100,16 @@ export default class Markets extends React.Component {
 
     changeMarket(symbol) {
         this.currentMarket = symbol;
-        this.props.marketChanged();
-        console.log("Change to: " + symbol)
+        this.props.marketChanged(symbol);
     }
 
     render() {
 
         const filteredMarkets = this.state.markets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
-        let marketsOld = filteredMarkets.map((item, i) => (
-            <Link to={`/exchange/${item.symbol}`} className="undec white-text" key={i.toString()}
-                  onClick={this.changeMarket}>
-                <div
-                    className={"fl-cont market bord-bottt gx-list-element " + (item.symbol == this.state.selectedMarket ? 'gx-list-selected' : '')}>
-                    <div className="fl-wrap padd-ri-md padd-left-10">
-                        <h5 className="no-marg uppercase">{item.symbol}</h5>
-                    </div>
-                    <div className="fl-wrap padd-ri-md">
-                        <h5 className="regular no-marg">{item.price}</h5>
-                    </div>
-                    <div className="fl-wrap padd-ri-md">
-                        <h5 className={'regular no-marg ' + (item.change > 0 ? 'green-text' : 'red-text')}>{item.change}%</h5>
-                    </div>
-                    <div className="fl-wrap padd-ri-md">
-                        <h5 className="regular no-marg">{item.volume}</h5>
-                    </div>
-                </div>
-            </Link>
-        ))
-
-
         let markets = filteredMarkets.map((item, i) =>
             <Market key={i.toString()} item={item} currentMarket={this.currentMarket} changeMarket={this.changeMarket}/>
         )
-
 
         return (
             <div className="gx-card padd-md marg-30 no-marg-left">
@@ -176,11 +152,6 @@ class Market extends React.Component {
 
     constructor(props) {
         super(props)
-
-        this.state = {
-            selected: false
-        }
-
         this._onClick = this._onClick.bind(this)
     }
 
