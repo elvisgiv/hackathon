@@ -89,6 +89,6 @@ module.exports = {
     output: output(),
     module: { loaders: loaders() },
     //postcss: [ postcssCssnext({ browsers: ['last 2 versions'] }) ],
-    devServer: { historyApiFallback: true },
+    devServer: { historyApiFallback: true, port: 3003 },
     plugins: plugins()
 }
