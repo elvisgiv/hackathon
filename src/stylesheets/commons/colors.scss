@@ -48,3 +48,9 @@ $gex-red: #ad1e04;
 .white-text{  color: white !important; }
 .green-text{ color: $gex-green; }
 .red-text{ color: $gex-red; }
+
+
+
+:root {
+  --mdc-theme-primary: $accent-color-gex !important;
+}

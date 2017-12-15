@@ -24,7 +24,8 @@
     "webpack-dev-server": "^2.9.4",
     "ethjs-contract": "^0.1.9",
     "ethjs-provider-http": "^0.1.6",
-    "ethjs-query": "^0.3.2"
+    "ethjs-query": "^0.3.2",
+    "react-table": "6.7.5"
   },
   "scripts": {
     "start": "webpack-dev-server",

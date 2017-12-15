@@ -24,9 +24,7 @@ export default class WalletConnector extends React.Component {
         this.fetchNetwork()
         this.fetchAccounts()
         this.fetchBalances()
-        this.props.updateWalletConnector(this.state)
     }
-
 
     fetchNetwork() {
         const { web3 } = window;
@@ -37,13 +35,16 @@ export default class WalletConnector extends React.Component {
                     networkError: err
                 });
             } else {
+
                 this.setState({
                     networkError: null,
                     networkId: netId,
                     web3connection: true
                 })
-
                 this.setNetworkName()
+
+                console.log(this.state.networkName)
+                this.props.updateWalletConnector(this.state)
 
             }
         });

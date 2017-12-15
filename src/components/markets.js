@@ -5,6 +5,9 @@ import {MdSearch} from 'react-icons/lib/md';
 
 import 'material-components-web/dist/material-components-web.min.css';
 
+// Import React Table
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 const KEYS_TO_FILTERS = ['symbol']
 
@@ -95,7 +98,8 @@ export default class Markets extends React.Component {
 
 
     componentWillReceiveProps() {
-        this.setState({selectedMarket: this.props.symbol})
+        //this.setState({selectedMarket: this.props.symbol})
+        this.setState({currentMarket: this.props.symbol})
     }
 
     changeMarket(symbol) {
@@ -114,11 +118,14 @@ export default class Markets extends React.Component {
         return (
             <div className="gx-card padd-md marg-30 no-marg-left">
 
+
+
                 <div className="fl-cont  fl-center-vert padd-10 marg-bott-md">
 
                     <div className="fl-wrap fl-grow">
                         <h3 className="bold no-marg">Markets</h3>
                     </div>
+
 
                     <div className="fl-wrap ">
 
@@ -134,6 +141,52 @@ export default class Markets extends React.Component {
 
                     </div>
                 </div>
+
+
+
+
+
+                <ReactTable
+                    showPagination={false}
+                    showPageSizeOptions={false}
+
+
+                    data={markets}
+                    columns={[
+                        {
+                            Header: "Coin",
+                            id: "coin",
+                            accessor: d => d.props.item.symbol,
+                            Cell: row => (
+                                <div style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    backgroundColor: '#dadada',
+                                    borderRadius: '2px'
+                                }}>leeee</div>
+                            )
+                        },
+                        {
+                            Header: "Price",
+                            id: "price",
+                            accessor: d => d.props.item.price
+                        },
+                        {
+                            Header: "Volume",
+                            id: "volume",
+                            accessor: d => d.props.item.volume
+                        },
+                        {
+                            Header: "Change",
+                            id: "change",
+                            accessor: d => <h5 className={'regular no-marg ' + (d.props.item.change > 0 ? 'green-text' : 'red-text')}>{d.props.item.change}%</h5>
+                        },
+                    ]}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                />
+
+
 
                 <div className="padd-10">
                     {markets}
