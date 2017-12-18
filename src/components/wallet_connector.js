@@ -42,8 +42,6 @@ export default class WalletConnector extends React.Component {
                     web3connection: true
                 })
                 this.setNetworkName()
-
-                console.log(this.state.networkName)
                 this.props.updateWalletConnector(this.state)
 
             }

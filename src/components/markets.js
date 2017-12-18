@@ -37,6 +37,24 @@ const marketsInfo = [
 
 export default class Markets extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            timer: null,
+            searchTerm: '',
+            markets: this.initMarkets()
+        };
+
+        let urlMarket = this.state.markets.find(market => market.symbol === props.urlMarketSym);
+        this.changeMarket(urlMarket)
+
+
+        this.searchUpdated = this.searchUpdated.bind(this);
+        this.changeMarket = this.changeMarket.bind(this)
+
+    }
+
     initMarkets(){
         let markets = this.initMarketsInfo();
         return this.generateMarketsData(markets);
@@ -61,21 +79,6 @@ export default class Markets extends React.Component {
             markets[i]['change'] = (GexHelpers.getRandomArbitrary(-100, 100)).toFixed(4);
         }
         return markets;
-    }
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            selectedMarket: props.symbol,
-            timer: null,
-            searchTerm: '',
-            markets: this.initMarkets()
-        };
-
-        this.searchUpdated = this.searchUpdated.bind(this);
-        this.changeMarket = this.changeMarket.bind(this)
-
     }
 
     searchUpdated(term) {
@@ -131,45 +134,6 @@ export default class Markets extends React.Component {
                     </div>
                 </div>
 
-
-                <ReactTable
-                    showPagination={false}
-                    showPageSizeOptions={false}
-
-
-                    data={markets}
-                    columns={[
-                        {
-                            Header: "Coin",
-                            id: "coin",
-                            accessor: d => d.props.market.symbol,
-                            Cell: cell => (
-                                <div>{cell.row.symbol}</div>
-                            )
-                        },
-                        {
-                            Header: "Price",
-                            id: "price",
-                            accessor: d => d.props.market.price
-                        },
-                        {
-                            Header: "Volume",
-                            id: "volume",
-                            accessor: d => d.props.market.volume
-                        },
-                        {
-                            Header: "Change",
-                            id: "change",
-                            accessor: d => d.props.market.change,
-                            //Cell: row => (
-                            //    <h5 className={'regular no-marg ' + (row.props.marketData.change > 0 ? 'green-text' : 'red-text')}>{row.props.marketData.change}%</h5>
-                            //)
-
-                        },
-                    ]}
-                    defaultPageSize={10}
-                    className="-striped -highlight"
-                />
 
 
 

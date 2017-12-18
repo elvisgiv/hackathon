@@ -19,6 +19,11 @@ export default class Exchange extends React.Component {
         this.getMarketInfo = this.getMarketInfo.bind(this)
     }
 
+    componentDidMount(){
+
+    }
+
+
     componentWillReceiveProps(){
         //this.setState({symbol: this.props.match.params.symbol})
     }
@@ -81,7 +86,7 @@ export default class Exchange extends React.Component {
                         </div>
                     </div>
                     <div className="fl-wrap markets-section">
-                        <Markets symbol={this.state.symbol} marketChanged={this.marketChanged} getMarketInfo={this.getMarketInfo}/>
+                        <Markets urlMarketSym={this.props.match.params.symbol} marketChanged={this.marketChanged} getMarketInfo={this.getMarketInfo}/>
                     </div>
 
                 </div>

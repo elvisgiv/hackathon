@@ -17,7 +17,7 @@ export default class Market extends React.Component {
             <div>
                 <Link to={`/exchange/${this.props.market.symbol}`} className="undec white-text" onClick={this._onClick}>
                     <div
-                        className={"fl-cont market bord-bottt gx-list-element " + (this.props.market.symbol === this.props.currentMarket ? 'gx-list-selected' : '')}>
+                        className={"fl-cont market bord-bottt gx-list-element " + (this.props.market.symbol === this.props.currentMarket.symbol ? 'gx-list-selected' : '')}>
                         <div className="fl-wrap padd-ri-md padd-left-10">
                             <h5 className="no-marg uppercase">{this.props.market.symbol}</h5>
                         </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import logo from '../../images/logos/galactic_logo_white.png';
+import ethLogo from '../../images/icons/eth.svg';
 import account_icon from '../../images/icons/account.svg';
 import down_icon from '../../images/icons/down.svg';
 
@@ -133,8 +134,8 @@ export default class Header extends React.Component {
                                             </div>
 
                                             <div className="fl-cont fl-center-vert padd-top-10">
-                                                <div className="fl-wrap padd-ri-10">
-                                                    <MdMonetizationOn className="sm-icon"/>
+                                                <div className="fl-wrap padd-ri-10 sm-icon">
+                                                    <img src={ethLogo} className="sm-icon"/>
                                                 </div>
                                                 <div className="fl-wrap">
                                                     {this.state.walletConnector.balance} ETH
