@@ -67,7 +67,10 @@ export default class Markets extends React.Component {
             let symbol = coin[0];
             let name = coin[1];
             let iconFormat = coin[2];
-            markets.push({'symbol': symbol, 'name': name, 'iconFormat': iconFormat})
+
+            let logoUrl = require('../images/coins/'+ symbol + '.' + iconFormat);
+
+            markets.push({'symbol': symbol, 'name': name, 'logoUrl': logoUrl})
         }
         return markets
     }

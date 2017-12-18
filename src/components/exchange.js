@@ -47,9 +47,26 @@ export default class Exchange extends React.Component {
                     <div className="fl-wrap fl-grow">
                         <div className="marg-30">
                             <div className="fl-cont fl-center-vert">
+
+
+                                <div className="fl-wrap round-wrap marg-ri-md">
+                                    <img src={this.state.market.logoUrl} className='gx-icon'/>
+                                </div>
+
                                 <div className="fl-wrap fl-grow">
-                                    <h1 className="bold no-marg inl"> {this.state.market.name}</h1>
-                                    <h1 className="bold no-marg uppercase inl"> ({this.state.market.symbol})</h1>
+
+                                    <div className="fl-cont fl-center-vert">
+
+                                        <div className="fl-wrap">
+                                            <h1 className="bold no-marg inl"> {this.state.market.name}</h1>
+                                            <h1 className="bold no-marg uppercase inl"> ({this.state.market.symbol})</h1>
+                                        </div>
+
+
+                                    </div>
+
+
+
                                     <h6 className="no-marg lite-gr-text uppercase">{this.state.market.symbol}/ETH</h6>
                                 </div>
                                 <div className="fl-wrap">
