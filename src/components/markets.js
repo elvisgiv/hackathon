@@ -1,81 +1,81 @@
 import React from 'react'
-import {Link, Switch, Route} from 'react-router-dom'
 import SearchInput, {createFilter} from 'react-search-input'
 import {MdSearch} from 'react-icons/lib/md';
-
 import 'material-components-web/dist/material-components-web.min.css';
+
+import Market from './market'
 
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-const KEYS_TO_FILTERS = ['symbol']
+//import '../helpers'
+import GexHelpers from "../gexHelpers"
 
+// search
+const KEYS_TO_FILTERS = ['symbol'];
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-const markets = [
-    'ppt', 'eos', 'qtum', 'cvc', 'storj', 'zrx', 'btm', 'kick', 'veri', 'ebtc', 'fun', 'mnt', 'salt'
-]
-
-
-const mark = {
-    ppt: 'Populous',
-    eos: 'EOS',
-    qtum: 'Qtum',
-    cvc: 'Civic',
-    storj: 'Storj',
-    zrx: '0x',
-    btm: 'Bytom',
-    kick: 'KickCoin',
-    veri: 'Veritaseum',
-    ebtc: 'eBitcoin',
-    fun: 'FunFair',
-    rep: 'Augur',
-    salt: 'SALT',
-    gnt: 'Golem',
-    wtc: 'Walton',
-    knc: 'Kyber Network',
-    pay: 'TenX',
-}
-
-
-function generateMarketsData() {
-    let marketsData = []
-
-
-    for (let i = 0; i < markets.length; i++) {
-        marketsData[i] = {
-            symbol: markets[i],
-            price: (Math.random() * getRandomInt(1, 3)).toFixed(4),
-            volume: (Math.random() * getRandomInt(1000, 5000)).toFixed(4),
-            change: (getRandomArbitrary(-100, 100)).toFixed(4),
-        }
-    }
-
-    return marketsData
-}
-
+const marketsInfo = [
+    ['ppt', 'Populous', 'svg'],
+    ['eos', 'EOS', 'svg'],
+    ['qtum', 'Qtum', 'svg'],
+    ['cvc', 'Civic', 'svg'],
+    ['storj', 'Storj', 'svg'],
+    ['zrx', '0x', 'svg'],
+    ['btm', 'Bytom', 'svg'],
+    ['kick', 'KickCoin', 'png'],
+    ['veri', 'Veritaseum', 'svg'],
+    ['ebtc', 'eBitcoin', 'png'],
+    ['fun', 'FunFair', 'svg'],
+    ['rep', 'Augur', 'svg'],
+    ['salt', 'SALT', 'svg'],
+    ['gnt', 'Golem', 'svg'],
+    ['wtc', 'Walton', 'svg'],
+    ['knc', 'Kyber Network', 'svg'],
+    ['pay', 'TenX', 'svg'],
+];
 
 export default class Markets extends React.Component {
+
+    initMarkets(){
+        let markets = this.initMarketsInfo();
+        return this.generateMarketsData(markets);
+    }
+
+    initMarketsInfo(){
+        let markets = [];
+        for (let i = 0; i < marketsInfo.length; i++) {
+            let coin = marketsInfo[i];
+            let symbol = coin[0];
+            let name = coin[1];
+            let iconFormat = coin[2];
+            markets.push({'symbol': symbol, 'name': name, 'iconFormat': iconFormat})
+        }
+        return markets
+    }
+
+    generateMarketsData(markets){
+        for (let i = 0; i < markets.length; i++) {
+            markets[i]['price'] = (Math.random() * GexHelpers.getRandomInt(1, 3)).toFixed(4);
+            markets[i]['volume'] = (Math.random() * GexHelpers.getRandomInt(1000, 5000)).toFixed(4);
+            markets[i]['change'] = (GexHelpers.getRandomArbitrary(-100, 100)).toFixed(4);
+        }
+        return markets;
+    }
 
     constructor(props) {
         super(props);
 
         this.state = {
-            markets: generateMarketsData(),
             selectedMarket: props.symbol,
             timer: null,
-            searchTerm: ''
+            searchTerm: '',
+            markets: this.initMarkets()
         };
-        this.searchUpdated = this.searchUpdated.bind(this)
+
+        this.searchUpdated = this.searchUpdated.bind(this);
         this.changeMarket = this.changeMarket.bind(this)
+
     }
 
     searchUpdated(term) {
@@ -86,7 +86,7 @@ export default class Markets extends React.Component {
         this.setState({
             timer: setInterval(() => {
                 this.setState({
-                    markets: generateMarketsData()
+                    markets: this.generateMarketsData(this.state.markets)
                 });
             }, 4000)
         });
@@ -96,15 +96,9 @@ export default class Markets extends React.Component {
         clearInterval(this.state.timer);
     }
 
-
-    componentWillReceiveProps() {
-        //this.setState({selectedMarket: this.props.symbol})
-        this.setState({currentMarket: this.props.symbol})
-    }
-
-    changeMarket(symbol) {
-        this.currentMarket = symbol;
-        this.props.marketChanged(symbol);
+    changeMarket(market) {
+        this.currentMarket = market;
+        this.props.marketChanged(market);
     }
 
     render() {
@@ -112,14 +106,11 @@ export default class Markets extends React.Component {
         const filteredMarkets = this.state.markets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
         let markets = filteredMarkets.map((item, i) =>
-            <Market key={i.toString()} item={item} currentMarket={this.currentMarket} changeMarket={this.changeMarket}/>
+            <Market key={i.toString()} market={item} currentMarket={this.currentMarket} changeMarket={this.changeMarket}/>
         )
 
         return (
             <div className="gx-card padd-md marg-30 no-marg-left">
-
-
-
                 <div className="fl-cont  fl-center-vert padd-10 marg-bott-md">
 
                     <div className="fl-wrap fl-grow">
@@ -128,9 +119,7 @@ export default class Markets extends React.Component {
 
 
                     <div className="fl-wrap ">
-
                         <div className="fl-cont fl-center-h search-wrap">
-
                             <div className="fl-wrap fl-grow">
                                 <SearchInput className="gx-search-input" onChange={this.searchUpdated}/>
                             </div>
@@ -143,9 +132,6 @@ export default class Markets extends React.Component {
                 </div>
 
 
-
-
-
                 <ReactTable
                     showPagination={false}
                     showPageSizeOptions={false}
@@ -156,30 +142,29 @@ export default class Markets extends React.Component {
                         {
                             Header: "Coin",
                             id: "coin",
-                            accessor: d => d.props.item.symbol,
-                            Cell: row => (
-                                <div style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    backgroundColor: '#dadada',
-                                    borderRadius: '2px'
-                                }}>leeee</div>
+                            accessor: d => d.props.market.symbol,
+                            Cell: cell => (
+                                <div>{cell.row.symbol}</div>
                             )
                         },
                         {
                             Header: "Price",
                             id: "price",
-                            accessor: d => d.props.item.price
+                            accessor: d => d.props.market.price
                         },
                         {
                             Header: "Volume",
                             id: "volume",
-                            accessor: d => d.props.item.volume
+                            accessor: d => d.props.market.volume
                         },
                         {
                             Header: "Change",
                             id: "change",
-                            accessor: d => <h5 className={'regular no-marg ' + (d.props.item.change > 0 ? 'green-text' : 'red-text')}>{d.props.item.change}%</h5>
+                            accessor: d => d.props.market.change,
+                            //Cell: row => (
+                            //    <h5 className={'regular no-marg ' + (row.props.marketData.change > 0 ? 'green-text' : 'red-text')}>{row.props.marketData.change}%</h5>
+                            //)
+
                         },
                     ]}
                     defaultPageSize={10}
@@ -201,41 +186,3 @@ export default class Markets extends React.Component {
 }
 
 
-class Market extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this._onClick = this._onClick.bind(this)
-    }
-
-    _onClick() {
-        this.props.changeMarket(this.props.item.symbol);
-    }
-
-    render() {
-        return (
-            <div>
-                <Link to={`/exchange/${this.props.item.symbol}`} className="undec white-text" onClick={this._onClick}>
-                    <div
-                        className={"fl-cont market bord-bottt gx-list-element " + (this.props.item.symbol === this.props.currentMarket ? 'gx-list-selected' : '')}>
-                        <div className="fl-wrap padd-ri-md padd-left-10">
-                            <h5 className="no-marg uppercase">{this.props.item.symbol}</h5>
-                        </div>
-                        <div className="fl-wrap padd-ri-md">
-                            <h5 className="regular no-marg">{this.props.item.price}</h5>
-                        </div>
-                        <div className="fl-wrap padd-ri-md">
-                            <h5 className={'regular no-marg ' + (this.props.item.change > 0 ? 'green-text' : 'red-text')}>{this.props.item.change}%</h5>
-                        </div>
-                        <div className="fl-wrap padd-ri-md">
-                            <h5 className="regular no-marg">{this.props.item.volume}</h5>
-                        </div>
-                    </div>
-                </Link>
-            </div>
-        )
-
-    }
-
-
-}

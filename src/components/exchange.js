@@ -11,10 +11,12 @@ export default class Exchange extends React.Component {
         super(props);
 
         this.state = {
-            symbol: props.match.params.symbol
+            symbol: props.match.params.symbol,
+            market: {}
         };
 
-        this.marketChanged = this.marketChanged.bind(this)
+        this.marketChanged = this.marketChanged.bind(this);
+        this.getMarketInfo = this.getMarketInfo.bind(this)
     }
 
     componentWillReceiveProps(){
@@ -22,8 +24,13 @@ export default class Exchange extends React.Component {
     }
 
 
-    marketChanged(symbol){
-        this.setState({symbol: symbol});
+    getMarketInfo(symbol){
+
+    }
+
+
+    marketChanged(market){
+        this.setState({market: market});
     }
 
 
@@ -36,8 +43,9 @@ export default class Exchange extends React.Component {
                         <div className="marg-30">
                             <div className="fl-cont fl-center-vert">
                                 <div className="fl-wrap fl-grow">
-                                    <h1 className="bold no-marg uppercase">{this.state.symbol}</h1>
-                                    <h6 className="no-marg lite-gr-text uppercase">{this.state.symbol}/ETH</h6>
+                                    <h1 className="bold no-marg inl"> {this.state.market.name}</h1>
+                                    <h1 className="bold no-marg uppercase inl"> ({this.state.market.symbol})</h1>
+                                    <h6 className="no-marg lite-gr-text uppercase">{this.state.market.symbol}/ETH</h6>
                                 </div>
                                 <div className="fl-wrap">
 
@@ -73,7 +81,7 @@ export default class Exchange extends React.Component {
                         </div>
                     </div>
                     <div className="fl-wrap markets-section">
-                        <Markets symbol={this.state.symbol} marketChanged={this.marketChanged}/>
+                        <Markets symbol={this.state.symbol} marketChanged={this.marketChanged} getMarketInfo={this.getMarketInfo}/>
                     </div>
 
                 </div>

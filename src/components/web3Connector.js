@@ -29,7 +29,7 @@ export default class Web3Connector extends React.Component {
     }
 
     checkWeb3(){
-        this.state.
+
     }
 
 
