@@ -9,6 +9,7 @@ import Exchange from './components/exchange';
 import Test from './components/test';
 import Help from './components/help';
 import Micropayments from './components/micropayments';
+import MchainManage from './components/mchain_manage';
 
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
@@ -66,6 +67,7 @@ export default class App extends Component {
                             <Route path='/test' component={Test}/>
                             <Route path='/help' component={Help}/>
                             <Route path='/micropayments' component={Micropayments}/>
+                            <Route path='/mchain_manage' component={MchainManage}/>
                         </Switch>
                     </div>
                     <Footer/>

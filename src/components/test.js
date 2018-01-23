@@ -83,7 +83,8 @@ export default class Test extends React.Component {
                 <h1 className="bold no-marg" >Test</h1>
                 <div className="padd-top-big">
 
-                    <input style={{width: '150px'}} type="number" value={this.state.number} onChange={(num) => this.setState({number: num.target.value})}/>
+                    <input style={{width: '150px'}} type="number" value={this.state.number} onChange={(num) =>
+                      this.setState({number: num.target.value})}/>
                     <br/>
                     <br/>
                     <Button className="gx-btn gx-btn-def" onClick={this.setNumber}>

@@ -25,7 +25,8 @@
     "ethjs-contract": "^0.1.9",
     "ethjs-provider-http": "^0.1.6",
     "ethjs-query": "^0.3.2",
-    "react-table": "6.7.5"
+    "react-table": "6.7.5",
+    "@galacticexchange/gex-client-js": "0.0.7"
   },
   "scripts": {
     "start": "webpack-dev-server",

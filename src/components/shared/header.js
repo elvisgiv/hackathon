@@ -14,13 +14,19 @@ export default class Header extends React.Component {
         super(props);
         this.state = {
             open: false,
-            walletConnector: {}
+            walletConnector: {},
+            openExample: false
         };
-        this.openMenu = this.openMenu.bind(this)
+        this.openMenu = this.openMenu.bind(this);
+        this.openMenuExample = this.openMenuExample.bind(this)
     }
 
     openMenu(){
         this.setState({open:true})
+    }
+
+    openMenuExample(){
+        this.setState({openExample:true})
     }
 
     componentWillReceiveProps(){
@@ -70,8 +76,34 @@ export default class Header extends React.Component {
                                         Test
                                     </Button>
                                 </Link>
-
+                                <Button className="gx-btn gx-btn-transp" onClick={this.openMenuExample}>
+                                    <div className="fl-cont fl-center-vert">
+                                        <div className="fl-wrap gx-text-col marg-ri-sm">
+                                            Examples
+                                        </div>
+                                        <div className="fl-wrap">
+                                            <MdKeyboardArrowDown className="sm-icon gex-svg"/>
+                                        </div>
+                                    </div>
+                                </Button>
+                                <MenuAnchor className="gx-mdc-menu">
+                                    <Menu
+                                        right
+                                        open={this.state.openExample}
+                                        onClose={()=>{this.setState({openExample:false})}}
+                                    >
+                                        <MenuItem>
+                                            <Link to='/mchain_manage' className="marg-left-10 undec">
+                                                <div className="">
+                                                    Mchain manage
+                                                </div>
+                                            </Link>
+                                        </MenuItem>
+                                    </Menu>
+                                </MenuAnchor>
                             </div>
+
+
 
                             <div  className="fl-wrap  fl-center-h">
 
@@ -142,7 +174,6 @@ export default class Header extends React.Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </Menu>
                                 </MenuAnchor>
 
