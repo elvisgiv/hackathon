@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import {Switch, Route} from 'react-router-dom'
 
-import WalletConnector from './components/wallet_connector'; // todo: remove it
 import Web3Connector from './components/web3Connector';
 import Exchange from './components/exchange';
 import Test from './components/test';
@@ -24,15 +23,9 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            walletConnector: {},
             web3Connector: {}
         }
-        this.updateWalletConnector = this.updateWalletConnector.bind(this)
         this.updateWeb3Connector = this.updateWeb3Connector.bind(this)
-    }
-
-    updateWalletConnector(walletConnector) {
-        this.setState({walletConnector: walletConnector})
     }
 
     updateWeb3Connector(web3Connector) {
@@ -40,11 +33,10 @@ export default class App extends Component {
     }
 
     render() {
-
-        let walletConnector = this.state.walletConnector;
+        let web3Connector = this.state.web3Connector;
         let content;
 
-        if (!walletConnector.web3connection) {
+        if (!web3Connector.web3) {
             content = (
                 <div className="cont fl-cont fl-center" style={{height: "calc(100vh - 65px)", textAlign: "center"}}>
                     <div className="fl-wrap fl-grow">
@@ -59,7 +51,7 @@ export default class App extends Component {
         else {
             content = (
                 <div className="cont">
-                    <Header walletConnector={walletConnector}/>
+                    <Header walletConnector={web3Connector}/>
                     <div className="page-content">
                         <Switch>
                             <Route exact path='/' component={Exchange}/>
@@ -77,8 +69,7 @@ export default class App extends Component {
 
         return (
             <div className="App">
-                <WalletConnector updateWalletConnector={this.updateWalletConnector}/>
-                <Web3Connector updateWalletConnector={this.updateWeb3Connector}/>
+                <Web3Connector updateWeb3Connector={this.updateWeb3Connector}/>
                 {content}
             </div>
         );
