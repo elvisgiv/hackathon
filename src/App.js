@@ -37,6 +37,8 @@ export default class App extends Component {
         let web3Connector = this.state.web3Connector;
         let content;
 
+        console.log(web3Connector)
+
         if (!web3Connector.web3) {
             content = (
                 <div className="cont fl-cont fl-center" style={{height: "calc(100vh - 65px)", textAlign: "center"}}>
@@ -57,7 +59,7 @@ export default class App extends Component {
                         <Switch>
                             <Route exact path='/' component={Exchange}/>
                             <Route exact path='/exchange/:symbol' component={Exchange}/>
-                            <Route path='/test' component={Test}/>
+                            <Route path='/test' component={Test} web3Connector={web3Connector}/>
                             <Route path='/help' component={Help}/>
                             <Route path='/micropayments' component={Micropayments}/>
                             <Route path='/mchain_manage' component={MchainManage}/>

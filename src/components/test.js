@@ -9,10 +9,16 @@ export default class Test extends React.Component {
 
 
     componentDidMount(){
-        let ip = '51.0.1.99';
-        let port = '8546';
-        gex.init(ip, port);
-        this.checkBalances();
+
+    }
+
+    componentWillReceiveProps(){
+
+        console.log(this.props.web3Connector)
+        if (this.props.web3Connector){
+            gex.initWithProvider(this.props.web3Connector.web3.currentProvider);
+            this.checkBalances();
+        }
     }
 
     async checkBalances() {
@@ -21,6 +27,9 @@ export default class Test extends React.Component {
         console.log('first account balance: ' + firstAccountBalance);
 
         let tokenAddr = gex.manager().contractAddress;
+        console.log('contract addr:');
+        console.log(gex.manager().contractAddress);
+
         let nodeManagerBalance = await gex.token().balanceOf(tokenAddr);
         console.log('node manager balance: ' + nodeManagerBalance);
     }
