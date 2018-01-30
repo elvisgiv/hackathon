@@ -6,7 +6,19 @@ import account_icon from '../../images/icons/account.svg';
 import down_icon from '../../images/icons/down.svg';
 
 import { MenuAnchor, Menu, MenuItem, MenuDivider, Button} from 'react-mdc-web/lib';
-import {MdAccountCircle, MdKeyboardArrowDown, MdLanguage, MdAccountBalanceWallet, MdMonetizationOn} from 'react-icons/lib/md';
+import {MdAccountCircle, MdKeyboardArrowDown, MdLanguage, MdAccountBalanceWallet, MdMonetizationOn, MdMenu} from 'react-icons/lib/md';
+
+import {
+    //Button,
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    DropdownToggle,
+    DropdownMenu,
+    Dropdown } from 'reactstrap';
 
 export default class Header extends React.Component {
 
@@ -15,10 +27,16 @@ export default class Header extends React.Component {
         this.state = {
             open: false,
             walletConnector: {},
-            openExample: false
+            openExample: false,
+            isOpen: false,
+            open: false,
+            dropdownOpen: false
         };
         this.openMenu = this.openMenu.bind(this);
-        this.openMenuExample = this.openMenuExample.bind(this)
+        this.openMenuExample = this.openMenuExample.bind(this);
+        this.toggle = this.toggle.bind(this);
+        this.toggleS = this.toggleS.bind(this);
+        this.toggleD = this.toggleD.bind(this);
     }
 
     openMenu(){
@@ -35,6 +53,24 @@ export default class Header extends React.Component {
         }
     }
 
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+
+    toggleS() {
+        this.setState({
+            open: !this.state.open
+        });
+    }
+
+    toggleD() {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }
+
     render() {
 
         if(!this.state.walletConnector){
@@ -43,6 +79,99 @@ export default class Header extends React.Component {
 
         return (
             <div className="header">
+                <div>
+                    <Navbar color="faded" dark expand="md">
+                        <NavbarBrand href="/exchange/eos">
+                            <img src={logo} className="header-logo" />
+                        </NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+
+                            <Nav className="mr-auto" navbar>
+                                <NavItem>
+                                    <Link to='/exchange/eos' className="marg-left-10">
+                                        <Button className="gx-btn gx-btn-def">
+                                            Exchange
+                                        </Button>
+                                    </Link>
+                                </NavItem>
+                                <NavItem >
+                                    <Link to='/micropayments' className="marg-left-10">
+                                        <Button className="gx-btn gx-btn-transp">
+                                            Micropayments
+                                        </Button>
+                                    </Link>
+                                </NavItem>
+                                <NavItem >
+                                    <Link to='/help' className="marg-left-10">
+                                        <Button className="gx-btn gx-btn-transp">
+                                            Help
+                                        </Button>
+                                    </Link>
+                                </NavItem>
+                                <NavItem >
+                                    <Link to='/test' className="marg-left-10">
+                                        <Button className="gx-btn gx-btn-transp">
+                                            Test
+                                        </Button>
+                                    </Link>
+                                </NavItem>
+                                <NavItem >
+                                    <Link to='/examples' className="marg-left-10">
+                                        <Button className="gx-btn gx-btn-transp">
+                                            Examples
+                                        </Button>
+                                    </Link>
+                                </NavItem>
+                            </Nav>
+
+                            <Button className="gx-btn gx-btn-transp marg-ri-10">
+                                <div className="fl-cont fl-center-vert">
+                                    <div className="fl-wrap marg-ri-sm">
+                                        <MdLanguage className="sm-icon gex-svg btn-icon"/>
+                                    </div>
+                                    <div className="fl-wrap gx-text-col marg-ri-sm">
+                                        English
+                                    </div>
+                                    <div className="fl-wrap">
+                                        <MdKeyboardArrowDown className="sm-icon gex-svg"/>
+                                    </div>
+                                </div>
+                            </Button>
+
+                            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleD}>
+                                <DropdownToggle>
+                                    <div className="fl-cont fl-center-vert">
+                                        <div className="fl-wrap gx-icon">
+                                            <MdAccountCircle className="gx-icon"/>
+                                        </div>
+                                        <div className="fl-wrap ">
+                                            <p className="network-badge">{this.state.walletConnector.networkName}</p>
+                                            <p className="no-marg account-badge">{this.state.walletConnector.ethAccounts}</p>
+                                        </div>
+                                    </div>
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                        <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
+                                        <h6 className="no-marg">Connected to Web3</h6>
+                                        <MdAccountBalanceWallet className="sm-icon"/>
+                                        <div className="fl-wrap">
+                                            {this.state.walletConnector.ethAccounts}
+                                        </div>
+                                        <img src={ethLogo} className="sm-icon"/>
+                                        {this.state.walletConnector.balance} ETH
+                                </DropdownMenu>
+                            </Dropdown>
+
+                        </Collapse>
+
+                    </Navbar>
+
+                </div>
+
+            </div>
+
+/*
                 <div className="header-inner fl-cont fl-center-h" >
                     <div className="fl-wrap padd-ri-md">
                         <Link to='/exchange/eos'>
@@ -76,16 +205,24 @@ export default class Header extends React.Component {
                                         Test
                                     </Button>
                                 </Link>
+
+                                <Link to='/examples' className="marg-left-10">
+                                    <Button className="gx-btn gx-btn-transp">
+                                        Examples
+                                    </Button>
+                                </Link>
+
                                 <Button className="gx-btn gx-btn-transp" onClick={this.openMenuExample}>
                                     <div className="fl-cont fl-center-vert">
                                         <div className="fl-wrap gx-text-col marg-ri-sm">
-                                            Examples
+                                            Examples_old
                                         </div>
                                         <div className="fl-wrap">
                                             <MdKeyboardArrowDown className="sm-icon gex-svg"/>
                                         </div>
                                     </div>
                                 </Button>
+
                                 <MenuAnchor className="gx-mdc-menu">
                                     <Menu
                                         right
@@ -185,7 +322,7 @@ export default class Header extends React.Component {
                     </div>
 
                 </div>
-            </div>
+            </div>*/
         );
     }
 }
