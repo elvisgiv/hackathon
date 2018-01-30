@@ -45,8 +45,8 @@ export default class Web3Connector extends React.Component {
         const {web3} = window;
         this.setState({web3: web3})
 
-        gex.initWithProvider(web3.currentProvider);
-        this.checkBalances();
+        //gex.initWithProvider(web3.currentProvider);
+        //this.checkBalances();
     }
 
     checkConnection() {

@@ -83,6 +83,7 @@ export default class MchainsList extends React.Component {
             mChains = items.map((item, i) =>
                 <tr key={i}>
                     <td>{item.mChainName}</td>
+                    <td>{item.mChainID}</td>
                     <td>{item.mChainStorage}</td>
                     <td>{item.mChainLifetime}</td>
                     <td>{item.mChainNodeNumber}</td>
@@ -101,6 +102,7 @@ export default class MchainsList extends React.Component {
                         <thead>
                             <tr>
                                 <th>mChainName</th>
+                                <th>mChainID</th>
                                 <th>mChainStorage</th>
                                 <th>mChainLifetime</th>
                                 <th>mChainNodeNumber</th>

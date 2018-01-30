@@ -84,6 +84,7 @@ export default class AggrMchainsList extends React.Component {
             aggrMchains = items.map((item, i) =>
                 <tr key={i}>
                     <td>{item.aggrMchainName}</td>
+                    <td>{item.aggrMchainID}</td>
                     <td>{item.aggrMchainStorage}</td>
                     <td>{item.aggrMchainLifetime}</td>
                     <td>{item.aggrMchainNodeNumber}</td>
@@ -102,6 +103,7 @@ export default class AggrMchainsList extends React.Component {
                         <thead>
                             <tr>
                                 <th>aggrMchainName</th>
+                                <th>aggrMchainID</th>
                                 <th>aggrMchainStorage</th>
                                 <th>aggrMchainLifetime</th>
                                 <th>aggrMchainNodeNumber</th>

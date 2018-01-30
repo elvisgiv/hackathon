@@ -4,9 +4,9 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Container } from 'reactstra
 import classnames from 'classnames';
 
 
-import MchainManage from './mchainManage'
-import MchainsList from './mchainsList'
-import AggrMchainsList from './aggrMchainsList'
+import MchainManage from './mchains/mchainManage'
+import MchainsList from './mchains/list/mchainsList'
+import AggrMchainsList from './mchains/list/aggrMchainsList'
 
 
 const gex = require('@galacticexchange/gex-client-js');

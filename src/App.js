@@ -8,7 +8,6 @@ import Exchange from './components/exchange';
 import Test from './components/test';
 import Help from './components/help';
 import Micropayments from './components/micropayments';
-import MchainManage from './components/mchainManage';
 import Examples from './components/examples';
 
 import Header from './components/shared/header'
@@ -37,7 +36,7 @@ export default class App extends Component {
         let web3Connector = this.state.web3Connector;
         let content;
 
-        console.log(web3Connector)
+        //console.log(web3Connector)
 
         if (!web3Connector.web3) {
             content = (
@@ -62,7 +61,6 @@ export default class App extends Component {
                             <Route path='/test' component={Test} web3Connector={web3Connector}/>
                             <Route path='/help' component={Help}/>
                             <Route path='/micropayments' component={Micropayments}/>
-                            <Route path='/mchain_manage' component={MchainManage}/>
                             <Route path='/examples' component={Examples}/>
                         </Switch>
                     </div>
