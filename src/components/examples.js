@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Input,
-    Container, Row, Col, } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Container } from 'reactstrap';
 import classnames from 'classnames';
 
 
-import MchainManage from './mchain_manage'
-import MchainsList from './mchains_list'
+import MchainManage from './mchainManage'
+import MchainsList from './mchainsList'
+import AggrMchainsList from './aggrMchainsList'
 
 
 const gex = require('@galacticexchange/gex-client-js');
@@ -43,6 +43,7 @@ export default class Examples extends React.Component {
         // for template render
         let mchainManage = <MchainManage/>;
         let mchainsList = <MchainsList/>;
+        let aggrMchainsList = <AggrMchainsList/>;
 
         return(
             <Container>
@@ -55,7 +56,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '1' })}
                                 onClick={() => { this.toggle('1'); }}
                             >
-                                Mchain Manage
+                                Mchains Manage
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -63,7 +64,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '2' })}
                                 onClick={() => { this.toggle('2'); }}
                             >
-                                My Mchains
+                                Mchains
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -71,13 +72,21 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '3' })}
                                 onClick={() => { this.toggle('3'); }}
                             >
-                                My Wallet
+                                Aggregation Mchains
                             </NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink
-                                className={classnames({ active: this.state.activeTab === '3' })}
+                                className={classnames({ active: this.state.activeTab === '4' })}
                                 onClick={() => { this.toggle('4'); }}
+                            >
+                                Wallet Balance
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink
+                                className={classnames({ active: this.state.activeTab === '5' })}
+                                onClick={() => { this.toggle('5'); }}
                             >
                                 Something Else
                             </NavLink>
@@ -95,8 +104,9 @@ export default class Examples extends React.Component {
                             </div>
                         </TabPane>
                         <TabPane tabId="3">
-                            <h1>Wallet Info Here</h1>
-                        </TabPane>
+                            <div className="padd-30">
+                                {aggrMchainsList}
+                            </div>                        </TabPane>
                         <TabPane tabId="4">
                             <h1>Something Else Here</h1>
                         </TabPane>

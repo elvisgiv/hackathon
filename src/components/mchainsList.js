@@ -28,7 +28,7 @@ export default class MchainsList extends React.Component {
         //
         console.log(channelsInfo);
         //
-        let mChains = this.initMchains()
+        let mChains = this.initMchains();
         //
         this.setState({mChains: mChains});
     }
@@ -62,7 +62,7 @@ export default class MchainsList extends React.Component {
         this.setState({
             timer: setInterval(() => {
                 this.getMchainsList()
-            }, 5000)
+            }, 15000)
         });
     }
 
@@ -81,7 +81,7 @@ export default class MchainsList extends React.Component {
 
         if (items !== undefined) {
             mChains = items.map((item, i) =>
-                <tr>
+                <tr key={i}>
                     <td>{item.mChainName}</td>
                     <td>{item.mChainStorage}</td>
                     <td>{item.mChainLifetime}</td>

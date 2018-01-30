@@ -8,7 +8,7 @@ import Exchange from './components/exchange';
 import Test from './components/test';
 import Help from './components/help';
 import Micropayments from './components/micropayments';
-import MchainManage from './components/mchain_manage';
+import MchainManage from './components/mchainManage';
 import Examples from './components/examples';
 
 import Header from './components/shared/header'
@@ -25,7 +25,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             web3Connector: {}
-        }
+        };
         this.updateWeb3Connector = this.updateWeb3Connector.bind(this)
     }
 

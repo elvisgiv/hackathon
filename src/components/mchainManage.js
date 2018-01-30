@@ -30,6 +30,14 @@ export default class MchainManage extends React.Component {
         this.setState({mChainListener: listener})
     }
 
+    initAggrMChainListener(){
+        let listener = new gex.listener(gex.manager().events.AggregationMchainCreated(), function (event) {
+            console.log('EVENT');
+            console.log(event.returnValues);
+        });
+        this.setState({aggrMchainListener: listener})
+    }
+
     createAggregationMchain(){
         //
         let agrName = this.state.agrName;
@@ -39,10 +47,14 @@ export default class MchainManage extends React.Component {
         let agrDeposit = this.state.agrDeposit;
         // test
         this.setState({agr: "agr"});
+
+        this.initAggrMChainListener();
         // invoke contract from lib
-        gex.manager().createAggregationMchain(agrStorageBytes, agrLifetime, agrMaxNodes, agrDeposit, agrName);
+        let aggrTest = gex.manager().createAggregationMchain(agrStorageBytes, agrLifetime, agrMaxNodes, agrDeposit, agrName);
         // clear fields
         this.setState({agrStorageBytes: "", agrLifetime: "", agrMaxNodes: "", agrDeposit: "", agrName: ""});
+
+        console.log(aggrTest);
     }
 
     createMchain(){
