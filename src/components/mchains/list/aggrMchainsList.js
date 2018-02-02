@@ -15,6 +15,8 @@ export default class AggrMchainsList extends React.Component {
         let ip = '51.0.1.99';
         let port = '8546';
         gex.init(ip, port);
+        //gex.init('10.1.0.15', '7545');
+        //gex.init('51.0.2.99', '8546');
         //
         this.getAggrMchainsList = this.getAggrMchainsList.bind(this);
     }
@@ -44,14 +46,14 @@ export default class AggrMchainsList extends React.Component {
             let aggrMchainName = item[6];
             let aggrMchainStorage = item[1];
             let aggrMchainLifetime = item[2];
-            let aggrMchainID = item[3];
+            let aggrMchainCreatedAt = item[3];
             let aggrMchainNodeNumber = item[4];
             let aggrMchainDeposit = item[5];
             //
             aggrMchains.push({
                 'owner': owner, 'aggrMchainName': aggrMchainName, 'aggrMchainStorage': aggrMchainStorage,
                 'aggrMchainDeposit': aggrMchainDeposit, 'aggrMchainLifetime': aggrMchainLifetime,
-                'aggrMchainID': aggrMchainID, 'aggrMchainNodeNumber': aggrMchainNodeNumber,
+                'aggrMchainCreatedAt': aggrMchainCreatedAt, 'aggrMchainNodeNumber': aggrMchainNodeNumber,
             })
         }
         console.log(aggrMchains);
@@ -84,7 +86,7 @@ export default class AggrMchainsList extends React.Component {
             aggrMchains = items.map((item, i) =>
                 <tr key={i}>
                     <td>{item.aggrMchainName}</td>
-                    <td>{item.aggrMchainID}</td>
+                    <td>{item.aggrMchainCreatedAt}</td>
                     <td>{item.aggrMchainStorage}</td>
                     <td>{item.aggrMchainLifetime}</td>
                     <td>{item.aggrMchainNodeNumber}</td>
@@ -103,7 +105,7 @@ export default class AggrMchainsList extends React.Component {
                         <thead>
                             <tr>
                                 <th>aggrMchainName</th>
-                                <th>aggrMchainID</th>
+                                <th>aggrMchainCreatedAt</th>
                                 <th>aggrMchainStorage</th>
                                 <th>aggrMchainLifetime</th>
                                 <th>aggrMchainNodeNumber</th>

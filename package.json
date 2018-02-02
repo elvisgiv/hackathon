@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.0.0",
+    "@galacticexchange/gex-client-js": "0.1.23",
     "@material/ripple": "0.25.0",
     "amstock3": "amcharts/amstock3",
     "bootstrap": "^4.0.0-beta.3",
     "lodash": "^4.17.4",
     "material-components-web": "^0.26.0",
+    "moment": "^2.20.1",
     "path": "^0.12.7",
     "postcss-cssnext": "^2.5.2",
     "react": "^16.2.0",
@@ -24,8 +26,7 @@
     "reactstrap": "^5.0.0-alpha.4",
     "web3": "0.19.0",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4",
-    "@galacticexchange/gex-client-js": "0.1.23"
+    "webpack-dev-server": "^2.9.4"
   },
   "scripts": {
     "start": "webpack-dev-server",

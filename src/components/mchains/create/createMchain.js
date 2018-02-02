@@ -21,19 +21,37 @@ export default class MchainManage extends React.Component {
         let ip = '51.0.1.99';
         let port = '8546';
         gex.init(ip, port);
+        //gex.init('10.1.0.15', '7545');
+        //gex.init('51.0.2.99', '8546');
         //
         this.createMchain = this.createMchain.bind(this);
+        this.hexToString = this.hexToString.bind(this);
     }
 
     initMChainListener(){
+        let self = this;
         let listener = new gex.listener(gex.manager().events.MchainCreated(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
+            console.log("name");
+            console.log(event.returnValues.name);
+            console.log(event.returnValues.mchainID);
+            console.log(event.returnValues.nonce);
+            // todo seState mChainName
+            self.setState({basNameHex: event.returnValues.name});
+            console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7');
+            console.log(self.hexToString(event.returnValues.name))
         });
         this.setState({mChainListener: listener})
+
     }
 
-    createMchain(){
+    hexToString(hexx) {
+        let hex = hexx.toString();//force conversion
+        return gex.w3.web3.utils.hexToUtf8(hex)
+    }
+
+    async createMchain(){
         //
         let basName = this.state.basName;
         let basStorageBytes = this.state.basStorageBytes;
@@ -44,11 +62,12 @@ export default class MchainManage extends React.Component {
         this.setState({bas: "bas"});
 
         this.initMChainListener();
-        let test = gex.manager().createMchain(basStorageBytes, basLifetime, basMaxNodes, basDeposit, basName);
+        let test = await gex.manager().createMchain(basStorageBytes, basLifetime, basMaxNodes, basDeposit, basName);
         // clear fields
         this.setState({basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: ""});
 
         console.log(test);
+
     }
 
 
@@ -92,6 +111,7 @@ export default class MchainManage extends React.Component {
                     <Button className="btn btn-lg" onClick={this.createMchain}>Create Mchain</Button>
                 </div>
                 <h2>{this.state.bas}</h2>
+
             </div>
 
         )

@@ -16,11 +16,15 @@ export default class MchainManage extends React.Component {
             agrLifetime: '',
             agrMaxNodes: '',
             agrDeposit: '',
+            mChainNonces: [],
         };
         //
         let ip = '51.0.1.99';
         let port = '8546';
         gex.init(ip, port);
+        //gex.init('10.1.0.15', '7545');
+        //gex.init('51.0.2.99', '8546');
+
         //
         this.createAggregationMchain = this.createAggregationMchain.bind(this);
     }
@@ -29,11 +33,15 @@ export default class MchainManage extends React.Component {
         let listener = new gex.listener(gex.manager().events.AggregationMchainCreated(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
+            //
+            //event.returnValues.nonce
         });
         this.setState({aggrMchainListener: listener})
+
     }
 
     createAggregationMchain(){
+
         //
         let agrName = this.state.agrName;
         let agrStorageBytes = this.state.agrStorageBytes;
@@ -45,11 +53,15 @@ export default class MchainManage extends React.Component {
 
         this.initAggrMChainListener();
         // invoke contract from lib
-        let aggrTest = gex.manager().createAggregationMchain(agrStorageBytes, agrLifetime, agrMaxNodes, agrDeposit, agrName);
+        let nonce = gex.manager().createAggregationMchain(agrStorageBytes, agrLifetime, agrMaxNodes, agrDeposit, agrName);
         // clear fields
-        this.setState({agrStorageBytes: "", agrLifetime: "", agrMaxNodes: "", agrDeposit: "", agrName: ""});
+        this.setState({agrStorageBytes: "", agrLifetime: "", agrMaxNodes: "", agrDeposit: "", agrName: "",});
 
-        console.log(aggrTest);
+        //save nonces to array
+        let arrayNonces = this.state.mChainNonces;
+        arrayNonces.push(nonce);
+        this.setState({mChainNonces: arrayNonces,});
+
     }
 
 
