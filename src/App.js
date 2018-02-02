@@ -38,7 +38,7 @@ export default class App extends Component {
 
         //console.log(web3Connector)
 
-        if (!web3Connector.web3) {
+        if (!web3Connector.provider) {
             content = (
                 <div className="cont fl-cont fl-center" style={{height: "calc(100vh - 65px)", textAlign: "center"}}>
                     <div className="fl-wrap fl-grow">
@@ -58,7 +58,7 @@ export default class App extends Component {
                         <Switch>
                             <Route exact path='/' component={Exchange}/>
                             <Route exact path='/exchange/:symbol' component={Exchange}/>
-                            <Route path='/test' component={Test} web3Connector={web3Connector}/>
+                            <Route path='/test'  render={() => <Test web3Connector={web3Connector} />} />
                             <Route path='/help' component={Help}/>
                             <Route path='/micropayments' component={Micropayments}/>
                             <Route path='/examples' component={Examples}/>
