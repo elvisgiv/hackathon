@@ -21,7 +21,7 @@ export default class MchainManage extends React.Component {
         //
         let ip = '51.0.1.99';
         let port = '8546';
-        gex.init(ip, port);
+        //gex.init(ip, port);
         //gex.init('10.1.0.15', '7545');
         //gex.init('51.0.2.99', '8546');
 
@@ -101,7 +101,10 @@ export default class MchainManage extends React.Component {
                 <br/>
 
                 <div className="col-md-12">
-                    <Button className="btn btn-lg" onClick={this.createAggregationMchain}>Create Aggregation Mchain</Button>
+                    <Button className="btn btn-lg"
+                            onClick={this.createAggregationMchain} disabled={gex.w3.web3 ? false : true}>
+                        Create Aggregation Mchain
+                    </Button>
                 </div>
                 <h2>{this.state.agr}</h2>
             </div>

@@ -12,6 +12,7 @@ export default class MchainsList extends React.Component {
         super(props);
         this.state = {
             timer: null,
+            timerEvents: null,
         };
         //
         let ip = '51.0.1.99';
@@ -21,7 +22,6 @@ export default class MchainsList extends React.Component {
         //gex.init('51.0.2.99', '8546');
 
         //
-        this.getMchainsList = this.getMchainsList.bind(this);
         this.isExpired = this.isExpired.bind(this);
         this.countdown = this.countdown.bind(this);
     }
@@ -35,45 +35,71 @@ export default class MchainsList extends React.Component {
         //
         console.log(channelsInfo);
         //
-        let mChains = this.initMchains();
-        //todo get events for name chain
-
-        let listener = new gex.listener(gex.manager().events.MchainCreated(gex.w3.allEventsOpt()), function (event) {
-            console.log('EVENT');
-            console.log(event);
-            let str = event.returnValues.mchainID;
-            console.log('dimondimondimondimondimondimondimondimon');
-            console.log(str);
-        });
+        let events = this.getEvents();
         //
-
+        let mChains = this.initMchains();
+        //
         this.setState({mChains: mChains});
 
+    }
+
+    hexToString(hexx) {
+        let hex = hexx.toString();//force conversion
+        return gex.w3.web3.utils.hexToUtf8(hex)
+    }
+
+    getEvents() {
+        let self = this;
+        //
+        let events = [];
+        //
+        let listener = new gex.listener(gex.manager().events.MchainCreated(gex.w3.allEventsOpt()), function (event) {
+            //
+            events.push(event.returnValues,);
+            //events.push({'mChainName': name, 'mChainID': event.returnValues.mchainID});
+            self.setState({events: events});
+        });
     }
 
     initMchains() {
         let self = this;
         let states = this.state.channelsInfo;
         let mChains = [];
+        let events = this.state.events;
+        console.log(events);
         //
         for (var i = 0; i < states.length; i++) {
             let mChain = states[i];
             //
-            let owner = mChain[0];
-            let mChainName = mChain[6];
-            let mChainStorage = mChain[1];
-            let mChainLifetime = mChain[2];
-            let mChainCreatedAtInSec = mChain[3];
-            let mChainNodeNumber = mChain[4];
-            let mChainDeposit = mChain[5];
-
-            let date = new Date(this.timeInUtc(mChain[3])).toString()
+            let owner = mChain.owner;
+            let mChainID = mChain.mChainID;
+            let mChainName = '0x706c6561736520776169742e2e'; //please wait...
+            let mChainStorage = mChain.storageBytes;
+            let mChainLifetime = mChain.lifetime;
+            let mChainCreatedAtInSec = mChain.creationDate;
+            let mChainNodeNumber = mChain.maxNodes;
+            let mChainDeposit = mChain.deposit;
+            //
+            let date = new Date(this.timeInUtc(mChain.creationDate)).toString();
+            //
+            let dateTo = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime);
+            let lifetime = new Date(this.timeInUtc(dateTo)).toString();
+            // get mChain name from events by mChainID
+            if (events) {
+                for (var j = 0; j < events.length; j++) {
+                    let event = events[j];
+                    if (event.mchainID === mChainID) {
+                        mChainName = event.name;
+                        break;
+                    }
+                }
+            }
 
             //
             mChains.push({
-                'owner': owner, 'mChainName': mChainName, 'mChainStorage': mChainStorage, 'mChainDeposit': mChainDeposit,
-                'mChainLifetime': mChainLifetime, 'mChainCreatedAt': date,
-                'mChainNodeNumber': mChainNodeNumber, 'mChainCreatedAtInSec': mChainCreatedAtInSec,
+                'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage, 'mChainDeposit': mChainDeposit,
+                'mChainLifetime': lifetime, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
+                'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
             });
 
             // need for countdown
@@ -85,16 +111,21 @@ export default class MchainsList extends React.Component {
     }
 
     componentDidMount() {
+        this.getEvents();
         this.getMchainsList();
         this.setState({
             timer: setInterval(() => {
                 this.getMchainsList()
-            }, 15000)
+            }, 15000),
+            timerEvents: setInterval(() => {
+                this.getEvents()
+            }, 15000),
         });
     }
 
     componentWillUnmount() {
         clearInterval(this.state.timer);
+        clearInterval(this.state.timerEvents);
     }
 
     isExpired(mChainCreatedAtInSec, mChainLifetime, index) {
@@ -104,7 +135,7 @@ export default class MchainsList extends React.Component {
 
         return(
             <div>
-                <Button className="btn btn-sm" onClick={() => this.withdrowFrom(index)} disabled={(countDownDate > timeNow)}>pick up a deposit</Button>
+                <Button className="btn btn-sm" onClick={() => this.withdrowFrom(index)} disabled={(countDownDate > timeNow)}>withdrow deposit</Button>
             </div>
         )
     }
@@ -165,13 +196,13 @@ export default class MchainsList extends React.Component {
                 <tr key={index}>
                     <td>{item.mChainName}</td>
                     <td>{item.mChainCreatedAt}</td>
-                    <td>{item.mChainStorage}</td>
                     <td>{item.mChainLifetime}</td>
+                    <td id={item.mChainCreatedAtInSec}>
+                        {this.countdown(item.mChainCreatedAtInSec, item.mChainLifetimeInSec)}
+                    </td>
+                    <td>{item.mChainStorage}</td>
                     <td>{item.mChainNodeNumber}</td>
                     <td>{item.mChainDeposit}</td>
-                    <td id={item.mChainCreatedAtInSec}>
-                        {this.countdown(item.mChainCreatedAtInSec, item.mChainLifetime)}
-                    </td>
                     <td>
                         {this.isExpired(item.mChainCreatedAtInSec, item.mChainLifetime, index)}
                     </td>
@@ -188,19 +219,19 @@ export default class MchainsList extends React.Component {
 
                     <Table striped>
                         <thead>
-                            <tr>
-                                <th>mChainName</th>
-                                <th>mChainCreatedAt</th>
-                                <th>mChainStorage</th>
-                                <th>mChainLifetime</th>
-                                <th>mChainNodeNumber</th>
-                                <th>mChainDeposit</th>
-                                <th>Expired</th>
-                                <th>Commands</th>
-                            </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date From</th>
+                            <th>Date To</th>
+                            <th>Expired</th>
+                            <th>Storage</th>
+                            <th>NodeNumber</th>
+                            <th>Deposit</th>
+                            <th>Commands</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {mChains}
+                        {mChains}
                         </tbody>
                     </Table>
                 </Col>

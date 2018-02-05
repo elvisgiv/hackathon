@@ -61,7 +61,7 @@ export default class App extends Component {
                             <Route path='/test'  render={() => <Test web3Connector={web3Connector} />} />
                             <Route path='/help' component={Help}/>
                             <Route path='/micropayments' component={Micropayments}/>
-                            <Route path='/examples' component={Examples}/>
+                            <Route path='/examples' render={() => <Examples web3Connector={web3Connector} />} />
                         </Switch>
                     </div>
                     <Footer/>

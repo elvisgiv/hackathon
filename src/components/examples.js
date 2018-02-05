@@ -21,14 +21,18 @@ export default class Examples extends React.Component {
             activeTab: '1'
         };
         //
-        let ip = '51.0.1.99';
+/*        let ip = '51.0.1.99';
         let port = '8546';
-        gex.init(ip, port);
+        gex.init(ip, port);*/
         //gex.init('10.1.0.15', '7545');
         //gex.init('51.0.2.99', '8546');
         //
         this.toggle = this.toggle.bind(this);
 
+    }
+
+    componentWillReceiveProps(){
+        this.setState({web3Connector: this.props.web3Connector})
     }
 
     // for tabs
@@ -43,10 +47,9 @@ export default class Examples extends React.Component {
 
     render(){
         // for template render
-        let mchainManage = <MchainManage/>;
+        let mchainManage = <MchainManage web3Connector={this.state.web3Connector}/>;
         let mchainsList = <MchainsList/>;
         let aggrMchainsList = <AggrMchainsList/>;
-
         return(
             <Container>
                 <br/>
@@ -58,7 +61,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '1' })}
                                 onClick={() => { this.toggle('1'); }}
                             >
-                                Mchains Manage
+                                Manage Mchains
                             </NavLink>
                         </NavItem>
                         <NavItem>

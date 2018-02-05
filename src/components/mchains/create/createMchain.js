@@ -16,16 +16,21 @@ export default class MchainManage extends React.Component {
             basLifetime: '',
             basMaxNodes: '',
             basDeposit: '',
+            libInit: false,
         };
         //
-        let ip = '51.0.1.99';
-        let port = '8546';
-        gex.init(ip, port);
         //gex.init('10.1.0.15', '7545');
         //gex.init('51.0.2.99', '8546');
         //
         this.createMchain = this.createMchain.bind(this);
-        this.hexToString = this.hexToString.bind(this);
+    }
+
+    componentWillReceiveProps() {
+        if (!this.state.libInit && this.props.web3Connector){
+            let provider = this.props.web3Connector.provider;
+            gex.initWithProvider(provider);
+            this.setState({libInit: true});
+        }
     }
 
     initMChainListener(){
@@ -108,7 +113,7 @@ export default class MchainManage extends React.Component {
                 <br/>
 
                 <div className="col-md-12">
-                    <Button className="btn btn-lg" onClick={this.createMchain}>Create Mchain</Button>
+                    <Button className="btn btn-lg" onClick={this.createMchain} disabled={this.state.libInit ? false : true}>Create Mchain</Button>
                 </div>
                 <h2>{this.state.bas}</h2>
 
