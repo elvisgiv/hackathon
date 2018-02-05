@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.0.0",
-    "@galacticexchange/gex-client-js": "0.1.23",
+    "@galacticexchange/gex-client-js": "0.1.25",
     "@material/ripple": "0.25.0",
     "amstock3": "amcharts/amstock3",
     "bootstrap": "^4.0.0-beta.3",
