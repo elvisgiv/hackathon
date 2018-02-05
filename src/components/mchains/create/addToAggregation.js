@@ -13,6 +13,8 @@ export default class MchainManage extends React.Component {
         this.state = {
             mChainID: '',
             aggrMchainID: '',
+            libInit: false,
+
         };
         //
         let ip = '51.0.1.99';
@@ -22,6 +24,13 @@ export default class MchainManage extends React.Component {
         this.addToAggr = this.addToAggr.bind(this);
     }
 
+    componentWillReceiveProps() {
+        if (!this.state.libInit && this.props.web3Connector){
+            let provider = this.props.web3Connector.provider;
+            gex.initWithProvider(provider);
+            this.setState({libInit: true});
+        }
+    }
 
     initMchainAddedListener(){
         let listener = new gex.listener(gex.manager().events.MchainAdded(), function (event) {
@@ -56,20 +65,20 @@ export default class MchainManage extends React.Component {
                 <br/>
                 <Input id="mChainID" type="number" placeholder="mChain ID" onChange={(num) =>
                     this.setState({mChainID: num.target.value})} value={this.state.mChainID}/>
-                {this.state.mChainID}
                 <h6 className="no-marg">Enter mChain ID</h6>
                 <br/>
 
                 <Input id="aggrMchainID" type="number" placeholder="Aggregation mChain ID" onChange={(num) =>
                     this.setState({aggrMchainID: num.target.value})} value={this.state.aggrMchainID}/>
-                {this.state.aggrMchainID}
                 <h6 className="no-marg">Enter Aggregation mChain ID</h6>
                 <br/>
 
                 <div className="col-md-12">
-                    <Button className="btn btn-lg" onClick={this.addToAggr}>Add To Aggregation</Button>
+                    <Button className="btn btn-lg"
+                            onClick={this.addToAggr} disabled={this.state.libInit ? false : true}>
+                        Add To Aggregation
+                    </Button>
                 </div>
-                <h2>{this.state.add}</h2>
             </div>
 
         )

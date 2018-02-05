@@ -37,7 +37,7 @@ export default class MchainManage extends React.Component {
         // for template render
         let createAggregationMchain = <CreateAggregationMchain web3Connector={this.state.web3Connector}/>;
         let createMchain = <CreateMchain web3Connector={this.state.web3Connector}/>;
-        let addToAggregation = <AddToAggregation/>;
+        let addToAggregation = <AddToAggregation web3Connector={this.state.web3Connector}/>;
 
         return(
             <Row>
