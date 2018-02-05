@@ -21,9 +21,6 @@ export default class CreateMchain extends React.Component {
 
         };
         //
-        //gex.init('10.1.0.15', '7545');
-        //gex.init('51.0.1.99', '8546');
-        //
         this.createMchain = this.createMchain.bind(this);
     }
 
@@ -31,7 +28,6 @@ export default class CreateMchain extends React.Component {
         if (!this.state.libInit && this.props.web3Connector){
             let provider = this.props.web3Connector.provider;
             gex.initWithProvider(provider);
-            //gex.init('51.0.1.99', '8546');
             this.setState({libInit: true});
         }
     }

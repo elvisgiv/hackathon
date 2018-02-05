@@ -20,13 +20,6 @@ export default class CreateAggregationMchain extends React.Component {
             libInit: false,
         };
         //
-/*        let ip = '51.0.1.99';
-        let port = '8546';*/
-        //gex.init(ip, port);
-        //gex.init('10.1.0.15', '7545');
-        //gex.init('51.0.2.99', '8546');
-
-        //
         this.createAggregationMchain = this.createAggregationMchain.bind(this);
     }
 

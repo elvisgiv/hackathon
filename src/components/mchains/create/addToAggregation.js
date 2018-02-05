@@ -17,10 +17,6 @@ export default class MchainManage extends React.Component {
 
         };
         //
-        let ip = '51.0.1.99';
-        let port = '8546';
-        gex.init(ip, port);
-        //
         this.addToAggr = this.addToAggr.bind(this);
     }
 
