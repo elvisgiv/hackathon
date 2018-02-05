@@ -66,8 +66,6 @@ export default class MchainsList extends React.Component {
         let states = this.state.channelsInfo;
         let mChains = [];
         let events = this.state.events;
-        console.log('eventseventseventseventseventsevents')
-        console.log(events);
         //
         for (var i = 0; i < states.length; i++) {
             let mChain = states[i];
@@ -95,17 +93,13 @@ export default class MchainsList extends React.Component {
                     }
                 }
             }
-
             //
             mChains.push({
-                'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage, 'mChainDeposit': mChainDeposit,
+                'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage,
                 'mChainLifetime': lifetime, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
                 'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
+                'mChainDeposit': mChainDeposit, 'mChainID': mChainID,
             });
-
-            // need for countdown
-            self.setState({mChainLifetime: mChainLifetime, mChainCreatedAtInSec: mChainCreatedAtInSec,});
-
         }
         console.log(mChains);
         return mChains
@@ -195,6 +189,7 @@ export default class MchainsList extends React.Component {
         if (items !== undefined) {
             mChains = items.map((item, index) =>
                 <tr key={index}>
+                    <td>{item.mChainID}</td>
                     <td>{item.mChainName}</td>
                     <td>{item.mChainCreatedAt}</td>
                     <td>{item.mChainLifetime}</td>
@@ -221,6 +216,7 @@ export default class MchainsList extends React.Component {
                     <Table striped>
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Date From</th>
                             <th>Date To</th>

@@ -6,7 +6,7 @@ import { Button, Input, } from 'reactstrap';
 const gex = require('@galacticexchange/gex-client-js');
 //const gex = require('@galacticexchange/gex-client-js/src/index');
 
-export default class MchainManage extends React.Component {
+export default class CreateMchain extends React.Component {
 
     constructor(props) {
         super(props);
@@ -66,16 +66,6 @@ export default class MchainManage extends React.Component {
         let arrayNonces = this.state.mChainNonces;
         arrayNonces.push(nonce);
         this.setState({mChainNonces: arrayNonces,});
-
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1');
-        console.log(nonce);
-
-
-        console.log('listener listener listener listener listener ');
-        console.log(this.state.nonceFromEvent);
-        console.log('nononononononononononononon');
-        console.log(this.state.mChainListener);
-
     }
 
 
@@ -111,7 +101,10 @@ export default class MchainManage extends React.Component {
                 <br/>
 
                 <div className="col-md-12">
-                    <Button className="btn btn-lg" onClick={this.createMchain} disabled={this.state.libInit ? false : true}>Create Mchain</Button>
+                    <Button className="btn btn-lg"
+                            onClick={this.createMchain} disabled={this.state.libInit ? false : true}>
+                        Create Mchain
+                    </Button>
                 </div>
 
             </div>
