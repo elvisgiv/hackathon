@@ -17,10 +17,12 @@ export default class MchainManage extends React.Component {
             basMaxNodes: '',
             basDeposit: '',
             libInit: false,
+            mChainNonces: [],
+
         };
         //
         //gex.init('10.1.0.15', '7545');
-        //gex.init('51.0.2.99', '8546');
+        //gex.init('51.0.1.99', '8546');
         //
         this.createMchain = this.createMchain.bind(this);
     }
@@ -29,31 +31,22 @@ export default class MchainManage extends React.Component {
         if (!this.state.libInit && this.props.web3Connector){
             let provider = this.props.web3Connector.provider;
             gex.initWithProvider(provider);
+            //gex.init('51.0.1.99', '8546');
             this.setState({libInit: true});
         }
     }
 
     initMChainListener(){
         let self = this;
+        console.log('before listenerbefore listenerbefore listenerbefore listenerbefore listener');
         let listener = new gex.listener(gex.manager().events.MchainCreated(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
-            console.log("name");
-            console.log(event.returnValues.name);
-            console.log(event.returnValues.mchainID);
+            console.log('noncenoncenoncenoncenoncenonce');
             console.log(event.returnValues.nonce);
-            // todo seState mChainName
-            self.setState({basNameHex: event.returnValues.name});
-            console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7');
-            console.log(self.hexToString(event.returnValues.name))
+            self.setState({nonceFromEvent: event.returnValues.nonce})
         });
         this.setState({mChainListener: listener})
-
-    }
-
-    hexToString(hexx) {
-        let hex = hexx.toString();//force conversion
-        return gex.w3.web3.utils.hexToUtf8(hex)
     }
 
     async createMchain(){
@@ -63,15 +56,25 @@ export default class MchainManage extends React.Component {
         let basLifetime = this.state.basLifetime;
         let basMaxNodes = this.state.basMaxNodes;
         let basDeposit = this.state.basDeposit;
-        // test
-        this.setState({bas: "bas"});
 
         this.initMChainListener();
-        let test = await gex.manager().createMchain(basStorageBytes, basLifetime, basMaxNodes, basDeposit, basName);
+        let nonce = await gex.manager().createMchain(basStorageBytes, basLifetime, basMaxNodes, basDeposit, basName);
         // clear fields
         this.setState({basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: ""});
 
-        console.log(test);
+        //save nonces to array
+        let arrayNonces = this.state.mChainNonces;
+        arrayNonces.push(nonce);
+        this.setState({mChainNonces: arrayNonces,});
+
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1');
+        console.log(nonce);
+
+
+        console.log('listener listener listener listener listener ');
+        console.log(this.state.nonceFromEvent);
+        console.log('nononononononononononononon');
+        console.log(this.state.mChainListener);
 
     }
 
@@ -84,38 +87,32 @@ export default class MchainManage extends React.Component {
 
                 <Input id="basName" type="text" placeholder="Enter Name of mChain" onChange={(num) =>
                     this.setState({basName: num.target.value})} value={this.state.basName} />
-                {this.state.basName}
                 <h6 className="no-marg">Name of mChain</h6>
                 <br/>
 
                 <Input id="basStorageBytes" type="number" size="180" placeholder="Storage in Bytes" onChange={(num) =>
                     this.setState({basStorageBytes: num.target.value})} value={this.state.basStorageBytes}/>
-                {this.state.basStorageBytes}
                 <h6 className="no-marg">Number of bytes this channel can store</h6>
                 <br/>
 
                 <Input id="basLifetime" type="number" size="150" placeholder="Lifetime in seconds" onChange={(num) =>
                     this.setState({basLifetime: num.target.value})} value={this.state.basLifetime}/>
-                {this.state.basLifetime}
                 <h6 className="no-marg">Number of seconds this channel will be considered as alive</h6>
                 <br/>
 
                 <Input id="basMaxNodes" type="number" size="150" placeholder="Max number of nodes" onChange={(num) =>
                     this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes}/>
-                {this.state.basMaxNodes}
                 <h6 className="no-marg">Max number of nodes associated with this channel</h6>
                 <br/>
 
                 <Input id="basDeposit" type="number" size="150" placeholder="Deposit" onChange={(num) =>
                     this.setState({basDeposit: num.target.value})} value={this.state.basDeposit}/>
-                {this.state.basDeposit}
                 <h6 className="no-marg">Value of tokens associated with this channel</h6>
                 <br/>
 
                 <div className="col-md-12">
                     <Button className="btn btn-lg" onClick={this.createMchain} disabled={this.state.libInit ? false : true}>Create Mchain</Button>
                 </div>
-                <h2>{this.state.bas}</h2>
 
             </div>
 

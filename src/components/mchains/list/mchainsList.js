@@ -66,6 +66,7 @@ export default class MchainsList extends React.Component {
         let states = this.state.channelsInfo;
         let mChains = [];
         let events = this.state.events;
+        console.log('eventseventseventseventseventsevents')
         console.log(events);
         //
         for (var i = 0; i < states.length; i++) {
@@ -204,7 +205,7 @@ export default class MchainsList extends React.Component {
                     <td>{item.mChainNodeNumber}</td>
                     <td>{item.mChainDeposit}</td>
                     <td>
-                        {this.isExpired(item.mChainCreatedAtInSec, item.mChainLifetime, index)}
+                        {this.isExpired(item.mChainCreatedAtInSec, item.mChainLifetimeInSec, index)}
                     </td>
 
                 </tr>
