@@ -27,7 +27,10 @@ export default class CreateMchain extends React.Component {
     componentWillReceiveProps() {
         if (!this.state.libInit && this.props.web3Connector){
             let provider = this.props.web3Connector.provider;
-            gex.initWithProvider(provider);
+            //gex.initWithProvider(provider);
+            let ip = '51.0.1.99';
+            let port = '8546';
+            gex.initBothProviders(ip, port, provider);
             this.setState({libInit: true});
         }
     }
@@ -35,7 +38,7 @@ export default class CreateMchain extends React.Component {
     initMChainListener(){
         let self = this;
         console.log('before listenerbefore listenerbefore listenerbefore listenerbefore listener');
-        let listener = new gex.listener(gex.manager().events.MchainCreated(), function (event) {
+        let listener = new gex.listener(gex.managerEv().events.MchainCreated(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
             console.log('noncenoncenoncenoncenoncenonce');

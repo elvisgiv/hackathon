@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import MchainManage from './mchains/mchainManage'
 import MchainsList from './mchains/list/mchainsList'
 import AggrMchainsList from './mchains/list/aggrMchainsList'
+import Exchange from './bot_balance/exchange/botExchange'
 
 
 const gex = require('@galacticexchange/gex-client-js');
@@ -50,6 +51,8 @@ export default class Examples extends React.Component {
         let mchainManage = <MchainManage web3Connector={this.state.web3Connector}/>;
         let mchainsList = <MchainsList/>;
         let aggrMchainsList = <AggrMchainsList/>;
+        let exchange = <Exchange web3Connector={this.state.web3Connector}/>;
+
         return(
             <Container>
                 <br/>
@@ -85,7 +88,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '4' })}
                                 onClick={() => { this.toggle('4'); }}
                             >
-                                Wallet Balance
+                                Exchange
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -111,8 +114,17 @@ export default class Examples extends React.Component {
                         <TabPane tabId="3">
                             <div className="padd-30">
                                 {aggrMchainsList}
-                            </div>                        </TabPane>
+                            </div>
+                        </TabPane>
                         <TabPane tabId="4">
+                            <div className="padd-30">
+                                {exchange}
+                            </div>
+                        </TabPane>
+                        <TabPane tabId="5">
+                            <h1>Something Else Here</h1>
+                        </TabPane>
+                        <TabPane tabId="6">
                             <h1>Something Else Here</h1>
                         </TabPane>
                     </TabContent>

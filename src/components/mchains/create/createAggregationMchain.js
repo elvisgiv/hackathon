@@ -26,13 +26,16 @@ export default class CreateAggregationMchain extends React.Component {
     componentWillReceiveProps() {
         if (!this.state.libInit && this.props.web3Connector){
             let provider = this.props.web3Connector.provider;
-            gex.initWithProvider(provider);
+            //gex.initWithProvider(provider);
+            let ip = '51.0.1.99';
+            let port = '8546';
+            gex.initBothProviders(ip, port, provider);
             this.setState({libInit: true});
         }
     }
 
     initAggrMChainListener(){
-        let listener = new gex.listener(gex.manager().events.AggregationMchainCreated(), function (event) {
+        let listener = new gex.listener(gex.managerEv().events.AggregationMchainCreated(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
             //

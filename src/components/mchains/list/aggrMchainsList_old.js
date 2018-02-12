@@ -1,18 +1,20 @@
 import React from 'react'
-import { Button, Table, Row, Col, } from 'reactstrap';
+import { Button, Table, Row, Col, Collapse, CardBody, Card,} from 'reactstrap';
+
 
 const gex = require('@galacticexchange/gex-client-js');
 const moment = require('moment');
 
 //const gex = require('@galacticexchange/gex-client-js/src/index');
 
-export default class MchainsList extends React.Component {
+export default class AggrMchainsList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             timer: null,
             timerEvents: null,
+            collapse: false,
         };
         //
         let ip = '51.0.1.99';
@@ -20,27 +22,26 @@ export default class MchainsList extends React.Component {
         gex.init(ip, port);
         //gex.init('10.1.0.15', '7545');
         //gex.init('51.0.2.99', '8546');
-
         //
         this.isExpired = this.isExpired.bind(this);
         this.countdown = this.countdown.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
-    async getMchainsList(){
+    async getAggrMchainsList(){
         //
-        let channelsInfo = await gex.manager().getMchainListInfo();
+        let channelsInfo = await gex.manager().getAggregationMchainListInfo();
+        console.log(channelsInfo.length);
         //
         this.setState({channelsInfo: channelsInfo});
         //
-/*        console.log('channelsInfo for mCain');
-        console.log(channelsInfo);*/
+        console.log(channelsInfo);
         //
         let events = this.getEvents();
         //
-        let mChains = this.initMchains();
+        let aggrMchains = this.initAggrMchains();
         //
-        this.setState({mChains: mChains});
-
+        this.setState({aggrMchains: aggrMchains});
     }
 
     hexToString(hexx) {
@@ -53,7 +54,7 @@ export default class MchainsList extends React.Component {
         //
         let events = [];
         //
-        let listener = new gex.listener(gex.manager().events.MchainCreated(gex.w3.allEventsOpt()), function (event) {
+        let listener = new gex.listener(gex.manager().events.AggregationMchainCreated(gex.w3.allEventsOpt()), function (event) {
             //
             events.push(event.returnValues,);
             //events.push({'mChainName': name, 'mChainID': event.returnValues.mchainID});
@@ -61,57 +62,56 @@ export default class MchainsList extends React.Component {
         });
     }
 
-    initMchains() {
+    initAggrMchains() {
         let self = this;
         let states = this.state.channelsInfo;
-        let mChains = [];
+        let aggrMchains = [];
         let events = this.state.events;
         //
         for (var i = 0; i < states.length; i++) {
             let mChain = states[i];
             //
             let owner = mChain.owner;
-            let mChainID = mChain.mChainID;
-            let mChainName = '0x706c6561736520776169742e2e'; //please wait...
-            let mChainStorage = mChain.storageBytes;
-            let mChainLifetime = mChain.lifetime;
-            let mChainCreatedAtInSec = mChain.creationDate;
-            let mChainNodeNumber = mChain.maxNodes;
-            let mChainDeposit = mChain.deposit;
+            let aggrMchainID = mChain.mChainID;
+            let aggrMchainName = '0x706c6561736520776169742e2e'; //please wait...
+            let aggrMchainStorage = mChain.storageBytes;
+            let aggrMchainLifetime = mChain.lifetime;
+            let aggrMchainCreatedAtInSec = mChain.creationDate;
+            let aggrMchainNodeNumber = mChain.maxNodes;
+            let aggrMchainDeposit = mChain.deposit;
             //
-            let date = new Date(this.timeInUtc(mChain.creationDate)).toString();
+            let date = new Date(this.timeInUtc(aggrMchainCreatedAtInSec)).toString();
             //
-            let dateTo = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime);
+            let dateTo = parseInt(aggrMchainCreatedAtInSec) + parseInt(aggrMchainLifetime);
             let lifetime = new Date(this.timeInUtc(dateTo)).toString();
             // get mChain name from events by mChainID
             if (events) {
                 for (var j = 0; j < events.length; j++) {
                     let event = events[j];
-                    if (event.mchainID === mChainID) {
-                        mChainName = event.name;
+                    if (event.mchainID === aggrMchainID) {
+                        aggrMchainName = event.name;
                         break;
                     }
                 }
             }
             //
-            mChains.push({
-                'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage,
-                'mChainLifetime': lifetime, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
-                'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
-                'mChainDeposit': mChainDeposit, 'mChainID': mChainID,
+            aggrMchains.push({
+                'owner': owner, 'aggrMchainName': self.hexToString(aggrMchainName), 'aggrMchainStorage': aggrMchainStorage,
+                'aggrMchainDeposit': aggrMchainDeposit, 'aggrMchainLifetime': lifetime, 'aggrMchainCreatedAt': date,
+                'aggrMchainNodeNumber': aggrMchainNodeNumber, 'aggrMchainCreatedAtInSec': aggrMchainCreatedAtInSec,
+                'aggrMchainLifetimeInSec': aggrMchainLifetime, 'aggrMchainID': aggrMchainID,
             });
         }
-/*        console.log('mChains');
-        console.log(mChains);*/
-        return mChains
+        console.log(aggrMchains);
+        return aggrMchains
     }
 
     componentDidMount() {
         this.getEvents();
-        this.getMchainsList();
+        this.getAggrMchainsList();
         this.setState({
             timer: setInterval(() => {
-                this.getMchainsList()
+                this.getAggrMchainsList()
             }, 15000),
             timerEvents: setInterval(() => {
                 this.getEvents()
@@ -127,11 +127,10 @@ export default class MchainsList extends React.Component {
     isExpired(mChainCreatedAtInSec, mChainLifetime, index) {
         let timeNow = Math.round(new Date().getTime() / 1000);
         let countDownDate = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime);
-
-
         return(
             <div>
                 <Button className="btn btn-sm" onClick={() => this.withdrowFrom(index)} disabled={(countDownDate > timeNow)}>withdraw deposit</Button>
+                <Button className="btn btn-sm" onClick={() => this.addToAggregation()}>Add mChain</Button>
             </div>
         )
     }
@@ -144,8 +143,12 @@ export default class MchainsList extends React.Component {
     }
 
     withdrowFrom(index) {
-        gex.manager().withdrawFromMchain(index);
+        gex.manager().withdrawFromAggregationMchain(index);
         console.log(index)
+    }
+
+    addToAggregation() {
+        console.log('DOSHLOOOOOOOO!!!!')
     }
 
     countdown(mChainCreatedAtInSec, mChainLifetime) {
@@ -179,39 +182,50 @@ export default class MchainsList extends React.Component {
         }, 1000);
     };
 
+    // for mChains list
+    toggle() {
+        this.setState({ collapse: !this.state.collapse });
+    }
+
+
 
     /////////////////////////////
 
     render(){
 
-        let items = this.state.mChains;
+        let items = this.state.aggrMchains;
         let mChains = [];
 
         if (items !== undefined) {
             mChains = items.map((item, index) =>
-                <tr key={index}>
-                    <td>{item.mChainID}</td>
-                    <td>{item.mChainName}</td>
-                    <td>{item.mChainCreatedAt}</td>
-                    <td>{item.mChainLifetime}</td>
-                    <td id={item.mChainCreatedAtInSec}>
-                        {this.countdown(item.mChainCreatedAtInSec, item.mChainLifetimeInSec)}
-                    </td>
-                    <td>{item.mChainStorage}</td>
-                    <td>{item.mChainNodeNumber}</td>
-                    <td>{item.mChainDeposit}</td>
+
+                <tr onClick={this.toggle} key={index} >
+
+                    <td>{item.aggrMchainID}</td>
                     <td>
-                        {this.isExpired(item.mChainCreatedAtInSec, item.mChainLifetimeInSec, index)}
+                        {item.aggrMchainName}
+                    </td>
+                    <td>{item.aggrMchainCreatedAt}</td>
+                    <td>{item.aggrMchainLifetime}</td>
+                    <td id={item.aggrMchainCreatedAtInSec}>
+                        {this.countdown(item.aggrMchainCreatedAtInSec, item.aggrMchainLifetimeInSec)}
+                    </td>
+                    <td>{item.aggrMchainStorage}</td>
+                    <td>{item.aggrMchainNodeNumber}</td>
+                    <td>{item.aggrMchainDeposit}</td>
+                    <td>
+                        {this.isExpired(item.aggrMchainCreatedAtInSec, item.aggrMchainLifetimeInSec, index)}
                     </td>
 
                 </tr>
+
             )
         }
 
         return(
             <Row>
                 <Col sm="12">
-                    <h1 className="bold text-center" >Mchains List</h1>
+                    <h1 className="bold text-center" >Aggregations Mchains List</h1>
                     <br/>
 
                     <Table striped>
@@ -234,6 +248,7 @@ export default class MchainsList extends React.Component {
                     </Table>
                 </Col>
             </Row>
+
         )
     }
 
