@@ -222,6 +222,7 @@ export default class AggrMchainsList extends React.Component {
         return arrOfMchain;
     }
 
+    // for subitems in table
     initMchains(mChains) {
         let objArray = [];
         let self = this;

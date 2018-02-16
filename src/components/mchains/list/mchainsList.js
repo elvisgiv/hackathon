@@ -26,22 +26,9 @@ export default class MchainsList extends React.Component {
         //gex.init('51.0.2.99', '8546');
 
         //
-        this.bbb = this.bbb.bind(this);
         this.isExpired = this.isExpired.bind(this);
         this.countdown = this.countdown.bind(this);
     }
-
-
-    bbb(items) {
-        console.log('items');
-        console.log(items);
-
-/*        for (var i = 0; i < items.length; i++) {
-            let item = items[i];
-                console.log('id id id id id '),
-                console.log(item.mChainID)
-        }*/
-    };
 
     async getMchainsList(){
         //
@@ -98,16 +85,18 @@ export default class MchainsList extends React.Component {
             let mChainNodeNumber = mChain.maxNodes;
             let mChainDeposit = mChain.deposit;
             //
-            let date = new Date(this.timeInUtc(mChain.creationDate)).toString();
+            let date = moment.utc(mChainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
             //
-            let dateTo = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime);
-            let lifetime = new Date(this.timeInUtc(dateTo)).toString();
+            let dateTo = moment.utc((parseInt(mChainCreatedAtInSec) +
+                parseInt(mChainLifetime)) * 1000).format("YYYY/MM/DD HH:mm:ss");
+            // countdown run
+            let countdown = self.countdown(mChainCreatedAtInSec, mChainLifetime);
             //
             mChains.push({
                 'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage,
-                'mChainLifetime': lifetime, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
+                'mChainLifetime': dateTo, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
                 'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
-                'mChainDeposit': mChainDeposit, 'mChainID': mChainID,
+                'mChainDeposit': mChainDeposit, 'mChainID': mChainID, 'countdown': countdown,
             });
         }
         /*        console.log('mChains');
@@ -133,11 +122,9 @@ export default class MchainsList extends React.Component {
         clearInterval(this.state.timerEvents);
     }
 
-    //isExpired(mChainCreatedAtInSec, mChainLifetime, index) {
-    isExpired(value) {
 
+    getFieldsFromMchain(value) {
         let mChainCreatedAtInSec, mChainLifetimeInSec;
-        //
         let items = this.state.mChains;
         for (var i = 0; i < items.length; i++) {
             let item = items[i];
@@ -147,6 +134,15 @@ export default class MchainsList extends React.Component {
                 break;
             }
         }
+
+        return [mChainCreatedAtInSec, mChainLifetimeInSec]
+    }
+
+    isExpired(value) {
+        let array = this.getFieldsFromMchain(value);
+        //
+        let mChainCreatedAtInSec = array[0];
+        let mChainLifetimeInSec = array[1];
         //
         let timeNow = Math.round(new Date().getTime() / 1000);
         let countDownDate = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetimeInSec);
@@ -158,47 +154,48 @@ export default class MchainsList extends React.Component {
         )
     }
 
-    timeInUtc(seconds) {
-        //
-        let timeFormat = moment.unix(seconds).utc().format();
-        //console.log(timeFormat);
-        return timeFormat;
-    }
-
     withdrowFrom(name) {
         gex.manager().withdrawFromMchain(name);
         console.log(name)
     }
 
-    countdown(mChainCreatedAtInSec, mChainLifetime) {
-
+    countdown(value) {
+        let str;
+        let array = this.getFieldsFromMchain(value);
+        //
+        let mChainCreatedAtInSec = array[0];
+        let mChainLifetimeInSec = array[1];
         // set countDownDate in ms
-        let countDownDate = (parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime)) * 1000;
-        // Update the count down every 1 second
-        let x = setInterval(function () {
-            // Get todays date and time in ms
-            let now = new Date().getTime();
-            // Find the distance between now an the count down date
-            let distance = countDownDate - now;
-            // Time calculations for days, hours, minutes and seconds
-            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        let countDownDate = (parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetimeInSec)) * 1000;
+        // Get todays date and time in ms
+        let now = new Date().getTime();
+        // Find the distance between now an the count down date
+        let distance = countDownDate - now;
+        // Time calculations for days, hours, minutes and seconds
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            if (!document.getElementById(mChainCreatedAtInSec)) {
-                clearInterval(x);
-            } else {
-                // Display the result in the element with id=mChainCreatedAtInSec
-                document.getElementById(mChainCreatedAtInSec).innerHTML = days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s ";
-                // If the count down is finished, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById(mChainCreatedAtInSec).innerHTML = "EXPIRED";
-                }
-            }
-        }, 1000);
+        console.log(distance);
+
+        if (distance < 0) {
+            //str = "EXPIRED";
+            return (
+                <div>
+                    EXPIRED
+                </div>
+            )
+
+        } else {
+            //str = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            return (
+                <div>
+                    {days + "d " + hours + "h " + minutes + "m " + seconds + "s "}
+                </div>
+            )
+
+        }
     };
 
 
@@ -255,8 +252,9 @@ export default class MchainsList extends React.Component {
             },
             {
                 Header: "Expired",
-                accessor: "countdown",
-                maxWidth: 150
+                id: 'countdown',
+                accessor: 'mChainName',
+                Cell: ({value}) => this.countdown(value),
             },
             {
                 Header: "Storage",
