@@ -159,14 +159,10 @@ export default class MchainsList extends React.Component {
         console.log(name)
     }
 
-    countdown(value) {
+    countdown(mChainCreatedAtInSec, mChainLifetime) {
         let str;
-        let array = this.getFieldsFromMchain(value);
-        //
-        let mChainCreatedAtInSec = array[0];
-        let mChainLifetimeInSec = array[1];
         // set countDownDate in ms
-        let countDownDate = (parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetimeInSec)) * 1000;
+        let countDownDate = (parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime)) * 1000;
         // Get todays date and time in ms
         let now = new Date().getTime();
         // Find the distance between now an the count down date
@@ -176,24 +172,14 @@ export default class MchainsList extends React.Component {
         let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        console.log(distance);
-
+        // If the count down is finished, write some text
         if (distance < 0) {
-            //str = "EXPIRED";
-            return (
-                <div>
-                    EXPIRED
-                </div>
-            )
+            str = "EXPIRED";
+            return str
 
         } else {
-            //str = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-            return (
-                <div>
-                    {days + "d " + hours + "h " + minutes + "m " + seconds + "s "}
-                </div>
-            )
+            str = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            return str
 
         }
     };
@@ -252,9 +238,7 @@ export default class MchainsList extends React.Component {
             },
             {
                 Header: "Expired",
-                id: 'countdown',
-                accessor: 'mChainName',
-                Cell: ({value}) => this.countdown(value),
+                accessor: 'countdown',
             },
             {
                 Header: "Storage",
