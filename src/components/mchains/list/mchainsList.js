@@ -56,6 +56,8 @@ export default class MchainsList extends React.Component {
             let mChainCreatedAtInSec = mChain.creationDate;
             let mChainNodeNumber = mChain.maxNodes;
             let mChainDeposit = mChain.deposit;
+            let mChainCpu = mChain.cpu;
+            let mChainTps = mChain.tPs;
             //
             let date = moment.utc(mChainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
             //
@@ -69,6 +71,8 @@ export default class MchainsList extends React.Component {
                 'mChainLifetime': dateTo, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
                 'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
                 'mChainDeposit': mChainDeposit, 'mChainID': mChainID, 'countdown': countdown,
+                'mChainCpu': mChainCpu ? mChainCpu : 'in developing',
+                'mChainTps': mChainTps ? mChainTps : 'in developing',
             });
         }
         //return mChains;
@@ -157,23 +161,23 @@ export default class MchainsList extends React.Component {
         const items = this.state.mChains;
         // for react-table
         const columns=[
-            {
+/*            {
                 Header: "ID",
                 accessor: "mChainID",
                 maxWidth: 30
-            },
+            },*/
             {
                 Header: "Name",
                 accessor: "mChainName",
                 maxWidth: 150
             },
             {
-                Header: "Date From",
+                Header: "Creation Date",
                 accessor: "mChainCreatedAt",
                 maxWidth: 150
             },
             {
-                Header: "Date To",
+                Header: "Expiration Date",
                 accessor: "mChainLifetime",
                 maxWidth: 150
             },
@@ -182,16 +186,24 @@ export default class MchainsList extends React.Component {
                 accessor: 'countdown',
             },
             {
-                Header: "Storage",
+                Header: "Storage in bytes",
                 accessor: "mChainStorage",
             },
             {
-                Header: "NodeNumber",
+                Header: "Nodes",
                 accessor: "mChainNodeNumber",
             },
             {
-                Header: "Deposit",
+                Header: "Deposit SKL",
                 accessor: "mChainDeposit",
+            },
+            {
+                Header: "CPU in %",
+                accessor: "mChainCpu",
+            },
+            {
+                Header: "TransPerSecond",
+                accessor: "mChainTps",
             },
             {
                 Header: "Commands",
