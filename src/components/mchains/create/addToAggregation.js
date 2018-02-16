@@ -6,7 +6,7 @@ import { Button, Input, } from 'reactstrap';
 const gex = require('@galacticexchange/gex-client-js');
 //const gex = require('@galacticexchange/gex-client-js/src/index');
 
-export default class MchainManage extends React.Component {
+export default class AddToAggregation extends React.Component {
 
     constructor(props) {
         super(props);
@@ -29,7 +29,8 @@ export default class MchainManage extends React.Component {
     }
 
     initMchainAddedListener(){
-        let listener = new gex.listener(gex.manager().events.MchainAdded(), function (event) {
+        console.log('doshlo')
+        let listener = new gex.listener(gex.managerEv().events.MchainAdded(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
         });
@@ -37,18 +38,16 @@ export default class MchainManage extends React.Component {
     }
 
 
-    addToAggr(){
+    async addToAggr(){
         let mChainID = this.state.mChainID;
         let aggrMchainID = this.state.aggrMchainID;
 
         this.initMchainAddedListener();
 
         this.setState({add: "add"});
-        let test = gex.manager().addToAggregationMchain(mChainID, aggrMchainID);
+        let test = await gex.manager().addToAggregationMchain(aggrMchainID, mChainID);
         // clear fields
         this.setState({mChainID: "", aggrMchainID: "", });
-
-        console.log(test);
 
     }
 

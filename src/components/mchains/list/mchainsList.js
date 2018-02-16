@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button, Table, Row, Col, } from 'reactstrap';
 
+// Import React Table
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+
 const gex = require('@galacticexchange/gex-client-js');
 const moment = require('moment');
 
@@ -22,9 +26,22 @@ export default class MchainsList extends React.Component {
         //gex.init('51.0.2.99', '8546');
 
         //
+        this.bbb = this.bbb.bind(this);
         this.isExpired = this.isExpired.bind(this);
         this.countdown = this.countdown.bind(this);
     }
+
+
+    bbb(items) {
+        console.log('items');
+        console.log(items);
+
+/*        for (var i = 0; i < items.length; i++) {
+            let item = items[i];
+                console.log('id id id id id '),
+                console.log(item.mChainID)
+        }*/
+    };
 
     async getMchainsList(){
         //
@@ -32,14 +49,16 @@ export default class MchainsList extends React.Component {
         //
         this.setState({channelsInfo: channelsInfo});
         //
-/*        console.log('channelsInfo for mCain');
-        console.log(channelsInfo);*/
+        /*        console.log('channelsInfo for mCain');
+                console.log(channelsInfo);*/
         //
         let events = this.getEvents();
         //
         let mChains = this.initMchains();
         //
         this.setState({mChains: mChains});
+
+        //console.log(this.state.mChains)
 
     }
 
@@ -72,7 +91,7 @@ export default class MchainsList extends React.Component {
             //
             let owner = mChain.owner;
             let mChainID = mChain.mChainID;
-            let mChainName = '0x706c6561736520776169742e2e'; //please wait...
+            let mChainName = mChain.name;
             let mChainStorage = mChain.storageBytes;
             let mChainLifetime = mChain.lifetime;
             let mChainCreatedAtInSec = mChain.creationDate;
@@ -83,16 +102,6 @@ export default class MchainsList extends React.Component {
             //
             let dateTo = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime);
             let lifetime = new Date(this.timeInUtc(dateTo)).toString();
-            // get mChain name from events by mChainID
-            if (events) {
-                for (var j = 0; j < events.length; j++) {
-                    let event = events[j];
-                    if (event.mchainID === mChainID) {
-                        mChainName = event.name;
-                        break;
-                    }
-                }
-            }
             //
             mChains.push({
                 'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage,
@@ -101,8 +110,8 @@ export default class MchainsList extends React.Component {
                 'mChainDeposit': mChainDeposit, 'mChainID': mChainID,
             });
         }
-/*        console.log('mChains');
-        console.log(mChains);*/
+        /*        console.log('mChains');
+                console.log(mChains);*/
         return mChains
     }
 
@@ -124,14 +133,27 @@ export default class MchainsList extends React.Component {
         clearInterval(this.state.timerEvents);
     }
 
-    isExpired(mChainCreatedAtInSec, mChainLifetime, index) {
-        let timeNow = Math.round(new Date().getTime() / 1000);
-        let countDownDate = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime);
+    //isExpired(mChainCreatedAtInSec, mChainLifetime, index) {
+    isExpired(value) {
 
+        let mChainCreatedAtInSec, mChainLifetimeInSec;
+        //
+        let items = this.state.mChains;
+        for (var i = 0; i < items.length; i++) {
+            let item = items[i];
+            if (item.mChainName === value) {
+                mChainCreatedAtInSec = item.mChainCreatedAtInSec;
+                mChainLifetimeInSec = item.mChainLifetimeInSec;
+                break;
+            }
+        }
+        //
+        let timeNow = Math.round(new Date().getTime() / 1000);
+        let countDownDate = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetimeInSec);
 
         return(
             <div>
-                <Button className="btn btn-sm" onClick={() => this.withdrowFrom(index)} disabled={(countDownDate > timeNow)}>withdraw deposit</Button>
+                <Button className="btn btn-sm" onClick={() => this.withdrowFrom(value)} disabled={(countDownDate > timeNow)}>withdraw deposit</Button>
             </div>
         )
     }
@@ -143,9 +165,9 @@ export default class MchainsList extends React.Component {
         return timeFormat;
     }
 
-    withdrowFrom(index) {
-        gex.manager().withdrawFromMchain(index);
-        console.log(index)
+    withdrowFrom(name) {
+        gex.manager().withdrawFromMchain(name);
+        console.log(name)
     }
 
     countdown(mChainCreatedAtInSec, mChainLifetime) {
@@ -184,8 +206,8 @@ export default class MchainsList extends React.Component {
 
     render(){
 
-        let items = this.state.mChains;
-        let mChains = [];
+        const items = this.state.mChains;
+/*        let mChains = [];
 
         if (items !== undefined) {
             mChains = items.map((item, index) =>
@@ -200,40 +222,75 @@ export default class MchainsList extends React.Component {
                     <td>{item.mChainStorage}</td>
                     <td>{item.mChainNodeNumber}</td>
                     <td>{item.mChainDeposit}</td>
+                    <td>no data yet</td>
+                    <td>no data yet</td>
                     <td>
                         {this.isExpired(item.mChainCreatedAtInSec, item.mChainLifetimeInSec, index)}
                     </td>
 
                 </tr>
             )
-        }
+        }*/
+
+        const columns=[
+            {
+                Header: "ID",
+                accessor: "mChainID",
+                maxWidth: 30
+            },
+            {
+                Header: "Name",
+                accessor: "mChainName",
+                maxWidth: 150
+            },
+            {
+                Header: "Date From",
+                accessor: "mChainCreatedAt",
+                maxWidth: 150
+            },
+            {
+                Header: "Date To",
+                accessor: "mChainLifetime",
+                maxWidth: 150
+            },
+            {
+                Header: "Expired",
+                accessor: "countdown",
+                maxWidth: 150
+            },
+            {
+                Header: "Storage",
+                accessor: "mChainStorage",
+            },
+            {
+                Header: "NodeNumber",
+                accessor: "mChainNodeNumber",
+            },
+            {
+                Header: "Deposit",
+                accessor: "mChainDeposit",
+            },
+            {
+                Header: "Commands",
+                id: 'button',
+                accessor: 'mChainName',
+                Cell: ({value}) => this.isExpired(value)
+            },
+        ];
+
 
         return(
-            <Row>
-                <Col sm="12">
-                    <h1 className="bold text-center" >Mchains List</h1>
-                    <br/>
-
-                    <Table striped>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Date From</th>
-                            <th>Date To</th>
-                            <th>Expired</th>
-                            <th>Storage</th>
-                            <th>NodeNumber</th>
-                            <th>Deposit</th>
-                            <th>Commands</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {mChains}
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+            <div>
+                <h1 className="bold text-center" >Mchains List</h1>
+                <br/>
+                <ReactTable
+                    data={items}
+                    columns={columns}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                />
+                <br />
+            </div>
         )
     }
 

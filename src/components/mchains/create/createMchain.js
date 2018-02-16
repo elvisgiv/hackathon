@@ -16,6 +16,8 @@ export default class CreateMchain extends React.Component {
             basLifetime: '',
             basMaxNodes: '',
             basDeposit: '',
+            basCpuTime: '',
+            basTransPerSec: '',
             libInit: false,
             mChainNonces: [],
 
@@ -37,12 +39,9 @@ export default class CreateMchain extends React.Component {
 
     initMChainListener(){
         let self = this;
-        console.log('before listenerbefore listenerbefore listenerbefore listenerbefore listener');
         let listener = new gex.listener(gex.managerEv().events.MchainCreated(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
-            console.log('noncenoncenoncenoncenoncenonce');
-            console.log(event.returnValues.nonce);
             self.setState({nonceFromEvent: event.returnValues.nonce})
         });
         this.setState({mChainListener: listener})
@@ -55,16 +54,20 @@ export default class CreateMchain extends React.Component {
         let basLifetime = this.state.basLifetime;
         let basMaxNodes = this.state.basMaxNodes;
         let basDeposit = this.state.basDeposit;
+        let basCpuTime = this.state.basCpuTime;
+        let basTransPerSec = this.state.basTransPerSec;
 
         this.initMChainListener();
-        let nonce = await gex.manager().createMchain(basStorageBytes, basLifetime, basMaxNodes, basDeposit, basName);
+        let nonce = await gex.manager().createMchain(basStorageBytes, basLifetime, basMaxNodes, basDeposit, basName,
+            basCpuTime, basTransPerSec);
         // clear fields
-        this.setState({basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: ""});
+        this.setState({basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: "",
+            basCpuTime: "", basTransPerSec: "",});
 
         //save nonces to array
-        let arrayNonces = this.state.mChainNonces;
+/*        let arrayNonces = this.state.mChainNonces;
         arrayNonces.push(nonce);
-        this.setState({mChainNonces: arrayNonces,});
+        this.setState({mChainNonces: arrayNonces,});*/
     }
 
 
@@ -97,6 +100,16 @@ export default class CreateMchain extends React.Component {
                 <Input id="basDeposit" type="number" size="150" placeholder="Deposit" onChange={(num) =>
                     this.setState({basDeposit: num.target.value})} value={this.state.basDeposit}/>
                 <h6 className="no-marg">Value of tokens associated with this channel</h6>
+                <br/>
+
+                <Input id="basCpuTime" type="number" size="150" placeholder="CPU Time" onChange={(num) =>
+                    this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime}/>
+                <h6 className="no-marg">CPU Time in %</h6>
+                <br/>
+
+                <Input id="basTransPerSec" type="number" size="150" placeholder="Transaction Per Second" onChange={(num) =>
+                    this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
+                <h6 className="no-marg">Number Of Transaction Per Second</h6>
                 <br/>
 
                 <div className="col-md-12">

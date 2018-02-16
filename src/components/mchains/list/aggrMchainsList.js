@@ -52,7 +52,51 @@ const columns=[
         },
         {
             Header: "Commands",
-            accessor: "aggrMchainDeposit",
+            id: 'button',
+        },
+    ];
+
+const columnsColumns=[
+        {
+            Header: "ID",
+            accessor: "mChainID",
+            maxWidth: 30
+        },
+        {
+            Header: "Name",
+            accessor: "mChainName",
+            maxWidth: 150
+        },
+        {
+            Header: "Date From",
+            accessor: "creationDate",
+            maxWidth: 150
+        },
+        {
+            Header: "Date To",
+            accessor: "lifetime",
+            maxWidth: 150
+        },
+        {
+            Header: "Expired",
+            accessor: "countdown",
+            maxWidth: 150
+        },
+        {
+            Header: "Storage",
+            accessor: "storageBytes",
+        },
+        {
+            Header: "NodeNumber",
+            accessor: "maxNodes",
+        },
+        {
+            Header: "Deposit",
+            accessor: "deposit",
+        },
+        {
+            Header: "Commands",
+            accessor: "deposit",
         },
     ];
 
@@ -94,12 +138,10 @@ export default class AggrMchainsList extends React.Component {
 /*        console.log('aggrChannelsInfo');
         console.log(channelsInfo);*/
         //
-        let aggrMchains = this.initAggrMchains();
-        //
-        this.setState({aggrMchains: aggrMchains});
+        this.initAggrMchains();
     }
 
-    initAggrMchains() {
+    async initAggrMchains() {
         let self = this;
         let states = this.state.channelsInfo;
         let aggrMchains = [];
@@ -116,6 +158,8 @@ export default class AggrMchainsList extends React.Component {
             let aggrMchainCreatedAtInSec = mChain.creationDate;
             let aggrMchainNodeNumber = mChain.maxNodes;
             let aggrMchainDeposit = mChain.deposit;
+            // get mchains for aggregation mchains
+            let mChains = await this.mChainForAggregation(aggrMchainID);
             //
             let date = moment.utc(aggrMchainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
             //
@@ -129,7 +173,7 @@ export default class AggrMchainsList extends React.Component {
                 'aggrMchainDeposit': aggrMchainDeposit, 'aggrMchainLifetime': dateTo, 'aggrMchainCreatedAt': date,
                 'aggrMchainNodeNumber': aggrMchainNodeNumber, 'aggrMchainCreatedAtInSec': aggrMchainCreatedAtInSec,
                 'aggrMchainLifetimeInSec': aggrMchainLifetime, 'aggrMchainID': aggrMchainID,
-                'countdown': countdown,
+                'countdown': countdown, 'mChains': mChains,
             });
             // for countdown
             self.setState({createdAtInSec: aggrMchainCreatedAtInSec,
@@ -139,7 +183,8 @@ export default class AggrMchainsList extends React.Component {
         }
 /*        console.log('aggrMchains');
         console.log(aggrMchains);*/
-        return aggrMchains
+        // return aggrMchains
+        this.setState({aggrMchains: aggrMchains});
     }
 
     componentDidMount() {
@@ -165,6 +210,48 @@ export default class AggrMchainsList extends React.Component {
                 <Button className="btn btn-sm" onClick={() => this.addToAggregation()}>Add mChain</Button>
             </div>
         )
+    }
+
+    async mChainForAggregation(id) {
+        let mChains = await gex.manager().getMchainListInfoFromAggregationMchain(id);
+
+        let arrOfMchain = this.initMchains(mChains);
+/*
+        console.log('mChainForAggregationmChainForAggregation');
+        console.log(mChains);*/
+        return arrOfMchain;
+    }
+
+    initMchains(mChains) {
+        let objArray = [];
+        let self = this;
+        //
+        for (var i = 0; i < mChains.length; i++) {
+            let mChain = mChains[i];
+            //
+            let owner = mChain.owner;
+            let mChainID = mChain.mChainID;
+            let mChainName = mChain.name;
+            let mChainStorage = mChain.storageBytes;
+            let mChainLifetime = mChain.lifetime;
+            let mChainCreatedAtInSec = mChain.creationDate;
+            let mChainNodeNumber = mChain.maxNodes;
+            let mChainDeposit = mChain.deposit;
+            //
+            let date = moment.utc(mChainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
+            //
+            let dateTo = moment.utc((parseInt(mChainCreatedAtInSec) +
+                parseInt(mChainLifetime)) * 1000).format("YYYY/MM/DD HH:mm:ss");
+            //
+            objArray.push({
+                'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage,
+                'mChainLifetime': dateTo, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
+                'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
+                'mChainDeposit': mChainDeposit, 'mChainID': mChainID,
+            });
+        }
+
+        return objArray
     }
 
     withdrowFrom(index) {
@@ -207,7 +294,6 @@ export default class AggrMchainsList extends React.Component {
     }
 
 
-
     /////////////////////////////
 
     render(){
@@ -226,24 +312,11 @@ export default class AggrMchainsList extends React.Component {
                     SubComponent={row => {
                         return (
                             <div style={{ padding: "20px" }}>
-                                <em>
-                                    You can put any component you want here, even another React
-                                    Table!
-                                </em>
-                                <br />
-                                <br />
                                 <ReactTable
-                                    data={data}
-                                    columns={columns}
+                                    data={row.row._original.mChains}
+                                    columns={columnsColumns}
                                     defaultPageSize={3}
                                     showPagination={true}
-                                    SubComponent={row => {
-                                        return (
-                                            <div style={{ padding: "20px" }}>
-                                                Another Sub Component!
-                                            </div>
-                                        );
-                                    }}
                                 />
                             </div>
                         );
@@ -254,7 +327,5 @@ export default class AggrMchainsList extends React.Component {
                 <Logo />
             </div>
         );
-
     }
-
 }

@@ -35,17 +35,14 @@ export default class AccountInfo extends React.Component {
         let accountInfo = await gex.bot().getInfoForAccount();
         //
         this.setState({
-            active: accountInfo.active,
-            amountEth: accountInfo.amountEth,
-            amountSkale: accountInfo.amountGex,
-            loanEth: accountInfo.loanEth,
-            loanGex: accountInfo.loanGex,
-            sendEth: accountInfo.sendEth,
-            sendSkale: accountInfo.sendGex,
+            //active: accountInfo.active,
+            amountEth: gex.w3.web3.utils.fromWei(accountInfo.amountEth),
+            amountSkale: gex.w3.web3.utils.fromWei(accountInfo.amountGex),
+            loanEth: gex.w3.web3.utils.fromWei(accountInfo.loanEth),
+            loanSkale: gex.w3.web3.utils.fromWei(accountInfo.loanGex),
+            sendEth: gex.w3.web3.utils.fromWei(accountInfo.sendEth),
+            sendSkale: gex.w3.web3.utils.fromWei(accountInfo.sendGex),
         });
-
-        console.log("infoinfoinfoinfoinfoinfoinfoinfoinfoinfo");
-        console.log(accountInfo)
 
     }
 
@@ -68,9 +65,6 @@ export default class AccountInfo extends React.Component {
                 <h4 className="bold no-marg" >Account balance:</h4>
                 <br/>
                 <p>
-                    <strong>Active:</strong> {this.state.active}
-                </p>
-                <p>
                     <strong>amountEth:</strong> {this.state.amountEth}
                 </p>
                 <p>
@@ -80,7 +74,7 @@ export default class AccountInfo extends React.Component {
                     <strong>loanEth:</strong> {this.state.loanEth}
                 </p>
                 <p>
-                    <strong>loanGex:</strong> {this.state.loanGex}
+                    <strong>loanSkale:</strong> {this.state.loanSkale}
                 </p>
                 <p>
                     <strong>sendEth:</strong> {this.state.sendEth}

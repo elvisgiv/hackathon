@@ -47,15 +47,16 @@ export default class FromSkale extends React.Component {
         let skaleVal = this.state.skaleVal;
         //
         this.initExEthListener();
+        // get 'wei' from skale
+        let weiVal = gex.w3.web3.utils.toWei(skaleVal);
         // invoke contract from lib
-        let promise = gex.bot().depositEth(skaleVal);
+        let promise = gex.bot().depositGex(weiVal);
         //
         console.log('exchangeSkaleexchangeSkaleexchangeSkaleexchangeSkaleexchangeSkale');
         // clear fields
         this.setState({skaleVal: ""});
 
     }
-
 
     render(){
         return(
