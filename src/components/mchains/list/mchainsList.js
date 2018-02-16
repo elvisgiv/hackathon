@@ -16,55 +16,27 @@ export default class MchainsList extends React.Component {
         super(props);
         this.state = {
             timer: null,
-            timerEvents: null,
         };
         //
         let ip = '51.0.1.99';
         let port = '8546';
         gex.init(ip, port);
-        //gex.init('10.1.0.15', '7545');
-        //gex.init('51.0.2.99', '8546');
-
         //
         this.isExpired = this.isExpired.bind(this);
         this.countdown = this.countdown.bind(this);
     }
 
     async getMchainsList(){
-        //
         let channelsInfo = await gex.manager().getMchainListInfo();
         //
         this.setState({channelsInfo: channelsInfo});
         //
-        /*        console.log('channelsInfo for mCain');
-                console.log(channelsInfo);*/
-        //
-        let events = this.getEvents();
-        //
-        let mChains = this.initMchains();
-        //
-        this.setState({mChains: mChains});
-
-        //console.log(this.state.mChains)
-
+        this.initMchains();
     }
 
     hexToString(hexx) {
         let hex = hexx.toString();//force conversion
         return gex.w3.web3.utils.hexToUtf8(hex)
-    }
-
-    getEvents() {
-        let self = this;
-        //
-        let events = [];
-        //
-        let listener = new gex.listener(gex.manager().events.MchainCreated(gex.w3.allEventsOpt()), function (event) {
-            //
-            events.push(event.returnValues,);
-            //events.push({'mChainName': name, 'mChainID': event.returnValues.mchainID});
-            self.setState({events: events});
-        });
     }
 
     initMchains() {
@@ -99,29 +71,22 @@ export default class MchainsList extends React.Component {
                 'mChainDeposit': mChainDeposit, 'mChainID': mChainID, 'countdown': countdown,
             });
         }
-        /*        console.log('mChains');
-                console.log(mChains);*/
-        return mChains
+        //return mChains;
+        this.setState({mChains: mChains});
     }
 
     componentDidMount() {
-        this.getEvents();
         this.getMchainsList();
         this.setState({
             timer: setInterval(() => {
                 this.getMchainsList()
-            }, 15000),
-            timerEvents: setInterval(() => {
-                this.getEvents()
             }, 15000),
         });
     }
 
     componentWillUnmount() {
         clearInterval(this.state.timer);
-        clearInterval(this.state.timerEvents);
     }
-
 
     getFieldsFromMchain(value) {
         let mChainCreatedAtInSec, mChainLifetimeInSec;
@@ -134,7 +99,7 @@ export default class MchainsList extends React.Component {
                 break;
             }
         }
-
+        //
         return [mChainCreatedAtInSec, mChainLifetimeInSec]
     }
 
@@ -146,7 +111,7 @@ export default class MchainsList extends React.Component {
         //
         let timeNow = Math.round(new Date().getTime() / 1000);
         let countDownDate = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetimeInSec);
-
+        //
         return(
             <div>
                 <Button className="btn btn-sm" onClick={() => this.withdrowFrom(value)} disabled={(countDownDate > timeNow)}>withdraw deposit</Button>
@@ -190,31 +155,7 @@ export default class MchainsList extends React.Component {
     render(){
 
         const items = this.state.mChains;
-/*        let mChains = [];
-
-        if (items !== undefined) {
-            mChains = items.map((item, index) =>
-                <tr key={index}>
-                    <td>{item.mChainID}</td>
-                    <td>{item.mChainName}</td>
-                    <td>{item.mChainCreatedAt}</td>
-                    <td>{item.mChainLifetime}</td>
-                    <td id={item.mChainCreatedAtInSec}>
-                        {this.countdown(item.mChainCreatedAtInSec, item.mChainLifetimeInSec)}
-                    </td>
-                    <td>{item.mChainStorage}</td>
-                    <td>{item.mChainNodeNumber}</td>
-                    <td>{item.mChainDeposit}</td>
-                    <td>no data yet</td>
-                    <td>no data yet</td>
-                    <td>
-                        {this.isExpired(item.mChainCreatedAtInSec, item.mChainLifetimeInSec, index)}
-                    </td>
-
-                </tr>
-            )
-        }*/
-
+        // for react-table
         const columns=[
             {
                 Header: "ID",
@@ -254,8 +195,9 @@ export default class MchainsList extends React.Component {
             },
             {
                 Header: "Commands",
+                // add custom value to "Commands" column
                 id: 'button',
-                accessor: 'mChainName',
+                accessor: 'mChainName', //value
                 Cell: ({value}) => this.isExpired(value)
             },
         ];
