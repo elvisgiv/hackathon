@@ -24,6 +24,8 @@ export default class MchainsList extends React.Component {
             tooltipOpenNodes: false,
             tooltipOpenDeposit: false,
             tooltipOpenCpU: false,
+            tooltipOpenCreationDate: false,
+            tooltipOpenExpirationDate: false,
 
         };
         //
@@ -169,12 +171,12 @@ export default class MchainsList extends React.Component {
         let name = value.name;
         let keyKey;
         //
-        let tableHeaders = ['Name', 'Expires', 'Storage', 'Nodes', 'Deposit', 'CpU', 'TpS'];
+        let tableHeaders = ['Name', 'Creation Date', 'Expiration Date', 'Expires', 'Storage', 'Nodes', 'Deposit', 'CpU', 'TpS'];
         for (var i = 0; i < tableHeaders.length; i++) {
             let header = tableHeaders[i];
             //
             if (name === header) {
-                keyKey = 'tooltipOpen' + name;
+                keyKey = 'tooltipOpen' + name.replace(/\s+/g, '');
                 this.setState({ [keyKey]: !this.state[keyKey] });
                 break;
             };
@@ -182,11 +184,12 @@ export default class MchainsList extends React.Component {
     }
 
     headerTooltip(name, fullName) {
+        let nameForState = name.replace(/\s+/g, '');
         return (
             <div>
-                <div id={name}>{name}</div>
-                <Tooltip placement="right" isOpen={this.state['tooltipOpen' + name]}
-                         target={name} toggle={() => this.toggle({name})}>
+                <div id={nameForState}>{name}</div>
+                <Tooltip placement="right" isOpen={this.state['tooltipOpen' + nameForState]}
+                         target={nameForState} toggle={() => this.toggle({name})}>
                     {fullName}
                 </Tooltip>
             </div>
@@ -209,15 +212,15 @@ export default class MchainsList extends React.Component {
             {
                 Header: () => this.headerTooltip('Name', "Unique Mchain Name"),
                 accessor: "mChainName",
-                maxWidth: 150
+                //maxWidth: 150
             },
             {
-                Header: "Creation Date",
+                Header: () => this.headerTooltip('Creation Date', "Creation Date"),
                 accessor: "mChainCreatedAt",
                 maxWidth: 150
             },
             {
-                Header: "Expiration Date",
+                Header: () => this.headerTooltip('Expiration Date', "Expiration Date"),
                 accessor: "mChainLifetime",
                 maxWidth: 150
             },
@@ -238,7 +241,7 @@ export default class MchainsList extends React.Component {
                 accessor: "mChainDeposit",
             },
             {
-                Header: () => this.headerTooltip('CpU', "CPU time in % or units"),
+                Header: () => this.headerTooltip('CpU', "Central Processing Unit time in % or units"),
                 accessor: "mChainCpu",
             },
             {
