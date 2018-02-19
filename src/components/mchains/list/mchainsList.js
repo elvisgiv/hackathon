@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Table, Row, Col, } from 'reactstrap';
+import { Button, Tooltip, } from 'reactstrap';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -16,6 +16,15 @@ export default class MchainsList extends React.Component {
         super(props);
         this.state = {
             timer: null,
+            // for tooltip
+            tooltipOpenName: false,
+            tooltipOpenExpires: false,
+            tooltipOpenTpS: false,
+            tooltipOpenStorage: false,
+            tooltipOpenNodes: false,
+            tooltipOpenDeposit: false,
+            tooltipOpenCpU: false,
+
         };
         //
         let ip = '51.0.1.99';
@@ -24,6 +33,9 @@ export default class MchainsList extends React.Component {
         //
         this.isExpired = this.isExpired.bind(this);
         this.countdown = this.countdown.bind(this);
+        this.headerTooltip = this.headerTooltip.bind(this);
+        this.toggle = this.toggle.bind(this);
+
     }
 
     async getMchainsList(){
@@ -43,7 +55,6 @@ export default class MchainsList extends React.Component {
         let self = this;
         let states = this.state.channelsInfo;
         let mChains = [];
-        let events = this.state.events;
         //
         for (var i = 0; i < states.length; i++) {
             let mChain = states[i];
@@ -153,6 +164,35 @@ export default class MchainsList extends React.Component {
         }
     };
 
+    // for tooltip
+    toggle(value) {
+        let name = value.name;
+        let keyKey;
+        //
+        let tableHeaders = ['Name', 'Expires', 'Storage', 'Nodes', 'Deposit', 'CpU', 'TpS'];
+        for (var i = 0; i < tableHeaders.length; i++) {
+            let header = tableHeaders[i];
+            //
+            if (name === header) {
+                keyKey = 'tooltipOpen' + name;
+                this.setState({ [keyKey]: !this.state[keyKey] });
+                break;
+            };
+        }
+    }
+
+    headerTooltip(name, fullName) {
+        return (
+            <div>
+                <div id={name}>{name}</div>
+                <Tooltip placement="right" isOpen={this.state['tooltipOpen' + name]}
+                         target={name} toggle={() => this.toggle({name})}>
+                    {fullName}
+                </Tooltip>
+            </div>
+        );
+    }
+
 
     /////////////////////////////
 
@@ -167,7 +207,7 @@ export default class MchainsList extends React.Component {
                 maxWidth: 30
             },*/
             {
-                Header: "Name",
+                Header: () => this.headerTooltip('Name', "Unique Mchain Name"),
                 accessor: "mChainName",
                 maxWidth: 150
             },
@@ -182,27 +222,27 @@ export default class MchainsList extends React.Component {
                 maxWidth: 150
             },
             {
-                Header: "Expired",
+                Header: () => this.headerTooltip('Expires', "Expires after"),
                 accessor: 'countdown',
             },
             {
-                Header: "Storage in bytes",
+                Header: () => this.headerTooltip('Storage', "Storage in bytes"),
                 accessor: "mChainStorage",
             },
             {
-                Header: "Nodes",
+                Header: () => this.headerTooltip('Nodes', "Max number of nodes in this mChain"),
                 accessor: "mChainNodeNumber",
             },
             {
-                Header: "Deposit SKL",
+                Header: () => this.headerTooltip('Deposit', "Deposit in SkaleTokens (SKL)"),
                 accessor: "mChainDeposit",
             },
             {
-                Header: "CPU in %",
+                Header: () => this.headerTooltip('CpU', "CPU time in % or units"),
                 accessor: "mChainCpu",
             },
             {
-                Header: "TransPerSecond",
+                Header: () => this.headerTooltip('TpS', "Transaction Per Second"),
                 accessor: "mChainTps",
             },
             {
