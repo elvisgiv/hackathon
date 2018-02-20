@@ -4,9 +4,14 @@ import { Button, Tooltip, } from 'reactstrap';
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+// for alerts
+import swal from 'sweetalert';
+
 
 const gex = require('@galacticexchange/gex-client-js');
 const moment = require('moment');
+
+
 
 //const gex = require('@galacticexchange/gex-client-js/src/index');
 
@@ -126,14 +131,35 @@ export default class MchainsList extends React.Component {
         //
         return(
             <div>
-                <Button className="btn btn-sm" onClick={() => this.withdrowFrom(value)} disabled={(countDownDate > timeNow)}>withdraw deposit</Button>
+                <Button className="btn btn-sm" onClick={() => this.withdrawFrom(value)} disabled={(countDownDate > timeNow)}>withdraw</Button>
             </div>
         )
     }
 
-    withdrowFrom(name) {
-        gex.manager().withdrawFromMchain(name);
-        console.log(name)
+    withdrawFrom(name) {
+        swal("Are you sure you want withdraw deposit and destroy '" + name + "' mchain?", {
+            icon: "warning",
+            buttons: {
+                cancel: "No",
+                catch: {
+                    text: 'Yes',
+                    value: 'ddd'
+                }
+            }
+        })
+        .then((value) => {
+            switch (value) {
+                case 'ddd':
+                    swal("After a while, the funds withdrawn from the '" + name + "' mchain deposit " +
+                        "will go to your wallet.", {
+                    icon: "success"
+                    });
+                    gex.manager().withdrawFromMchain(name);
+                    break;
+                default:
+                    swal("Withdraw from '" + name + "' mchain are rejected.");
+            }
+        })
     }
 
     countdown(mChainCreatedAtInSec, mChainLifetime) {
