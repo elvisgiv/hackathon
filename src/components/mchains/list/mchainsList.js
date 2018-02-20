@@ -48,11 +48,6 @@ export default class MchainsList extends React.Component {
         this.initMchains();
     }
 
-    hexToString(hexx) {
-        let hex = hexx.toString();//force conversion
-        return gex.w3.web3.utils.hexToUtf8(hex)
-    }
-
     initMchains() {
         let self = this;
         let states = this.state.channelsInfo;
@@ -70,7 +65,7 @@ export default class MchainsList extends React.Component {
             let mChainNodeNumber = mChain.maxNodes;
             let mChainDeposit = mChain.deposit;
             let mChainCpu = mChain.cpu;
-            let mChainTps = mChain.tPs;
+            let mChainTps = mChain.tps;
             //
             let date = moment.utc(mChainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
             //
@@ -80,7 +75,7 @@ export default class MchainsList extends React.Component {
             let countdown = self.countdown(mChainCreatedAtInSec, mChainLifetime);
             //
             mChains.push({
-                'owner': owner, 'mChainName': self.hexToString(mChainName), 'mChainStorage': mChainStorage,
+                'owner': owner, 'mChainName': mChainName, 'mChainStorage': mChainStorage,
                 'mChainLifetime': dateTo, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
                 'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
                 'mChainDeposit': mChainDeposit, 'mChainID': mChainID, 'countdown': countdown,

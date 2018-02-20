@@ -75,14 +75,14 @@ export default class Examples extends React.Component {
                                 Mchains
                             </NavLink>
                         </NavItem>
-                        <NavItem>
+{/*                        <NavItem>
                             <NavLink
                                 className={classnames({ active: this.state.activeTab === '3' })}
                                 onClick={() => { this.toggle('3'); }}
                             >
                                 Aggregation Mchains
                             </NavLink>
-                        </NavItem>
+                        </NavItem>*/}
                         <NavItem>
                             <NavLink
                                 className={classnames({ active: this.state.activeTab === '4' })}
