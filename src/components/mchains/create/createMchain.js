@@ -1,6 +1,9 @@
 import React from 'react'
 
-import { Button, Input, } from 'reactstrap';
+import { Button, Input,  } from 'reactstrap';
+
+import swal from 'sweetalert';
+
 
 
 const gex = require('@galacticexchange/gex-client-js');
@@ -20,10 +23,10 @@ export default class CreateMchain extends React.Component {
             basTransPerSec: '',
             libInit: false,
             mChainNonces: [],
-
         };
         //
         this.createMchain = this.createMchain.bind(this);
+
     }
 
     componentWillReceiveProps() {
@@ -34,6 +37,8 @@ export default class CreateMchain extends React.Component {
             let port = '8546';
             gex.initBothProviders(ip, port, provider);
             this.setState({libInit: true});
+            ///
+            this.initMChainListener();
         }
     }
 
@@ -47,8 +52,19 @@ export default class CreateMchain extends React.Component {
         this.setState({mChainListener: listener})
     }
 
+    isFilled(basName, basStorageBytes, basLifetime, basMaxNodes,
+             basDeposit, basCpuTime, basTransPerSec) {
+        if (basName.length > 0 && basStorageBytes.length > 0 && basLifetime.length > 0 && basMaxNodes.length > 0 &&
+            basDeposit.length > 0 && basCpuTime.length > 0 && basTransPerSec.length > 0) {
+            console.log(basName);
+            return true
+        } else {
+            return false
+        }
+    }
+
     async createMchain(){
-        //
+        // from form
         let basName = this.state.basName;
         let basStorageBytes = this.state.basStorageBytes;
         let basLifetime = this.state.basLifetime;
@@ -56,13 +72,53 @@ export default class CreateMchain extends React.Component {
         let basDeposit = this.state.basDeposit;
         let basCpuTime = this.state.basCpuTime;
         let basTransPerSec = this.state.basTransPerSec;
+        // to hash
+        let mChain = {storageBytes: basStorageBytes, cpu: basCpuTime, tps: basTransPerSec, lifetime: basLifetime,
+            maxNodes: basMaxNodes, deposit: basDeposit, name: basName};
+        //
+        let isAvailable = false;
+        //
+        let isFilled = this.isFilled(basName, basStorageBytes, basLifetime, basMaxNodes,
+            basDeposit, basCpuTime, basTransPerSec );
+        //
+        if (isFilled) {
+            isAvailable = await gex.manager().isMchainIdAvailable(basName);
+        } else {
+            return (
+                swal({
+                    title: "Attention!!!",
+                    text: "Please fill all fields",
+                    icon: "warning",
+                    //buttons: true,
+                    dangerMode: true,
+                })
+        )
+        }
+        //
+        if (isAvailable) {
+            let nonce = await gex.manager().createMchain( mChain );
+            // clear fields
+            this.setState({basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: "",
+                basCpuTime: "", basTransPerSec: "",});
 
-        this.initMChainListener();
-        let nonce = await gex.manager().createMchain(basStorageBytes, basLifetime, basMaxNodes, basDeposit, basName,
-            basCpuTime, basTransPerSec);
-        // clear fields
-        this.setState({basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: "",
-            basCpuTime: "", basTransPerSec: "",});
+            swal({
+                title: "Congratulations!",
+                text: "You just created the mchain!",
+                icon: "success",
+            })
+
+        } else {
+            return (
+                swal({
+                    title: "Attention!!!",
+                    text: "Mchain with name '" + basName + "' already exists!",
+                    icon: "warning",
+                    //buttons: true,
+                    dangerMode: true,
+                })
+            )
+        }
+
 
         //save nonces to array
 /*        let arrayNonces = this.state.mChainNonces;

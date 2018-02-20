@@ -6,7 +6,6 @@ const gex = require('@galacticexchange/gex-client-js');
 const moment = require('moment');
 
 import { render } from "react-dom";
-import { makeData, Logo, Tips } from "./Utils";
 
 // Import React Table
 import ReactTable from "react-table";
@@ -324,8 +323,6 @@ export default class AggrMchainsList extends React.Component {
                     }}
                 />
                 <br />
-                <Tips />
-                <Logo />
             </div>
         );
     }
