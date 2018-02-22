@@ -97,7 +97,7 @@ export default class MchainsList extends React.Component {
         this.setState({
             timer: setInterval(() => {
                 this.getMchainsList()
-            }, 15000),
+            }, 5000),
         });
     }
 
@@ -233,17 +233,18 @@ export default class MchainsList extends React.Component {
             {
                 Header: () => this.headerTooltip('Name', "Unique Mchain Name"),
                 accessor: "mChainName",
+                filterable: true,
                 //maxWidth: 150
             },
             {
                 Header: () => this.headerTooltip('Creation Date', "Creation Date"),
                 accessor: "mChainCreatedAt",
-                maxWidth: 150
+                width: 150
             },
             {
                 Header: () => this.headerTooltip('Expiration Date', "Expiration Date"),
                 accessor: "mChainLifetime",
-                maxWidth: 150
+                width: 150
             },
             {
                 Header: () => this.headerTooltip('Expires', "Expires after"),
@@ -264,16 +265,21 @@ export default class MchainsList extends React.Component {
             {
                 Header: () => this.headerTooltip('CpU', "Central Processing Unit time in % or units"),
                 accessor: "mChainCpu",
+                width: 60
+
             },
             {
                 Header: () => this.headerTooltip('TpS', "Transaction Per Second"),
                 accessor: "mChainTps",
+                width: 60
+
             },
             {
                 Header: "Commands",
                 // add custom value to "Commands" column
                 id: 'button',
                 accessor: 'mChainName', //value
+                sortable: false,
                 Cell: ({value}) => this.isExpired(value)
             },
         ];
