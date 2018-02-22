@@ -225,16 +225,11 @@ export default class MchainsList extends React.Component {
         const items = this.state.mChains;
         // for react-table
         const columns=[
-/*            {
-                Header: "ID",
-                accessor: "mChainID",
-                maxWidth: 30
-            },*/
             {
                 Header: () => this.headerTooltip('Name', "Unique Mchain Name"),
                 accessor: "mChainName",
                 filterable: true,
-                //maxWidth: 150
+                width: 70
             },
             {
                 Header: () => this.headerTooltip('Creation Date', "Creation Date"),
