@@ -7,13 +7,8 @@ import "react-table/react-table.css";
 // for alerts
 import swal from 'sweetalert';
 
-
 const gex = require('@galacticexchange/gex-client-js');
 const moment = require('moment');
-
-
-
-//const gex = require('@galacticexchange/gex-client-js/src/index');
 
 export default class MchainsList extends React.Component {
 
