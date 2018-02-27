@@ -73,7 +73,7 @@ export default class CreateMchain extends React.Component {
         let basCpuTime = this.state.basCpuTime;
         let basTransPerSec = this.state.basTransPerSec;
         // to hash
-        let mChain = {storageBytes: basStorageBytes, cpu: basCpuTime, tps: basTransPerSec, lifetime: basLifetime,
+        let mChain = {storageBytes: basStorageBytes, cpu: basCpuTime, transactionThroughput: basTransPerSec, lifetime: basLifetime,
             maxNodes: basMaxNodes, deposit: basDeposit, name: basName};
         //
         let isAvailable = false;

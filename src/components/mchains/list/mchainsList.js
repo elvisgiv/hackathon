@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { Button, Tooltip, } from 'reactstrap';
 
 // Import React Table
@@ -6,6 +7,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 // for alerts
 import swal from 'sweetalert';
+
 
 const gex = require('@galacticexchange/gex-client-js');
 const moment = require('moment');
@@ -26,6 +28,9 @@ export default class MchainsList extends React.Component {
             tooltipOpenCpU: false,
             tooltipOpenCreationDate: false,
             tooltipOpenExpirationDate: false,
+            // for pass mchain name to mchain show
+            mChainName1: null,
+
 
         };
         //
@@ -37,6 +42,8 @@ export default class MchainsList extends React.Component {
         this.countdown = this.countdown.bind(this);
         this.headerTooltip = this.headerTooltip.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.linkTo = this.linkTo.bind(this);
+        this._onClick = this._onClick.bind(this);
 
     }
 
@@ -53,11 +60,10 @@ export default class MchainsList extends React.Component {
         let states = this.state.channelsInfo;
         let mChains = [];
         //
-        for (var i = 0; i < states.length; i++) {
+        for (let i = 0; i < states.length; i++) {
             let mChain = states[i];
             //
             let owner = mChain.owner;
-            let mChainID = mChain.mChainID;
             let mChainName = mChain.name;
             let mChainStorage = mChain.storageBytes;
             let mChainLifetime = mChain.lifetime;
@@ -65,7 +71,7 @@ export default class MchainsList extends React.Component {
             let mChainNodeNumber = mChain.maxNodes;
             let mChainDeposit = mChain.deposit;
             let mChainCpu = mChain.cpu;
-            let mChainTps = mChain.tps;
+            let mChainTps = mChain.transactionThroughput;
             //
             let date = moment.utc(mChainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
             //
@@ -78,7 +84,7 @@ export default class MchainsList extends React.Component {
                 'owner': owner, 'mChainName': mChainName, 'mChainStorage': mChainStorage,
                 'mChainLifetime': dateTo, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
                 'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
-                'mChainDeposit': mChainDeposit, 'mChainID': mChainID, 'countdown': countdown,
+                'mChainDeposit': mChainDeposit, 'countdown': countdown,
                 'mChainCpu': mChainCpu ? mChainCpu : 'in developing',
                 'mChainTps': mChainTps ? mChainTps : 'in developing',
             });
@@ -103,7 +109,7 @@ export default class MchainsList extends React.Component {
     getFieldsFromMchain(value) {
         let mChainCreatedAtInSec, mChainLifetimeInSec;
         let items = this.state.mChains;
-        for (var i = 0; i < items.length; i++) {
+        for (let i = 0; i < items.length; i++) {
             let item = items[i];
             if (item.mChainName === value) {
                 mChainCreatedAtInSec = item.mChainCreatedAtInSec;
@@ -188,14 +194,14 @@ export default class MchainsList extends React.Component {
         let keyKey;
         //
         let tableHeaders = ['Name', 'Creation Date', 'Expiration Date', 'Expires', 'Storage', 'Nodes', 'Deposit', 'CpU', 'TpS'];
-        for (var i = 0; i < tableHeaders.length; i++) {
+        for (let i = 0; i < tableHeaders.length; i++) {
             let header = tableHeaders[i];
             //
             if (name === header) {
                 keyKey = 'tooltipOpen' + name.replace(/\s+/g, '');
                 this.setState({ [keyKey]: !this.state[keyKey] });
                 break;
-            };
+            }
         }
     }
 
@@ -212,6 +218,20 @@ export default class MchainsList extends React.Component {
         );
     }
 
+    _onClick(name) {
+
+    }
+
+    linkTo(name) {
+        return (
+            <div>
+                <Link to={`/mchains/${name}`} >
+                    {name}
+                </Link>
+            </div>
+        )
+    }
+
 
     /////////////////////////////
 
@@ -224,7 +244,9 @@ export default class MchainsList extends React.Component {
                 Header: () => this.headerTooltip('Name', "Unique Mchain Name"),
                 accessor: "mChainName",
                 filterable: true,
-                width: 70
+                width: 70,
+                Cell: ({value}) => this.linkTo(value)
+
             },
             {
                 Header: () => this.headerTooltip('Creation Date', "Creation Date"),
