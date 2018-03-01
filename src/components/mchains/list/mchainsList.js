@@ -30,8 +30,6 @@ export default class MchainsList extends React.Component {
             tooltipOpenExpirationDate: false,
             // for pass mchain name to mchain show
             mChainName1: null,
-
-
         };
         //
         let ip = '51.0.1.99';

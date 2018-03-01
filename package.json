@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.0.0",
-    "@galacticexchange/gex-client-js": "0.2.18",
+    "@galacticexchange/gex-client-js": "0.2.24",
     "@material/ripple": "0.25.0",
     "amstock3": "amcharts/amstock3",
     "bootstrap": "^4.0.0-beta.3",
@@ -29,7 +29,10 @@
     "sweetalert": "^2.1.0",
     "web3": "0.19.0",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.4",
+    "lorem-ipsum": "^1.0.4",
+    "identicon": "^2.1.1",
+    "identicon.js": "^2.3.1"
   },
   "scripts": {
     "start": "webpack-dev-server",

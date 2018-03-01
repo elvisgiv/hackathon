@@ -9,6 +9,7 @@ import Test from './components/test';
 import Help from './components/help';
 import Micropayments from './components/micropayments';
 import Examples from './components/examples';
+import Mchain from './components/mchains/show/mchain';
 
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
@@ -62,6 +63,7 @@ export default class App extends Component {
                             <Route path='/help' component={Help}/>
                             <Route path='/micropayments' component={Micropayments}/>
                             <Route path='/examples' render={() => <Examples web3Connector={web3Connector} />} />
+                            <Route exact path='/mchains/:name' render={(props) => <Mchain web3Connector={web3Connector} props={props}/>} />
                         </Switch>
                     </div>
                     <Footer/>
