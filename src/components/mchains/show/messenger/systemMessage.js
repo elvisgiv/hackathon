@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/SystemMessage/SystemMessage.css';
+import '../../../../stylesheets/commons/messenger/systemMessage.scss';
+// import 'react-chat-elements/src/SystemMessage/SystemMessage.css';
+
 
 const classNames = require('classnames');
 

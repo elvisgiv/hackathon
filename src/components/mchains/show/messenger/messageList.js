@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/MessageList/MessageList.css';
+import '../../../../stylesheets/commons/messenger/messageList.scss';
+// import 'react-chat-elements/src/MessageList/MessageList.css';
+
 
 import MessageBox from './messageBox';
 

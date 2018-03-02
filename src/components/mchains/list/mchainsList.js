@@ -9,7 +9,7 @@ import "react-table/react-table.css";
 import swal from 'sweetalert';
 
 
-const gex = require('@galacticexchange/gex-client-js');
+const gex = require('@skale-labs/skale-api');
 const moment = require('moment');
 
 export default class MchainsList extends React.Component {
@@ -37,7 +37,7 @@ export default class MchainsList extends React.Component {
         gex.init(ip, port);
         //
         this.isExpired = this.isExpired.bind(this);
-        this.countdown = this.countdown.bind(this);
+        //this.countdown = this.countdown.bind(this);
         this.headerTooltip = this.headerTooltip.bind(this);
         this.toggle = this.toggle.bind(this);
         this.linkTo = this.linkTo.bind(this);
@@ -76,7 +76,7 @@ export default class MchainsList extends React.Component {
             let dateTo = moment.utc((parseInt(mChainCreatedAtInSec) +
                 parseInt(mChainLifetime)) * 1000).format("YYYY/MM/DD HH:mm:ss");
             // countdown run
-            let countdown = self.countdown(mChainCreatedAtInSec, mChainLifetime);
+            let countdown = MchainsList.countdown(mChainCreatedAtInSec, mChainLifetime);
             //
             mChains.push({
                 'owner': owner, 'mChainName': mChainName, 'mChainStorage': mChainStorage,
@@ -161,7 +161,7 @@ export default class MchainsList extends React.Component {
         })
     }
 
-    countdown(mChainCreatedAtInSec, mChainLifetime) {
+    static countdown(mChainCreatedAtInSec, mChainLifetime) {
         let str;
         // set countDownDate in ms
         let countDownDate = (parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime)) * 1000;

@@ -3,8 +3,8 @@ import React from 'react'
 import { Button, Input, } from 'reactstrap';
 
 
-const gex = require('@galacticexchange/gex-client-js');
-//const gex = require('@galacticexchange/gex-client-js/src/index');
+const gex = require('@skale-labs/skale-api');
+//const gex = require('@skale-labs/skale-api/src/index');
 
 export default class FromSkale extends React.Component {
 

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.0.0",
-    "@galacticexchange/gex-client-js": "0.2.24",
+    "@skale-labs/skale-api": "0.3.6",
     "@material/ripple": "0.25.0",
     "amstock3": "amcharts/amstock3",
     "bootstrap": "^4.0.0-beta.3",
@@ -15,7 +15,6 @@
     "path": "^0.12.7",
     "postcss-cssnext": "^2.5.2",
     "react": "^16.2.0",
-    "react-chat-elements": "^0.8.2",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
     "react-material-icons": "1.0.3",

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/Popup/Popup.css';
+import '../../../../stylesheets/commons/messenger/popup.scss';
+// import 'react-chat-elements/src/Popup/Popup.css';
+
 
 import Button from './button';
 

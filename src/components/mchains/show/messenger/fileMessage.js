@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/FileMessage/FileMessage.css';
+import '../../../../stylesheets/commons/messenger/fileMessage.scss';
+// import 'react-chat-elements/src/FileMessage/FileMessage.css';
+
 
 import FaCloudDownload from 'react-icons/lib/fa/cloud-download';
 import FaFile from 'react-icons/lib/fa/file';

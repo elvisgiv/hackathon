@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Table, Row, Col, Collapse, CardBody, Card,} from 'reactstrap';
 
 
-const gex = require('@galacticexchange/gex-client-js');
+const gex = require('@skale-labs/skale-api');
 const moment = require('moment');
 
 import { render } from "react-dom";
@@ -100,7 +100,7 @@ const columnsColumns=[
     ];
 
 
-//const gex = require('@galacticexchange/gex-client-js/src/index');
+//const gex = require('@skale-labs/skale-api/src/index');
 
 export default class AggrMchainsList extends React.Component {
 

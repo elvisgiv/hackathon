@@ -1,5 +1,5 @@
 import React from 'react'
-const gex = require('@galacticexchange/gex-client-js');
+const gex = require('@skale-labs/skale-api');
 
 export default class Web3Connector extends React.Component {
 

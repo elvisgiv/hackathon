@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/SideBar/SideBar.css';
+import '../../../../stylesheets/commons/messenger/sideBar.scss';
+// import 'react-chat-elements/src/SideBar/SideBar.css';
+
 
 const classNames = require('classnames');
 

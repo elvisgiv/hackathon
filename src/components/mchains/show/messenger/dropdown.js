@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/Dropdown/Dropdown.css';
+import '../../../../stylesheets/commons/messenger/dropdown.scss';
+// import 'react-chat-elements/src/Dropdown/Dropdown.css';
+
 
 import Button from './button';
 

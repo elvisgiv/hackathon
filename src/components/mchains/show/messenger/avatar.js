@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/Avatar/Avatar.css';
+import '../../../../stylesheets/commons/messenger/avatar.scss';
+//import 'react-chat-elements/src/Avatar/Avatar.css';
+
 
 const classNames = require('classnames');
 

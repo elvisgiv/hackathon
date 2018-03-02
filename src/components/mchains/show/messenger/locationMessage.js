@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/LocationMessage/LocationMessage.css';
+import '../../../../stylesheets/commons/messenger/locationMessage.scss';
+// import 'react-chat-elements/src/LocationMessage/LocationMessage.css';
+
 
 const classNames = require('classnames');
 

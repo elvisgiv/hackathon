@@ -7,8 +7,8 @@ import AccountInfo from './accountInfo';
 
 
 
-const gex = require('@galacticexchange/gex-client-js');
-//const gex = require('@galacticexchange/gex-client-js/src/index');
+const gex = require('@skale-labs/skale-api');
+//const gex = require('@skale-labs/skale-api/src/index');
 
 export default class BotExchange extends React.Component {
 

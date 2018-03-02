@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/MessageBox/MessageBox.css';
+import '../../../../stylesheets/commons/messenger/messageBox.scss';
+// import 'react-chat-elements/src/MessageBox/MessageBox.css';
 
-import PhotoMessage from './photoMessage';
-import FileMessage from './fileMessage';
+
+//import PhotoMessage from './photoMessage';
+//import FileMessage from './fileMessage';
 import SystemMessage from './systemMessage';
-import LocationMessage from './locationMessage';
-import SpotifyMessage from './spotifyMessage';
+//import LocationMessage from './locationMessage';
+//import SpotifyMessage from './spotifyMessage';
 
 import Avatar from './avatar';
 
 import FaForward from 'react-icons/lib/fa/mail-forward';
-import FaReply from 'react-icons/lib/fa/mail-reply';
+//import FaReply from 'react-icons/lib/fa/mail-reply';
 
 import IoDoneAll from 'react-icons/lib/io/android-done-all';
 import MdIosTime from 'react-icons/lib/md/access-time';
@@ -91,7 +93,7 @@ export class MessageBox extends Component {
                                     </div>
                                 }
 
-                                {
+{/*                                {
                                     this.props.type === 'location' &&
                                     <LocationMessage
                                         onOpen={this.props.onOpen}
@@ -103,9 +105,9 @@ export class MessageBox extends Component {
                                         zoom={this.props.zoom}
                                         markerColor={this.props.markerColor}
                                         text={this.props.text} />
-                                }
+                                }*/}
 
-                                {
+{/*                                {
                                     this.props.type === 'photo' &&
                                     <PhotoMessage
                                         onOpen={this.props.onOpen}
@@ -114,8 +116,8 @@ export class MessageBox extends Component {
                                         width={this.props.width}
                                         height={this.props.height}
                                         text={this.props.text} />
-                                }
-
+                                }*/}
+{/*
                                 {
                                     this.props.type === 'file' &&
                                     <FileMessage
@@ -123,9 +125,9 @@ export class MessageBox extends Component {
                                         onDownload={this.props.onDownload}
                                         data={this.props.data}
                                         text={this.props.text} />
-                                }
+                                }*/}
 
-                                {
+{/*                                {
                                     this.props.type === 'spotify' &&
                                     <SpotifyMessage
                                         width={this.props.width}
@@ -134,7 +136,7 @@ export class MessageBox extends Component {
                                         view={this.props.view}
                                         data={this.props.data}
                                         uri={this.props.uri || this.props.text} />
-                                }
+                                }*/}
 
                                 <div
                                     className={classNames(

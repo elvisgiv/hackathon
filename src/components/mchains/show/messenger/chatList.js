@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/ChatList/ChatList.css';
+import '../../../../stylesheets/commons/messenger/chatList.scss';
 
 import ChatItem from './chatItem';
 

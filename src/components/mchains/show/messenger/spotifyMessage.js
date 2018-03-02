@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'react-chat-elements/src/SpotifyMessage/SpotifyMessage.css';
+import '../../../../stylesheets/commons/messenger/spotifyMessage.scss';
+// import 'react-chat-elements/src/SpotifyMessage/SpotifyMessage.css';
+
 
 const classNames = require('classnames');
 

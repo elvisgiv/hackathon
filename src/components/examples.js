@@ -10,8 +10,8 @@ import AggrMchainsList from './mchains/list/aggrMchainsList'
 import Exchange from './bot_balance/exchange/botExchange'
 
 
-const gex = require('@galacticexchange/gex-client-js');
-//const gex = require('@galacticexchange/gex-client-js/src/index');
+const gex = require('@skale-labs/skale-api');
+//const gex = require('@skale-labs/skale-api/src/index');
 
 export default class Examples extends React.Component {
 

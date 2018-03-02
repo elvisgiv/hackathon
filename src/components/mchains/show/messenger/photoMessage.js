@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import 'react-chat-elements/src/PhotoMessage/PhotoMessage.css';
+import '../../../../stylesheets/commons/messenger/photoMessage.scss';
+// import 'react-chat-elements/src/PhotoMessage/PhotoMessage.css';
+
 
 import FaCloudDownload from 'react-icons/lib/fa/cloud-download';
 

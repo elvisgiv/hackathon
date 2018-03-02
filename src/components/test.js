@@ -1,5 +1,5 @@
 import React from 'react'
-const gex = require('@galacticexchange/gex-client-js/src/index');
+const gex = require('@skale-labs/skale-api/src/index');
 
 import {Button} from 'react-mdc-web/lib';
 
