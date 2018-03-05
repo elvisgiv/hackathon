@@ -64,7 +64,7 @@ export default class FromEth extends React.Component {
             <div>
                 <h4 className="bold no-marg" >Change Eth to SkaleTokens</h4>
                 <br/>
-                <Input id="ethVal" placeholder="Amount of Eth" onChange={(num) =>
+                <Input id="ethVal" type="number" placeholder="Amount of Eth" onChange={(num) =>
                     this.setState({ethVal: num.target.value})} value={this.state.ethVal} />
                 <h6 className="no-marg">The amount of Eth that you want to exchange</h6>
                 <br/>

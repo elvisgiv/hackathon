@@ -63,7 +63,7 @@ export default class FromSkale extends React.Component {
             <div>
                 <h4 className="bold no-marg" >Change SkaleTokens to Eth</h4>
                 <br/>
-                <Input id="skaleVal" placeholder="Amount of SkaleTokens" onChange={(num) =>
+                <Input id="skaleVal" type="number" placeholder="Amount of SkaleTokens" onChange={(num) =>
                     this.setState({skaleVal: num.target.value})} value={this.state.skaleVal} />
                 <h6 className="no-marg">The amount of SkaleTokens that you want to exchange</h6>
                 <br/>
