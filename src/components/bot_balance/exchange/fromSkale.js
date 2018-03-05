@@ -1,6 +1,8 @@
 import React from 'react'
 
 import { Button, Input, } from 'reactstrap';
+import FromEth from './fromEth';
+import swal from 'sweetalert';
 
 
 const gex = require('@skale-labs/skale-api');
@@ -40,22 +42,34 @@ export default class FromSkale extends React.Component {
         this.setState({initExEthListener: listener})
     }
 
-
-
     exchangeSkale(){
         //
         let skaleVal = this.state.skaleVal;
         //
-        this.initExEthListener();
-        // get 'wei' from skale
-        let weiVal = gex.w3.web3.utils.toWei(skaleVal);
-        // invoke contract from lib
-        let promise = gex.bot().depositGex(weiVal);
+        let isFilled = FromEth.isFilled(skaleVal);
         //
-        console.log('exchangeSkaleexchangeSkaleexchangeSkaleexchangeSkaleexchangeSkale');
-        // clear fields
-        this.setState({skaleVal: ""});
-
+        if (isFilled) {
+            //
+            this.initExEthListener();
+            // get 'wei' from skale
+            let weiVal = gex.w3.web3.utils.toWei(skaleVal);
+            // invoke contract from lib
+            let promise = gex.bot().depositGex(weiVal);
+            //
+            console.log('exchangeSkaleexchangeSkaleexchangeSkaleexchangeSkaleexchangeSkale');
+            // clear fields
+            this.setState({skaleVal: ""});
+        } else {
+            return (
+                swal({
+                    title: "Attention!!!",
+                    text: "Please fill the 'Amount of SkaleTokens' field",
+                    icon: "warning",
+                    //buttons: true,
+                    dangerMode: true,
+                })
+            )
+        }
     }
 
     render(){

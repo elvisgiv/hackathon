@@ -42,9 +42,9 @@ export default class FromEth extends React.Component {
         this.setState({initExEthListener: listener})
     }
 
-    isFilled(ethVal) {
-        if (ethVal.length > 0 ) {
-            console.log(ethVal);
+    static isFilled(value) {
+        if (value.length > 0 ) {
+            console.log(value);
             return true
         } else {
             return false
@@ -55,7 +55,7 @@ export default class FromEth extends React.Component {
         //
         let ethVal = this.state.ethVal;
         //
-        let isFilled = this.isFilled(ethVal);
+        let isFilled = FromEth.isFilled(ethVal);
         //
         if (isFilled) {
             //
