@@ -51,7 +51,7 @@ export default class FromEth extends React.Component {
         }
     }
 
-    exchangeEth(){
+    async exchangeEth(){
         //
         let ethVal = this.state.ethVal;
         //
@@ -61,9 +61,9 @@ export default class FromEth extends React.Component {
             //
             this.initExEthListener();
             // get 'wei' from eth
-            let weiVal = gex.w3.web3.utils.toWei(ethVal);
+            let weiVal = await gex.w3.web3.utils.toWei(ethVal);
             // invoke contract from lib
-            let promise = gex.bot().depositEth(weiVal);
+            let promise = await gex.bot().depositEth(weiVal);
             //
             console.log('exchangeEthexchangeEthexchangeEthexchangeEthexchangeEth');
             // clear fields

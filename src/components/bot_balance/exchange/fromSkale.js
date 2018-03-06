@@ -42,7 +42,7 @@ export default class FromSkale extends React.Component {
         this.setState({initExEthListener: listener})
     }
 
-    exchangeSkale(){
+    async exchangeSkale(){
         //
         let skaleVal = this.state.skaleVal;
         //
@@ -52,9 +52,9 @@ export default class FromSkale extends React.Component {
             //
             this.initExEthListener();
             // get 'wei' from skale
-            let weiVal = gex.w3.web3.utils.toWei(skaleVal);
+            let weiVal = await gex.w3.web3.utils.toWei(skaleVal);
             // invoke contract from lib
-            let promise = gex.bot().depositGex(weiVal);
+            let promise = await gex.bot().depositGex(weiVal);
             //
             console.log('exchangeSkaleexchangeSkaleexchangeSkaleexchangeSkaleexchangeSkale');
             // clear fields

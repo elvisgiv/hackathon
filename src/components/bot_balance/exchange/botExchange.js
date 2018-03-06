@@ -38,16 +38,18 @@ export default class BotExchange extends React.Component {
                     <h1 className="bold text-center" >Exchange</h1>
                     <br/>
                     <Row>
-                        <Col sd={4}>
+                        <Col sd={5}>
                             {exchangeEth}
                         </Col>
 
-                        <Col sd={4}>
+                        <Col sd={2}></Col>
+
+                        <Col sd={5}>
                             {exchangeSkale}
                         </Col>
-                        <Col sd={4}>
+                        {/*<Col sd={4}>
                             {accountInfo}
-                        </Col>
+                        </Col>*/}
                     </Row>
                 </Col>
             </Row>
