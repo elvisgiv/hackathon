@@ -3,13 +3,10 @@ import React from 'react'
 import { Row, Col, } from 'reactstrap';
 import FromEth from './fromEth';
 import FromSkale from './fromSkale';
-import AccountInfo from './accountInfo';
+//import AccountInfo from './accountInfo';
 import ReturnEth from "./returnEth";
+import ReturnSkl from "./returnSkl";
 
-
-
-const gex = require('@skale-labs/skale-api');
-//const gex = require('@skale-labs/skale-api/src/index');
 
 export default class BotExchange extends React.Component {
 
@@ -31,8 +28,9 @@ export default class BotExchange extends React.Component {
         // for template render
         let exchangeEth = <FromEth web3Connector={this.state.web3Connector}/>;
         let exchangeSkale = <FromSkale web3Connector={this.state.web3Connector}/>;
-        let accountInfo = <AccountInfo web3Connector={this.state.web3Connector}/>;
+        //let accountInfo = <AccountInfo web3Connector={this.state.web3Connector}/>;
         let returnEth = <ReturnEth web3Connector={this.state.web3Connector}/>;
+        let returnSkl = <ReturnSkl web3Connector={this.state.web3Connector}/>;
 
         return(
             <Row>
@@ -57,7 +55,7 @@ export default class BotExchange extends React.Component {
                     <br/>
                     <Row>
                         <Col sd={5}>
-                            returnSkl
+                            {returnSkl}
                         </Col>
 
                         <Col sd={2}></Col>

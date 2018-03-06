@@ -5,7 +5,7 @@ import { Button, Input, } from 'reactstrap';
 const gex = require('@skale-labs/skale-api');
 //const gex = require('@skale-labs/skale-api/src/index');
 
-export default class ReturnEth extends React.Component {
+export default class ReturnSkl extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,7 +13,7 @@ export default class ReturnEth extends React.Component {
             libInit: false,
         };
         //
-        this.returnEth = this.returnEth.bind(this);
+        this.returnSkl = this.returnSkl.bind(this);
     }
 
     componentWillReceiveProps() {
@@ -37,11 +37,11 @@ export default class ReturnEth extends React.Component {
         this.setState({initExEthListener: listener})
     }
 
-    async returnEth(){
+    async returnSkl(){
         //
         this.initExEthListener();
         //
-        await gex.bot().returnEth();
+        await gex.bot().returnGex();
     }
 
     render(){
@@ -49,8 +49,8 @@ export default class ReturnEth extends React.Component {
             <div>
                 <div className="col-md-12">
                     <Button className="btn btn-lg"
-                            onClick={this.returnEth} disabled={this.state.libInit ? false : true}>
-                        get ETH remainder
+                            onClick={this.returnSkl} disabled={this.state.libInit ? false : true}>
+                        get SKL remainder
                     </Button>
                 </div>
             </div>

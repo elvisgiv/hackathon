@@ -72,7 +72,7 @@ export default class FromEth extends React.Component {
             return (
                 swal({
                     title: "Attention!!!",
-                    text: "Please fill the 'Amount of Eth' field",
+                    text: "Please fill the 'Amount of ETH' field",
                     icon: "warning",
                     //buttons: true,
                     dangerMode: true,
@@ -86,9 +86,9 @@ export default class FromEth extends React.Component {
     render(){
         return(
             <div>
-                <h4 className="bold no-marg" >Change Eth to SkaleTokens</h4>
+                <h5 className="bold no-marg" >Change ETH to SkaleTokens (SKL)</h5>
                 <br/>
-                <Input id="ethVal" type="number" placeholder="Amount of Eth" onChange={(num) =>
+                <Input id="ethVal" type="number" placeholder="Amount of ETH" onChange={(num) =>
                     this.setState({ethVal: num.target.value})} value={this.state.ethVal} />
                 <h6 className="no-marg">The amount of Eth that you want to exchange</h6>
                 <br/>

@@ -63,7 +63,7 @@ export default class FromSkale extends React.Component {
             return (
                 swal({
                     title: "Attention!!!",
-                    text: "Please fill the 'Amount of SkaleTokens' field",
+                    text: "Please fill the 'Amount of SKL' field",
                     icon: "warning",
                     //buttons: true,
                     dangerMode: true,
@@ -75,9 +75,9 @@ export default class FromSkale extends React.Component {
     render(){
         return(
             <div>
-                <h4 className="bold no-marg" >Change SkaleTokens to Eth</h4>
+                <h5 className="bold no-marg" >Change SkaleTokens (SKL) to ETH</h5>
                 <br/>
-                <Input id="skaleVal" type="number" placeholder="Amount of SkaleTokens" onChange={(num) =>
+                <Input id="skaleVal" type="number" placeholder="Amount of SKL" onChange={(num) =>
                     this.setState({skaleVal: num.target.value})} value={this.state.skaleVal} />
                 <h6 className="no-marg">The amount of SkaleTokens that you want to exchange</h6>
                 <br/>
