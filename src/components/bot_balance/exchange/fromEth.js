@@ -68,6 +68,13 @@ export default class FromEth extends React.Component {
             console.log('exchangeEthexchangeEthexchangeEthexchangeEthexchangeEth');
             // clear fields
             this.setState({ethVal: ""});
+            //
+            swal({
+                title: "Congratulations!!!",
+                text: "You just exchanged 80% of your amount, the remaining 20% you can pick up after the close of exchange!",
+                icon: "success",
+                //buttons: true,
+            })
         } else {
             return (
                 swal({

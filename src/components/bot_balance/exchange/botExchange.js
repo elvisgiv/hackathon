@@ -52,6 +52,7 @@ export default class BotExchange extends React.Component {
                         </Col>*/}
                     </Row>
                     <h1 className="bold text-center" >Reminder</h1>
+                    <h4 className="bold text-center" >(the exchange closes at 00:00 in pacific time)</h4>
                     <br/>
                     <Row>
                         <Col sd={5}>
