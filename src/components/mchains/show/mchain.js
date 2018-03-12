@@ -1,28 +1,13 @@
 import React from 'react'
 import MchainsList from '../list/mchainsList';
 
-import {Link} from 'react-router-dom'
-//import { Button, Tooltip, } from 'reactstrap';
-
 // Import React Table
-import ReactTable from "react-table";
 import "react-table/react-table.css";
-// for alerts
-import swal from 'sweetalert';
-
 // for chat
 import Input from './messenger/input'
 import MessageList from './messenger/messageList'
-import Dropdown from './messenger/dropdown'
 import Button from './messenger/button'
-import ChatList from './messenger/chatList'
 import SideBar from './messenger/sideBar'
-//import Popup from './messenger/popup'
-
-import FaSearch from 'react-icons/lib/fa/search';
-import FaComments from 'react-icons/lib/fa/comments';
-import FaClose from 'react-icons/lib/fa/close';
-import FaMenu from 'react-icons/lib/md/more-vert';
 
 const loremIpsum = require('lorem-ipsum');
 const Identicon = require('identicon.js');
@@ -50,19 +35,21 @@ export default class Mchain extends React.Component {
 
     componentWillReceiveProps() {
         if (!this.state.libInit && this.props.web3Connector){
-            var provider = this.props.web3Connector.provider;
+            let provider = this.props.web3Connector.provider;
             //gex.initWithProvider(provider);
-            var ip = '51.0.1.99';
-            var port = '8546';
+            let ip = '51.0.1.99';
+            let port = '8546';
             skale.initBothProviders(ip, port, provider);
             this.setState({libInit: true});
             this.getAccount();
-            this.getMchain(this.state.mChainName)
+            this.getMchain(this.state.mChainName);
+            let messenger = skale.communicator.addMessenger(this.state.mChainName, skale.w3);
+            this.setState({messenger: messenger});
         }
     }
 
     componentDidMount() {
-        this.setState({mChainName: this.props.props.match.params.name})
+        this.setState({mChainName: this.props.props.match.params.name});
         this.setState({
             timer: setInterval(() => {
                 this.getAccount()
@@ -142,10 +129,8 @@ export default class Mchain extends React.Component {
                     type: type,
                     theme: 'white',
                     view: 'list',
-                    //title: loremIpsum({ count: 2, units: 'words' }),
                     title: this.state.account,
                     titleColor: this.getRandomColor(),
-                    //text: type === 'spotify' ? 'spotify:track:7wGoVu4Dady5GV0Sv4UIsx' : loremIpsum({ count: 1, units: 'sentences' }),
                     text: this.state.message,
                     data: {
                         uri: `data:image/png;base64,${this.photo(150)}`,
@@ -163,46 +148,24 @@ export default class Mchain extends React.Component {
                     dateString: moment(new Date()).format('HH:mm'),
                     avatar: `data:image/png;base64,${this.photo()}`,
                 };
-/*            case 'chat':
-                return {
-                    id: String(Math.random()),
-                    avatar: `data:image/png;base64,${this.photo()}`,
-                    avatarFlexible: true,
-                    statusColor: 'lightgreen',
-                    alt: loremIpsum({ count: 2, units: 'words' }),
-                    title: loremIpsum({ count: 2, units: 'words' }),
-                    date: new Date(),
-                    subtitle: loremIpsum({ count: 1, units: 'sentences' }),
-                    unread: parseInt(Math.random() * 10 % 3),
-                    dropdownMenu: (
-                        <Dropdown
-                            animationPosition="norteast"
-                            buttonProps={{
-                                type: "transparent",
-                                color: "#cecece",
-                                icon: {
-                                    component: <FaMenu />,
-                                    size: 24,
-                                }
-                            }}
-                            items={[
-                                'Menu Item1',
-                                'Menu Item2',
-                                'Menu Item3',
-                            ]} />
-                    ),
-                    dateString: moment(new Date()).format('HH:mm'),
-                };*/
         }
     }
 
-    addMessage() {
-        let list = this.state.messageList;
-        list.push(this.random('message'));
-        //list.push(this.state.message);
-        this.setState({
-            messageList: list,
-        });
+    async addMessage() {
+        let messenger = this.state.messenger;
+        let isConnected = await messenger.connect();
+        if (isConnected) {
+            await messenger.sendMessage(this.state.message);
+            console.log('connected');
+        } else {
+            console.log('disconnected');
+            //
+            let list = this.state.messageList;
+            list.push(this.random('message'));
+            this.setState({
+                messageList: list,
+            });
+        }
     }
 
     async getMchain (name) {
@@ -243,38 +206,10 @@ export default class Mchain extends React.Component {
 
         return (
             <div className='container chat-container'>
-{/*
-                <h3>{this.props.props.match.params.name}</h3>
-*/}
                 <div
                     className='chat-list'>
                     <SideBar
-/*                        top={
-                            <Popup
-                                // show={this.state.show}
-                                header='Lorem ipsum dolor sit amet.'
-                                headerButtons={[{
-                                    type: 'transparent',
-                                    color: 'black',
-                                    onClick: () => {
-                                        this.setState({ show: false })
-                                    },
-                                    icon: {
-                                        component: <FaClose />,
-                                        size: 18
-                                    }
-                                }]}
-                                text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem animi veniam voluptas eius!'
-                                footerButtons={[{
-                                    color: 'white',
-                                    backgroundColor: '#ff5e3e',
-                                    text: "Vazgeç",
-                                }, {
-                                    color: 'white',
-                                    backgroundColor: 'lightgreen',
-                                    text: "Tamam",
-                                }]} />
-                        }*/
+
                         center={
                             <div>
                                 <h3>Chain: {this.state.chain.mChainName}</h3>
@@ -290,29 +225,6 @@ export default class Mchain extends React.Component {
                             </div>
                         }
 
-
-
-/*                            <ChatList
-                                dataSource={chatSource} />*/
-/*                        bottom={
-                            <span>
-                                <Button
-                                    type='transparent'
-                                    color='black'
-                                    icon={{
-                                        component: <FaComments />,
-                                        size: 18
-                                    }} />
-                                <Button
-                                    type='transparent'
-                                    color='black'
-                                    icon={{
-                                        component: <FaSearch />,
-                                        size: 18
-                                    }} />
-                                <Button text="Count"></Button>
-                            </span>
-                        } */
                     />
                 </div>
                 <div

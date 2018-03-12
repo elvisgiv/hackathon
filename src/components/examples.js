@@ -10,7 +10,7 @@ import AggrMchainsList from './mchains/list/aggrMchainsList'
 import Exchange from './bot_balance/exchange/botExchange'
 
 
-const gex = require('@skale-labs/skale-api');
+//const gex = require('@skale-labs/skale-api');
 //const gex = require('@skale-labs/skale-api/src/index');
 
 export default class Examples extends React.Component {
@@ -22,12 +22,7 @@ export default class Examples extends React.Component {
             activeTab: '1'
         };
         //
-/*        let ip = '51.0.1.99';
-        let port = '8546';
-        gex.init(ip, port);*/
-        //gex.init('10.1.0.15', '7545');
-        //gex.init('51.0.2.99', '8546');
-        //
+
         this.toggle = this.toggle.bind(this);
 
     }
@@ -64,7 +59,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '1' })}
                                 onClick={() => { this.toggle('1'); }}
                             >
-                                Manage Mchains
+                                Exchange
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -72,7 +67,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '2' })}
                                 onClick={() => { this.toggle('2'); }}
                             >
-                                Mchains
+                                Manage Mchains
                             </NavLink>
                         </NavItem>
 {/*                        <NavItem>
@@ -88,9 +83,9 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '4' })}
                                 onClick={() => { this.toggle('4'); }}
                             >
-                                Exchange
+                                Mchains
                             </NavLink>
-                        </NavItem>
+                        </NavItem>{/*
                         <NavItem>
                             <NavLink
                                 className={classnames({ active: this.state.activeTab === '5' })}
@@ -98,17 +93,17 @@ export default class Examples extends React.Component {
                             >
                                 Something Else
                             </NavLink>
-                        </NavItem>
+                        </NavItem>*/}
                     </Nav>
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
                             <div className="padd-30">
-                                {mchainManage}
+                                {exchange}
                             </div>
                         </TabPane>
                         <TabPane tabId="2">
                             <div className="padd-30">
-                                {mchainsList}
+                                {mchainManage}
                             </div>
                         </TabPane>
                         <TabPane tabId="3">
@@ -118,7 +113,7 @@ export default class Examples extends React.Component {
                         </TabPane>
                         <TabPane tabId="4">
                             <div className="padd-30">
-                                {exchange}
+                                {mchainsList}
                             </div>
                         </TabPane>
                         <TabPane tabId="5">

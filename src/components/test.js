@@ -33,7 +33,7 @@ export default class Test extends React.Component {
     }
 
     async checkBalances() {
-        let accounts = await gex.gexWeb3.getAccounts();
+        let accounts = await gex.w3.getAccounts();
         console.log(accounts);
 
 
