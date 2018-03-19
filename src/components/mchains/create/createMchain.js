@@ -171,7 +171,7 @@ export default class CreateMchain extends React.Component {
                 <div className="col-md-12">
                     <Button className="btn btn-lg"
                             onClick={this.createMchain} disabled={this.state.libInit ? false : true}>
-                        Create Mchain
+                        Create Schain
                     </Button>
                 </div>
 
