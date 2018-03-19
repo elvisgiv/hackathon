@@ -239,7 +239,7 @@ export default class MchainsList extends React.Component {
         // for react-table
         const columns=[
             {
-                Header: () => this.headerTooltip('Name', "Unique Mchain Name"),
+                Header: () => this.headerTooltip('Name', "Unique Schain Name"),
                 accessor: "mChainName",
                 filterable: true,
                 width: 70,
