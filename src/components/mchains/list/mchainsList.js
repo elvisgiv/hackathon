@@ -302,7 +302,9 @@ export default class MchainsList extends React.Component {
                 <ReactTable
                     data={items}
                     columns={columns}
-                    defaultPageSize={10}
+                    //defaultPageSize={10}
+                    pgination={false}
+                    showPagination={false}
                     className="-striped -highlight"
                 />
                 <br />
