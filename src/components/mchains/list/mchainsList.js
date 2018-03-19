@@ -297,7 +297,7 @@ export default class MchainsList extends React.Component {
 
         return(
             <div>
-                <h1 className="bold text-center" >Mchains List</h1>
+                <h1 className="bold text-center" >Schains List</h1>
                 <br/>
                 <ReactTable
                     data={items}

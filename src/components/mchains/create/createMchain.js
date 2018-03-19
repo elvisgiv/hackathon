@@ -130,7 +130,7 @@ export default class CreateMchain extends React.Component {
     render(){
         return(
             <div>
-                <h4 className="bold no-marg" >Create Mchain</h4>
+                <h4 className="bold no-marg" >Create Schain</h4>
                 <br/>
 
                 <Input id="basName" type="text" placeholder="Enter Name of mChain" onChange={(num) =>

@@ -35,7 +35,7 @@ export default class MchainManage extends React.Component {
         return(
             <Row>
                 <Col sm="12">
-                    <h1 className="bold text-center" >Manage Mchains</h1>
+                    <h1 className="bold text-center" >Manage Schains</h1>
                     <br/>
                     <Row>
                         <Col sd={4}>

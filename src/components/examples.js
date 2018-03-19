@@ -67,7 +67,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '2' })}
                                 onClick={() => { this.toggle('2'); }}
                             >
-                                Manage Mchains
+                                Manage Schains
                             </NavLink>
                         </NavItem>
 {/*                        <NavItem>
@@ -83,7 +83,7 @@ export default class Examples extends React.Component {
                                 className={classnames({ active: this.state.activeTab === '4' })}
                                 onClick={() => { this.toggle('4'); }}
                             >
-                                Mchains
+                                Schains
                             </NavLink>
                         </NavItem>{/*
                         <NavItem>
