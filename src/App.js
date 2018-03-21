@@ -10,6 +10,7 @@ import Help from './components/help';
 import Micropayments from './components/micropayments';
 import Examples from './components/examples';
 import Mchain from './components/mchains/show/mchain';
+import BotExchange from './components/bot_balance/exchange/botExchange';
 
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
@@ -24,13 +25,22 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            web3Connector: {}
+            web3Connector: {},
+            isOpen: false,
         };
+
         this.updateWeb3Connector = this.updateWeb3Connector.bind(this)
+        this.onClickHandle = this.onClickHandle.bind(this)
     }
 
     updateWeb3Connector(web3Connector) {
         this.setState({web3Connector: web3Connector})
+    }
+
+    onClickHandle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     }
 
     render() {
@@ -53,8 +63,10 @@ export default class App extends Component {
         }
         else {
             content = (
-                <div className="cont">
-                    <Header walletConnector={web3Connector}/>
+                <div className="cont wrapper">
+                    <Header walletConnector={web3Connector} callbackFromApp={this.onClickHandle}
+                            isOpenFromApp={this.state.isOpen}/>
+
                     <div className="page-content">
                         <Switch>
                             <Route exact path='/' component={Exchange}/>
@@ -63,6 +75,7 @@ export default class App extends Component {
                             <Route path='/help' component={Help}/>
                             <Route path='/micropayments' component={Micropayments}/>
                             <Route path='/examples' render={() => <Examples web3Connector={web3Connector} />} />
+                            <Route path='/bot_exchange' render={() => <BotExchange web3Connector={web3Connector} />} />
                             <Route exact path='/mchains/:name' render={(props) => <Mchain web3Connector={web3Connector} props={props}/>} />
                         </Switch>
                     </div>

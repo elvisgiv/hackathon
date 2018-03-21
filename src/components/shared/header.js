@@ -152,14 +152,14 @@ export default class Header extends React.Component {
                                     </div>
                                 </DropdownToggle>
                                 <DropdownMenu>
-                                        <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
-                                        <h6 className="no-marg">Connected to Web3</h6>
-                                        <MdAccountBalanceWallet className="sm-icon"/>
-                                        <div className="fl-wrap">
-                                            {this.state.walletConnector.ethAccounts}
-                                        </div>
-                                        <img src={ethLogo} className="sm-icon"/>
-                                        {this.state.walletConnector.balance} ETH
+                                    <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
+                                    <h6 className="no-marg">Connected to Web3</h6>
+                                    <MdAccountBalanceWallet className="sm-icon"/>
+                                    <div className="fl-wrap">
+                                        {this.state.walletConnector.ethAccounts}
+                                    </div>
+                                    <img src={ethLogo} className="sm-icon"/>
+                                    {this.state.walletConnector.balance} ETH
                                 </DropdownMenu>
                             </Dropdown>
 
@@ -171,158 +171,158 @@ export default class Header extends React.Component {
 
             </div>
 
-/*
-                <div className="header-inner fl-cont fl-center-h" >
-                    <div className="fl-wrap padd-ri-md">
-                        <Link to='/exchange/eos'>
-                            <img src={logo} className="header-logo" />
-                        </Link>
-                    </div>
+            /*
+                            <div className="header-inner fl-cont fl-center-h" >
+                                <div className="fl-wrap padd-ri-md">
+                                    <Link to='/exchange/eos'>
+                                        <img src={logo} className="header-logo" />
+                                    </Link>
+                                </div>
 
-                    <div className="fl-wrap fl-grow padd-left-md hidden">
-                        <div className="fl-cont">
-                            <div className="fl-wrap fl-grow fl-center-vert">
-                                <Link to='/exchange/eos' className="marg-left-10">
-                                    <Button className="gx-btn gx-btn-def">
-                                        Exchange
-                                    </Button>
-                                </Link>
-
-                                <Link to='/micropayments' className="marg-left-10">
-                                    <Button className="gx-btn gx-btn-transp">
-                                        Micropayments
-                                    </Button>
-                                </Link>
-
-                                <Link to='/help' className="marg-left-10">
-                                    <Button className="gx-btn gx-btn-transp">
-                                        Help
-                                    </Button>
-                                </Link>
-
-                                <Link to='/test' className="marg-left-10">
-                                    <Button className="gx-btn gx-btn-transp">
-                                        Test
-                                    </Button>
-                                </Link>
-
-                                <Link to='/examples' className="marg-left-10">
-                                    <Button className="gx-btn gx-btn-transp">
-                                        Examples
-                                    </Button>
-                                </Link>
-
-                                <Button className="gx-btn gx-btn-transp" onClick={this.openMenuExample}>
-                                    <div className="fl-cont fl-center-vert">
-                                        <div className="fl-wrap gx-text-col marg-ri-sm">
-                                            Examples_old
-                                        </div>
-                                        <div className="fl-wrap">
-                                            <MdKeyboardArrowDown className="sm-icon gex-svg"/>
-                                        </div>
-                                    </div>
-                                </Button>
-
-                                <MenuAnchor className="gx-mdc-menu">
-                                    <Menu
-                                        right
-                                        open={this.state.openExample}
-                                        onClose={()=>{this.setState({openExample:false})}}
-                                    >
-                                        <MenuItem>
-                                            <Link to='/mchain_manage' className="marg-left-10 undec">
-                                                <div className="">
-                                                    Mchain manage
-                                                </div>
+                                <div className="fl-wrap fl-grow padd-left-md hidden">
+                                    <div className="fl-cont">
+                                        <div className="fl-wrap fl-grow fl-center-vert">
+                                            <Link to='/exchange/eos' className="marg-left-10">
+                                                <Button className="gx-btn gx-btn-def">
+                                                    Exchange
+                                                </Button>
                                             </Link>
-                                        </MenuItem>
-                                    </Menu>
-                                </MenuAnchor>
-                            </div>
 
+                                            <Link to='/micropayments' className="marg-left-10">
+                                                <Button className="gx-btn gx-btn-transp">
+                                                    Micropayments
+                                                </Button>
+                                            </Link>
 
+                                            <Link to='/help' className="marg-left-10">
+                                                <Button className="gx-btn gx-btn-transp">
+                                                    Help
+                                                </Button>
+                                            </Link>
 
-                            <div  className="fl-wrap  fl-center-h">
+                                            <Link to='/test' className="marg-left-10">
+                                                <Button className="gx-btn gx-btn-transp">
+                                                    Test
+                                                </Button>
+                                            </Link>
 
+                                            <Link to='/examples' className="marg-left-10">
+                                                <Button className="gx-btn gx-btn-transp">
+                                                    Examples
+                                                </Button>
+                                            </Link>
 
-                                <Button className="gx-btn gx-btn-transp marg-ri-10">
-                                    <div className="fl-cont fl-center-vert">
-                                        <div className="fl-wrap marg-ri-sm">
-                                            <MdLanguage className="sm-icon gex-svg btn-icon"/>
+                                            <Button className="gx-btn gx-btn-transp" onClick={this.openMenuExample}>
+                                                <div className="fl-cont fl-center-vert">
+                                                    <div className="fl-wrap gx-text-col marg-ri-sm">
+                                                        Examples_old
+                                                    </div>
+                                                    <div className="fl-wrap">
+                                                        <MdKeyboardArrowDown className="sm-icon gex-svg"/>
+                                                    </div>
+                                                </div>
+                                            </Button>
+
+                                            <MenuAnchor className="gx-mdc-menu">
+                                                <Menu
+                                                    right
+                                                    open={this.state.openExample}
+                                                    onClose={()=>{this.setState({openExample:false})}}
+                                                >
+                                                    <MenuItem>
+                                                        <Link to='/mchain_manage' className="marg-left-10 undec">
+                                                            <div className="">
+                                                                Mchain manage
+                                                            </div>
+                                                        </Link>
+                                                    </MenuItem>
+                                                </Menu>
+                                            </MenuAnchor>
                                         </div>
-                                        <div className="fl-wrap gx-text-col marg-ri-sm">
-                                            English
+
+
+
+                                        <div  className="fl-wrap  fl-center-h">
+
+
+                                            <Button className="gx-btn gx-btn-transp marg-ri-10">
+                                                <div className="fl-cont fl-center-vert">
+                                                    <div className="fl-wrap marg-ri-sm">
+                                                        <MdLanguage className="sm-icon gex-svg btn-icon"/>
+                                                    </div>
+                                                    <div className="fl-wrap gx-text-col marg-ri-sm">
+                                                        English
+                                                    </div>
+                                                    <div className="fl-wrap">
+                                                        <MdKeyboardArrowDown className="sm-icon gex-svg"/>
+                                                    </div>
+                                                </div>
+
+                                            </Button>
+
+
+                                            <div className="gx-bage fl-cont fl-center-h hand-cursor" onClick={this.openMenu}>
+                                                <div className="fl-wrap gx-icon">
+                                                    <MdAccountCircle className="gx-icon"/>
+
+                                                </div>
+                                                <div className="fl-wrap padd-left-10">
+                                                    <p className="network-badge">{this.state.walletConnector.networkName}</p>
+                                                    <p className="no-marg account-badge">{this.state.walletConnector.ethAccounts}</p>
+                                                </div>
+                                                <div className="fl-wrap padd-left-10">
+                                                    <MdKeyboardArrowDown className="sm-icon lt-gr-svg"/>
+                                                </div>
+
+                                            </div>
+                                            <MenuAnchor className="gx-mdc-menu">
+                                                <Menu
+                                                    right
+                                                    open={this.state.open}
+                                                    onClose={()=>{this.setState({open:false})}}
+                                                >
+                                                    <div className="padd-30">
+
+                                                        <div className="fl-cont fl-center-vert">
+                                                            <div className="fl-wrap fl-grow">
+                                                                <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
+                                                            </div>
+                                                            <div className="fl-wrap">
+                                                                <h6 className="no-marg">Connected to Web3</h6>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div className="fl-cont fl-center-vert padd-top-md">
+                                                            <div className="fl-wrap padd-ri-10">
+                                                                <MdAccountBalanceWallet className="sm-icon"/>
+                                                            </div>
+                                                            <div className="fl-wrap">
+                                                                {this.state.walletConnector.ethAccounts}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="fl-cont fl-center-vert padd-top-10">
+                                                            <div className="fl-wrap padd-ri-10 sm-icon">
+                                                                <img src={ethLogo} className="sm-icon"/>
+                                                            </div>
+                                                            <div className="fl-wrap">
+                                                                {this.state.walletConnector.balance} ETH
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Menu>
+                                            </MenuAnchor>
+
                                         </div>
-                                        <div className="fl-wrap">
-                                            <MdKeyboardArrowDown className="sm-icon gex-svg"/>
-                                        </div>
-                                    </div>
-
-                                </Button>
-
-
-                                <div className="gx-bage fl-cont fl-center-h hand-cursor" onClick={this.openMenu}>
-                                    <div className="fl-wrap gx-icon">
-                                        <MdAccountCircle className="gx-icon"/>
 
                                     </div>
-                                    <div className="fl-wrap padd-left-10">
-                                        <p className="network-badge">{this.state.walletConnector.networkName}</p>
-                                        <p className="no-marg account-badge">{this.state.walletConnector.ethAccounts}</p>
-                                    </div>
-                                    <div className="fl-wrap padd-left-10">
-                                        <MdKeyboardArrowDown className="sm-icon lt-gr-svg"/>
-                                    </div>
+
 
                                 </div>
-                                <MenuAnchor className="gx-mdc-menu">
-                                    <Menu
-                                        right
-                                        open={this.state.open}
-                                        onClose={()=>{this.setState({open:false})}}
-                                    >
-                                        <div className="padd-30">
-
-                                            <div className="fl-cont fl-center-vert">
-                                                <div className="fl-wrap fl-grow">
-                                                    <h3 className="no-marg"> {this.state.walletConnector.networkName} Network</h3>
-                                                </div>
-                                                <div className="fl-wrap">
-                                                    <h6 className="no-marg">Connected to Web3</h6>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="fl-cont fl-center-vert padd-top-md">
-                                                <div className="fl-wrap padd-ri-10">
-                                                    <MdAccountBalanceWallet className="sm-icon"/>
-                                                </div>
-                                                <div className="fl-wrap">
-                                                    {this.state.walletConnector.ethAccounts}
-                                                </div>
-                                            </div>
-
-                                            <div className="fl-cont fl-center-vert padd-top-10">
-                                                <div className="fl-wrap padd-ri-10 sm-icon">
-                                                    <img src={ethLogo} className="sm-icon"/>
-                                                </div>
-                                                <div className="fl-wrap">
-                                                    {this.state.walletConnector.balance} ETH
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Menu>
-                                </MenuAnchor>
 
                             </div>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-            </div>*/
+                        </div>*/
         );
     }
 }
