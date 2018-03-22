@@ -9,7 +9,7 @@ export default class Help extends React.Component {
     render() {
         return (
             <div className="marg-30">
-                <h1 className="bold no-marg" >Help</h1>
+                <h1 className="bold no-marg" >test test</h1>
             </div>
         );
     }
