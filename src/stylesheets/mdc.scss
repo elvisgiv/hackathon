@@ -2,4 +2,37 @@
   height: 100vh;
 }
 
+.mdc-drawer--persistent{
+  .mdc-drawer__drawer{
+    border-right: none !important;
+    background-color: #f1f1f1 !important;
+  }
+}
 
+
+.sidebar{
+  .mdc-toolbar{
+    background-color: #1975c5 !important;
+  }
+}
+
+.main-content{
+  background-color: white;
+  height: 100vh;
+  .mdc-toolbar{
+    padding: 4px 0;
+  }
+}
+
+.mdc-list-item__text{
+  color: #424242 !important;
+}
+
+.selected-item {
+  background-color: #d6d6d6;
+}
+
+.skale-page-content{
+  overflow-y: scroll;
+  height: calc(100vh - 72px);
+}
