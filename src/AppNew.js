@@ -12,6 +12,7 @@ import Examples from './components/examples';
 import Mchain from './components/mchains/show/mchain';
 import SChains from './components/skale/sChains';
 import CreateSChain from './components/mchains/create/createMchain';
+import BotExchange from './components/bot_balance/exchange/botExchange';
 
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
@@ -147,7 +148,7 @@ export default class App extends Component {
                 <Route exact path='/' render={PageShell(() => PageShell(<SChains web3Connector={web3Connector} />))} />
                 <Route exact path='/schains' render={() => <SChains web3Connector={web3Connector} />} />
                 <Route exact path='/schains/create' render={PageShell(CreateSChain)}/>
-                <Route path='/wallet' render={PageShell(Help)}/>
+                <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector} />} />
 
                 <Route path='/micropayments' component={Micropayments}/>
 

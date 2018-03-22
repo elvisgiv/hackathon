@@ -63,6 +63,18 @@ export default class Sidebar extends React.Component {
         </Toolbar>
 
         <DrawerContent className="padd-top-md">
+
+          <Link to='/wallet' className="undec">
+              <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/wallet') ? 'selected-item' : '')}>
+                  <div className="fl-wrap gx-icon">
+                      <Icon strategy="ligature" className="orange-col">account_balance_wallet</Icon>
+                  </div>
+                  <ListItemText className="fl-wrap padd-left-10">
+                      Wallet
+                  </ListItemText>
+              </ListItem>
+          </Link>
+
           <Link to='/schains' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.sChainsPage() ? 'selected-item' : '')}>
               <div className="fl-wrap gx-icon">
@@ -70,17 +82,6 @@ export default class Sidebar extends React.Component {
               </div>
               <ListItemText className="fl-wrap padd-left-10">
                 sChains
-              </ListItemText>
-            </ListItem>
-          </Link>
-
-          <Link to='/wallet' className="undec">
-            <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/wallet') ? 'selected-item' : '')}>
-              <div className="fl-wrap gx-icon">
-                <Icon strategy="ligature" className="orange-col">account_balance_wallet</Icon>
-              </div>
-              <ListItemText className="fl-wrap padd-left-10">
-                Wallet
               </ListItemText>
             </ListItem>
           </Link>
