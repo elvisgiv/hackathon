@@ -44,10 +44,11 @@ export default class BotExchange extends React.Component {
         //
         this.setState({skl: skl, eth: eth});
         // from skalebot
-        let accountInfo = await gex.bot().getInfoForAccount();
+        let accountInfo = await gex.bot().getInfoForAccount(accounts[0]);
+
         this.setState({
             botEth: gex.w3.web3.utils.fromWei(accountInfo.sendEth),
-            botSkale: gex.w3.web3.utils.fromWei(accountInfo.sendSkale),
+            botSkale: gex.w3.web3.utils.fromWei(accountInfo.sendGex),
         });
     }
 
