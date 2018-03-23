@@ -1,10 +1,12 @@
 import React from 'react'
+import { Redirect } from 'react-router'
 
 import {Row, Container, Tooltip} from 'reactstrap';
 
 import {TextField, TextFieldHelperText} from 'rmwc/TextField';
 import {Icon} from 'rmwc/Icon';
 import {Button} from 'rmwc/Button';
+
 
 import swal from 'sweetalert';
 
@@ -47,12 +49,6 @@ export default class CreateMchain extends React.Component {
       let ip = '51.0.1.99';
       let port = '8546';
       gex.initBothProviders(ip, port, provider);
-
-
-      //
-      console.log('leee');
-      console.log(this.state.libInit);
-
       this.setState({libInit: true});
       ///
       this.initMChainListener();
@@ -119,14 +115,19 @@ export default class CreateMchain extends React.Component {
       // clear fields
       this.setState({
         basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: "",
-        basCpuTime: "", basTransPerSec: "",
+        basCpuTime: "", basTransPerSec: "", snackbarIsOpen: true, sChainsPage: true
       });
 
-      swal({
+
+      // todo
+      //this.props.history.push("/schains");
+
+
+      /*swal({
         title: "Congratulations!",
         text: "You just created the mchain!",
         icon: "success",
-      })
+      })*/
 
     } else {
       return (
@@ -157,6 +158,12 @@ export default class CreateMchain extends React.Component {
   }
 
   render() {
+    const { sChainsPage } = this.state;
+
+    if (sChainsPage) {
+      return <Redirect to="/schains" push={true} />
+    }
+
     return (
       <div className="marg-30">
         <div className="padd-left-md">

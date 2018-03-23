@@ -5,21 +5,26 @@ import {Switch, Route} from 'react-router-dom'
 
 import Web3Connector from './components/web3Connector';
 import Sidebar from './components/skale/sidebar';
-import Test from './components/test';
-import Help from './components/help';
+
 import Micropayments from './components/micropayments';
-import Examples from './components/examples';
+import Logs from './components/skale/logs';
+import Management from './components/skale/management';
+import Dapps from './components/skale/dapps';
+
 import Mchain from './components/mchains/show/mchain';
 import SChains from './components/skale/sChains';
 import CreateSChain from './components/mchains/create/createMchain';
+
 // for wallet
 import BotExchange from './components/bot_balance/exchange/botExchange';
 import FromEth from './components/bot_balance/exchange/fromEth';
 import FromSkale from './components/bot_balance/exchange/fromSkale';
 
 
-import Header from './components/shared/header'
-import Footer from './components/shared/footer'
+
+
+
+
 import 'material-components-web/dist/material-components-web.min.css';
 
 import { Icon } from 'rmwc/Icon';
@@ -42,10 +47,8 @@ const ROUTES = {
   '/wallet': {title: 'Wallet'},
   '/management': {title: 'Management'},
   '/logs': {title: 'Logs'},
+  '/dapps': {title: 'dApps'},
 };
-
-
-import PageShell from './components/skale/pageShell'
 
 
 export default class App extends Component {
@@ -136,6 +139,11 @@ export default class App extends Component {
                   <Route exact path='/' render={() => <SChains web3Connector={web3Connector} />} />
                   <Route exact path='/schains' render={() => <SChains web3Connector={web3Connector} />} />
                   <Route exact path='/schains/create' render={() => <CreateSChain web3Connector={web3Connector}/>}/>
+
+                  <Route exact path='/logs' render={() => <Logs web3Connector={web3Connector}/>}/>
+                  <Route exact path='/management' render={() => <Management web3Connector={web3Connector}/>}/>
+                  <Route exact path='/dapps' render={() => <Dapps web3Connector={web3Connector}/>}/>
+
                   <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector} />} />
                   <Route path='/buy-eth' render={() => <FromSkale web3Connector={web3Connector} />} />
                   <Route path='/buy-skl' render={() => <FromEth web3Connector={web3Connector} />} />
