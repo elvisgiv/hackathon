@@ -3,7 +3,9 @@
   background: white !important;
 }
 
-
+.ReactTable .rt-th, .ReactTable .rt-td{
+  padding: 7px 10px !important;
+}
 
 .ReactTable{
   font-family: Roboto, sans-serif !important;
@@ -19,9 +21,14 @@
   padding-bottom: 20px !important;
 }
 
-.rt-thead.-filters{
-  display: none !important;
+
+.hideFilters{
+  .rt-thead.-filters{
+    display: none !important;
+  }
 }
+
+
 
 .ReactTable .rt-tbody .rt-td{
   border: none !important;
@@ -61,7 +68,7 @@
 }
 
 .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
-  background: rgba(6, 75, 150, 0.05) !important;
+  background: white !important;
 }
 
 .ReactTable .rt-thead .rt-th.-sort-desc, .ReactTable .rt-thead .rt-td.-sort-desc {
