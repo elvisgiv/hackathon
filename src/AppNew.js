@@ -12,7 +12,11 @@ import Examples from './components/examples';
 import Mchain from './components/mchains/show/mchain';
 import SChains from './components/skale/sChains';
 import CreateSChain from './components/mchains/create/createMchain';
+// for wallet
 import BotExchange from './components/bot_balance/exchange/botExchange';
+import FromEth from './components/bot_balance/exchange/fromEth';
+import FromSkale from './components/bot_balance/exchange/fromSkale';
+
 
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
@@ -133,6 +137,8 @@ export default class App extends Component {
                   <Route exact path='/schains' render={() => <SChains web3Connector={web3Connector} />} />
                   <Route exact path='/schains/create' render={() => <CreateSChain web3Connector={web3Connector}/>}/>
                   <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector} />} />
+                  <Route path='/buy-eth' render={() => <FromSkale web3Connector={web3Connector} />} />
+                  <Route path='/buy-skl' render={() => <FromEth web3Connector={web3Connector} />} />
 
                   <Route path='/micropayments' component={Micropayments}/>
 
