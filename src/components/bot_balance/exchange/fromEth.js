@@ -63,7 +63,7 @@ export default class FromEth extends React.Component {
             // get 'wei' from eth
             let weiVal = await gex.w3.web3.utils.toWei(ethVal);
             // invoke contract from lib
-            let promise = await gex.bot().depositEth(weiVal);
+            let promise = await gex.bot().depositEth({value: weiVal});
             //
             console.log('exchangeEthexchangeEthexchangeEthexchangeEthexchangeEth');
             // clear fields
