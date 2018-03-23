@@ -1,15 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
 import { Button } from 'rmwc/Button';
-
-
 import { Row, Col, } from 'reactstrap';
-import FromEth from './fromEth';
-import FromSkale from './fromSkale';
-//import AccountInfo from './accountInfo';
+//
 import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
+//
 const gex = require('@skale-labs/skale-api');
 
 
@@ -20,7 +16,6 @@ export default class BotExchange extends React.Component {
         this.state = {
             skl: '',
             eth: '',
-
         };
         //
         this.checkBalances =this.checkBalances.bind(this)
@@ -38,14 +33,15 @@ export default class BotExchange extends React.Component {
         // in wei
         let firstAccountBalance = await gex.token().balanceOf(accounts[0]);
         let firstAccountEthBalance = await gex.w3.web3.eth.getBalance(accounts[0]);
-        // from wei
-        let skl = gex.w3.web3.utils.fromWei(firstAccountBalance);
-        let eth = gex.w3.web3.utils.fromWei(firstAccountEthBalance);
         //
-        this.setState({skl: skl, eth: eth});
+        this.setState({
+            skl: gex.w3.web3.utils.fromWei(firstAccountBalance),
+            eth: gex.w3.web3.utils.fromWei(firstAccountEthBalance)
+        });
+
         // from skalebot
         let accountInfo = await gex.bot().getInfoForAccount(accounts[0]);
-
+        //
         this.setState({
             botEth: gex.w3.web3.utils.fromWei(accountInfo.sendEth),
             botSkale: gex.w3.web3.utils.fromWei(accountInfo.sendGex),
