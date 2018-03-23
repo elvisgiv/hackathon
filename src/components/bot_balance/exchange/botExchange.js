@@ -60,7 +60,7 @@ export default class BotExchange extends React.Component {
                 <br/>
                 <br/>
                 <br/>
-                <h2 className="bold no-marg text-center" >Your balance:</h2>
+                <h2 className="bold no-marg text-center" >Your balance</h2>
 
                 <Row>
 
@@ -73,16 +73,16 @@ export default class BotExchange extends React.Component {
                             <p>
                                 <strong>ETH:</strong> {this.state.eth}
                                 <br/>
-                                <Link to='/buy-eth' className="undec">
-                                    <Button raised>Buy ETH</Button>
+                                <Link to='/exchange-eth' className="undec">
+                                    <Button raised>Exchange ETH</Button>
                                 </Link>
                             </p>
 
                             <p>
                                 <strong>SKL:</strong> {this.state.skl}
                                 <br/>
-                                <Link to='/buy-skl' className="undec">
-                                    <Button raised>Buy SKL</Button>
+                                <Link to='/exchange-skl' className="undec">
+                                    <Button raised>Exchange SKL</Button>
                                 </Link>
                             </p>
                         </div>
@@ -92,7 +92,7 @@ export default class BotExchange extends React.Component {
                         <div>
                             <br/>
                             <br/>
-                            <h4 className="bold no-marg" >From SkaleBot:</h4>
+                            <h4 className="bold no-marg" >from SkaleBot:</h4>
                             <br/>
                             <p>
                                 <strong>ETH:</strong> {this.state.botEth}
