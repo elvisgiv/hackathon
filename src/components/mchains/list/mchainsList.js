@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { Button, Tooltip, } from 'reactstrap';
-
+import { Tooltip } from 'reactstrap';
+import { Button, ButtonIcon } from 'rmwc/Button';
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -129,8 +129,11 @@ export default class MchainsList extends React.Component {
         let countDownDate = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetimeInSec);
         //
         return(
-            <div>
-                <Button className="btn btn-sm" onClick={() => this.withdrawFrom(value)} disabled={(countDownDate > timeNow)}>withdraw</Button>
+            <div style={{textAlign: "right"}}>
+                <Button dense onClick={() => this.withdrawFrom(value)} disabled={(countDownDate > timeNow)}>
+                    withdraw
+                    <ButtonIcon use="keyboard_arrow_right" className="marg-left-sm marg-ri-sm" />
+                </Button>
             </div>
         )
     }
@@ -285,7 +288,7 @@ export default class MchainsList extends React.Component {
 
             },
             {
-                Header: "Commands",
+                Header: "",
                 // add custom value to "Commands" column
                 id: 'button',
                 accessor: 'mChainName', //value

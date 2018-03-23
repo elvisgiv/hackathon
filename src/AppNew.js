@@ -16,29 +16,10 @@ import BotExchange from './components/bot_balance/exchange/botExchange';
 
 import Header from './components/shared/header'
 import Footer from './components/shared/footer'
-
-import {MDCPersistentDrawer, MDCPersistentDrawerFoundation, util} from '@material/drawer';
-//import '@material/drawer/mdc-drawer.scss';
-
-//import {MDCPersistentDrawer} from '@material/drawer';
-
-//import {LinearProgress} from 'react-mdc-web/lib';
-//import 'material-components-web/dist/material-components-web.min.css';
 import 'material-components-web/dist/material-components-web.min.css';
-//import {MDCRipple} from '@material/ripple';
 
 import { Icon } from 'rmwc/Icon';
-
-import {
-  Drawer,
-  DrawerHeader,
-  DrawerContent
-} from 'rmwc/Drawer';
-
-import {
-  ListItem,
-  ListItemText
-} from 'rmwc/List';
+import { LinearProgress } from 'rmwc/LinearProgress';
 
 import {
   Toolbar,
@@ -111,55 +92,60 @@ export default class App extends Component {
       content = (
         <div className="cont fl-cont fl-center" style={{height: "calc(100vh - 65px)", textAlign: "center"}}>
           <div className="fl-wrap fl-grow">
-            <h1>Connecting to the Web3!!!</h1>
+            <h2>Connecting to the Web3</h2>
+            <h6 className="padd-bott-md lite-gr-col" style={{    lineHeight: "1.6"}}>
+              Please note that Metamask plugin should be installed in order to use this application. <br/>
+              If you're seeing this more than a few seconds, probably you don't.
+            </h6>
             <div style={{width: "340px", margin: "auto"}}>
-              {/*<LinearProgress indeterminate/>*/}
+              <LinearProgress determinate={false}></LinearProgress>
             </div>
           </div>
         </div>
       )
     }
     else {
-    }
-    content = (
+      content = (
 
-      <div>
-        <div className="fl-cont">
-          <div className="fl-wrap">
-            <Sidebar ref="sidebar" persistentOpen={this.persistentOpen}/>
-          </div>
-          <div className="fl-wrap fl-grow main-content">
-            <Toolbar>
-              <ToolbarRow>
-                <ToolbarSection alignStart>
-                  <ToolbarMenuIcon use="menu" onClick={() => this.refs.sidebar.toggleSidebar()}/>
-                  <ToolbarTitle>{this.state.pageTitle}</ToolbarTitle>
-                </ToolbarSection>
-                <ToolbarSection alignEnd>
-                  <div className="fl-wrap gx-icon marg-ri-10">
-                    <Icon strategy="ligature" className="white-col">account_circle</Icon>
-                  </div>
-                </ToolbarSection>
-              </ToolbarRow>
-            </Toolbar>
+        <div>
+          <div className="fl-cont">
+            <div className="fl-wrap">
+              <Sidebar ref="sidebar" persistentOpen={this.persistentOpen}/>
+            </div>
+            <div className="fl-wrap fl-grow main-content">
+              <Toolbar>
+                <ToolbarRow>
+                  <ToolbarSection alignStart>
+                    <ToolbarMenuIcon use="menu" onClick={() => this.refs.sidebar.toggleSidebar()}/>
+                    <ToolbarTitle>{this.state.pageTitle}</ToolbarTitle>
+                  </ToolbarSection>
+                  <ToolbarSection alignEnd>
+                    <div className="fl-wrap gx-icon marg-ri-10">
+                      <Icon strategy="ligature" className="white-col">account_circle</Icon>
+                    </div>
+                  </ToolbarSection>
+                </ToolbarRow>
+              </Toolbar>
 
-            <div className="skale-page-content">
-              <Switch>
-                <Route exact path='/' render={PageShell(() => PageShell(<SChains web3Connector={web3Connector} />))} />
-                <Route exact path='/schains' render={() => <SChains web3Connector={web3Connector} />} />
-                <Route exact path='/schains/create' render={PageShell(CreateSChain)}/>
-                <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector} />} />
+              <div className="skale-page-content">
+                <Switch>
+                  <Route exact path='/' render={() => <SChains web3Connector={web3Connector} />} />
+                  <Route exact path='/schains' render={() => <SChains web3Connector={web3Connector} />} />
+                  <Route exact path='/schains/create' render={() => <CreateSChain web3Connector={web3Connector}/>}/>
+                  <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector} />} />
 
-                <Route path='/micropayments' component={Micropayments}/>
+                  <Route path='/micropayments' component={Micropayments}/>
 
-                <Route exact path='/mchains/:name' render={(props) => <Mchain web3Connector={web3Connector} props={props}/>} />
-              </Switch>
+                  <Route exact path='/mchains/:name' render={(props) => <Mchain web3Connector={web3Connector} props={props}/>} />
+                </Switch>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    )
+      );
+    }
+
 
     return (
       <div className="App">

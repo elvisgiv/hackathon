@@ -1,6 +1,10 @@
 import React from 'react'
 
-import {Button, Input, Row, Container} from 'reactstrap';
+import {Row, Container, Tooltip} from 'reactstrap';
+
+import {TextField, TextFieldHelperText} from 'rmwc/TextField';
+import {Icon} from 'rmwc/Icon';
+import {Button} from 'rmwc/Button';
 
 import swal from 'sweetalert';
 
@@ -22,9 +26,17 @@ export default class CreateMchain extends React.Component {
       basTransPerSec: '',
       libInit: false,
       mChainNonces: [],
+
+      tooltipStorageBytes: false,
+      tooltipLifetime: false,
+      tooltipMaxNodes: false,
+      tooltipDeposit: false,
+      tooltipCpuTime: false,
+      tooltipTransPerSec: false,
     };
     //
     this.createMchain = this.createMchain.bind(this);
+    this.toggle = this.toggle.bind(this);
 
   }
 
@@ -35,6 +47,12 @@ export default class CreateMchain extends React.Component {
       let ip = '51.0.1.99';
       let port = '8546';
       gex.initBothProviders(ip, port, provider);
+
+
+      //
+      console.log('leee');
+      console.log(this.state.libInit);
+
       this.setState({libInit: true});
       ///
       this.initMChainListener();
@@ -130,54 +148,123 @@ export default class CreateMchain extends React.Component {
   }
 
 
+  toggle(fieldName) {
+    if(this.state[fieldName] !== undefined){
+      let newState = {};
+      newState[fieldName] = !this.state[fieldName];
+      this.setState(newState);
+    }
+  }
+
   render() {
     return (
-      <Container className="padd-top-md">
-        <div className="padd-top-big">
-          <Input id="basName" type="text" placeholder="Enter Name of mChain" onChange={(num) =>
+      <div className="marg-30">
+        <div className="padd-left-md">
+
+          <TextField className="skale-field" label="Name of sChain" id="basName" type="text" onChange={(num) =>
             this.setState({basName: num.target.value})} value={this.state.basName}/>
-          <h6 className="no-marg">Name of mChain</h6>
+          <br/>
           <br/>
 
-          <Input id="basStorageBytes" type="number" size="180" placeholder="Storage in Bytes" onChange={(num) =>
-            this.setState({basStorageBytes: num.target.value})} value={this.state.basStorageBytes}/>
-          <h6 className="no-marg">Number of bytes this channel can store</h6>
-          <br/>
-
-          <Input id="basLifetime" type="number" size="150" placeholder="Lifetime in seconds" onChange={(num) =>
-            this.setState({basLifetime: num.target.value})} value={this.state.basLifetime}/>
-          <h6 className="no-marg">Number of seconds this channel will be considered as alive</h6>
-          <br/>
-
-          <Input id="basMaxNodes" type="number" size="150" placeholder="Max number of nodes" onChange={(num) =>
-            this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes}/>
-          <h6 className="no-marg">Max number of nodes associated with this channel</h6>
-          <br/>
-
-          <Input id="basDeposit" type="number" size="150" placeholder="Deposit" onChange={(num) =>
-            this.setState({basDeposit: num.target.value})} value={this.state.basDeposit}/>
-          <h6 className="no-marg">Value of tokens associated with this channel</h6>
-          <br/>
-
-          <Input id="basCpuTime" type="number" size="150" placeholder="CPU Time" onChange={(num) =>
-            this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime}/>
-          <h6 className="no-marg">CPU Time in %</h6>
-          <br/>
-
-          <Input id="basTransPerSec" type="number" size="150" placeholder="Transaction Per Second" onChange={(num) =>
-            this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
-          <h6 className="no-marg">Number Of Transaction Per Second</h6>
-          <br/>
-
-          <div className="col-md-12">
-            <Button className="btn btn-lg"
-                    onClick={this.createMchain} disabled={this.state.libInit ? false : true}>
-              Create Schain
-            </Button>
+          <div className="fl-cont fl-center-vert">
+            <div className="fl-wrap">
+              <TextField className="skale-field" id="basStorageBytes" type="number" size="180" label="Storage in Bytes"
+                         onChange={(num) =>
+                           this.setState({basStorageBytes: num.target.value})} value={this.state.basStorageBytes} onFocus={() => this.toggle('tooltipStorageBytes')} onBlur={() => this.toggle('tooltipStorageBytes')}/>
+            </div>
+            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+              <Icon strategy="ligature" id="TooltipStorageBytes" className="lite-gr-col">info_outline</Icon>
+              <Tooltip placement="right" isOpen={this.state.tooltipStorageBytes} target="TooltipStorageBytes" toggle={() => this.toggle('tooltipStorageBytes')}>
+                Number of bytes this channel can store
+              </Tooltip>
+            </div>
           </div>
 
+          <br/>
+
+          <div className="fl-cont fl-center-vert">
+            <div className="fl-wrap">
+              <TextField className="skale-field" id="basLifetime" type="number" size="150" label="Lifetime in seconds" onChange={(num) =>
+                this.setState({basLifetime: num.target.value})} value={this.state.basLifetime} onFocus={() => this.toggle('tooltipLifetime')} onBlur={() => this.toggle('tooltipLifetime')}/>
+            </div>
+            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+              <Icon strategy="ligature" id="TooltipLifetime" className="lite-gr-col">info_outline</Icon>
+              <Tooltip placement="right" isOpen={this.state.tooltipLifetime} target="TooltipLifetime" toggle={() => this.toggle('tooltipLifetime')}>
+                Number of seconds this channel will be considered as alive
+              </Tooltip>
+            </div>
+          </div>
+
+          <br/>
+
+          <div className="fl-cont fl-center-vert">
+            <div className="fl-wrap">
+              <TextField className="skale-field" id="basMaxNodes" type="number" size="150" label="Max number of nodes" onChange={(num) =>
+                this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes} onFocus={() => this.toggle('tooltipMaxNodes')} onBlur={() => this.toggle('tooltipMaxNodes')}/>
+            </div>
+            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+              <Icon strategy="ligature" id="TooltipMaxNodes" className="lite-gr-col">info_outline</Icon>
+              <Tooltip placement="right" isOpen={this.state.tooltipMaxNodes} target="TooltipMaxNodes" toggle={() => this.toggle('tooltipMaxNodes')}>
+                Max number of nodes associated with this channel
+              </Tooltip>
+            </div>
+          </div>
+
+          <br/>
+
+
+          <div className="fl-cont fl-center-vert">
+            <div className="fl-wrap">
+              <TextField className="skale-field" id="basDeposit" type="number" size="150" label="Deposit" onChange={(num) =>
+                this.setState({basDeposit: num.target.value})} value={this.state.basDeposit} onFocus={() => this.toggle('tooltipDeposit')} onBlur={() => this.toggle('tooltipDeposit')}/>
+            </div>
+            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+              <Icon strategy="ligature" id="TooltipDeposit" className="lite-gr-col">info_outline</Icon>
+              <Tooltip placement="right" isOpen={this.state.tooltipDeposit} target="TooltipDeposit" toggle={() => this.toggle('tooltipDeposit')}>
+                Value of tokens associated with this channel
+              </Tooltip>
+            </div>
+          </div>
+
+          <br/>
+
+
+          <div className="fl-cont fl-center-vert">
+            <div className="fl-wrap">
+              <TextField className="skale-field" id="basCpuTime" type="number" size="150" label="CPU Time" onChange={(num) =>
+                this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime} onFocus={() => this.toggle('tooltipCpuTime')} onBlur={() => this.toggle('tooltipCpuTime')}/>
+            </div>
+            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+              <Icon strategy="ligature" id="TooltipCpuTime" className="lite-gr-col">info_outline</Icon>
+              <Tooltip placement="right" isOpen={this.state.tooltipCpuTime} target="TooltipCpuTime" toggle={() => this.toggle('tooltipCpuTime')}>
+                CPU Time in %
+              </Tooltip>
+            </div>
+          </div>
+
+          <br/>
+
+          <div className="fl-cont fl-center-vert">
+            <div className="fl-wrap">
+              <TextField className="skale-field"  id="basTransPerSec" type="number" size="150" label="Transaction Per Second" onChange={(num) =>
+                this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec} onFocus={() => this.toggle('tooltipTransPerSec')} onBlur={() => this.toggle('tooltipTransPerSec')}/>
+            </div>
+            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+              <Icon strategy="ligature" id="TooltipTransPerSec" className="lite-gr-col">info_outline</Icon>
+              <Tooltip placement="right" isOpen={this.state.tooltipTransPerSec} target="TooltipTransPerSec" toggle={() => this.toggle('tooltipTransPerSec')}>
+                Number Of Transaction Per Second
+              </Tooltip>
+            </div>
+          </div>
+
+          <br/>
+          <br/>
+
+
+          <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
+
         </div>
-      </Container>
+      </div>
     )
 
   }
