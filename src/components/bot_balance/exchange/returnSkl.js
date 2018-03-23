@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Button, Input, } from 'reactstrap';
+import { Button } from 'rmwc/Button';
+
 
 const gex = require('@skale-labs/skale-api');
-//const gex = require('@skale-labs/skale-api/src/index');
 
 export default class ReturnSkl extends React.Component {
 
@@ -46,14 +46,10 @@ export default class ReturnSkl extends React.Component {
 
     render(){
         return(
-            <div>
-                <div className="col-md-12">
-                    <Button className="btn btn-lg"
-                            onClick={this.returnSkl} disabled={this.state.libInit ? false : true}>
-                        get SKL remainder
-                    </Button>
-                </div>
-            </div>
+            <Button dense
+                    onClick={this.returnSkl} disabled={this.state.libInit ? false : true}>
+                get SKL
+            </Button>
 
         )
 

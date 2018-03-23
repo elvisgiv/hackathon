@@ -1,4 +1,8 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
+import { Button } from 'rmwc/Button';
+
 
 import { Row, Col, } from 'reactstrap';
 import FromEth from './fromEth';
@@ -23,12 +27,13 @@ export default class BotExchange extends React.Component {
     }
 
     componentWillReceiveProps(){
-        this.setState({web3Connector: this.props.web3Connector})
+        this.setState({web3Connector: this.props.web3Connector});
         this.checkBalances()
     }
 
     // balance
     async checkBalances() {
+        // from metamask
         let accounts = await gex.w3.getAccounts();
         // in wei
         let firstAccountBalance = await gex.token().balanceOf(accounts[0]);
@@ -38,67 +43,75 @@ export default class BotExchange extends React.Component {
         let eth = gex.w3.web3.utils.fromWei(firstAccountEthBalance);
         //
         this.setState({skl: skl, eth: eth});
+        // from skalebot
+        let accountInfo = await gex.bot().getInfoForAccount();
+        this.setState({
+            botEth: gex.w3.web3.utils.fromWei(accountInfo.sendEth),
+            botSkale: gex.w3.web3.utils.fromWei(accountInfo.sendSkale),
+        });
     }
 
 
     ///////////////////////////
     render(){
 
-        // for template render
-        let exchangeEth = <FromEth web3Connector={this.state.web3Connector}/>;
-        let exchangeSkale = <FromSkale web3Connector={this.state.web3Connector}/>;
-        //let accountInfo = <AccountInfo web3Connector={this.state.web3Connector}/>;
         let returnEth = <ReturnEth web3Connector={this.state.web3Connector}/>;
         let returnSkl = <ReturnSkl web3Connector={this.state.web3Connector}/>;
 
         return(
             <div className='container'>
-                <div>
-                    <h4 className="bold no-marg" >Your balance:</h4>
-                    <br/>
-                    <p>
-                        <strong>ETH:</strong> {this.state.eth}
-                    </p>
-                    <p>
-                        <strong>SKL:</strong> {this.state.skl}
-                    </p>
-                </div>
+                <br/>
+                <br/>
+                <br/>
+                <h2 className="bold no-marg text-center" >Your balance:</h2>
+
                 <Row>
-                    <Col sm="12">
-                        <h1 className="bold text-center" >Exchange</h1>
-                        <br/>
-                        <Row>
-                            <Col sd={5}>
-                                {exchangeEth}
-                            </Col>
 
-                            <Col sd={2}></Col>
+                    <Col sm="6" className="text-center">
+                        <div>
+                            <br/>
+                            <br/>
+                            <h4 className="bold no-marg" >from MetaMask:</h4>
+                            <br/>
+                            <p>
+                                <strong>ETH:</strong> {this.state.eth}
+                                <br/>
+                                <Link to='/buy-eth' className="undec">
+                                    <Button raised>Buy ETH</Button>
+                                </Link>
+                            </p>
 
-                            <Col sd={5}>
-                                {exchangeSkale}
-                            </Col>
-                            {/*<Col sd={4}>
-                                {accountInfo}
-                            </Col>*/}
-                        </Row>
-                        <h1 className="bold text-center" >Reminder</h1>
-                        <h4 className="bold text-center" >(the exchange closes at 00:00 in pacific time)</h4>
-                        <br/>
-                        <Row>
-                            <Col sd={5}>
-                                {returnSkl}
-                            </Col>
+                            <p>
+                                <strong>SKL:</strong> {this.state.skl}
+                                <br/>
+                                <Link to='/buy-skl' className="undec">
+                                    <Button raised>Buy SKL</Button>
+                                </Link>
+                            </p>
+                        </div>
+                    </Col>
 
-                            <Col sd={2}></Col>
-
-                            <Col sd={5}>
+                    <Col sm='6' className="text-center">
+                        <div>
+                            <br/>
+                            <br/>
+                            <h4 className="bold no-marg" >From SkaleBot:</h4>
+                            <br/>
+                            <p>
+                                <strong>ETH:</strong> {this.state.botEth}
+                                <br/>
                                 {returnEth}
-                            </Col>
-                        </Row>
+                            </p>
+
+                            <p>
+                                <strong>SKL:</strong> {this.state.botSkale}
+                                <br/>
+                                {returnSkl}
+                            </p>
+                        </div>
                     </Col>
                 </Row>
             </div>
-
 
 
         )
