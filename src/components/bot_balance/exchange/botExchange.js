@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { Button } from 'rmwc/Button';
-import { Row, Col, } from 'reactstrap';
+import { Container, Col, } from 'reactstrap';
 //
 import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
@@ -60,54 +60,54 @@ export default class BotExchange extends React.Component {
                 <br/>
                 <br/>
                 <br/>
-                <h2 className="bold no-marg text-center" >Your balance</h2>
+                <h2 className="bold no-marg" >Your balance</h2>
+                <br/>
 
-                <Row>
+                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{width: '40%'}}>
+                    <div>
+                        <br/>
+                        <h4 className="bold no-marg" >from MetaMask:</h4>
+                        <br/>
+                        <span style={{'font-weight':'bold'}}>ETH: </span>
+                        {this.state.eth}
+                        <br/>
+                        <Link to='/exchange-eth' className="undec">
+                            <Button dense>Buy ETH</Button>
+                        </Link>
+                        <br/>
+                        <br/>
+                        <span style={{'font-weight':'bold'}}>SKL: </span>
+                        {this.state.skl}
+                        <br/>
+                        <Link to='/exchange-skl' className="undec">
+                            <Button dense>Buy SKL</Button>
+                        </Link>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+                <br/>
+                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{width: '40%'}}>
 
-                    <Col sm="6" className="text-center">
-                        <div>
-                            <br/>
-                            <br/>
-                            <h4 className="bold no-marg" >from MetaMask:</h4>
-                            <br/>
-                            <p>
-                                <strong>ETH:</strong> {this.state.eth}
-                                <br/>
-                                <Link to='/exchange-eth' className="undec">
-                                    <Button raised>Exchange ETH</Button>
-                                </Link>
-                            </p>
+                    <div>
+                        <br/>
+                        <h4 className="bold no-marg" >from SkaleBot:</h4>
+                        <br/>
+                        <span style={{'font-weight':'bold'}}>ETH:</span>
+                        {this.state.botEth}
+                        <br/>
+                        {returnEth}
+                        <br/>
+                        <br/>
+                        <span style={{'font-weight':'bold'}}>SKL:</span>
+                        {this.state.botSkale}
+                        <br/>
+                        {returnSkl}
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
 
-                            <p>
-                                <strong>SKL:</strong> {this.state.skl}
-                                <br/>
-                                <Link to='/exchange-skl' className="undec">
-                                    <Button raised>Exchange SKL</Button>
-                                </Link>
-                            </p>
-                        </div>
-                    </Col>
-
-                    <Col sm='6' className="text-center">
-                        <div>
-                            <br/>
-                            <br/>
-                            <h4 className="bold no-marg" >from SkaleBot:</h4>
-                            <br/>
-                            <p>
-                                <strong>ETH:</strong> {this.state.botEth}
-                                <br/>
-                                {returnEth}
-                            </p>
-
-                            <p>
-                                <strong>SKL:</strong> {this.state.botSkale}
-                                <br/>
-                                {returnSkl}
-                            </p>
-                        </div>
-                    </Col>
-                </Row>
             </div>
 
 
