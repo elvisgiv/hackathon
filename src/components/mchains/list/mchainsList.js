@@ -261,20 +261,6 @@ export default class MchainsList extends React.Component {
 
       },
       {
-        Header: () => this.headerTooltip('Creation Date', "Creation Date"),
-        accessor: "mChainCreatedAt",
-        width: 150
-      },
-      {
-        Header: () => this.headerTooltip('Expiration Date', "Expiration Date"),
-        accessor: "mChainLifetime",
-        width: 150
-      },
-      {
-        Header: () => this.headerTooltip('Expires', "Expires after"),
-        accessor: 'countdown',
-      },
-      {
         Header: () => this.headerTooltip('Storage', "Storage in bytes"),
         accessor: "mChainStorage",
       },
@@ -298,6 +284,20 @@ export default class MchainsList extends React.Component {
         width: 60
 
       },
+      {
+        Header: () => this.headerTooltip('Creation Date', "Creation Date"),
+        accessor: "mChainCreatedAt",
+        width: 150
+      },
+      {
+        Header: () => this.headerTooltip('Expiration Date', "Expiration Date"),
+        accessor: "mChainLifetime",
+        width: 150
+      },
+      /*{
+        Header: () => this.headerTooltip('Expires', "Expires after"),
+        accessor: 'countdown',
+      },*/
       {
         Header: "",
         // add custom value to "Commands" column
