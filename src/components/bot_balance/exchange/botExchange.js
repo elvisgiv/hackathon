@@ -55,23 +55,17 @@ export default class BotExchange extends React.Component {
         let returnSkl = <ReturnSkl web3Connector={this.state.web3Connector}/>;
 
         return(
-            <div className='container'>
-                <br/>
-                <br/>
-                <br/>
-                <h2 className="bold no-marg" >Your balance</h2>
-                <br/>
+            <div className='marg-30'>
 
-                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{maxWidth: '450px'}}>
+                <div className="mdc-elevation--z4 padd-top-10 padd-30"  style={{maxWidth: '550px'}}>
                     <div>
-                        <br/>
                         <h4 className="bold no-marg" >MetaMask:</h4>
                         <br/>
                         <span style={{'font-weight':'bold'}}>ETH: </span>
                         {this.state.eth}
                         <br/>
                         <Link to='/exchange-eth' className="undec">
-                            <Button dense>Buy ETH</Button>
+                            <Button dense>Sell SKL</Button>
                         </Link>
                         <br/>
                         <br/>
@@ -81,15 +75,12 @@ export default class BotExchange extends React.Component {
                         <Link to='/exchange-skl' className="undec">
                             <Button dense>Buy SKL</Button>
                         </Link>
-                        <br/>
-                        <br/>
                     </div>
                 </div>
                 <br/>
 
-                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{maxWidth: '450px'}}>
+                <div className="mdc-elevation--z4 padd-top-10 padd-30"  style={{maxWidth: '550px'}}>
                     <div>
-                        <br/>
                         <h4 className="bold no-marg" >SkaleBot:</h4>
                         <br/>
                         <span style={{'font-weight':'bold'}}>ETH:</span>
@@ -102,8 +93,6 @@ export default class BotExchange extends React.Component {
                         {this.state.botSkale}
                         <br/>
                         {returnSkl}
-                        <br/>
-                        <br/>
                     </div>
                 </div>
 
