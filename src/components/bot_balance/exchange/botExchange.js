@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { Button } from 'rmwc/Button';
-import { Container, Col, } from 'reactstrap';
 //
 import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
@@ -63,7 +62,7 @@ export default class BotExchange extends React.Component {
                 <h2 className="bold no-marg" >Your balance</h2>
                 <br/>
 
-                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{width: '40%'}}>
+                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{maxWidth: '450px'}}>
                     <div>
                         <br/>
                         <h4 className="bold no-marg" >MetaMask:</h4>
@@ -87,8 +86,8 @@ export default class BotExchange extends React.Component {
                     </div>
                 </div>
                 <br/>
-                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{width: '40%'}}>
 
+                <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{maxWidth: '450px'}}>
                     <div>
                         <br/>
                         <h4 className="bold no-marg" >SkaleBot:</h4>
