@@ -108,7 +108,7 @@ export default class FromSkale extends React.Component {
 
                     <div className="fl-cont fl-center-vert">
                         <div className="fl-wrap">
-                            <TextField className="skale-field" id="skaleVal" type="number" size="150" label="Exchange to ETH" onChange={(num) =>
+                            <TextField className="skale-field" id="skaleVal" type="number" size="150" label="Amount of SKL" onChange={(num) =>
                                 this.setState({skaleVal: num.target.value})} value={this.state.skaleVal} onFocus={() => this.toggle('tooltipSkaleVal')} onBlur={() => this.toggle('tooltipSkaleVal')}/>
                         </div>
                         <div className="fl-wrap gx-icon marg-left-md padd-top-sm">

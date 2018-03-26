@@ -1,6 +1,9 @@
 import React from 'react'
 
-import { Button, Input, } from 'reactstrap';
+import { Tooltip, Input} from 'reactstrap';
+import {TextField, TextFieldHelperText} from 'rmwc/TextField';
+import {Icon} from 'rmwc/Icon';
+import {Button} from 'rmwc/Button';
 //
 import swal from 'sweetalert';
 
@@ -14,8 +17,10 @@ export default class FromEth extends React.Component {
         super(props);
         this.state = {
             ethVal: '',
-            skaleVal: '',
             libInit: false,
+
+            tooltipEthVal: false,
+
         };
         //
         this.exchangeEth = this.exchangeEth.bind(this);
@@ -89,19 +94,41 @@ export default class FromEth extends React.Component {
 
     }
 
+    toggle(fieldName) {
+        if(this.state[fieldName] !== undefined){
+            let newState = {};
+            newState[fieldName] = !this.state[fieldName];
+            this.setState(newState);
+        }
+    }
+
 
     render(){
         return(
-            <div>
-                <h5 className="bold no-marg" >Change ETH to SkaleTokens (SKL)</h5>
-                <br/>
-                <Input id="ethVal" type="number" placeholder="Amount of ETH" onChange={(num) =>
-                    this.setState({ethVal: num.target.value})} value={this.state.ethVal} />
-                <h6 className="no-marg">The amount of Eth that you want to exchange</h6>
-                <br/>
+            <div className="marg-30">
+                <div className="padd-left-md">
+                    <br/>
 
-                <div className="col-md-12">
-                    <Button className="btn btn-lg"
+                    <h5 className="bold no-marg" >Change ETH to SkaleTokens (SKL)</h5>
+
+                    <br/>
+
+                    <div className="fl-cont fl-center-vert">
+                        <div className="fl-wrap">
+                            <TextField className="skale-field" id="ethVal" type="number" size="150" label="Amount of ETH" onChange={(num) =>
+                                this.setState({ethVal: num.target.value})} value={this.state.ethVal} onFocus={() => this.toggle('tooltipEthVal')} onBlur={() => this.toggle('tooltipEthVal')}/>
+                        </div>
+                        <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                            <Icon strategy="ligature" id="TooltipEthVal" className="lite-gr-col">info_outline</Icon>
+                            <Tooltip placement="right" isOpen={this.state.tooltipEthVal} target="TooltipEthVal" toggle={() => this.toggle('tooltipEthVal')}>
+                                The amount of ETH that you want to exchange
+                            </Tooltip>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <Button raised
                             onClick={this.exchangeEth} disabled={this.state.libInit ? false : true}>
                         Exchange
                     </Button>
