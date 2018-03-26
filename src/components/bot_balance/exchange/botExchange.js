@@ -66,7 +66,7 @@ export default class BotExchange extends React.Component {
                 <div className="mdc-elevation--z4 padd-top-10 padd-left-big"  style={{width: '40%'}}>
                     <div>
                         <br/>
-                        <h4 className="bold no-marg" >from MetaMask:</h4>
+                        <h4 className="bold no-marg" >MetaMask:</h4>
                         <br/>
                         <span style={{'font-weight':'bold'}}>ETH: </span>
                         {this.state.eth}
@@ -91,7 +91,7 @@ export default class BotExchange extends React.Component {
 
                     <div>
                         <br/>
-                        <h4 className="bold no-marg" >from SkaleBot:</h4>
+                        <h4 className="bold no-marg" >SkaleBot:</h4>
                         <br/>
                         <span style={{'font-weight':'bold'}}>ETH:</span>
                         {this.state.botEth}
