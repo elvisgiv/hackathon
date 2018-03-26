@@ -303,6 +303,7 @@ export default class MchainsList extends React.Component {
         // add custom value to "Commands" column
         id: 'button',
         accessor: 'mChainName', //value
+        width: 120,
         sortable: false,
         Cell: ({value}) => this.isExpired(value)
       },
