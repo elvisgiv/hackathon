@@ -61,7 +61,7 @@ export default class BotExchange extends React.Component {
                     <div>
                         <h4 className="bold no-marg" >MetaMask:</h4>
                         <br/>
-                        <span style={{'font-weight':'bold'}}>ETH: </span>
+                        <span style={{'fontWeight':'bold'}}>ETH: </span>
                         {this.state.eth}
                         <br/>
                         <Link to='/exchange-eth' className="undec">
@@ -69,7 +69,7 @@ export default class BotExchange extends React.Component {
                         </Link>
                         <br/>
                         <br/>
-                        <span style={{'font-weight':'bold'}}>SKL: </span>
+                        <span style={{'fontWeight':'bold'}}>SKL: </span>
                         {this.state.skl}
                         <br/>
                         <Link to='/exchange-skl' className="undec">
@@ -83,13 +83,13 @@ export default class BotExchange extends React.Component {
                     <div>
                         <h4 className="bold no-marg" >SkaleBot:</h4>
                         <br/>
-                        <span style={{'font-weight':'bold'}}>ETH:</span>
+                        <span style={{'fontWeight':'bold'}}>ETH:</span>
                         {this.state.botEth}
                         <br/>
                         {returnEth}
                         <br/>
                         <br/>
-                        <span style={{'font-weight':'bold'}}>SKL:</span>
+                        <span style={{'fontWeight':'bold'}}>SKL:</span>
                         {this.state.botSkale}
                         <br/>
                         {returnSkl}
