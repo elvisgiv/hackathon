@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button } from 'rmwc/Button';
+import { Button, ButtonIcon } from 'rmwc/Button';
 
 
 const gex = require('@skale-labs/skale-api');
@@ -48,7 +48,8 @@ export default class ReturnSkl extends React.Component {
         return(
             <Button dense
                     onClick={this.returnSkl} disabled={this.state.libInit ? false : true}>
-                get SKL
+                Withdraw SKL
+                <ButtonIcon use="keyboard_arrow_right" className="marg-left-sm marg-ri-sm"/>
             </Button>
 
         )
