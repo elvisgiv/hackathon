@@ -21,10 +21,6 @@ import FromEth from './components/bot_balance/exchange/fromEth';
 import FromSkale from './components/bot_balance/exchange/fromSkale';
 
 
-
-
-
-
 import 'material-components-web/dist/material-components-web.min.css';
 
 import { Icon } from 'rmwc/Icon';

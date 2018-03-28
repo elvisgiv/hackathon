@@ -8,9 +8,8 @@ import {Button} from 'rmwc/Button';
 const Identicon = require('identicon.js');
 
 const skale = require('@skale-labs/skale-api');
-
-
-
+import ethLogo from '../../../images/coins/eth.png';
+import skaleLogo from '../../../images/coins/skale.jpg';
 
 export default class BotExchange extends React.Component {
 
@@ -55,7 +54,7 @@ export default class BotExchange extends React.Component {
 
     this.setState({
       account: account,
-      skl: accountSkaleBalance,
+      skl: parseFloat(accountSkaleBalance).toFixed(3),
       eth: accountEthBalance,
       botEth: skaleBotEthBalance,
       botSkale: skaleBotSkaleBalance
@@ -94,15 +93,27 @@ export default class BotExchange extends React.Component {
 
               <div className="fl-cont fl-center-vert">
                 <div className="fl-col padd-ri-10">
-                  {this.state.avatarData ? <img width={35} height={35} style={{borderRadius: "10px"}} src={"data:image/png;base64,"+this.state.avatarData}/> : null}
+                  <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
                 </div>
                 <div className="fl-col">
                   <h6 className="no-marg">{this.state.eth} ETH </h6>
                 </div>
               </div>
 
+              <div className="fl-cont fl-center-vert padd-top-md">
+                <div className="fl-col padd-ri-10">
+                  <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
+                </div>
+                <div className="fl-col">
+                  <h6 className="no-marg">{this.state.skl} SKL </h6>
+                </div>
+              </div>
 
-              <span style={{fontWeight: 'bold'}}>ETH: </span>
+
+
+
+
+              {/*<span style={{fontWeight: 'bold'}}>ETH: </span>
               {this.state.eth}
               <br/>
               <Link to='/exchange-eth' className="undec">
@@ -115,7 +126,7 @@ export default class BotExchange extends React.Component {
               <br/>
               <Link to='/exchange-skl' className="undec">
                 <Button dense>Buy SKL</Button>
-              </Link>
+              </Link>*/}
             </div>
 
           </div>
