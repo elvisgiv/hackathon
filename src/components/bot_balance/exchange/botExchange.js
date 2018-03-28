@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom'
 import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
 
-import {Button} from 'rmwc/Button';
+import {Button, ButtonIcon} from 'rmwc/Button';
+
 const Identicon = require('identicon.js');
 
 const skale = require('@skale-labs/skale-api');
@@ -15,8 +16,7 @@ export default class BotExchange extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentWillReceiveProps() {
@@ -25,8 +25,8 @@ export default class BotExchange extends React.Component {
       skale.initBothProviders('51.0.1.99', '8546', provider);
       this.setState({libInit: true});
       this.initBalanceChecker();
-      this.initAvatarData();
     }
+    this.initAvatarData();
   }
 
   initBalanceChecker() {
@@ -77,11 +77,12 @@ export default class BotExchange extends React.Component {
 
     return (
       <div className='marg-30'>
-        <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
+        <div className="skale-card mdc-elevation--z4 marg-bott-30" style={{maxWidth: '750px'}}>
           <div>
             <div className="fl-cont fl-center-vert card-top">
               <div className="fl-col padd-ri-10">
-                {this.state.avatarData ? <img width={35} height={35} style={{borderRadius: "10px"}} src={"data:image/png;base64,"+this.state.avatarData}/> : null}
+                {this.state.avatarData ? <img width={35} height={35} style={{borderRadius: "10px"}}
+                                              src={"data:image/png;base64," + this.state.avatarData}/> : null}
               </div>
               <div className="fl-col">
                 <h6 className="bold no-marg">{this.state.account}</h6>
@@ -92,11 +93,12 @@ export default class BotExchange extends React.Component {
             <div className="card-content padd-30">
 
               <div className="fl-cont fl-center-vert">
-                <div className="fl-col padd-ri-10">
+                <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
                   <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
                 </div>
                 <div className="fl-col">
-                  <h6 className="no-marg">{this.state.eth} ETH </h6>
+                  <h5 className="no-marg inl">{this.state.eth}</h5>
+                  <h5 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h5>
                 </div>
               </div>
 
@@ -105,33 +107,13 @@ export default class BotExchange extends React.Component {
                   <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
                 </div>
                 <div className="fl-col">
-                  <h6 className="no-marg">{this.state.skl} SKL </h6>
+                  <h5 className="no-marg inl">{this.state.skl} </h5>
+                  <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKL </h5>
                 </div>
               </div>
-
-
-
-
-
-              {/*<span style={{fontWeight: 'bold'}}>ETH: </span>
-              {this.state.eth}
-              <br/>
-              <Link to='/exchange-eth' className="undec">
-                <Button dense>Sell SKL</Button>
-              </Link>
-              <br/>
-              <br/>
-              <span style={{fontWeight: 'bold'}}>SKL: </span>
-              {this.state.skl}
-              <br/>
-              <Link to='/exchange-skl' className="undec">
-                <Button dense>Buy SKL</Button>
-              </Link>*/}
             </div>
-
           </div>
         </div>
-        <br/>
 
         <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
           <div className="fl-cont fl-center-vert card-top">
@@ -140,16 +122,53 @@ export default class BotExchange extends React.Component {
             </div>
           </div>
           <div className="padd-30">
-            <span style={{fontWeight: 'bold'}}>ETH:</span>
-            {this.state.botEth}
-            <br/>
-            {returnEth}
-            <br/>
-            <br/>
-            <span style={{fontWeight: 'bold'}}>SKL:</span>
-            {this.state.botSkale}
-            <br/>
-            {returnSkl}
+
+            <div className="fl-cont">
+              <div className="fl-col padd-ri-md">
+                <Link to='/exchange-skl' className="undec">
+                  <Button unelevated className="green-btn"><ButtonIcon use="call_received" />Buy SKL</Button>
+                </Link>
+              </div>
+              <div className="fl-col">
+                <Link to='/exchange-eth' className="undec">
+                  <Button unelevated className="red-btn"><ButtonIcon use="call_made" />Sell SKL</Button>
+                </Link>
+              </div>
+            </div>
+
+
+
+
+            <div className="padd-top-30">
+              <h5 className="no-marg">Your exchange refunds</h5>
+
+              <div className="fl-cont fl-center-vert marg-top-md">
+                <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
+                  <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
+                </div>
+                <div className="fl-col padd-ri-30">
+                  <h6 className="no-marg inl">{this.state.botEth}</h6>
+                  <h6 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h6>
+                </div>
+                <div className="fl-col">
+                  {returnEth}
+                </div>
+              </div>
+
+              <div className="fl-cont fl-center-vert padd-top-md">
+                <div className="fl-col padd-ri-10">
+                  <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
+                </div>
+                <div className="fl-col padd-ri-30">
+                  <h6 className="no-marg inl">{this.state.botSkale} </h6>
+                  <h6 className="no-marg padd-left-sm lite-gr-col inl"> SKL </h6>
+                </div>
+                <div className="fl-col">
+                  {returnSkl}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
