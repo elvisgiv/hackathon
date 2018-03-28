@@ -73,8 +73,8 @@ export default class BotExchange extends React.Component {
 
   render() {
 
-    let returnEth = <ReturnEth web3Connector={this.state.web3Connector}/>;
-    let returnSkl = <ReturnSkl web3Connector={this.state.web3Connector}/>;
+    let returnEth = <ReturnEth web3Connector={this.props.web3Connector}/>;
+    let returnSkl = <ReturnSkl web3Connector={this.props.web3Connector}/>;
 
     return (
       <div className='marg-30'>
