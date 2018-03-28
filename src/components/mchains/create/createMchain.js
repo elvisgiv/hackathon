@@ -166,111 +166,122 @@ export default class CreateMchain extends React.Component {
 
     return (
       <div className="marg-30">
-        <div className="padd-left-md">
 
-          <TextField className="skale-field" label="Name of sChain" id="basName" type="text" onChange={(num) =>
-            this.setState({basName: num.target.value})} value={this.state.basName}/>
-          <br/>
-          <br/>
 
-          <div className="fl-cont fl-center-vert">
-            <div className="fl-wrap">
-              <TextField className="skale-field" id="basStorageBytes" type="number" size="180" label="Storage in Bytes"
-                         onChange={(num) =>
-                           this.setState({basStorageBytes: num.target.value})} value={this.state.basStorageBytes} onFocus={() => this.toggle('tooltipStorageBytes')} onBlur={() => this.toggle('tooltipStorageBytes')}/>
-            </div>
-            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-              <Icon strategy="ligature" id="TooltipStorageBytes" className="lite-gr-col">info_outline</Icon>
-              <Tooltip placement="right" isOpen={this.state.tooltipStorageBytes} target="TooltipStorageBytes" toggle={() => this.toggle('tooltipStorageBytes')}>
-                Number of bytes this channel can store
-              </Tooltip>
+
+        <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
+          <div className="fl-cont fl-center-vert card-top">
+            <div className="fl-col">
+              <h6 className="bold no-marg">Fill these fields to create an sChain</h6>
             </div>
           </div>
+          <div className="padd-30">
 
-          <br/>
+            <TextField className="skale-field no-marg-top" label="Name of sChain" id="basName" type="text" onChange={(num) =>
+              this.setState({basName: num.target.value})} value={this.state.basName}/>
+            <br/>
+            <br/>
 
-          <div className="fl-cont fl-center-vert">
-            <div className="fl-wrap">
-              <TextField className="skale-field" id="basLifetime" type="number" size="150" label="Lifetime in seconds" onChange={(num) =>
-                this.setState({basLifetime: num.target.value})} value={this.state.basLifetime} onFocus={() => this.toggle('tooltipLifetime')} onBlur={() => this.toggle('tooltipLifetime')}/>
+            <div className="fl-cont fl-center-vert">
+              <div className="fl-wrap">
+                <TextField className="skale-field" id="basStorageBytes" type="number" size="180" label="Storage in Bytes"
+                           onChange={(num) =>
+                             this.setState({basStorageBytes: num.target.value})} value={this.state.basStorageBytes} onFocus={() => this.toggle('tooltipStorageBytes')} onBlur={() => this.toggle('tooltipStorageBytes')}/>
+              </div>
+              <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                <Icon strategy="ligature" id="TooltipStorageBytes" className="lite-gr-col">info_outline</Icon>
+                <Tooltip placement="right" isOpen={this.state.tooltipStorageBytes} target="TooltipStorageBytes" toggle={() => this.toggle('tooltipStorageBytes')}>
+                  Number of bytes this channel can store
+                </Tooltip>
+              </div>
             </div>
-            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-              <Icon strategy="ligature" id="TooltipLifetime" className="lite-gr-col">info_outline</Icon>
-              <Tooltip placement="right" isOpen={this.state.tooltipLifetime} target="TooltipLifetime" toggle={() => this.toggle('tooltipLifetime')}>
-                Number of seconds this channel will be considered as alive
-              </Tooltip>
+
+            <br/>
+
+            <div className="fl-cont fl-center-vert">
+              <div className="fl-wrap">
+                <TextField className="skale-field" id="basLifetime" type="number" size="150" label="Lifetime in seconds" onChange={(num) =>
+                  this.setState({basLifetime: num.target.value})} value={this.state.basLifetime} onFocus={() => this.toggle('tooltipLifetime')} onBlur={() => this.toggle('tooltipLifetime')}/>
+              </div>
+              <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                <Icon strategy="ligature" id="TooltipLifetime" className="lite-gr-col">info_outline</Icon>
+                <Tooltip placement="right" isOpen={this.state.tooltipLifetime} target="TooltipLifetime" toggle={() => this.toggle('tooltipLifetime')}>
+                  Number of seconds this channel will be considered as alive
+                </Tooltip>
+              </div>
             </div>
+
+            <br/>
+
+            <div className="fl-cont fl-center-vert">
+              <div className="fl-wrap">
+                <TextField className="skale-field" id="basMaxNodes" type="number" size="150" label="Max number of nodes" onChange={(num) =>
+                  this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes} onFocus={() => this.toggle('tooltipMaxNodes')} onBlur={() => this.toggle('tooltipMaxNodes')}/>
+              </div>
+              <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                <Icon strategy="ligature" id="TooltipMaxNodes" className="lite-gr-col">info_outline</Icon>
+                <Tooltip placement="right" isOpen={this.state.tooltipMaxNodes} target="TooltipMaxNodes" toggle={() => this.toggle('tooltipMaxNodes')}>
+                  Max number of nodes associated with this channel
+                </Tooltip>
+              </div>
+            </div>
+
+            <br/>
+
+
+            <div className="fl-cont fl-center-vert">
+              <div className="fl-wrap">
+                <TextField className="skale-field" id="basDeposit" type="number" size="150" label="Deposit" onChange={(num) =>
+                  this.setState({basDeposit: num.target.value})} value={this.state.basDeposit} onFocus={() => this.toggle('tooltipDeposit')} onBlur={() => this.toggle('tooltipDeposit')}/>
+              </div>
+              <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                <Icon strategy="ligature" id="TooltipDeposit" className="lite-gr-col">info_outline</Icon>
+                <Tooltip placement="right" isOpen={this.state.tooltipDeposit} target="TooltipDeposit" toggle={() => this.toggle('tooltipDeposit')}>
+                  Value of tokens associated with this channel
+                </Tooltip>
+              </div>
+            </div>
+
+            <br/>
+
+
+            <div className="fl-cont fl-center-vert">
+              <div className="fl-wrap">
+                <TextField className="skale-field" id="basCpuTime" type="number" size="150" label="CPU Time" onChange={(num) =>
+                  this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime} onFocus={() => this.toggle('tooltipCpuTime')} onBlur={() => this.toggle('tooltipCpuTime')}/>
+              </div>
+              <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                <Icon strategy="ligature" id="TooltipCpuTime" className="lite-gr-col">info_outline</Icon>
+                <Tooltip placement="right" isOpen={this.state.tooltipCpuTime} target="TooltipCpuTime" toggle={() => this.toggle('tooltipCpuTime')}>
+                  CPU Time in %
+                </Tooltip>
+              </div>
+            </div>
+
+            <br/>
+
+            <div className="fl-cont fl-center-vert">
+              <div className="fl-wrap">
+                <TextField className="skale-field"  id="basTransPerSec" type="number" size="150" label="Transaction Per Second" onChange={(num) =>
+                  this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec} onFocus={() => this.toggle('tooltipTransPerSec')} onBlur={() => this.toggle('tooltipTransPerSec')}/>
+              </div>
+              <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                <Icon strategy="ligature" id="TooltipTransPerSec" className="lite-gr-col">info_outline</Icon>
+                <Tooltip placement="right" isOpen={this.state.tooltipTransPerSec} target="TooltipTransPerSec" toggle={() => this.toggle('tooltipTransPerSec')}>
+                  Number Of Transaction Per Second
+                </Tooltip>
+              </div>
+            </div>
+
+            <br/>
+            <br/>
+
+
+            <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
+
           </div>
-
-          <br/>
-
-          <div className="fl-cont fl-center-vert">
-            <div className="fl-wrap">
-              <TextField className="skale-field" id="basMaxNodes" type="number" size="150" label="Max number of nodes" onChange={(num) =>
-                this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes} onFocus={() => this.toggle('tooltipMaxNodes')} onBlur={() => this.toggle('tooltipMaxNodes')}/>
-            </div>
-            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-              <Icon strategy="ligature" id="TooltipMaxNodes" className="lite-gr-col">info_outline</Icon>
-              <Tooltip placement="right" isOpen={this.state.tooltipMaxNodes} target="TooltipMaxNodes" toggle={() => this.toggle('tooltipMaxNodes')}>
-                Max number of nodes associated with this channel
-              </Tooltip>
-            </div>
-          </div>
-
-          <br/>
-
-
-          <div className="fl-cont fl-center-vert">
-            <div className="fl-wrap">
-              <TextField className="skale-field" id="basDeposit" type="number" size="150" label="Deposit" onChange={(num) =>
-                this.setState({basDeposit: num.target.value})} value={this.state.basDeposit} onFocus={() => this.toggle('tooltipDeposit')} onBlur={() => this.toggle('tooltipDeposit')}/>
-            </div>
-            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-              <Icon strategy="ligature" id="TooltipDeposit" className="lite-gr-col">info_outline</Icon>
-              <Tooltip placement="right" isOpen={this.state.tooltipDeposit} target="TooltipDeposit" toggle={() => this.toggle('tooltipDeposit')}>
-                Value of tokens associated with this channel
-              </Tooltip>
-            </div>
-          </div>
-
-          <br/>
-
-
-          <div className="fl-cont fl-center-vert">
-            <div className="fl-wrap">
-              <TextField className="skale-field" id="basCpuTime" type="number" size="150" label="CPU Time" onChange={(num) =>
-                this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime} onFocus={() => this.toggle('tooltipCpuTime')} onBlur={() => this.toggle('tooltipCpuTime')}/>
-            </div>
-            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-              <Icon strategy="ligature" id="TooltipCpuTime" className="lite-gr-col">info_outline</Icon>
-              <Tooltip placement="right" isOpen={this.state.tooltipCpuTime} target="TooltipCpuTime" toggle={() => this.toggle('tooltipCpuTime')}>
-                CPU Time in %
-              </Tooltip>
-            </div>
-          </div>
-
-          <br/>
-
-          <div className="fl-cont fl-center-vert">
-            <div className="fl-wrap">
-              <TextField className="skale-field"  id="basTransPerSec" type="number" size="150" label="Transaction Per Second" onChange={(num) =>
-                this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec} onFocus={() => this.toggle('tooltipTransPerSec')} onBlur={() => this.toggle('tooltipTransPerSec')}/>
-            </div>
-            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-              <Icon strategy="ligature" id="TooltipTransPerSec" className="lite-gr-col">info_outline</Icon>
-              <Tooltip placement="right" isOpen={this.state.tooltipTransPerSec} target="TooltipTransPerSec" toggle={() => this.toggle('tooltipTransPerSec')}>
-                Number Of Transaction Per Second
-              </Tooltip>
-            </div>
-          </div>
-
-          <br/>
-          <br/>
-
-
-          <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
-
         </div>
+
       </div>
     )
 

@@ -98,34 +98,36 @@ export default class FromSkale extends React.Component {
     render(){
         return(
             <div className="marg-30">
-                <div className="padd-left-md">
 
-                    <br/>
 
-                    <h5 className="bold no-marg" >Change SkaleTokens (SKL) to ETH</h5>
-
-                    <br/>
-
-                    <div className="fl-cont fl-center-vert">
-                        <div className="fl-wrap">
-                            <TextField className="skale-field" id="skaleVal" type="number" size="150" label="Amount of SKL" onChange={(num) =>
-                                this.setState({skaleVal: num.target.value})} value={this.state.skaleVal} onFocus={() => this.toggle('tooltipSkaleVal')} onBlur={() => this.toggle('tooltipSkaleVal')}/>
-                        </div>
-                        <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-                            <Icon strategy="ligature" id="TooltipSkaleVal" className="lite-gr-col">info_outline</Icon>
-                            <Tooltip placement="right" isOpen={this.state.tooltipSkaleVal} target="TooltipSkaleVal" toggle={() => this.toggle('tooltipSkaleVal')}>
-                                The amount of SkaleTokens that you want to exchange
-                            </Tooltip>
+                <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
+                    <div className="fl-cont fl-center-vert card-top">
+                        <div className="fl-col">
+                            <h6 className="bold no-marg">Change SkaleTokens (SKL) to ETH</h6>
                         </div>
                     </div>
+                    <div className="padd-30">
 
-                    <br/>
+                        <div className="fl-cont fl-center-vert">
+                            <div className="fl-wrap">
+                                <TextField className="skale-field" id="skaleVal" type="number" size="150" label="Amount of SKL" onChange={(num) =>
+                                  this.setState({skaleVal: num.target.value})} value={this.state.skaleVal} onFocus={() => this.toggle('tooltipSkaleVal')} onBlur={() => this.toggle('tooltipSkaleVal')}/>
+                            </div>
+                            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
+                                <Icon strategy="ligature" id="TooltipSkaleVal" className="lite-gr-col">info_outline</Icon>
+                                <Tooltip placement="right" isOpen={this.state.tooltipSkaleVal} target="TooltipSkaleVal" toggle={() => this.toggle('tooltipSkaleVal')}>
+                                    The amount of SkaleTokens that you want to exchange
+                                </Tooltip>
+                            </div>
+                        </div>
 
-                    <Button raised
-                            onClick={this.exchangeSkale} disabled={this.state.libInit ? false : true}>
-                        Exchange
-                    </Button>
+                        <br/>
 
+                        <Button raised
+                                onClick={this.exchangeSkale} disabled={this.state.libInit ? false : true}>
+                            Exchange
+                        </Button>
+                    </div>
                 </div>
             </div>
 
