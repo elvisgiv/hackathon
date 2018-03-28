@@ -55,9 +55,9 @@ export default class BotExchange extends React.Component {
     this.setState({
       account: account,
       skl: parseFloat(accountSkaleBalance).toFixed(3),
-      eth: accountEthBalance,
-      botEth: skaleBotEthBalance,
-      botSkale: skaleBotSkaleBalance
+      eth: parseFloat(accountEthBalance).toFixed(3),
+      botEth: parseFloat(skaleBotEthBalance).toFixed(3),
+      botSkale: parseFloat(skaleBotSkaleBalance).toFixed(3)
     });
   }
 
@@ -115,7 +115,7 @@ export default class BotExchange extends React.Component {
           </div>
         </div>
 
-        <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
+        <div className="skale-card mdc-elevation--z4">
           <div className="fl-cont fl-center-vert card-top">
             <div className="fl-col">
               <h6 className="bold no-marg">Skale Bot</h6>

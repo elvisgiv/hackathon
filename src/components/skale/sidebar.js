@@ -46,6 +46,10 @@ export default class Sidebar extends React.Component {
     return this.isItemSelected('/schains') || this.isItemSelected('/') || this.isItemSelected('/schains/create')
   }
 
+  walletPage() {
+    return this.isItemSelected('/wallet') || this.isItemSelected('/exchange-eth') || this.isItemSelected('/exchange-skl')
+  }
+
   render() {
     return (
       <Drawer className="sidebar" persistent open={this.state.persistentOpen}>
@@ -65,7 +69,7 @@ export default class Sidebar extends React.Component {
         <DrawerContent className="padd-top-md">
 
           <Link to='/wallet' className="undec">
-              <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/wallet') ? 'selected-item' : '')}>
+              <ListItem className={"fl-cont fl-center-vert "+ (this.walletPage() ? 'selected-item' : '')}>
                   <div className="fl-wrap gx-icon">
                       <Icon strategy="ligature" className="orange-col">account_balance_wallet</Icon>
                   </div>
