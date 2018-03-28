@@ -4,10 +4,12 @@ import {Link} from 'react-router-dom'
 import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
 
-const skale = require('@skale-labs/skale-api');
-
 import {Button} from 'rmwc/Button';
 const Identicon = require('identicon.js');
+
+const skale = require('@skale-labs/skale-api');
+
+
 
 
 export default class BotExchange extends React.Component {
