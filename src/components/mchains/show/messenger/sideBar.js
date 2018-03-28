@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import '../../../../stylesheets/commons/messenger/sideBar.scss';
-// import 'react-chat-elements/src/SideBar/SideBar.css';
 
-
-const classNames = require('classnames');
 
 export class SideBar extends Component {
     render() {
         return (
-            <div className={classNames('rce-sbar', this.props.type, this.props.className)}>
+            <div className={'rce-sbar light'}>
                 <div className="rce-sbar-item">
                     {this.props.top}
                 </div>

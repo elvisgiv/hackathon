@@ -1,6 +1,9 @@
 import React from 'react'
 import MchainsList from '../list/mchainsList';
 
+import {Container, Row, Col, } from 'reactstrap';
+
+
 // Import React Table
 import "react-table/react-table.css";
 // for chat
@@ -9,7 +12,6 @@ import MessageList from './messenger/messageList'
 import Button from './messenger/button'
 import SideBar from './messenger/sideBar'
 
-const loremIpsum = require('lorem-ipsum');
 const Identicon = require('identicon.js');
 
 const skale = require('@skale-labs/skale-api');
@@ -205,64 +207,69 @@ export default class Mchain extends React.Component {
         let chatSource = arr.map(x => this.random('chat'));
 
         return (
-            <div className='container chat-container'>
-                <div
-                    className='chat-list'>
-                    <SideBar
+                    <Container>
+                        <Row>
+                            <Col md="4" >
+                                <div className="skale-card mdc-elevation--z4 chat-list marg-top-big">
+                                    <SideBar
 
-                        center={
-                            <div>
-                                <h3>Chain: {this.state.chain.mChainName}</h3>
-                                <p>Creation Date: {this.state.chain.mChainCreatedAt}</p>
-                                <p>Expiration Date: {this.state.chain.mChainLifetime}</p>
-                                <p>Expires: {this.state.chain.countdown}</p>
-                                <p>Storage: {this.state.chain.mChainStorage}</p>
-                                <p>Nodes: {this.state.chain.mChainNodeNumber}</p>
-                                <p>Deposit: {this.state.chain.mChainDeposit}</p>
-                                <p>CpU: {this.state.chain.mChainCpu}</p>
-                                <p>TpS: {this.state.chain.mChainTps}</p>
-                                <p>Owner: {this.state.chain.owner}</p>
-                            </div>
-                        }
+                                        top={
+                                            <div>
+                                                <h3>Chain: {this.state.chain.mChainName}</h3>
+                                                <p>Creation Date: {this.state.chain.mChainCreatedAt}</p>
+                                                <p>Expiration Date: {this.state.chain.mChainLifetime}</p>
+                                                <p>Expires: {this.state.chain.countdown}</p>
+                                                <p>Storage: {this.state.chain.mChainStorage}</p>
+                                                <p>Nodes: {this.state.chain.mChainNodeNumber}</p>
+                                                <p>Deposit: {this.state.chain.mChainDeposit}</p>
+                                                <p>CpU: {this.state.chain.mChainCpu}</p>
+                                                <p>TpS: {this.state.chain.mChainTps}</p>
+                                                <p>Owner: {this.state.chain.owner}</p>
+                                            </div>
+                                        }
 
-                    />
-                </div>
-                <div
-                    className='right-panel'>
-                    <MessageList
-                        className='message-list'
-                        lockable={true}
-                        downButtonBadge={10}
-                        dataSource={this.state.messageList} />
+                                    />
+                                </div>
+                            </Col>
+                            <Col md="8" >
 
-                    <Input
-                        onChange={(val) => this.setState({message: val.target.value})} value={this.state.message}
-                        placeholder="Enter your message here"
-                        defaultValue=""
-                        ref='input'
-                        multiline={true}
-                        // buttonsFloat='left'
-                        onKeyPress={(e) => {
-                            if (e.shiftKey && e.charCode === 13) {
-                                return true;
-                            }
-                            if (e.charCode === 13) {
-                                this.refs.input.clear();
-                                this.addMessage();
-                                e.preventDefault();
-                                return false;
-                            }
-                        }}
-                        rightButtons={
-                            <Button
-                                text='Send'
-                                onClick={this.addMessage}
-                                disabled={this.state.libInit ? false : true}
-                            />
-                        }
-                    />
-                </div>
-            </div>
+                                <div className="skale-card mdc-elevation--z4 right-panel marg-top-big">
+                                    <MessageList
+                                        className='message-list'
+                                        lockable={true}
+                                        downButtonBadge={10}
+                                        dataSource={this.state.messageList} />
+
+                                    <Input
+                                        onChange={(val) => this.setState({message: val.target.value})} value={this.state.message}
+                                        placeholder="Enter your message here"
+                                        defaultValue=""
+                                        ref='input'
+                                        multiline={true}
+                                        // buttonsFloat='left'
+                                        onKeyPress={(e) => {
+                                            if (e.shiftKey && e.charCode === 13) {
+                                                return true;
+                                            }
+                                            if (e.charCode === 13) {
+                                                this.refs.input.clear();
+                                                this.addMessage();
+                                                e.preventDefault();
+                                                return false;
+                                            }
+                                        }}
+                                        rightButtons={
+                                            <Button
+                                                text='Send'
+                                                onClick={this.addMessage}
+                                                disabled={this.state.libInit ? false : true}
+                                            />
+                                        }
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
         );
     }
 }
