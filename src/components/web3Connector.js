@@ -33,11 +33,11 @@ export default class Web3Connector extends React.Component {
     }
 
     updateConnection() {
-        this.setState({provider: web3.currentProvider, loaded: true});
+        this.setState({provider: window.web3.currentProvider, loaded: true});
     }
 
     checkConnection() {
-        return (web3 && web3.currentProvider)
+        return (window.web3 && window.web3.currentProvider)
     }
 
     render() {
