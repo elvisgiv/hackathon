@@ -43,8 +43,8 @@ const ROUTES = {
   '/wallet': {title: 'Wallet'},
   '/management': {title: 'Management'},
   '/logs': {title: 'Logs'},
-  '/exchange-eth': {title: 'Exchange ETH'},
-  '/exchange-skl': {title: 'Exchange SKL'},
+  '/sell-skl': {title: 'Sell SKALE'},
+  '/buy-skl': {title: 'Buy SKALE'},
   '/dapps': {title: 'dApps'},
 };
 
@@ -143,8 +143,8 @@ export default class App extends Component {
                   <Route exact path='/dapps' render={() => <Dapps web3Connector={web3Connector}/>}/>
 
                   <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector} />} />
-                  <Route path='/exchange-eth' render={() => <FromSkale web3Connector={web3Connector} />} />
-                  <Route path='/exchange-skl' render={() => <FromEth web3Connector={web3Connector} />} />
+                  <Route path='/sell-skl' render={() => <FromSkale web3Connector={web3Connector} />} />
+                  <Route path='/buy-skl' render={() => <FromEth web3Connector={web3Connector} />} />
 
                   <Route path='/micropayments' component={Micropayments}/>
 

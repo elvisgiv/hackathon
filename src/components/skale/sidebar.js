@@ -47,7 +47,7 @@ export default class Sidebar extends React.Component {
   }
 
   walletPage() {
-    return this.isItemSelected('/wallet') || this.isItemSelected('/exchange-eth') || this.isItemSelected('/exchange-skl')
+    return this.isItemSelected('/wallet') || this.isItemSelected('/sell-skl') || this.isItemSelected('/buy-skl')
   }
 
   render() {

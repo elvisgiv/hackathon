@@ -77,6 +77,15 @@ export default class BotExchange extends React.Component {
 
     return (
       <div className='marg-30'>
+          <div className="fl-wrap fl-grow">
+
+              <h2 className="no-marg">Wallet</h2>
+              <p className="sb-p-text">
+                  Here you can see your balance in the MetaMask, and also buy or sell SKALE.
+              </p>
+          </div>
+          <br/>
+
         <div className="skale-card mdc-elevation--z4 marg-bott-30" style={{maxWidth: '750px'}}>
           <div>
             <div className="fl-cont fl-center-vert card-top">
@@ -116,7 +125,7 @@ export default class BotExchange extends React.Component {
         </div>
 
         <div className="skale-card mdc-elevation--z4">
-          <div className="fl-cont fl-center-vert card-top">
+          <div className="fl-cont fl-center-vert card-top" style={{"height": "65px"}}>
             <div className="fl-col">
               <h6 className="bold no-marg">Skale Bot</h6>
             </div>
@@ -125,12 +134,12 @@ export default class BotExchange extends React.Component {
 
             <div className="fl-cont">
               <div className="fl-col padd-ri-md">
-                <Link to='/exchange-skl' className="undec">
+                <Link to='/buy-skl' className="undec">
                   <Button unelevated className="green-btn"><ButtonIcon use="call_received" />Buy SKL</Button>
                 </Link>
               </div>
               <div className="fl-col">
-                <Link to='/exchange-eth' className="undec">
+                <Link to='/sell-skl' className="undec">
                   <Button unelevated className="red-btn"><ButtonIcon use="call_made" />Sell SKL</Button>
                 </Link>
               </div>

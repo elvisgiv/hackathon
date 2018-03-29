@@ -99,24 +99,32 @@ export default class FromSkale extends React.Component {
         return(
             <div className="marg-30">
 
+                <div className="fl-wrap fl-grow">
+                    <h2 className="no-marg">Sell SKALE</h2>
+                    <p className="sb-p-text">
+                        After filling field "Amount of SKALE" push "sell" button, a MetaMask pop-up window will appear.
+                        To provide a transaction, you must click "submit" on it.
+                    </p>
+                </div>
+                <br/>
 
                 <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
-                    <div className="fl-cont fl-center-vert card-top">
+                    <div className="fl-cont fl-center-vert card-top" style={{"height": "65px"}}>
                         <div className="fl-col">
-                            <h6 className="bold no-marg">Change SkaleTokens (SKL) to ETH</h6>
+                            <h6 className="bold no-marg">Sell SkaleTokens</h6>
                         </div>
                     </div>
                     <div className="padd-30">
 
                         <div className="fl-cont fl-center-vert">
                             <div className="fl-wrap">
-                                <TextField className="skale-field" id="skaleVal" type="number" size="150" label="Amount of SKL" onChange={(num) =>
+                                <TextField className="skale-field" id="skaleVal" type="number" size="150" label="Amount of SKALE" onChange={(num) =>
                                   this.setState({skaleVal: num.target.value})} value={this.state.skaleVal} onFocus={() => this.toggle('tooltipSkaleVal')} onBlur={() => this.toggle('tooltipSkaleVal')}/>
                             </div>
                             <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
                                 <Icon strategy="ligature" id="TooltipSkaleVal" className="lite-gr-col">info_outline</Icon>
                                 <Tooltip placement="right" isOpen={this.state.tooltipSkaleVal} target="TooltipSkaleVal" toggle={() => this.toggle('tooltipSkaleVal')}>
-                                    The amount of SkaleTokens that you want to exchange
+                                    The amount of SkaleTokens that you want to sell.
                                 </Tooltip>
                             </div>
                         </div>
@@ -125,8 +133,10 @@ export default class FromSkale extends React.Component {
 
                         <Button raised
                                 onClick={this.exchangeSkale} disabled={this.state.libInit ? false : true}>
-                            Exchange
+                            Sell
+
                         </Button>
+
                     </div>
                 </div>
             </div>

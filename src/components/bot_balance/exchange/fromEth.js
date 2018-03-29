@@ -106,10 +106,20 @@ export default class FromEth extends React.Component {
   render() {
     return (
       <div className="marg-30">
+
+          <div className="fl-wrap fl-grow">
+              <h2 className="no-marg">Buy SKALE</h2>
+              <p className="sb-p-text">
+                  After filling field "Amount of ETH" push "buy" button, a MetaMask pop-up window will appear.
+                  To provide a transaction, you must click "submit" on it.
+              </p>
+          </div>
+          <br/>
+
         <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
-          <div className="fl-cont fl-center-vert card-top">
+          <div className="fl-cont fl-center-vert card-top" style={{"height": "65px"}}>
             <div className="fl-col">
-              <h6 className="bold no-marg">Change ETH to SkaleTokens (SKL)</h6>
+              <h6 className="bold no-marg">Buy SkaleTokens</h6>
             </div>
           </div>
           <div className="padd-30">
@@ -125,7 +135,7 @@ export default class FromEth extends React.Component {
                 <Icon strategy="ligature" id="TooltipEthVal" className="lite-gr-col">info_outline</Icon>
                 <Tooltip placement="right" isOpen={this.state.tooltipEthVal} target="TooltipEthVal"
                          toggle={() => this.toggle('tooltipEthVal')}>
-                  The amount of ETH that you want to exchange
+                  The amount of ETH that you want to spend on buying SKALE.
                 </Tooltip>
               </div>
             </div>
@@ -134,7 +144,7 @@ export default class FromEth extends React.Component {
 
             <Button raised
                     onClick={this.exchangeEth} disabled={this.state.libInit ? false : true}>
-              Exchange
+              Buy
             </Button>
 
           </div>

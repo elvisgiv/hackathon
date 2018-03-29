@@ -167,7 +167,16 @@ export default class CreateMchain extends React.Component {
     return (
       <div className="marg-30">
 
-
+          <div className="fl-wrap fl-grow">
+              <h2 className="no-marg">Create sChain</h2>
+              <p className="sb-p-text">
+                  Create your own Skale-chanel with custom characteristics.
+              </p>
+              <p className="sb-p-text">
+                  After filling all fields push "create schain" button, a MetaMask pop-up window will appear.
+                  To provide a transaction, you must click "submit" on it.              </p>
+          </div>
+          <br/>
 
         <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
           <div className="fl-cont fl-center-vert card-top">
