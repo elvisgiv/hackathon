@@ -9,11 +9,31 @@
 
 
 .card-top{
-  background-color: #e4e4e4;
-  padding: 15px;
+  //background-color: #e4e4e4;
+  //padding: 25px;
 }
 
 
-.skale-card{
-  max-width: 750px
+.skale-card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: solid 1px rgba(212, 212, 212, 0.6) !important;
+  border-radius: 3px;
 }
+
+.card-h-icon {
+  background-color: #6f6f6f !important;
+  border-radius: 50%;
+  padding: 6px;
+  height: 31px;
+  width: 31px;
+}
+
+.card-title{
+  color: #4c4c4c !important;
+}
+
+.card-content{
+  padding-top: 30px;
+  padding-left: 20px;
+}
+

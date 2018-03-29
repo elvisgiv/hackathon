@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5, h6, p, span {
   font-weight: 400;
 }
 
+.light{
+  font-weight: 200;
+}
+
 .uppercase{
   text-transform: uppercase;
 }
@@ -21,7 +25,18 @@ h1, h2, h3, h4, h5, h6, p, span {
 .undec{ text-decoration: none !important; }
 .inl{ display: inline !important; }
 
-.sb-p-text {
-  font-size: 11pt;
-  margin-bottom: 0px !important;
+
+.gr-text{
+  color: #7f7f7f !important;
 }
+
+.page-desc{
+  color: #7f7f7f !important;
+  font-size: 11pt !important;
+  font-weight: 400 !important;
+}
+
+.page-title{
+  color: #4c4c4c !important;
+}
+

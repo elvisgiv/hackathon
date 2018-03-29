@@ -53,27 +53,13 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <Drawer className="sidebar" persistent open={this.state.persistentOpen}>
-
-        <Toolbar>
-          <ToolbarRow>
-            <ToolbarSection alignStart>
-              <ToolbarTitle className="no-padd no-marg">
-                <Link to='/' className="undec">
-                  <img src={logo} className="header-logo"/>
-                </Link>
-              </ToolbarTitle>
-            </ToolbarSection>
-          </ToolbarRow>
-        </Toolbar>
-
-        <DrawerContent className="padd-top-md">
-
+        <DrawerContent className="padd-top-30">
           <Link to='/wallet' className="undec">
               <ListItem className={"fl-cont fl-center-vert "+ (this.walletPage() ? 'selected-item' : '')}>
-                  <div className="fl-wrap gx-icon">
-                      <Icon strategy="ligature" className="orange-col">account_balance_wallet</Icon>
+                  <div className="fl-wrap gx-icon padd-left-10">
+                      <Icon strategy="ligature" className="gray-icon">account_balance_wallet</Icon>
                   </div>
-                  <ListItemText className="fl-wrap padd-left-10">
+                  <ListItemText className="fl-wrap padd-left-md">
                       Wallet
                   </ListItemText>
               </ListItem>
@@ -81,10 +67,10 @@ export default class Sidebar extends React.Component {
 
           <Link to='/schains' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.sChainsPage() ? 'selected-item' : '')}>
-              <div className="fl-wrap gx-icon">
-                <Icon strategy="ligature" className="blue-col">group_work</Icon>
+              <div className="fl-wrap gx-icon padd-left-10">
+                <Icon strategy="ligature" className="gray-icon">group_work</Icon>
               </div>
-              <ListItemText className="fl-wrap padd-left-10">
+              <ListItemText className="fl-wrap padd-left-md">
                 sChains
               </ListItemText>
             </ListItem>
@@ -92,10 +78,10 @@ export default class Sidebar extends React.Component {
 
           <Link to='/dapps' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/dapps') ? 'selected-item' : '')}>
-              <div className="fl-wrap gx-icon">
-                <Icon strategy="ligature" className="cyan-col">extension</Icon>
+              <div className="fl-wrap gx-icon padd-left-10">
+                <Icon strategy="ligature" className="gray-icon">extension</Icon>
               </div>
-              <ListItemText className="fl-wrap padd-left-10">
+              <ListItemText className="fl-wrap padd-left-md">
                 dApps
               </ListItemText>
             </ListItem>
@@ -103,10 +89,10 @@ export default class Sidebar extends React.Component {
 
           <Link to='/management' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/management') ? 'selected-item' : '')}>
-              <div className="fl-wrap gx-icon">
-                <Icon strategy="ligature" className="green-col">view_carousel</Icon>
+              <div className="fl-wrap gx-icon padd-left-10">
+                <Icon strategy="ligature" className="gray-icon">view_carousel</Icon>
               </div>
-              <ListItemText className="fl-wrap padd-left-10">
+              <ListItemText className="fl-wrap padd-left-md">
                 Management
               </ListItemText>
             </ListItem>
@@ -114,10 +100,10 @@ export default class Sidebar extends React.Component {
 
           <Link to='/logs' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/logs') ? 'selected-item' : '')}>
-              <div className="fl-wrap gx-icon">
-                <Icon strategy="ligature" className="purple-col">assignment</Icon>
+              <div className="fl-wrap gx-icon padd-left-10">
+                <Icon strategy="ligature" className="gray-icon">assignment</Icon>
               </div>
-              <ListItemText className="fl-wrap padd-left-10">
+              <ListItemText className="fl-wrap padd-left-md">
                 Logs
               </ListItemText>
             </ListItem>

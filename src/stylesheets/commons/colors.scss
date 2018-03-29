@@ -1,6 +1,26 @@
-//== Colors
-/*GalacticExchange stylesheets*/
-// accent color
+@import "variables";
+
+.gray-icon{
+  color: $gray-icon !important;
+}
+
+.info-icon{
+  color: rgba(51, 146, 230, 0.85) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+// old
+
+
 $accent-color-gex: #1d87e4;
 $link-color-gex: #0d75d0;
 

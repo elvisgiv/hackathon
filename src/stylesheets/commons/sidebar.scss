@@ -1,22 +1,21 @@
+@import "variables";
+
 .mdc-drawer{
-  height: 100vh;
+  height: calc(100vh - 73px);
 }
 
 .mdc-drawer--persistent{
   .mdc-drawer__drawer{
-    border-right: none !important;
-    background-color: #f1f1f1 !important;
+    border-right: solid 1px $border-color !important;
+    background-color: white !important;
   }
 }
-
-
 
 .main-content{
   .mdc-toolbar{
     background-color: #404040 !important;
   }
 }
-
 
 .sidebar{
   .mdc-toolbar{
@@ -27,7 +26,7 @@
 
 .main-content{
   background-color: white;
-  height: 100vh;
+  height: calc(100vh - 73px);
   .mdc-toolbar{
     padding: 4px 0;
   }
@@ -35,15 +34,22 @@
 
 .mdc-list-item__text{
   color: #424242 !important;
+  font-weight: 200 !important;
+  font-size: 11pt !important;
 }
 
 .selected-item {
-  background-color: #d6d6d6;
+  background-color: $selected-color;
+
+  span, i{
+    color: white !important;
+  }
+
 }
 
 .skale-page-content{
-  overflow-y: scroll;
-  height: calc(100vh - 72px);
+  overflow-y: auto;
+  height: calc(100vh - 73px);
 }
 
 .skale-field{
