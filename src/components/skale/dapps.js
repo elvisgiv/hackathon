@@ -24,7 +24,7 @@ export default class Dapps extends React.Component {
               />
             </div>
             <div className="fl-wrap">
-              <Link to='/schains/create' className="undec">
+              <Link to='/dapps/upload' className="undec">
                 <Button className="btn-md" unelevated>Upload dApp</Button>
               </Link>
             </div>

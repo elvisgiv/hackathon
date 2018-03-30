@@ -9,6 +9,7 @@ import Web3Connection from './components/shared/web3Connection';
 import Logs from './components/skale/logs';
 import Management from './components/skale/management';
 import Dapps from './components/skale/dapps';
+import UploadDapp from './components/dapps/create/uploadDapp';
 
 import Mchain from './components/mchains/show/mchain';
 import SChains from './components/skale/sChains';
@@ -34,6 +35,7 @@ const ROUTES = {
   '/exchange-eth': {title: 'Exchange ETH'},
   '/exchange-skl': {title: 'Exchange SKL'},
   '/dapps': {title: 'dApps'},
+  '/dapps/upload': {title: 'Upload Dapp'},
 };
 
 
@@ -120,6 +122,7 @@ export default class App extends Component {
                   <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector}/>}/>
                   <Route path='/exchange-eth' render={() => <FromSkale web3Connector={web3Connector}/>}/>
                   <Route path='/exchange-skl' render={() => <FromEth web3Connector={web3Connector}/>}/>
+                  <Route path='/dapps/upload' render={() => <UploadDapp web3Connector={web3Connector}/>}/>
 
                   <Route exact path='/mchains/:name'
                          render={(props) => <Mchain web3Connector={web3Connector} props={props}/>}/>
