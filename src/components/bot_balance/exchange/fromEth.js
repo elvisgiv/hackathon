@@ -85,9 +85,9 @@ export default class FromEth extends React.Component {
         text: "You just exchanged 80% of your amount, the remaining 20% you can pick up after the close of exchange!",
         icon: "success",
         //buttons: true,
-      })
+      });
 
-        this.props.fatherToggle()
+      this.props.fatherToggle()
 
     } else {
       return (
@@ -116,11 +116,10 @@ export default class FromEth extends React.Component {
                   subtitle='After filling field "Amount of ETH" push "buy" button, a MetaMask pop-up window will appear.
                       To provide a transaction, you must click "submit" on it.'
               />
-
           </ModalHeader>
 
           <ModalBody>
-              <Input className="new-input" id="basCpuTime" type="number" size="150" placeholder="
+              <Input className="new-input" id="buySkl" type="number" size="150" placeholder="
                         The amount of ETH that you want to spend on buying SKALE"
                      onChange={(num) =>
                          this.setState({ethVal: num.target.value})} value={this.state.ethVal}/>

@@ -1,9 +1,12 @@
 import React from 'react'
 
-import { Tooltip, Input} from 'reactstrap';
+import {Tooltip, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
 import {TextField, TextFieldHelperText} from 'rmwc/TextField';
 import {Icon} from 'rmwc/Icon';
 import {Button} from 'rmwc/Button';
+
+import PageTitle from "../../shared/pageTitle";
+
 
 import FromEth from './fromEth';
 import swal from 'sweetalert';
@@ -62,7 +65,8 @@ export default class FromSkale extends React.Component {
             // get 'wei' from skale
             let weiVal = await gex.w3.web3.utils.toWei(skaleVal);
             // invoke contract from lib
-            let promise = await gex.bot().depositGex({value: weiVal});
+            //let promise = await gex.bot().depositGex({value: weiVal});
+            let promise = gex.bot().depositGex({value: weiVal});
             //
             console.log('exchangeSkaleexchangeSkaleexchangeSkaleexchangeSkaleexchangeSkale');
             // clear fields
@@ -73,7 +77,10 @@ export default class FromSkale extends React.Component {
                 text: "You just exchanged 80% of your amount, the remaining 20% you can pick up after the close of exchange!",
                 icon: "success",
                 //buttons: true,
-            })
+            });
+
+            this.props.fatherToggleColl()
+
         } else {
             return (
                 swal({
@@ -97,49 +104,37 @@ export default class FromSkale extends React.Component {
 
     render(){
         return(
-            <div className="marg-30">
+            <div className="">
 
-                <div className="fl-wrap fl-grow">
-                    <h2 className="no-marg">Sell SKALE</h2>
-                    <p className="sb-p-text">
-                        After filling field "Amount of SKALE" push "sell" button, a MetaMask pop-up window will appear.
-                        To provide a transaction, you must click "submit" on it.
-                    </p>
-                </div>
-                <br/>
+                <ModalHeader>
+                    <PageTitle
+                        title="Sell SKALE"
+                        subtitle='After filling field "Amount of SKALE" push "sell" button, a MetaMask pop-up window will appear.
+                            To provide a transaction, you must click "submit" on it.'
+                    />
+                </ModalHeader>
 
-                <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
-                    <div className="fl-cont fl-center-vert card-top" style={{"height": "65px"}}>
-                        <div className="fl-col">
-                            <h6 className="bold no-marg">Sell SkaleTokens</h6>
-                        </div>
-                    </div>
-                    <div className="padd-30">
+                <ModalBody>
+                    <Input className="new-input" id="sellSkl" type="number" size="150" placeholder="
+                            The amount of SkaleTokens that you want to sell."
+                           onChange={(num) =>
+                               this.setState({skaleVal: num.target.value})} value={this.state.skaleVal}/>
+                </ModalBody>
 
-                        <div className="fl-cont fl-center-vert">
-                            <div className="fl-wrap">
-                                <TextField className="skale-field" id="skaleVal" type="number" size="150" label="Amount of SKALE" onChange={(num) =>
-                                  this.setState({skaleVal: num.target.value})} value={this.state.skaleVal} onFocus={() => this.toggle('tooltipSkaleVal')} onBlur={() => this.toggle('tooltipSkaleVal')}/>
-                            </div>
-                            <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-                                <Icon strategy="ligature" id="TooltipSkaleVal" className="lite-gr-col">info_outline</Icon>
-                                <Tooltip placement="right" isOpen={this.state.tooltipSkaleVal} target="TooltipSkaleVal" toggle={() => this.toggle('tooltipSkaleVal')}>
-                                    The amount of SkaleTokens that you want to sell.
-                                </Tooltip>
-                            </div>
-                        </div>
+                <ModalFooter>
+                    <Button raised
+                            onClick={() => {this.exchangeSkale(); }}
+                            disabled={this.state.libInit ? false : true}>
+                        Sell
+                    </Button>
+                    <Button color="secondary" onClick={this.props.fatherToggleColl}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
 
-                        <br/>
-
-                        <Button raised
-                                onClick={this.exchangeSkale} disabled={this.state.libInit ? false : true}>
-                            Sell
-
-                        </Button>
-
-                    </div>
-                </div>
             </div>
+
+
 
         )
 

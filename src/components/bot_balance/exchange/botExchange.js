@@ -5,7 +5,7 @@ import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
 import FromEth from "./fromEth";
 
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, Collapse } from 'reactstrap';
 
 
 import PageTitle from "../../shared/pageTitle";
@@ -18,16 +18,19 @@ import {Button, ButtonIcon} from 'rmwc/Button';
 const skale = require('@skale-labs/skale-api');
 import ethLogo from '../../../images/coins/eth.png';
 import skaleLogo from '../../../images/coins/skale.jpg';
+import FromSkale from "./fromSkale";
 
 export default class BotExchange extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        modal: false
+        modal: false,
+        collapse: false,
     };
 
     this.toggle = this.toggle.bind(this);
+    this.toggleColl = this.toggleColl.bind(this);
 
   }
 
@@ -78,9 +81,16 @@ export default class BotExchange extends React.Component {
         });
     }
 
+    toggleColl() {
+        this.setState({
+            collapse: !this.state.collapse
+        });
+    }
+
   render() {
 
       let buySkl = <FromEth web3Connector={this.props.web3Connector} fatherToggle={this.toggle}/>;
+      let sellSkl = <FromSkale web3Connector={this.props.web3Connector} fatherToggleColl={this.toggleColl}/>;
 
       return (
       <div className='marg-30'>
@@ -142,15 +152,16 @@ export default class BotExchange extends React.Component {
                 </div>
 
 
-
-
-
-
-
                 <div className="fl-col">
-                  <Link to='/exchange-eth' className="undec">
+{/*                  <Link to='/exchange-eth' className="undec">
                     <Button unelevated className="red-btn"><ButtonIcon use="call_made"/>Sell SKALE</Button>
-                  </Link>
+                  </Link>*/}
+                    <Button unelevated className="red-btn" onClick={this.toggleColl}>
+                        <ButtonIcon use="call_made"/>Sell SKALE</Button>
+                    <Collapse isOpen={this.state.collapse}>
+                        {sellSkl}
+                    </Collapse>
+
                 </div>
               </div>
 
