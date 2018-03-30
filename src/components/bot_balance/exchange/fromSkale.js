@@ -24,6 +24,7 @@ export default class FromSkale extends React.Component {
         this.state = {
             skaleVal: '',
             libInit: false,
+          ethEstimateValue: 0,
 
             tooltipSkaleVal: false,
 
@@ -122,7 +123,7 @@ export default class FromSkale extends React.Component {
                     <Input className="new-input" id="buySkl" type="number" size="150" placeholder="
                         SKALE amount"
                            onChange={(num) =>
-                               this.setState({skaleVal: num.target.value, ethEstimateValue: (num.target.value * 7)})}
+                               this.setState({skaleVal: num.target.value, ethEstimateValue: (num.target.value / 7).toFixed(3)})}
                            value={this.state.skaleVal}/>
 
 
