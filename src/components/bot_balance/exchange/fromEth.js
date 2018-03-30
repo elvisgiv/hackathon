@@ -1,9 +1,14 @@
 import React from 'react'
 
-import {Tooltip, Input} from 'reactstrap';
+import {Tooltip, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
 import {TextField, TextFieldHelperText} from 'rmwc/TextField';
 import {Icon} from 'rmwc/Icon';
 import {Button} from 'rmwc/Button';
+
+import PageTitle from "../../shared/pageTitle";
+
+
+
 //
 import swal from 'sweetalert';
 
@@ -68,7 +73,8 @@ export default class FromEth extends React.Component {
       // get 'wei' from eth
       let weiVal = await gex.w3.web3.utils.toWei(ethVal);
       // invoke contract from lib
-      let promise = await gex.bot().depositEth({value: weiVal});
+      //let promise = await gex.bot().depositEth({value: weiVal});
+      let promise = gex.bot().depositEth({value: weiVal});
       //
       console.log('exchangeEthexchangeEthexchangeEthexchangeEthexchangeEth');
       // clear fields
@@ -80,6 +86,9 @@ export default class FromEth extends React.Component {
         icon: "success",
         //buttons: true,
       })
+
+        this.props.fatherToggle()
+
     } else {
       return (
         swal({
@@ -94,61 +103,41 @@ export default class FromEth extends React.Component {
 
   }
 
-  toggle(fieldName) {
-    if (this.state[fieldName] !== undefined) {
-      let newState = {};
-      newState[fieldName] = !this.state[fieldName];
-      this.setState(newState);
-    }
-  }
+
 
 
   render() {
     return (
-      <div className="marg-30">
+      <div className="">
 
-          <div className="fl-wrap fl-grow">
-              <h2 className="no-marg">Buy SKALE</h2>
-              <p className="sb-p-text">
-                  After filling field "Amount of ETH" push "buy" button, a MetaMask pop-up window will appear.
-                  To provide a transaction, you must click "submit" on it.
-              </p>
-          </div>
-          <br/>
+          <ModalHeader>
+              <PageTitle
+                  title="Buy SKALE"
+                  subtitle='After filling field "Amount of ETH" push "buy" button, a MetaMask pop-up window will appear.
+                      To provide a transaction, you must click "submit" on it.'
+              />
 
-        <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
-          <div className="fl-cont fl-center-vert card-top" style={{"height": "65px"}}>
-            <div className="fl-col">
-              <h6 className="bold no-marg">Buy SkaleTokens</h6>
-            </div>
-          </div>
-          <div className="padd-30">
+          </ModalHeader>
 
-            <div className="fl-cont fl-center-vert">
-              <div className="fl-wrap">
-                <TextField className="skale-field" id="ethVal" type="number" size="150" label="Amount of ETH"
-                           onChange={(num) =>
-                             this.setState({ethVal: num.target.value})} value={this.state.ethVal}
-                           onFocus={() => this.toggle('tooltipEthVal')} onBlur={() => this.toggle('tooltipEthVal')}/>
-              </div>
-              <div className="fl-wrap gx-icon marg-left-md padd-top-sm">
-                <Icon strategy="ligature" id="TooltipEthVal" className="lite-gr-col">info_outline</Icon>
-                <Tooltip placement="right" isOpen={this.state.tooltipEthVal} target="TooltipEthVal"
-                         toggle={() => this.toggle('tooltipEthVal')}>
-                  The amount of ETH that you want to spend on buying SKALE.
-                </Tooltip>
-              </div>
-            </div>
+          <ModalBody>
+              <Input className="new-input" id="basCpuTime" type="number" size="150" placeholder="
+                        The amount of ETH that you want to spend on buying SKALE"
+                     onChange={(num) =>
+                         this.setState({ethVal: num.target.value})} value={this.state.ethVal}/>
+          </ModalBody>
 
-            <br/>
+          <ModalFooter>
 
-            <Button raised
-                    onClick={this.exchangeEth} disabled={this.state.libInit ? false : true}>
-              Buy
-            </Button>
+                <Button raised
+                        onClick={() => {this.exchangeEth(); }}
+                        disabled={this.state.libInit ? false : true}>
+                  Buy
+                </Button>
 
-          </div>
-        </div>
+                <Button color="secondary" onClick={this.props.fatherToggle}>Cancel</Button>
+
+          </ModalFooter>
+
 
       </div>
 

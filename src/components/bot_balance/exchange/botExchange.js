@@ -3,6 +3,10 @@ import {Link} from 'react-router-dom'
 
 import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
+import FromEth from "./fromEth";
+
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 
 import PageTitle from "../../shared/pageTitle";
 import CardTitle from "../../shared/cardTitle";
@@ -19,7 +23,12 @@ export default class BotExchange extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+        modal: false
+    };
+
+    this.toggle = this.toggle.bind(this);
+
   }
 
   componentWillReceiveProps() {
@@ -63,8 +72,17 @@ export default class BotExchange extends React.Component {
     });
   }
 
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
   render() {
-    return (
+
+      let buySkl = <FromEth web3Connector={this.props.web3Connector} fatherToggle={this.toggle}/>;
+
+      return (
       <div className='marg-30'>
         <PageTitle
           title="Wallet"
@@ -113,10 +131,22 @@ export default class BotExchange extends React.Component {
               />
               <div className="fl-cont padd-left-md">
                 <div className="fl-col padd-ri-md">
-                  <Link to='/exchange-skl' className="undec">
+{/*                  <Link to='/exchange-skl' className="undec">
                     <Button unelevated className="green-btn"><ButtonIcon use="call_received"/>Buy SKALE</Button>
-                  </Link>
+                  </Link>*/}
+                    <Button unelevated className="green-btn" onClick={this.toggle}>
+                        <ButtonIcon use="call_received"/>Buy SKALE</Button>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        {buySkl}
+                    </Modal>
                 </div>
+
+
+
+
+
+
+
                 <div className="fl-col">
                   <Link to='/exchange-eth' className="undec">
                     <Button unelevated className="red-btn"><ButtonIcon use="call_made"/>Sell SKALE</Button>
