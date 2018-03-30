@@ -34,16 +34,11 @@ export default class Header extends React.Component {
           <Toolbar className="skale-header">
               <ToolbarRow>
                   <ToolbarSection alignStart>
-
                       <ToolbarTitle className="no-padd no-marg">
                           <Link to='/' className="undec">
                               <img src={logo} className="header-logo"/>
                           </Link>
                       </ToolbarTitle>
-
-
-                      <ToolbarMenuIcon use="menu" onClick={() => this.refs.sidebar.toggleSidebar()}/>
-                      <ToolbarTitle>{this.state.pageTitle}</ToolbarTitle>
                   </ToolbarSection>
                   <ToolbarSection alignEnd>
 

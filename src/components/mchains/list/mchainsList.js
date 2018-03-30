@@ -138,7 +138,7 @@ export default class MchainsList extends React.Component {
     return (
       <div style={{textAlign: "right"}}>
         <Button dense onClick={() => this.withdrawFrom(value)} disabled={(countDownDate > timeNow)}>
-          withdraw
+          Withdraw
           <ButtonIcon use="keyboard_arrow_right" className="marg-left-sm marg-ri-sm"/>
         </Button>
       </div>
@@ -256,7 +256,7 @@ export default class MchainsList extends React.Component {
         Header: () => this.headerTooltip('Name', "Unique Schain Name"),
         accessor: "mChainName",
         filterable: true,
-        width: 140,
+        //width: 140,
         Cell: ({value}) => this.linkTo(value)
 
       },
@@ -275,24 +275,24 @@ export default class MchainsList extends React.Component {
       {
         Header: () => this.headerTooltip('CpU', "Central Processing Unit time in % or units"),
         accessor: "mChainCpu",
-        width: 100
+        //width: 100
 
       },
       {
         Header: () => this.headerTooltip('TpS', "Transaction Per Second"),
         accessor: "mChainTps",
-        width: 100
+        //width: 100
 
       },
       {
         Header: () => this.headerTooltip('Creation Date', "Creation Date"),
         accessor: "mChainCreatedAt",
-        width: 160
+        //width: 160
       },
       {
         Header: () => this.headerTooltip('Expiration Date', "Expiration Date"),
         accessor: "mChainLifetime",
-        width: 160
+        //width: 160
       },
       /*{
         Header: () => this.headerTooltip('Expires', "Expires after"),
@@ -303,7 +303,7 @@ export default class MchainsList extends React.Component {
         // add custom value to "Commands" column
         id: 'button',
         accessor: 'mChainName', //value
-        width: 120,
+        //width: 120,
         sortable: false,
         Cell: ({value}) => this.isExpired(value)
       },

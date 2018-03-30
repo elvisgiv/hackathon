@@ -7,6 +7,9 @@ import {TextField, TextFieldHelperText} from 'rmwc/TextField';
 import {Icon} from 'rmwc/Icon';
 import {Button} from 'rmwc/Button';
 
+import CardInfo from "../../shared/cardInfo";
+import PageTitle from "../../shared/pageTitle";
+
 
 import swal from 'sweetalert';
 
@@ -167,7 +170,85 @@ export default class CreateMchain extends React.Component {
     return (
       <div className="marg-30">
 
-          <div className="fl-wrap fl-grow">
+        <PageTitle
+          title="Create sChain"
+          subtitle="Here you can see your balance in the MetaMask, and also buy or sell SKALE."
+        />
+
+        <div className='fl-wrap padd-md clickable lite-gx-border choice-card'>
+          <div className='fl-cont fl-center-vert bord-bott padd-bott-md'>
+            <div className='fl-wrap padd-ri-md'>
+              <div className='grad-aws grad-wrap'>
+                <Icon strategy="ligature" className="lg-icon white-text">info</Icon>
+              </div>
+            </div>
+            <div className='fl-wrap fl-grow padd-left-md padd-ri-md'>
+              <h3 className='bold choice-title'>Small</h3>
+              <div className='fl-cont marg-top-10'>
+                <div className='fl-wrap padd-top-10'>
+                  <CardInfo
+                    k="some short descpiption for this type"
+                    value=''
+                    nopadd={true}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='fl-wrap padd-left-md padd-ri-10 marg-left-md'>
+              <Icon strategy="ligature" className=" info-icon">keyboard_arrow_right</Icon>
+            </div>
+          </div>
+
+          <div className='padd-top-md padd-left-md'>
+            <CardInfo
+              k="Storage in bytes:"
+              value='1500'
+              //tooltipText="Number of bytes this channel can store"
+            />
+            <CardInfo
+              k="Lifetime:"
+              value='10000'
+              //tooltipText="Number of seconds this channel will be considered as alive"
+            />
+            <CardInfo
+              k="Max number of nodes:"
+              value='26'
+              //tooltipText="Max number of nodes associated with this channel"
+            />
+            <CardInfo
+              k="CPU Time:"
+              value='50'
+              //tooltipText="CPU Time in %"
+            />
+            <CardInfo
+              k="Transactions Per Second:"
+              value='2500'
+              //tooltipText="Number Of Transactions Per Second"
+              nopadd={true}
+            />
+          </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div className="fl-wrap fl-grow">
               <h2 className="no-marg">Create sChain</h2>
               <p className="sb-p-text">
                   Create your own Skale-chanel with custom characteristics.

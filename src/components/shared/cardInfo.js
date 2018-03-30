@@ -24,7 +24,7 @@ export default class SectionTitle extends React.Component {
 
   render() {
     return (
-      <div className="fl-cont fl-center-vert padd-bott-md">
+      <div className={"fl-cont fl-center-vert " + (this.props.nopadd ? '' : 'padd-bott-md')}>
         <div className="fl-col">
           <h6 className="gr-text inl marg-ri-10 light">{this.props.k}</h6>
           <h6 className="inl">{this.props.value}</h6>
