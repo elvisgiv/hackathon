@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router'
+import {Redirect} from 'react-router'
 
 import {Input, Container, Tooltip} from 'reactstrap';
 
@@ -9,6 +9,8 @@ import {Button} from 'rmwc/Button';
 
 import CardInfo from "../../shared/cardInfo";
 import PageTitle from "../../shared/pageTitle";
+import CardTitle from "../../shared/cardTitle";
+import SectionTitle from "../../shared/sectionTitle";
 
 
 import swal from 'sweetalert';
@@ -153,7 +155,7 @@ export default class CreateMchain extends React.Component {
 
 
   toggle(fieldName) {
-    if(this.state[fieldName] !== undefined){
+    if (this.state[fieldName] !== undefined) {
       let newState = {};
       newState[fieldName] = !this.state[fieldName];
       this.setState(newState);
@@ -161,10 +163,10 @@ export default class CreateMchain extends React.Component {
   }
 
   render() {
-    const { sChainsPage } = this.state;
+    const {sChainsPage} = this.state;
 
     if (sChainsPage) {
-      return <Redirect to="/schains" push={true} />
+      return <Redirect to="/schains" push={true}/>
     }
 
     return (
@@ -172,10 +174,10 @@ export default class CreateMchain extends React.Component {
 
         <PageTitle
           title="Create sChain"
-          subtitle="Here you can see your balance in the MetaMask, and also buy or sell SKALE."
+          subtitle="Create your own Skale-chanel with custom characteristics."
         />
 
-        <div className='fl-wrap padd-md clickable lite-gx-border choice-card'>
+        {/*<div className='fl-wrap padd-md clickable lite-gx-border choice-card'>
           <div className='fl-cont fl-center-vert bord-bott padd-bott-md'>
             <div className='fl-wrap padd-ri-md'>
               <div className='grad-aws grad-wrap'>
@@ -229,14 +231,28 @@ export default class CreateMchain extends React.Component {
           </div>
 
 
-        </div>
+        </div>*/}
+
+        <div className="skale-card padd-30 marg-bott-30">
+
+          <CardTitle icon="settings" text="Configuration"/>
 
 
+          <div className="card-content">
+            <SectionTitle
+              text="Fill these fields to create an sChain."
+              //tooltipText="todo: short explanation for the sChain creation"
+              nopadd={true}
+            />
+
+            <SectionTitle
+              text="Then click 'Create sChain' and MetaMask pop-up will appear.
+                  Click 'Submit' to confirm a transaction."
+              //tooltipText="todo: short explanation for the sChain creation"
+            />
 
 
-
-
-
+            <div className="form-wrap" style={{maxWidth: "850px"}}>
 
 
 
@@ -312,11 +328,22 @@ export default class CreateMchain extends React.Component {
             <br/>
 
 
-            <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
+              <div className="padd-top-30 padd-bott-10">
+                <CardInfo
+                  k="Deposit:"
+                  //value={this.state.deposit}
+                  value={5200 + " SKALE"}
+                  tooltipText="todo: short explanation for deposit value"
+                />
+              </div>
+              <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
+
+            </div>
+
 
           </div>
-        </div>
 
+        </div>
       </div>
     )
 
