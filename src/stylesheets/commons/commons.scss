@@ -1,4 +1,6 @@
 // commons.scss - file to import all components in folder
+@import "variables";
+
 @import "colors";
 @import "grid";
 @import "layout";
@@ -12,7 +14,11 @@
 @import "cards";
 @import "inputs";
 @import "animations";
+@import "sidebar";
 
 .hand-cursor {
+  cursor: pointer;
+}
+.clickable{
   cursor: pointer;
 }
