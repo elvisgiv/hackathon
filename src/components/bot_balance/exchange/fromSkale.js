@@ -154,7 +154,7 @@ export default class FromSkale extends React.Component {
                             >
                                 Confirm
                             </Button>
-                            <Button color="secondary" onClick={this.props.fatherToggle}>Cancel</Button>
+                            <Button color="secondary" onClick={this.props.fatherToggleColl}>Cancel</Button>
                         </div>
                     </div>
                 </div>
