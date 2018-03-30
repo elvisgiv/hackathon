@@ -98,7 +98,7 @@ export default class BotExchange extends React.Component {
                 </div>
                 <div className="fl-col">
                   <h5 className="no-marg inl">{this.state.skl} </h5>
-                  <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKL </h5>
+                  <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
                 </div>
               </div>
             </div>
@@ -114,12 +114,12 @@ export default class BotExchange extends React.Component {
               <div className="fl-cont padd-left-md">
                 <div className="fl-col padd-ri-md">
                   <Link to='/exchange-skl' className="undec">
-                    <Button unelevated className="green-btn"><ButtonIcon use="call_received"/>Buy SKL</Button>
+                    <Button unelevated className="green-btn"><ButtonIcon use="call_received"/>Buy SKALE</Button>
                   </Link>
                 </div>
                 <div className="fl-col">
                   <Link to='/exchange-eth' className="undec">
-                    <Button unelevated className="red-btn"><ButtonIcon use="call_made"/>Sell SKL</Button>
+                    <Button unelevated className="red-btn"><ButtonIcon use="call_made"/>Sell SKALE</Button>
                   </Link>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default class BotExchange extends React.Component {
                   </div>
                   <div className="fl-col padd-ri-30">
                     <h5 className="no-marg inl">{this.state.botSkale} </h5>
-                    <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKL </h5>
+                    <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
                   </div>
                   <div className="fl-col">
                     <ReturnSkl web3Connector={this.props.web3Connector}/>

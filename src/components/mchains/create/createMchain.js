@@ -253,96 +253,68 @@ export default class CreateMchain extends React.Component {
 
 
             <div className="form-wrap" style={{maxWidth: "850px"}}>
-
-
-
-
-
-
-
-
-
-
-
-        <div className="fl-wrap fl-grow">
-              <h2 className="no-marg">Create sChain</h2>
-              <p className="sb-p-text">
-                  Create your own Skale-chanel with custom characteristics.
-              </p>
-              <p className="sb-p-text">
-                  After filling all fields push "create schain" button, a MetaMask pop-up window will appear.
-                  To provide a transaction, you must click "submit" on it.              </p>
-          </div>
-          <br/>
-
-        <div className="skale-card mdc-elevation--z4" style={{maxWidth: '750px'}}>
-          <div className="padd-30">
-              <div className="fl-cont fl-center-vert card-top">
-                  <div className="fl-col">
-                      <h5 className="bold">Fill these fields to create an sChain</h5>
+              <div className="">
+                <div className="">
+                  <h6 className="like-old">Name of sChain</h6>
+                  <div className="fl-col fl-grow">
+                    <Input className="new-input" id="basName" type="text" placeholder="Enter Name of sChain"
+                           onChange={(num) =>
+                             this.setState({basName: num.target.value})} value={this.state.basName}/>
+                    <br/>
                   </div>
-              </div>
-              <br/>
 
-              <h6 className="like-old">Name of sChain</h6>
-              <div className="fl-col fl-grow">
-                  <Input className="new-input" id="basName" type="text" placeholder="Enter Name of sChain" onChange={(num) =>
-                      this.setState({basName: num.target.value})} value={this.state.basName} />
+                  <h6 className="like-old">Storage in Bytes</h6>
+                  <Input className="new-input" id="basStorageBytes" type="number" size="180"
+                         placeholder="Number of bytes this channel can store"
+                         onChange={(num) => this.setState({basStorageBytes: num.target.value})}
+                         value={this.state.basStorageBytes}/>
                   <br/>
-              </div>
 
-              <h6 className="like-old">Storage in Bytes</h6>
-              <Input className="new-input" id="basStorageBytes" type="number" size="180" placeholder="Number of bytes this channel can store"
-                  onChange={(num) => this.setState({basStorageBytes: num.target.value})}
-                  value={this.state.basStorageBytes}/>
-              <br/>
-
-              <h6 className="like-old">Lifetime in seconds</h6>
-              <Input className="new-input" id="basLifetime" type="number" size="150" placeholder="Number of seconds this channel will be
+                  <h6 className="like-old">Lifetime in seconds</h6>
+                  <Input className="new-input" id="basLifetime" type="number" size="150" placeholder="Number of seconds this channel will be
                   considered as alive" onChange={(num) => this.setState({basLifetime: num.target.value})}
-                  value={this.state.basLifetime}/>
-              <br/>
+                         value={this.state.basLifetime}/>
+                  <br/>
 
-              <h6 className="like-old">Max number of nodes</h6>
-              <Input className="new-input" id="basMaxNodes" type="number" size="150" placeholder="Max number of nodes associated with this
+                  <h6 className="like-old">Max number of nodes</h6>
+                  <Input className="new-input" id="basMaxNodes" type="number" size="150" placeholder="Max number of nodes associated with this
                   channel" onChange={(num) =>
-                  this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes}/>
-              <br/>
+                    this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes}/>
+                  <br/>
 
-              <h6 className="like-old">Deposit</h6>
-              <Input className="new-input" id="basDeposit" type="number" size="150" placeholder="Value of tokens associated with this channel"
-                  onChange={(num) =>
-                  this.setState({basDeposit: num.target.value})} value={this.state.basDeposit}/>
-              <br/>
+                  {/*<h6 className="like-old">Deposit</h6>
+                  <Input className="new-input" id="basDeposit" type="number" size="150"
+                         placeholder="Value of tokens associated with this channel"
+                         onChange={(num) =>
+                           this.setState({basDeposit: num.target.value})} value={this.state.basDeposit}/>
+                  <br/>*/}
 
-              <h6 className="like-old">CPU Time</h6>
-              <Input className="new-input" id="basCpuTime" type="number" size="150" placeholder="CPU Time in %" onChange={(num) =>
-                  this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime}/>
-              <br/>
+                  <h6 className="like-old">CPU Time</h6>
+                  <Input className="new-input" id="basCpuTime" type="number" size="150" placeholder="CPU Time in %"
+                         onChange={(num) =>
+                           this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime}/>
+                  <br/>
 
-              <h6 className="like-old">Transaction Per Second</h6>
-              <Input className="new-input" id="basTransPerSec" type="number" size="150" placeholder="Number Of Transaction Per Second"
-                  onChange={(num) =>
-                  this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
-              <br/>
-            <br/>
+                  <h6 className="like-old">Transaction Per Second</h6>
+                  <Input className="new-input" id="basTransPerSec" type="number" size="150"
+                         placeholder="Number Of Transaction Per Second"
+                         onChange={(num) =>
+                           this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
 
+                  <div className="padd-top-30 padd-bott-10">
+                    <CardInfo
+                      k="Deposit:"
+                      //value={this.state.basDeposit + " SKALE"}
+                      value={5200 + " SKALE"}
+                      tooltipText="todo: short explanation for deposit value"
+                    />
+                  </div>
+                  <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
 
-              <div className="padd-top-30 padd-bott-10">
-                <CardInfo
-                  k="Deposit:"
-                  //value={this.state.deposit}
-                  value={5200 + " SKALE"}
-                  tooltipText="todo: short explanation for deposit value"
-                />
+                </div>
               </div>
-              <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
-
             </div>
-
-
           </div>
-
         </div>
       </div>
     )
