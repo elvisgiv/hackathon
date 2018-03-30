@@ -3,10 +3,11 @@ import React from 'react'
 import {Tooltip, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
 import {TextField, TextFieldHelperText} from 'rmwc/TextField';
 import {Icon} from 'rmwc/Icon';
-import {Button} from 'rmwc/Button';
+import {Button, ButtonIcon} from 'rmwc/Button';
 
 import PageTitle from "../../shared/pageTitle";
-
+import CardTitle from "../../shared/cardTitle";
+import SectionTitle from "../../shared/sectionTitle";
 
 
 //
@@ -23,6 +24,7 @@ export default class FromEth extends React.Component {
     this.state = {
       ethVal: '',
       libInit: false,
+      skaleEstimateValue: 0,
 
       tooltipEthVal: false,
 
@@ -104,38 +106,87 @@ export default class FromEth extends React.Component {
   }
 
 
-
-
   render() {
     return (
       <div className="">
 
-          <ModalHeader>
-              <PageTitle
-                  title="Buy SKALE"
-                  subtitle='After filling field "Amount of ETH" push "buy" button, a MetaMask pop-up window will appear.
-                      To provide a transaction, you must click "submit" on it.'
-              />
-          </ModalHeader>
+        <div className="padd-30">
+          <CardTitle icon="account_balance_wallet" text="Buy SKALE"/>
 
-          <ModalBody>
-              <Input className="new-input" id="buySkl" type="number" size="150" placeholder="
+          <div className="padd-top-30 padd-bott-10">
+            <SectionTitle
+              text="Enter the amount of ETH that you want to spend on SKALE"
+              nopadd={true}
+            />
+          </div>
+
+
+          {/*<PageTitle
+            title="Buy SKALE"
+            subtitle='Enter the amount of ETH that you want to spend on SKALE'
+          />*/}
+
+
+          <Input className="new-input" id="buySkl" type="number" size="150" placeholder="
+                        ETH amount"
+                 onChange={(num) =>
+                   this.setState({ethVal: num.target.value, skaleEstimateValue: (num.target.value * 85)})}
+                 value={this.state.ethVal}/>
+
+
+          <div className="padd-top-30 bord-bott padd-bott-md">
+            <SectionTitle
+              text="Estimated amount of SKALE"
+              tooltipText="todo: short explanation for the emstimated amount"
+              nopadd={true}
+            />
+            <h3 className="padd-top-sm no-marg">
+              {this.state.skaleEstimateValue} SKALE
+            </h3>
+          </div>
+
+
+          <div className="padd-top-md">
+            <SectionTitle
+              text="Confirm the transaction"
+              tooltipText="todo: short explanation for the metamask popup"
+              nopadd={true}
+            />
+
+            <div className="padd-top-10">
+              <Button unelevated className="green-btn"
+                      onClick={() => {
+                        this.exchangeEth();
+                      }}
+                      disabled={this.state.libInit ? false : true}
+              >
+                Confirm
+              </Button>
+              <Button color="secondary" onClick={this.props.fatherToggle}>Cancel</Button>
+            </div>
+          </div>
+        </div>
+
+        {/*<ModalBody>
+          <Input className="new-input" id="buySkl" type="number" size="150" placeholder="
                         The amount of ETH that you want to spend on buying SKALE"
-                     onChange={(num) =>
-                         this.setState({ethVal: num.target.value})} value={this.state.ethVal}/>
-          </ModalBody>
+                 onChange={(num) =>
+                   this.setState({ethVal: num.target.value})} value={this.state.ethVal}/>
+        </ModalBody>
 
-          <ModalFooter>
+        <ModalFooter>
 
-                <Button raised
-                        onClick={() => {this.exchangeEth(); }}
-                        disabled={this.state.libInit ? false : true}>
-                  Buy
-                </Button>
+          <Button raised
+                  onClick={() => {
+                    this.exchangeEth();
+                  }}
+                  disabled={this.state.libInit ? false : true}>
+            Buy
+          </Button>
 
-                <Button color="secondary" onClick={this.props.fatherToggle}>Cancel</Button>
+          <Button color="secondary" onClick={this.props.fatherToggle}>Cancel</Button>
 
-          </ModalFooter>
+        </ModalFooter>*/}
 
 
       </div>
