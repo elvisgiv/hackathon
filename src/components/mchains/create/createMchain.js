@@ -174,7 +174,7 @@ export default class CreateMchain extends React.Component {
 
         <PageTitle
           title="Create sChain"
-          subtitle="Create your own Skale-chanel with custom characteristics."
+          subtitle="Create your own sChain with custom parameters."
         />
 
         {/*<div className='fl-wrap padd-md clickable lite-gx-border choice-card'>

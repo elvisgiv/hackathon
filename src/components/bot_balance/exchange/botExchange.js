@@ -99,7 +99,7 @@ export default class BotExchange extends React.Component {
           subtitle="Here you can see your balance in the MetaMask, and also buy or sell SKALE."
         />
         <div className="skale-card padd-30 marg-bott-30">
-          <div>
+          <div className="padd-bott-10">
             <CardTitle icon="account_balance_wallet" text="Account balance"/>
             <div className="card-content padd-top-30 padd-left-md">
               <CardInfo
@@ -170,7 +170,50 @@ export default class BotExchange extends React.Component {
                   text="Your exchange refunds"
                   tooltipText="todo: short explanation for the exchange refunds"
                 />
-                <div className="fl-cont fl-center-vert padd-left-md">
+
+
+                <table>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div className="fl-cont fl-center-vert padd-left-md">
+                        <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
+                          <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
+                        </div>
+                        <div className="fl-col padd-ri-30">
+                          <h5 className="no-marg inl">{this.state.botEth}</h5>
+                          <h5 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h5>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="fl-col">
+                        <ReturnEth web3Connector={this.props.web3Connector}/>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr >
+                    <td>
+                      <div className="fl-cont fl-center-vert padd-left-md padd-top-md">
+                        <div className="fl-col padd-ri-10">
+                          <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
+                        </div>
+                        <div className="fl-col padd-ri-30">
+                          <h5 className="no-marg inl">{this.state.botSkale} </h5>
+                          <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="fl-col padd-top-md">
+                        <ReturnSkl web3Connector={this.props.web3Connector}/>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                {/*<div className="fl-cont fl-center-vert padd-left-md padd-top-big">
                   <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
                     <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
                   </div>
@@ -194,7 +237,7 @@ export default class BotExchange extends React.Component {
                   <div className="fl-col">
                     <ReturnSkl web3Connector={this.props.web3Connector}/>
                   </div>
-                </div>
+                </div>*/}
 
               </div>
             </div>

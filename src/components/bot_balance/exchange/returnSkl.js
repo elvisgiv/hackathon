@@ -48,7 +48,7 @@ export default class ReturnSkl extends React.Component {
         return(
             <Button dense
                     onClick={this.returnSkl} disabled={this.state.libInit ? false : true}>
-                Withdraw SKL
+                Withdraw SKALE
                 <ButtonIcon use="keyboard_arrow_right" className="marg-left-sm marg-ri-sm"/>
             </Button>
 
