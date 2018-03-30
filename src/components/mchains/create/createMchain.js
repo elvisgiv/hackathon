@@ -267,42 +267,45 @@ export default class CreateMchain extends React.Component {
                   </div>
               </div>
               <br/>
-              <h6 className="no-marg">Name of sChain</h6>
-              <Input id="basName" type="text" placeholder="Enter Name of sChain" onChange={(num) =>
-                  this.setState({basName: num.target.value})} value={this.state.basName} />
-              <br/>
 
-              <h6 className="no-marg">Storage in Bytes</h6>
-              <Input id="basStorageBytes" type="number" size="180" placeholder="Number of bytes this channel can store"
+              <h6 className="like-old">Name of sChain</h6>
+              <div className="fl-col fl-grow">
+                  <Input className="new-input" id="basName" type="text" placeholder="Enter Name of sChain" onChange={(num) =>
+                      this.setState({basName: num.target.value})} value={this.state.basName} />
+                  <br/>
+              </div>
+
+              <h6 className="like-old">Storage in Bytes</h6>
+              <Input className="new-input" id="basStorageBytes" type="number" size="180" placeholder="Number of bytes this channel can store"
                   onChange={(num) => this.setState({basStorageBytes: num.target.value})}
                   value={this.state.basStorageBytes}/>
               <br/>
 
-              <h6 className="no-marg">Lifetime in seconds</h6>
-              <Input id="basLifetime" type="number" size="150" placeholder="Number of seconds this channel will be
+              <h6 className="like-old">Lifetime in seconds</h6>
+              <Input className="new-input" id="basLifetime" type="number" size="150" placeholder="Number of seconds this channel will be
                   considered as alive" onChange={(num) => this.setState({basLifetime: num.target.value})}
                   value={this.state.basLifetime}/>
               <br/>
 
-              <h6 className="no-marg">Max number of nodes</h6>
-              <Input id="basMaxNodes" type="number" size="150" placeholder="Max number of nodes associated with this
+              <h6 className="like-old">Max number of nodes</h6>
+              <Input className="new-input" id="basMaxNodes" type="number" size="150" placeholder="Max number of nodes associated with this
                   channel" onChange={(num) =>
                   this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes}/>
               <br/>
 
-              <h6 className="no-marg">Deposit</h6>
-              <Input id="basDeposit" type="number" size="150" placeholder="Value of tokens associated with this channel"
+              <h6 className="like-old">Deposit</h6>
+              <Input className="new-input" id="basDeposit" type="number" size="150" placeholder="Value of tokens associated with this channel"
                   onChange={(num) =>
                   this.setState({basDeposit: num.target.value})} value={this.state.basDeposit}/>
               <br/>
 
-              <h6 className="no-marg">CPU Time</h6>
-              <Input id="basCpuTime" type="number" size="150" placeholder="CPU Time in %" onChange={(num) =>
+              <h6 className="like-old">CPU Time</h6>
+              <Input className="new-input" id="basCpuTime" type="number" size="150" placeholder="CPU Time in %" onChange={(num) =>
                   this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime}/>
               <br/>
 
-              <h6 className="no-marg">Transaction Per Second</h6>
-              <Input id="basTransPerSec" type="number" size="150" placeholder="Number Of Transaction Per Second"
+              <h6 className="like-old">Transaction Per Second</h6>
+              <Input className="new-input" id="basTransPerSec" type="number" size="150" placeholder="Number Of Transaction Per Second"
                   onChange={(num) =>
                   this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
               <br/>
