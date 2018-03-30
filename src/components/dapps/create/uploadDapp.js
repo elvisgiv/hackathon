@@ -3,6 +3,8 @@ import {Redirect} from 'react-router'
 
 import {Button} from 'rmwc/Button';
 import PageTitle from "../../shared/pageTitle";
+import SectionTitle from "../../shared/sectionTitle";
+import CardTitle from "../../shared/cardTitle";
 
 
 const gex = require('@skale-labs/skale-api');
@@ -12,7 +14,7 @@ export default class UploadDapp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        libInit: false,
+      libInit: false,
     };
     //
 
@@ -42,8 +44,32 @@ export default class UploadDapp extends React.Component {
         />
 
 
+        <div className="skale-card padd-30 marg-bott-30">
 
-        <Button raised disabled={!this.state.libInit}>Upload</Button>
+          <CardTitle icon="settings" text="Configuration"/>
+
+
+          <div className="card-content">
+
+
+            <div className="padd-top-10 padd-bott-10">
+              <SectionTitle
+                text="Here you could upload your Solidity code to the sChain"
+                //tooltipText="todo: short explanation for the sChain creation"
+                nopadd={true}
+              />
+            </div>
+
+
+            <div className="padd-top-md">
+              <Button raised disabled={!this.state.libInit}>Upload</Button>
+            </div>
+
+          </div>
+        </div>
+
+
+
 
       </div>
     )

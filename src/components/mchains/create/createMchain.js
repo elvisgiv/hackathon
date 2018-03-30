@@ -28,7 +28,7 @@ export default class CreateMchain extends React.Component {
       basStorageBytes: '',
       basLifetime: '',
       basMaxNodes: '',
-      basDeposit: '',
+      basDeposit: 2300,
       basCpuTime: '',
       basTransPerSec: '',
       libInit: false,
@@ -162,6 +162,11 @@ export default class CreateMchain extends React.Component {
     }
   }
 
+
+  calcDeposit() {
+    this.setState({basStorageBytes: num.target.value})
+  }
+
   render() {
     const {sChainsPage} = this.state;
 
@@ -239,17 +244,21 @@ export default class CreateMchain extends React.Component {
 
 
           <div className="card-content">
-            <SectionTitle
-              text="Fill these fields to create an sChain."
-              //tooltipText="todo: short explanation for the sChain creation"
-              nopadd={true}
-            />
 
-            <SectionTitle
-              text="Then click 'Create sChain' and MetaMask pop-up will appear.
-                  Click 'Submit' to confirm a transaction."
-              //tooltipText="todo: short explanation for the sChain creation"
-            />
+
+            <div className="padd-top-10 padd-bott-10">
+              <SectionTitle
+                text="Fill these fields to create an sChain."
+                //tooltipText="todo: short explanation for the sChain creation"
+                nopadd={true}
+              />
+
+              <SectionTitle
+                text="Then click 'Create sChain' and MetaMask pop-up will appear.
+                    Click 'Submit' to confirm a transaction."
+                //tooltipText="todo: short explanation for the sChain creation"
+              />
+            </div>
 
 
             <div className="form-wrap" style={{maxWidth: "850px"}}>
@@ -266,7 +275,7 @@ export default class CreateMchain extends React.Component {
                   <h6 className="like-old">Storage in Bytes</h6>
                   <Input className="new-input" id="basStorageBytes" type="number" size="180"
                          placeholder="Number of bytes this channel can store"
-                         onChange={(num) => this.setState({basStorageBytes: num.target.value})}
+                         onChange={(num) => this.calcDeposit({basStorageBytes: num.target.value})}
                          value={this.state.basStorageBytes}/>
                   <br/>
 
@@ -301,13 +310,15 @@ export default class CreateMchain extends React.Component {
                          onChange={(num) =>
                            this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
 
-                  <div className="padd-top-30 padd-bott-10">
-                    <CardInfo
-                      k="Deposit:"
-                      //value={this.state.basDeposit + " SKALE"}
-                      value={5200 + " SKALE"}
-                      tooltipText="todo: short explanation for deposit value"
+                  <div className="padd-top-30 padd-bott-30">
+                    <SectionTitle
+                      text="Deposit value"
+                      tooltipText="todo: short explanation for the emstimated amount"
+                      nopadd={true}
                     />
+                    <h3 className="padd-top-sm no-marg">
+                      {this.state.basDeposit} SKALE
+                    </h3>
                   </div>
                   <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
 
