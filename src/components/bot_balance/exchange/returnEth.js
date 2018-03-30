@@ -47,7 +47,7 @@ export default class ReturnEth extends React.Component {
         return(
             <Button dense
                     onClick={this.returnEth} disabled={this.state.libInit ? false : true}>
-                Withdraw Eth
+                Withdraw ETH
                 <ButtonIcon use="keyboard_arrow_right" className="marg-left-sm marg-ri-sm"/>
             </Button>
 

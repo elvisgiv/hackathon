@@ -1,10 +1,25 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-export default class Management extends React.Component {
+import PageTitle from "../shared/pageTitle";
+import CardTitle from "../shared/cardTitle";
+import SectionTitle from "../shared/sectionTitle";
+import CardInfo from "../shared/cardInfo";
+
+import {Button, ButtonIcon} from 'rmwc/Button';
+
+export default class Reporting extends React.Component {
   render() {
     return (
       <div className="marg-30">
-        <h3 className="bold no-marg" >Management page is under development</h3>
+        <PageTitle
+          title="Reporting"
+          subtitle="Dashboard with real-time performance of your sChains."
+          nopadd={true}
+        />
+        <div className="skale-card marg-bott-30 padd-30 marg-top-30">
+          In progress
+        </div>
       </div>
     );
   }

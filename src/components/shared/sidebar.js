@@ -90,10 +90,10 @@ export default class Sidebar extends React.Component {
           <Link to='/management' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/management') ? 'selected-item' : '')}>
               <div className="fl-wrap gx-icon padd-left-10">
-                <Icon strategy="ligature" className="gray-icon">view_carousel</Icon>
+                <Icon strategy="ligature" className="gray-icon">assessment</Icon>
               </div>
               <ListItemText className="fl-wrap padd-left-md">
-                Management
+                Reporting
               </ListItemText>
             </ListItem>
           </Link>
