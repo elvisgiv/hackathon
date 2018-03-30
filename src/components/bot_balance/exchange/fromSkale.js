@@ -6,6 +6,8 @@ import {Icon} from 'rmwc/Icon';
 import {Button} from 'rmwc/Button';
 
 import PageTitle from "../../shared/pageTitle";
+import CardTitle from "../../shared/cardTitle";
+import SectionTitle from "../../shared/sectionTitle";
 
 
 import FromEth from './fromEth';
@@ -65,8 +67,8 @@ export default class FromSkale extends React.Component {
             // get 'wei' from skale
             let weiVal = await gex.w3.web3.utils.toWei(skaleVal);
             // invoke contract from lib
-            //let promise = await gex.bot().depositGex({value: weiVal});
-            let promise = gex.bot().depositGex({value: weiVal});
+            let promise = await gex.bot().depositGex({value: weiVal});
+            //let promise = gex.bot().depositGex({value: weiVal});
             //
             console.log('exchangeSkaleexchangeSkaleexchangeSkaleexchangeSkaleexchangeSkale');
             // clear fields
@@ -106,7 +108,62 @@ export default class FromSkale extends React.Component {
         return(
             <div className="">
 
-                <ModalHeader>
+                <div className="padd-30">
+                    <CardTitle icon="account_balance_wallet" text="Sell SKALE"/>
+
+                    <div className="padd-top-30 padd-bott-10">
+                        <SectionTitle
+                            text="Enter amount of SkaleTokens that you want to sell."
+                            nopadd={true}
+                        />
+                    </div>
+
+
+                    <Input className="new-input" id="buySkl" type="number" size="150" placeholder="
+                        SKALE amount"
+                           onChange={(num) =>
+                               this.setState({skaleVal: num.target.value, ethEstimateValue: (num.target.value * 7)})}
+                           value={this.state.skaleVal}/>
+
+
+                    <div className="padd-top-30 bord-bott padd-bott-md">
+                        <SectionTitle
+                            text="Estimated amount of ETH"
+                            tooltipText="todo: short explanation for the emstimated amount"
+                            nopadd={true}
+                        />
+                        <h3 className="padd-top-sm no-marg">
+                            {this.state.ethEstimateValue} ETH
+                        </h3>
+                    </div>
+
+
+                    <div className="padd-top-md">
+                        <SectionTitle
+                            text="Confirm the transaction"
+                            tooltipText="todo: short explanation for the metamask popup"
+                            nopadd={true}
+                        />
+
+                        <div className="padd-top-10">
+                            <Button unelevated className="green-btn"
+                                    onClick={() => {
+                                        this.exchangeSkale();
+                                    }}
+                                    disabled={this.state.libInit ? false : true}
+                            >
+                                Confirm
+                            </Button>
+                            <Button color="secondary" onClick={this.props.fatherToggle}>Cancel</Button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+{/*                <ModalHeader>
                     <PageTitle
                         title="Sell SKALE"
                         subtitle='After filling field "Amount of SKALE" push "sell" button, a MetaMask pop-up window will appear.
@@ -130,7 +187,7 @@ export default class FromSkale extends React.Component {
                     <Button color="secondary" onClick={this.props.fatherToggleColl}>
                         Cancel
                     </Button>
-                </ModalFooter>
+                </ModalFooter>*/}
 
             </div>
 

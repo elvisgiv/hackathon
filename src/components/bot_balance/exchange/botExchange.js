@@ -158,9 +158,9 @@ export default class BotExchange extends React.Component {
                   </Link>*/}
                     <Button unelevated className="red-btn" onClick={this.toggleColl}>
                         <ButtonIcon use="call_made"/>Sell SKALE</Button>
-                    <Collapse isOpen={this.state.collapse}>
+                    <Modal isOpen={this.state.collapse} toggle={this.toggleColl}>
                         {sellSkl}
-                    </Collapse>
+                    </Modal>
 
                 </div>
               </div>
