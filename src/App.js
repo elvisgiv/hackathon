@@ -19,6 +19,8 @@ import CreateSChain from './components/mchains/create/createMchain';
 import BotExchange from './components/bot_balance/exchange/botExchange';
 import FromEth from './components/bot_balance/exchange/fromEth';
 import FromSkale from './components/bot_balance/exchange/fromSkale';
+//
+import Marketplace from "./components/bot_balance/exchange/marketplace";
 
 import 'material-components-web/dist/material-components-web.min.css';
 const Identicon = require('identicon.js');
@@ -36,6 +38,7 @@ const ROUTES = {
   '/exchange-skl': {title: 'Exchange SKL'},
   '/dapps': {title: 'dApps'},
   '/dapps/upload': {title: 'Upload Dapp'},
+  '/marketplace': {title: 'Marketplace'},
 };
 
 
@@ -123,6 +126,7 @@ export default class App extends Component {
                   <Route path='/exchange-eth' render={() => <FromSkale web3Connector={web3Connector}/>}/>
                   <Route path='/exchange-skl' render={() => <FromEth web3Connector={web3Connector}/>}/>
                   <Route path='/dapps/upload' render={() => <UploadDapp web3Connector={web3Connector}/>}/>
+                  <Route path='/marketplace' render={() => <Marketplace web3Connector={web3Connector}/>}/>
 
                   <Route exact path='/mchains/:name'
                          render={(props) => <Mchain web3Connector={web3Connector} props={props}/>}/>
