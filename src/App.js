@@ -7,7 +7,7 @@ import Sidebar from './components/shared_components/sidebar';
 import Web3Connection from './components/shared_components/web3Connection';
 
 import Logs from './components/pages/Logs';
-import Management from './components/pages/Reporting';
+import Reporting from './components/pages/Reporting';
 import Dapps from './components/pages/DApps';
 import UploadDapp from './components/page_components/dapps/UploadDApp';
 
@@ -19,8 +19,6 @@ import CreateSChain from './components/pages/CreateSChain';
 import BotExchange from './components/pages/Wallet';
 import FromEth from './components/page_components/maketplace/FromEth';
 import FromSkale from './components/page_components/maketplace/FromSkale';
-//
-import ChartsMockup from "./components/charts/charts_mockup";
 //
 import Marketplace from "./components/pages/Marketplace";
 
@@ -34,14 +32,13 @@ const ROUTES = {
   '/schains': {title: 'sChains'},
   '/schains/create': {title: 'Create sChain'},
   '/wallet': {title: 'Wallet'},
-  '/management': {title: 'Management'},
+  '/reporting': {title: 'Reporting'},
   '/logs': {title: 'Logs'},
   '/exchange-eth': {title: 'Exchange ETH'},
   '/exchange-skl': {title: 'Exchange SKL'},
   '/dapps': {title: 'dApps'},
   '/dapps/upload': {title: 'Upload Dapp'},
   '/marketplace': {title: 'Marketplace'},
-  '/reports': {title: 'Reports'},
 };
 
 
@@ -122,7 +119,7 @@ export default class App extends Component {
                   <Route exact path='/schains/create' render={() => <CreateSChain web3Connector={web3Connector}/>}/>
 
                   <Route exact path='/logs' render={() => <Logs web3Connector={web3Connector}/>}/>
-                  <Route exact path='/management' render={() => <Management web3Connector={web3Connector}/>}/>
+                  <Route exact path='/reporting' render={() => <Reporting web3Connector={web3Connector}/>}/>
                   <Route exact path='/dapps' render={() => <Dapps web3Connector={web3Connector}/>}/>
 
                   <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector}/>}/>
@@ -130,7 +127,6 @@ export default class App extends Component {
                   <Route path='/exchange-skl' render={() => <FromEth web3Connector={web3Connector}/>}/>
                   <Route path='/dapps/upload' render={() => <UploadDapp web3Connector={web3Connector}/>}/>
                   <Route path='/marketplace' render={() => <Marketplace web3Connector={web3Connector}/>}/>
-                  <Route path='/reports' render={() => <ChartsMockup web3Connector={web3Connector}/>}/>
 
                   <Route exact path='/mchains/:name'
                          render={(props) => <SChain web3Connector={web3Connector} props={props}/>}/>

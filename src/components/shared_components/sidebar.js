@@ -102,8 +102,8 @@ export default class Sidebar extends React.Component {
             </ListItem>
           </Link>
 
-          <Link to='/management' className="undec">
-            <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/management') ? 'selected-item' : '')}>
+          <Link to='/reporting' className="undec">
+            <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/reporting') ? 'selected-item' : '')}>
               <div className="fl-wrap gx-icon padd-left-10">
                 <Icon strategy="ligature" className="gray-icon">assessment</Icon>
               </div>
