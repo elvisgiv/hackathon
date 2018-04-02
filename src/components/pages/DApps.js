@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import PageTitle from "../shared/pageTitle";
-import CardTitle from "../shared/cardTitle";
-import SectionTitle from "../shared/sectionTitle";
-import CardInfo from "../shared/cardInfo";
+import PageTitle from "../shared_components/pageTitle";
+import CardTitle from "../shared_components/cardTitle";
+import SectionTitle from "../shared_components/sectionTitle";
+import CardInfo from "../shared_components/cardInfo";
 
 import {Button, ButtonIcon} from 'rmwc/Button';
 

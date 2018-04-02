@@ -2,25 +2,25 @@ import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom'
 
 import Web3Connector from './components/web3Connector';
-import Header from "./components/shared/header";
-import Sidebar from './components/shared/sidebar';
-import Web3Connection from './components/shared/web3Connection';
+import Header from "./components/shared_components/header";
+import Sidebar from './components/shared_components/sidebar';
+import Web3Connection from './components/shared_components/web3Connection';
 
-import Logs from './components/skale/logs';
-import Management from './components/skale/management';
-import Dapps from './components/skale/dapps';
+import Logs from './components/pages/Logs';
+import Management from './components/pages/Reporting';
+import Dapps from './components/pages/DApps';
 import UploadDapp from './components/dapps/create/uploadDapp';
 
 import Mchain from './components/mchains/show/mchain';
-import SChains from './components/skale/sChains';
+import SChains from './components/pages/SChains';
 import CreateSChain from './components/mchains/create/createMchain';
 
 // for wallet
-import BotExchange from './components/bot_balance/exchange/botExchange';
+import BotExchange from './components/pages/Wallet';
 import FromEth from './components/bot_balance/exchange/fromEth';
 import FromSkale from './components/bot_balance/exchange/fromSkale';
 //
-import Marketplace from "./components/bot_balance/exchange/marketplace";
+import Marketplace from "./components/pages/Marketplace";
 
 import 'material-components-web/dist/material-components-web.min.css';
 const Identicon = require('identicon.js');

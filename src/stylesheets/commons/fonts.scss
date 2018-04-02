@@ -1,13 +1,40 @@
 
 h1, h2, h3, h4, h5, h6, p, span {
   font-family: 'Roboto', sans-serif !important;
-  color: #292929 !important
 }
 
-.link{  color: #266ad0 !important; }
-
-.lite-gr-text{
+.grey-800{
+  color: #414141;
+}
+.grey-600{
+  color: hsl(0, 0%, 29%);
+}
+.grey-400{
+  color: hsl(0, 0%, 45%);
+}
+.grey-200{
   color: #b5b5b5;
+}
+
+.font-800{
+  font-weight: 800;
+}
+.font-600{
+  font-weight: 600;
+}
+.font-400{
+  font-weight: 400;
+}
+.font-200{
+  font-weight: 200;
+}
+
+
+
+
+
+.link{
+  color: #266ad0 !important;
 }
 
 .regular{

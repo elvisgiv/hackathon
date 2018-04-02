@@ -2,9 +2,9 @@ import React from 'react'
 import {Redirect} from 'react-router'
 
 import {Button} from 'rmwc/Button';
-import PageTitle from "../../shared/pageTitle";
-import SectionTitle from "../../shared/sectionTitle";
-import CardTitle from "../../shared/cardTitle";
+import PageTitle from "../../shared_components/pageTitle";
+import SectionTitle from "../../shared_components/sectionTitle";
+import CardTitle from "../../shared_components/cardTitle";
 
 
 const gex = require('@skale-labs/skale-api');
