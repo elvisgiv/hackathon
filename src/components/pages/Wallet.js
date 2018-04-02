@@ -1,25 +1,26 @@
 import React from 'react'
+/*import {Link} from 'react-router-dom'
 
 import ReturnEth from "./returnEth";
 import ReturnSkl from "./returnSkl";
 import FromEth from "./fromEth";
 
-import { Modal, Collapse } from 'reactstrap';
+import { Modal, Collapse } from 'reactstrap';*/
 
 
-import PageTitle from "../../shared/pageTitle";
-import CardTitle from "../../shared/cardTitle";
-import SectionTitle from "../../shared/sectionTitle";
+import PageTitle from "../shared_components/pageTitle";
+import CardTitle from "../shared_components/cardTitle";
+// import SectionTitle from "../../shared/sectionTitle";
+import CardInfo from "../shared_components/cardInfo";
 
-import {Button, ButtonIcon} from 'rmwc/Button';
+// import {Button, ButtonIcon} from 'rmwc/Button';
 
 const skale = require('@skale-labs/skale-api');
+import ethLogo from '../../images/coins/eth.png';
+import skaleLogo from '../../images/coins/skale.jpg';
+// import FromSkale from "./fromSkale";
 
-import ethLogo from '../../../images/coins/eth.png';
-import skaleLogo from '../../../images/coins/skale.jpg';
-import FromSkale from "./fromSkale";
-
-export default class Marketplace extends React.Component {
+export default class BotExchange extends React.Component {
 
   constructor(props) {
     super(props);
@@ -27,7 +28,6 @@ export default class Marketplace extends React.Component {
         modal: false,
         collapse: false,
         timer: null,
-
     };
 
     this.toggle = this.toggle.bind(this);
@@ -89,18 +89,54 @@ export default class Marketplace extends React.Component {
     }
 
   render() {
-
+/*
       let buySkl = <FromEth web3Connector={this.props.web3Connector} fatherToggle={this.toggle}/>;
-      let sellSkl = <FromSkale web3Connector={this.props.web3Connector} fatherToggleColl={this.toggleColl}/>;
+      let sellSkl = <FromSkale web3Connector={this.props.web3Connector} fatherToggleColl={this.toggleColl}/>;*/
 
       return (
       <div className='marg-30'>
         <PageTitle
-          title="Marketplace"
-          subtitle="Here you can buy or sell SKALE."
+          title="Wallet"
+          subtitle="Here you can see your balance in the MetaMask."
         />
         <div className="skale-card padd-30 marg-bott-30">
           <div className="padd-bott-10">
+            <CardTitle icon="account_balance_wallet" text="Account"/>
+            <div className="card-content padd-top-30 padd-left-md">
+              <CardInfo
+                k="Web3 provider"
+                value="Metamask"
+              />
+              <CardInfo
+                k="Balance for the account"
+                value={this.state.account}
+                tooltipText="Balance for the account currently selected in Metamask"
+              />
+              <div className="fl-cont fl-center-vert padd-top-10 padd-left-md">
+                <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
+                  <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
+                </div>
+                <div className="fl-col">
+                  <h5 className="no-marg inl">{this.state.eth}</h5>
+                  <h5 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h5>
+                </div>
+              </div>
+              <div className="fl-cont fl-center-vert padd-top-md padd-left-md">
+                <div className="fl-col padd-ri-10">
+                  <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
+                </div>
+                <div className="fl-col">
+                  <h5 className="no-marg inl">{this.state.skl} </h5>
+                  <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
+                </div>
+              </div>
+            </div>
+
+
+
+{/*
+
+            <div className="divider"></div>
 
             <CardTitle icon="star_rate" text="Marketplace"/>
             <div className="card-content">
@@ -110,9 +146,9 @@ export default class Marketplace extends React.Component {
               />
               <div className="fl-cont padd-left-md">
                 <div className="fl-col padd-ri-md">
-{/*                  <Link to='/exchange-skl' className="undec">
+                  <Link to='/exchange-skl' className="undec">
                     <Button unelevated className="green-btn"><ButtonIcon use="call_received"/>Buy SKALE</Button>
-                  </Link>*/}
+                  </Link>
                     <Button unelevated className="green-btn" onClick={this.toggle}>
                         <ButtonIcon use="call_received"/>Buy SKALE</Button>
                     <Modal isOpen={this.state.modal} toggle={this.toggle}>
@@ -122,9 +158,9 @@ export default class Marketplace extends React.Component {
 
 
                 <div className="fl-col">
-{/*                  <Link to='/exchange-eth' className="undec">
+                  <Link to='/exchange-eth' className="undec">
                     <Button unelevated className="red-btn"><ButtonIcon use="call_made"/>Sell SKALE</Button>
-                  </Link>*/}
+                  </Link>
                     <Button unelevated className="red-btn" onClick={this.toggleColl}>
                         <ButtonIcon use="call_made"/>Sell SKALE</Button>
                     <Modal isOpen={this.state.collapse} toggle={this.toggleColl}>
@@ -181,11 +217,38 @@ export default class Marketplace extends React.Component {
                   </tr>
                   </tbody>
                 </table>
+*/}
+
+                {/*<div className="fl-cont fl-center-vert padd-left-md padd-top-big">
+                  <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
+                    <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
+                  </div>
+                  <div className="fl-col padd-ri-30">
+                    <h5 className="no-marg inl">{this.state.botEth}</h5>
+                    <h5 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h5>
+                  </div>
+                  <div className="fl-col">
+                    <ReturnEth web3Connector={this.props.web3Connector}/>
+                  </div>
+                </div>
+
+                <div className="fl-cont fl-center-vert padd-top-md padd-left-md">
+                  <div className="fl-col padd-ri-10">
+                    <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
+                  </div>
+                  <div className="fl-col padd-ri-30">
+                    <h5 className="no-marg inl">{this.state.botSkale} </h5>
+                    <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
+                  </div>
+                  <div className="fl-col">
+                    <ReturnSkl web3Connector={this.props.web3Connector}/>
+                  </div>
+                </div>*/}
 
               </div>
             </div>
-          </div>
-        </div>
+          <h2> Some activity here </h2>
+
       </div>
 
     )

@@ -5,12 +5,12 @@ import {TextField, TextFieldHelperText} from 'rmwc/TextField';
 import {Icon} from 'rmwc/Icon';
 import {Button} from 'rmwc/Button';
 
-import PageTitle from "../../shared/pageTitle";
-import CardTitle from "../../shared/cardTitle";
-import SectionTitle from "../../shared/sectionTitle";
+import PageTitle from "../../shared_components/pageTitle";
+import CardTitle from "../../shared_components/cardTitle";
+import SectionTitle from "../../shared_components/sectionTitle";
 
 
-import FromEth from './fromEth';
+import FromEth from './FromEth';
 import swal from 'sweetalert';
 
 

@@ -1,16 +1,19 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import PageTitle from "../shared/pageTitle";
-import CardTitle from "../shared/cardTitle";
-import SectionTitle from "../shared/sectionTitle";
-import CardInfo from "../shared/cardInfo";
+import PageTitle from "../shared_components/pageTitle";
 
-import {Button, ButtonIcon} from 'rmwc/Button';
+import {Container, Row, Col} from 'reactstrap';
+import {Button} from 'rmwc/Button';
+import {Fab} from 'rmwc/Fab';
+import {Elevation} from 'rmwc/Elevation';
 
-import SChainsList from '../mchains/list/mchainsList'
+import SChainsList from '../page_components/sChains/SChainsList'
 
-export default class Dapps extends React.Component {
+
+export default class sChains extends React.Component {
+
+
   render() {
     return (
       <div className="marg-30">
@@ -18,21 +21,21 @@ export default class Dapps extends React.Component {
           <div className="fl-cont fl-center-vert padd-bott-30">
             <div className="fl-col fl-grow">
               <PageTitle
-                title="dApps"
+                title="sChains"
                 subtitle="Please, choose a sChain to view or create a new one."
                 nopadd={true}
               />
             </div>
             <div className="fl-wrap">
-              <Link to='/dapps/upload' className="undec">
-                <Button className="btn-md" unelevated>Upload dApp</Button>
+              <Link to='/schains/create' className="undec">
+                <Button className="btn-md" unelevated>Create sChain</Button>
               </Link>
             </div>
           </div>
         </div>
 
         <div className="skale-card marg-bott-30">
-          <SChainsList ref="sChainsList"/>
+            <SChainsList ref="sChainsList"/>
         </div>
       </div>
     );

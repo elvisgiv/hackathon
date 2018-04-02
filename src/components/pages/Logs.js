@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PageTitle from "../shared/pageTitle";
+import PageTitle from "../shared_components/pageTitle";
 
 export default class Logs extends React.Component {
   render() {

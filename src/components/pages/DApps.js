@@ -1,19 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import PageTitle from "../shared/pageTitle";
+import PageTitle from "../shared_components/pageTitle";
+import CardTitle from "../shared_components/cardTitle";
+import SectionTitle from "../shared_components/sectionTitle";
+import CardInfo from "../shared_components/cardInfo";
 
-import {Container, Row, Col} from 'reactstrap';
-import {Button} from 'rmwc/Button';
-import {Fab} from 'rmwc/Fab';
-import {Elevation} from 'rmwc/Elevation';
+import {Button, ButtonIcon} from 'rmwc/Button';
 
-import SChainsList from '../mchains/list/mchainsList'
+import SChainsList from '../page_components/sChains/SChainsList'
 
-
-export default class sChains extends React.Component {
-
-
+export default class Dapps extends React.Component {
   render() {
     return (
       <div className="marg-30">
@@ -21,21 +18,21 @@ export default class sChains extends React.Component {
           <div className="fl-cont fl-center-vert padd-bott-30">
             <div className="fl-col fl-grow">
               <PageTitle
-                title="sChains"
+                title="dApps"
                 subtitle="Please, choose a sChain to view or create a new one."
                 nopadd={true}
               />
             </div>
             <div className="fl-wrap">
-              <Link to='/schains/create' className="undec">
-                <Button className="btn-md" unelevated>Create sChain</Button>
+              <Link to='/dapps/upload' className="undec">
+                <Button className="btn-md" unelevated>Upload dApp</Button>
               </Link>
             </div>
           </div>
         </div>
 
         <div className="skale-card marg-bott-30">
-            <SChainsList ref="sChainsList"/>
+          <SChainsList ref="sChainsList"/>
         </div>
       </div>
     );
