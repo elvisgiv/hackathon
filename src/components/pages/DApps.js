@@ -8,7 +8,7 @@ import CardInfo from "../shared_components/cardInfo";
 
 import {Button, ButtonIcon} from 'rmwc/Button';
 
-import SChainsList from '../mchains/list/mchainsList'
+import SChainsList from '../page_components/sChains/SChainsList'
 
 export default class Dapps extends React.Component {
   render() {

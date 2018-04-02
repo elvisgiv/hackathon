@@ -1,8 +1,8 @@
 import React from 'react'
 
-import ReturnEth from "../bot_balance/exchange/returnEth";
-import ReturnSkl from "../bot_balance/exchange/returnSkl";
-import FromEth from "../bot_balance/exchange/fromEth";
+import ReturnEth from "../page_components/maketplace/ReturnEth";
+import ReturnSkl from "../page_components/maketplace/ReturnSkl";
+import FromEth from "../page_components/maketplace/FromEth";
 
 import { Modal, Collapse } from 'reactstrap';
 
@@ -17,7 +17,7 @@ const skale = require('@skale-labs/skale-api');
 
 import ethLogo from '../../images/coins/eth.png';
 import skaleLogo from '../../images/coins/skale.jpg';
-import FromSkale from "../bot_balance/exchange/fromSkale";
+import FromSkale from "../page_components/maketplace/FromSkale";
 
 export default class Marketplace extends React.Component {
 

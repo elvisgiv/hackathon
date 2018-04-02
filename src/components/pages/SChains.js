@@ -8,7 +8,7 @@ import {Button} from 'rmwc/Button';
 import {Fab} from 'rmwc/Fab';
 import {Elevation} from 'rmwc/Elevation';
 
-import SChainsList from '../mchains/list/mchainsList'
+import SChainsList from '../page_components/sChains/SChainsList'
 
 
 export default class sChains extends React.Component {

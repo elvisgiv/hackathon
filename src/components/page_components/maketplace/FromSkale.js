@@ -10,7 +10,7 @@ import CardTitle from "../../shared_components/cardTitle";
 import SectionTitle from "../../shared_components/sectionTitle";
 
 
-import FromEth from './fromEth';
+import FromEth from './FromEth';
 import swal from 'sweetalert';
 
 

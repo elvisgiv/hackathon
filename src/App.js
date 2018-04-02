@@ -9,16 +9,16 @@ import Web3Connection from './components/shared_components/web3Connection';
 import Logs from './components/pages/Logs';
 import Management from './components/pages/Reporting';
 import Dapps from './components/pages/DApps';
-import UploadDapp from './components/dapps/create/uploadDapp';
+import UploadDapp from './components/page_components/dapps/UploadDApp';
 
-import Mchain from './components/mchains/show/mchain';
+import SChain from './components/pages/SChain';
 import SChains from './components/pages/SChains';
-import CreateSChain from './components/mchains/create/createMchain';
+import CreateSChain from './components/pages/CreateSChain';
 
 // for wallet
 import BotExchange from './components/pages/Wallet';
-import FromEth from './components/bot_balance/exchange/fromEth';
-import FromSkale from './components/bot_balance/exchange/fromSkale';
+import FromEth from './components/page_components/maketplace/FromEth';
+import FromSkale from './components/page_components/maketplace/FromSkale';
 //
 import Marketplace from "./components/pages/Marketplace";
 
@@ -129,7 +129,7 @@ export default class App extends Component {
                   <Route path='/marketplace' render={() => <Marketplace web3Connector={web3Connector}/>}/>
 
                   <Route exact path='/mchains/:name'
-                         render={(props) => <Mchain web3Connector={web3Connector} props={props}/>}/>
+                         render={(props) => <SChain web3Connector={web3Connector} props={props}/>}/>
                 </Switch>
               </div>
             </div>
