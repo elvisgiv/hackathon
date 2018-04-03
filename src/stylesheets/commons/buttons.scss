@@ -3,6 +3,41 @@
   text-transform: none !important;
 }
 
+.lite-btn {
+  background-color: rgb(208, 233, 255) !important;
+  color: #1d87e4 !important;
+}
+
+.border-btn {
+  background-color: transparent !important;
+  color: #1d87e4 !important;
+  border: 2px rgba(29, 135, 228, 0.53) solid !important;
+  line-height: calc(2.25rem - 4px) !important;
+}
+
+.link-btn {
+  background-color: transparent !important;
+  color: #1d87e4 !important;
+}
+
+.red-btn{
+  background-color: #e43e3e !important;
+}
+
+.green-btn{
+  background-color: #2bc570 !important
+}
+
+
+
+
+
+
+
+
+
+
+
 .btn-md{
   font-size: 11pt !important;
 }
@@ -30,12 +65,3 @@
   margin-top: -3px;
 }
 
-
-.red-btn{
-  background-color: #e43e3e !important;
-}
-
-
-.green-btn{
-  background-color: #2bc570 !important
-}

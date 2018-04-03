@@ -8,12 +8,14 @@ import FromEth from "./fromEth";
 import { Modal, Collapse } from 'reactstrap';*/
 
 
-import PageTitle from "../shared_components/pageTitle";
-import CardTitle from "../shared_components/cardTitle";
+import PageTitle from "../shared_components/PageTitle";
+import CardTitle from "../shared_components/CardTitle";
+import SectionTitle from "../shared_components/SectionTitle";
 // import SectionTitle from "../../shared/sectionTitle";
-import CardInfo from "../shared_components/cardInfo";
+import CardInfo from "../shared_components/CardInfo";
 
-// import {Button, ButtonIcon} from 'rmwc/Button';
+import {Button, ButtonIcon} from 'rmwc/Button';
+import { Modal } from 'reactstrap';
 
 const skale = require('@skale-labs/skale-api');
 import ethLogo from '../../images/coins/eth.png';
@@ -133,91 +135,55 @@ export default class BotExchange extends React.Component {
             </div>
 
 
-
-{/*
-
             <div className="divider"></div>
 
-            <CardTitle icon="star_rate" text="Marketplace"/>
+            <CardTitle icon="compare_arrows" text="Transfer"/>
             <div className="card-content">
               <SectionTitle
-                text="You can buy and sell SKALE tokens using our Skale Exchange Bot"
-                tooltipText="todo: short explanation for the Skale Bot"
+                text="Send and receive SKALE tokens"
               />
+
               <div className="fl-cont padd-left-md">
                 <div className="fl-col padd-ri-md">
-                  <Link to='/exchange-skl' className="undec">
-                    <Button unelevated className="green-btn"><ButtonIcon use="call_received"/>Buy SKALE</Button>
-                  </Link>
-                    <Button unelevated className="green-btn" onClick={this.toggle}>
-                        <ButtonIcon use="call_received"/>Buy SKALE</Button>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                        {buySkl}
-                    </Modal>
+                  <Button unelevated className="grdeen-btn" onClick={this.toggleSend} style={{minWidth: "135px"}}>
+                    <ButtonIcon use="call_made"/>Send</Button>
+                  <Modal isOpen={this.state.modalSend} toggle={this.toggleSend}>
+                    dddddddddddd
+                  </Modal>
                 </div>
-
-
-                <div className="fl-col">
-                  <Link to='/exchange-eth' className="undec">
-                    <Button unelevated className="red-btn"><ButtonIcon use="call_made"/>Sell SKALE</Button>
-                  </Link>
-                    <Button unelevated className="red-btn" onClick={this.toggleColl}>
-                        <ButtonIcon use="call_made"/>Sell SKALE</Button>
-                    <Modal isOpen={this.state.collapse} toggle={this.toggleColl}>
-                        {sellSkl}
-                    </Modal>
-
+                <div className="fl-col padd-ri-md">
+                  <Button unelevated className="redd-btn" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
+                    <ButtonIcon use="call_received"/>Receive</Button>
+                  <Modal isOpen={this.state.modalReceive} toggle={this.toggleReceive}>
+                    dddddddddddd
+                  </Modal>
+                </div>
+                <div className="fl-col padd-ri-md">
+                  <Button unelevated className="lite-btn" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
+                    <ButtonIcon use="shopping_cart"/>Buy</Button>
                 </div>
               </div>
 
-              <div className="padd-top-30">
-                <SectionTitle
-                  text="Your exchange refunds"
-                  tooltipText="todo: short explanation for the exchange refunds"
-                />
+
+              {/*<div className="padd-top-md">
+                <Button unelevated className="marg-ri-md" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
+                  <ButtonIcon use="shopping_cart"/> Buy
+                </Button>
+                <Button unelevated className="lite-btn marg-ri-md" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
+                  <ButtonIcon use="shopping_cart"/> Buy
+                </Button>
+                <Button unelevated className="border-btn marg-ri-md" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
+                  <ButtonIcon use="shopping_cart"/> Buy
+                </Button>
+                <Button unelevated className="link-btn marg-ri-md" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
+                  <ButtonIcon use="shopping_cart"/> Buy
+                </Button>
+              </div>*/}
 
 
-                <table>
-                  <tbody>
-                  <tr>
-                    <td>
-                      <div className="fl-cont fl-center-vert padd-left-md">
-                        <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
-                          <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
-                        </div>
-                        <div className="fl-col padd-ri-30">
-                          <h5 className="no-marg inl">{this.state.botEth}</h5>
-                          <h5 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h5>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="fl-col">
-                        <ReturnEth web3Connector={this.props.web3Connector}/>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr >
-                    <td>
-                      <div className="fl-cont fl-center-vert padd-left-md padd-top-md">
-                        <div className="fl-col padd-ri-10">
-                          <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
-                        </div>
-                        <div className="fl-col padd-ri-30">
-                          <h5 className="no-marg inl">{this.state.botSkale} </h5>
-                          <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="fl-col padd-top-md">
-                        <ReturnSkl web3Connector={this.props.web3Connector}/>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-*/}
+
+            </div>
+
 
                 {/*<div className="fl-cont fl-center-vert padd-left-md padd-top-big">
                   <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
@@ -247,7 +213,6 @@ export default class BotExchange extends React.Component {
 
               </div>
             </div>
-          <h2> Some activity here </h2>
 
       </div>
 

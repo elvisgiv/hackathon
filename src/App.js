@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom'
 
 import Web3Connector from './components/web3Connector';
-import Header from "./components/shared_components/header";
-import Sidebar from './components/shared_components/sidebar';
-import Web3Connection from './components/shared_components/web3Connection';
+import Header from "./components/shared_components/Header";
+import Sidebar from './components/shared_components/Sidebar';
+import Web3Connection from './components/shared_components/Web3Connection';
 
 import Logs from './components/pages/Logs';
 import Reporting from './components/pages/Reporting';

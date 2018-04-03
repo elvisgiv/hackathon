@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import PageTitle from "../shared_components/pageTitle";
+import PageTitle from "../shared_components/PageTitle";
 
 import {Container, Row, Col} from 'reactstrap';
 import {Button} from 'rmwc/Button';

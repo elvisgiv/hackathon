@@ -7,9 +7,9 @@ import FromEth from "../page_components/maketplace/FromEth";
 import { Modal, Collapse } from 'reactstrap';
 
 
-import PageTitle from "../shared_components/pageTitle";
-import CardTitle from "../shared_components/cardTitle";
-import SectionTitle from "../shared_components/sectionTitle";
+import PageTitle from "../shared_components/PageTitle";
+import CardTitle from "../shared_components/CardTitle";
+import SectionTitle from "../shared_components/SectionTitle";
 
 import {Button, ButtonIcon} from 'rmwc/Button';
 
@@ -110,27 +110,18 @@ export default class Marketplace extends React.Component {
               />
               <div className="fl-cont padd-left-md">
                 <div className="fl-col padd-ri-md">
-{/*                  <Link to='/exchange-skl' className="undec">
-                    <Button unelevated className="green-btn"><ButtonIcon use="call_received"/>Buy SKALE</Button>
-                  </Link>*/}
                     <Button unelevated className="green-btn" onClick={this.toggle}>
-                        <ButtonIcon use="call_received"/>Buy SKALE</Button>
+                        {/*<ButtonIcon use="call_received"/>*/}Buy SKALE</Button>
                     <Modal isOpen={this.state.modal} toggle={this.toggle}>
                         {buySkl}
                     </Modal>
                 </div>
-
-
                 <div className="fl-col">
-{/*                  <Link to='/exchange-eth' className="undec">
-                    <Button unelevated className="red-btn"><ButtonIcon use="call_made"/>Sell SKALE</Button>
-                  </Link>*/}
                     <Button unelevated className="red-btn" onClick={this.toggleColl}>
-                        <ButtonIcon use="call_made"/>Sell SKALE</Button>
+                        {/*<ButtonIcon use="call_made"/>*/}Sell SKALE</Button>
                     <Modal isOpen={this.state.collapse} toggle={this.toggleColl}>
                         {sellSkl}
                     </Modal>
-
                 </div>
               </div>
 

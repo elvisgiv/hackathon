@@ -5,9 +5,9 @@ import {TextField, TextFieldHelperText} from 'rmwc/TextField';
 import {Icon} from 'rmwc/Icon';
 import {Button, ButtonIcon} from 'rmwc/Button';
 
-import PageTitle from "../../shared_components/pageTitle";
-import CardTitle from "../../shared_components/cardTitle";
-import SectionTitle from "../../shared_components/sectionTitle";
+import PageTitle from "../../shared_components/PageTitle";
+import CardTitle from "../../shared_components/CardTitle";
+import SectionTitle from "../../shared_components/SectionTitle";
 
 
 //
