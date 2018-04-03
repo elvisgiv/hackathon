@@ -10,7 +10,7 @@ import {Button} from 'rmwc/Button';
 import CardInfo from "../../shared_components/cardInfo";
 import PageTitle from "../../shared_components/pageTitle";
 import CardTitle from "../../shared_components/cardTitle";
-import SectionTitle from "../../shared_components/sectionTitle";
+import SectionText from "../../shared_components/SectionText";
 
 
 import swal from 'sweetalert';
@@ -247,13 +247,13 @@ export default class CreateMchain extends React.Component {
 
 
             <div className="padd-top-10 padd-bott-10">
-              <SectionTitle
+              <SectionText
                 text="Fill these fields to create an sChain."
                 //tooltipText="todo: short explanation for the sChain creation"
                 nopadd={true}
               />
 
-              <SectionTitle
+              <SectionText
                 text="Then click 'Create sChain' and MetaMask pop-up will appear.
                     Click 'Submit' to confirm a transaction."
                 //tooltipText="todo: short explanation for the sChain creation"
@@ -311,7 +311,7 @@ export default class CreateMchain extends React.Component {
                            this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
 
                   <div className="padd-top-30 padd-bott-30">
-                    <SectionTitle
+                    <SectionText
                       text="Deposit value"
                       tooltipText="todo: short explanation for the emstimated amount"
                       nopadd={true}

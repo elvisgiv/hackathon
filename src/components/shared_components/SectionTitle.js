@@ -26,7 +26,7 @@ export default class SectionTitle extends React.Component {
     return (
       <div className={"fl-cont fl-center-vert " + (this.props.nopadd ? '' : 'padd-bott-md')}>
         <div className="fl-col">
-          <h6 className="gr-text light">{this.props.text}</h6>
+          <h6 className="g-4 fw-4 fs-6">{this.props.text}</h6>
         </div>
         {!this.props.tooltipText ? null :
           (<div className="fl-col padd-left-30">

@@ -9,7 +9,7 @@ import { Modal, Collapse } from 'reactstrap';
 
 import PageTitle from "../shared_components/PageTitle";
 import CardTitle from "../shared_components/CardTitle";
-import SectionTitle from "../shared_components/SectionTitle";
+import SectionText from "../shared_components/SectionText";
 
 import {Button, ButtonIcon} from 'rmwc/Button';
 
@@ -91,43 +91,40 @@ export default class Marketplace extends React.Component {
   render() {
 
       let buySkl = <FromEth web3Connector={this.props.web3Connector} fatherToggle={this.toggle}/>;
-      let sellSkl = <FromSkale web3Connector={this.props.web3Connector} fatherToggleColl={this.toggleColl}/>;
-
-      return (
+    return (
       <div className='marg-30'>
         <PageTitle
           title="Marketplace"
-          subtitle="Here you can buy or sell SKALE."
+          subtitle="Buy or sell SKALE tokens"
         />
         <div className="skale-card padd-30 marg-bott-30">
           <div className="padd-bott-10">
-
-            <CardTitle icon="star_rate" text="Marketplace"/>
+            <CardTitle icon="star_rate" text="Exchange"/>
             <div className="card-content">
-              <SectionTitle
-                text="You can buy and sell SKALE tokens using our Skale Exchange Bot"
+              <SectionText
+                text="Buy and sell SKALE tokens using our Skale Exchange Bot"
                 tooltipText="todo: short explanation for the Skale Bot"
               />
               <div className="fl-cont padd-left-md">
                 <div className="fl-col padd-ri-md">
-                    <Button unelevated className="green-btn" onClick={this.toggle}>
-                        {/*<ButtonIcon use="call_received"/>*/}Buy SKALE</Button>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                        {buySkl}
-                    </Modal>
+                  <Button unelevated className="green-btn" onClick={this.toggle}>
+                    {/*<ButtonIcon use="call_received"/>*/}Buy SKALE</Button>
+                  <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                    {buySkl}
+                  </Modal>
                 </div>
                 <div className="fl-col">
-                    <Button unelevated className="red-btn" onClick={this.toggleColl}>
-                        {/*<ButtonIcon use="call_made"/>*/}Sell SKALE</Button>
-                    <Modal isOpen={this.state.collapse} toggle={this.toggleColl}>
-                        {sellSkl}
-                    </Modal>
+                  <Button unelevated className="red-btn" onClick={this.toggleColl}>
+                    {/*<ButtonIcon use="call_made"/>*/}Sell SKALE</Button>
+                  <Modal isOpen={this.state.collapse} toggle={this.toggleColl}>
+                    {sellSkl}
+                  </Modal>
                 </div>
               </div>
 
               <div className="padd-top-30">
-                <SectionTitle
-                  text="Your exchange refunds"
+                <SectionText
+                  text="Exchange refunds"
                   tooltipText="todo: short explanation for the exchange refunds"
                 />
 
@@ -180,5 +177,7 @@ export default class Marketplace extends React.Component {
       </div>
 
     )
+
+      let sellSkl = <FromSkale web3Connector={this.props.web3Connector} fatherToggleColl={this.toggleColl}/>;
   }
 }

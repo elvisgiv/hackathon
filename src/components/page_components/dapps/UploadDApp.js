@@ -3,7 +3,7 @@ import {Redirect} from 'react-router'
 
 import {Button} from 'rmwc/Button';
 import PageTitle from "../../shared_components/PageTitle";
-import SectionTitle from "../../shared_components/SectionTitle";
+import SectionText from "../../shared_components/SectionText";
 import CardTitle from "../../shared_components/CardTitle";
 
 
@@ -53,7 +53,7 @@ export default class UploadDapp extends React.Component {
 
 
             <div className="padd-top-10 padd-bott-10">
-              <SectionTitle
+              <SectionText
                 text="Here you could upload your Solidity code to the sChain"
                 //tooltipText="todo: short explanation for the sChain creation"
                 nopadd={true}

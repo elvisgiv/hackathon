@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 import PageTitle from "../shared_components/PageTitle";
 import CardTitle from "../shared_components/CardTitle";
-import SectionTitle from "../shared_components/SectionTitle";
 import CardInfo from "../shared_components/CardInfo";
 
 import {Button, ButtonIcon} from 'rmwc/Button';

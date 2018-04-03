@@ -4,7 +4,7 @@ import 'material-components-web/dist/material-components-web.min.css';
 import {Icon} from 'rmwc/Icon';
 import {Tooltip} from 'reactstrap';
 
-export default class CardInfo extends React.Component {
+export default class SectionText extends React.Component {
 
   constructor(props) {
     super(props);
@@ -26,13 +26,12 @@ export default class CardInfo extends React.Component {
     return (
       <div className={"fl-cont fl-center-vert " + (this.props.nopadd ? '' : 'padd-bott-md')}>
         <div className="fl-col">
-          <h6 className="gr-text inl marg-ri-10 light">{this.props.k}</h6>
-          <h6 className="inl">{this.props.value}</h6>
+          <h6 className="gr-text light">{this.props.text}</h6>
         </div>
         {!this.props.tooltipText ? null :
-          (<div className="fl-col padd-left-30 gx-icon">
-            <Icon id={"info"+this.state.rand} strategy="ligature" className="info-icon clickable">help</Icon>
-            <Tooltip placement="right" isOpen={this.state.tooltipOpen} target={"info"+this.state.rand} toggle={this.toggle}>
+          (<div className="fl-col padd-left-30">
+            <Icon id={"Tooltip"+this.state.rand} strategy="ligature" className="info-icon clickable">help</Icon>
+            <Tooltip placement="right" isOpen={this.state.tooltipOpen} target={"Tooltip"+this.state.rand} toggle={this.toggle}>
               {this.props.tooltipText}
             </Tooltip>
           </div>)

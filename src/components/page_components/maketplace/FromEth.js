@@ -7,7 +7,7 @@ import {Button, ButtonIcon} from 'rmwc/Button';
 
 import PageTitle from "../../shared_components/PageTitle";
 import CardTitle from "../../shared_components/CardTitle";
-import SectionTitle from "../../shared_components/SectionTitle";
+import SectionText from "../../shared_components/SectionText";
 
 
 //
@@ -114,7 +114,7 @@ export default class FromEth extends React.Component {
           <CardTitle icon="account_balance_wallet" text="Buy SKALE"/>
 
           <div className="padd-top-30 padd-bott-10">
-            <SectionTitle
+            <SectionText
               text="Enter the amount of ETH that you want to spend on SKALE"
               nopadd={true}
             />
@@ -135,7 +135,7 @@ export default class FromEth extends React.Component {
 
 
           <div className="padd-top-30 bord-bott padd-bott-md">
-            <SectionTitle
+            <SectionText
               text="Estimated amount of SKALE"
               tooltipText="todo: short explanation for the emstimated amount"
               nopadd={true}
@@ -147,7 +147,7 @@ export default class FromEth extends React.Component {
 
 
           <div className="padd-top-md">
-            <SectionTitle
+            <SectionText
               text="Confirm the transaction"
               tooltipText="todo: short explanation for the metamask popup"
               nopadd={true}
