@@ -293,16 +293,16 @@ export default class Reporting extends Component {
 
                 <div className="skale-card marg-bott-30 padd-30 marg-top-30">
 
-                    <p>LineChart with panoramic brush</p>
+                    <p>Transaction per second</p>
 
                     <div className="line-chart-wrapper">
                         <LineChart
-                            width={900} height={400} data={data03}
+                            width={1200} height={400} data={data03}
                             margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
                         >
                             <CartesianGrid vertical={true} />
-                            <XAxis dataKey="date" label="Date" />
-                            <YAxis domain={['auto', 'auto']} label="Stock Price" />
+                            <XAxis dataKey="date" label="" />
+                            <YAxis domain={['auto', 'auto']} label="" />
                             <Tooltip />
                             <Line dataKey="price" stroke="#ff7300" dot={true} />
 
