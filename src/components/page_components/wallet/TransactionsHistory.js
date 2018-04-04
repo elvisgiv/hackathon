@@ -42,7 +42,7 @@ export default class TransactionsHistory extends React.Component {
         floatValue: parseFloat(floatValue).toFixed(5)
       })
     });
-    return transactionsRes;
+    return transactionsRes.reverse();
   }
 
   render() {
@@ -53,7 +53,6 @@ export default class TransactionsHistory extends React.Component {
             <Identicon size={40} hash={transaction.to}/>
           </div>
           <div className="fl-col fl-grow">
-
           {/*  <h6 className="g-2 fw-5 fs-4 inl">To </h6>*/}
             <h6 className="g-6 fw-5 fs-4 inl">{transaction.to}</h6> <br/>
 
@@ -98,6 +97,7 @@ export default class TransactionsHistory extends React.Component {
         />
         <div className="padd-ri-md padd-top-10">
           {transactionsFrom}
+          {(transactionsFrom.length === 0) ? <h6 className="padd-left-md padd-top-10 g-6 fw-5 fs-2">No transactions found</h6> : null}
         </div>
 
         <div className="padd-top-30">
@@ -107,6 +107,7 @@ export default class TransactionsHistory extends React.Component {
           />
           <div className="padd-ri-md padd-top-10">
             {transactionsTo}
+            {(transactionsTo.length === 0) ? <h6 className="padd-left-md padd-top-10 g-6 fw-5 fs-2">No transactions found</h6> : null}
           </div>
         </div>
       </div>

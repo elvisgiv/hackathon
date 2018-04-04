@@ -17,14 +17,14 @@ export default class SkaleIdenticon extends React.Component {
   }
 
   componentWillReceiveProps() {
-    this.initIdenticon();
+    this.initIdenticon(this.props.hash);
   }
 
-  initIdenticon() {
+  initIdenticon(hash, size) {
     this.setState({
-      avatarData: new Identicon(this.state.hash, {
+      avatarData: new Identicon((hash ? hash : this.state.hash), {
         margin: 0.22,
-        size: this.state.size,
+        size: (size ? size : this.state.size),
         background: [216, 216, 216, 255],
         brightness: 0.4,
         saturation: 1

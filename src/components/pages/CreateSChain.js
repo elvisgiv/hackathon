@@ -28,7 +28,7 @@ export default class CreateMchain extends React.Component {
       basStorageBytes: '',
       basLifetime: '',
       basMaxNodes: '',
-      basDeposit: 2300,
+      basDeposit: 150,
       basCpuTime: '',
       basTransPerSec: '',
       libInit: false,
@@ -91,15 +91,20 @@ export default class CreateMchain extends React.Component {
     let basCpuTime = this.state.basCpuTime;
     let basTransPerSec = this.state.basTransPerSec;
     // to hash
+
+    let weiVal = gex.w3.web3.utils.toWei(basDeposit.toString());
+
     let mChain = {
       storageBytes: basStorageBytes, cpu: basCpuTime, transactionThroughput: basTransPerSec, lifetime: basLifetime,
-      maxNodes: basMaxNodes, deposit: basDeposit, name: basName
+      maxNodes: basMaxNodes, deposit: weiVal, name: basName
     };
+
     //
     let isAvailable = false;
-    //
+    // todo: remove it - doesn't work for float
     let isFilled = this.isFilled(basName, basStorageBytes, basLifetime, basMaxNodes,
       basDeposit, basCpuTime, basTransPerSec);
+    isFilled = true;
     //
     if (isFilled) {
       isAvailable = await gex.manager().isMchainIdAvailable(basName);
@@ -163,8 +168,9 @@ export default class CreateMchain extends React.Component {
   }
 
 
-  calcDeposit() {
-    this.setState({basStorageBytes: num.target.value})
+  calcDeposit(params) {
+    params.basDeposit = 150 + this.state.basStorageBytes * 0.1 + this.state.basMaxNodes * 30 + this.state.basLifetime * 0.05 + this.state.basCpuTime * 20 + this.state.basTransPerSec * 10;
+    this.setState(params)
   }
 
   render() {
@@ -281,14 +287,14 @@ export default class CreateMchain extends React.Component {
 
                   <h6 className="like-old">Lifetime in seconds</h6>
                   <Input className="new-input" id="basLifetime" type="number" size="150" placeholder="Number of seconds this channel will be
-                  considered as alive" onChange={(num) => this.setState({basLifetime: num.target.value})}
+                  considered as alive" onChange={(num) => this.calcDeposit({basLifetime: num.target.value})}
                          value={this.state.basLifetime}/>
                   <br/>
 
                   <h6 className="like-old">Max number of nodes</h6>
                   <Input className="new-input" id="basMaxNodes" type="number" size="150" placeholder="Max number of nodes associated with this
                   channel" onChange={(num) =>
-                    this.setState({basMaxNodes: num.target.value})} value={this.state.basMaxNodes}/>
+                    this.calcDeposit({basMaxNodes: num.target.value})} value={this.state.basMaxNodes}/>
                   <br/>
 
                   {/*<h6 className="like-old">Deposit</h6>
@@ -301,14 +307,14 @@ export default class CreateMchain extends React.Component {
                   <h6 className="like-old">CPU Time</h6>
                   <Input className="new-input" id="basCpuTime" type="number" size="150" placeholder="CPU Time in %"
                          onChange={(num) =>
-                           this.setState({basCpuTime: num.target.value})} value={this.state.basCpuTime}/>
+                           this.calcDeposit({basCpuTime: num.target.value})} value={this.state.basCpuTime}/>
                   <br/>
 
                   <h6 className="like-old">Transaction Per Second</h6>
                   <Input className="new-input" id="basTransPerSec" type="number" size="150"
                          placeholder="Number Of Transaction Per Second"
                          onChange={(num) =>
-                           this.setState({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
+                           this.calcDeposit({basTransPerSec: num.target.value})} value={this.state.basTransPerSec}/>
 
                   <div className="padd-top-30 padd-bott-30">
                     <SectionText

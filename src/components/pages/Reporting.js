@@ -7,6 +7,9 @@ import CardInfo from "../shared_components/CardInfo";
 
 import {Button, ButtonIcon} from 'rmwc/Button';
 
+
+const skale = require('@skale-labs/skale-api');
+
 import {  LineChart, Line, XAxis, YAxis,
     Tooltip, CartesianGrid,  Brush,  AreaChart, Area,
 } from 'recharts';
@@ -267,6 +270,22 @@ const data03 = [
 ];
 
 
+let sampleData = [
+  { date: 'Jan 1 2017', price: 115.19 },
+  { date: 'Jan 2 2017', price: 115.82 },
+  { date: 'Jan 3 2017', price: 115.97 },
+  { date: 'Jan 4 2017', price: 116.64 },
+  { date: 'Jan 5 2017', price: 116.95 },
+  { date: 'Jan 6 2017', price: 117.06 },
+  { date: 'Jan 7 2017', price: 116.29 },
+  { date: 'Jan 8 2017', price: 116.52 },
+  { date: 'Jan 9 2017', price: 117.26 },
+  { date: 'Jan 10 2017', price: 116.76 },
+  { date: 'Jan 11 2017', price: 116.73 },
+  { date: 'Jan 12 2017', price: 115.82 },
+];
+
+
 export default class Reporting extends Component {
 
     constructor(props) {
@@ -275,9 +294,23 @@ export default class Reporting extends Component {
             opacity: 1,
             anotherState: false,
             timer: null,
-
+            data03: data03
         };
 
+    }
+
+    componentDidMount() {
+      this.addSampleData();
+    }
+
+
+    async addSampleData() {
+        for(let unit of sampleData){
+            await skale.helper.timeout(3000);
+            let data = this.state.data03;
+            data.push(unit);
+            this.setState(data);
+        }
     }
 
 
@@ -292,12 +325,11 @@ export default class Reporting extends Component {
                 />
 
                 <div className="skale-card marg-bott-30 padd-30 marg-top-30">
-
-                    <p>Transaction per second</p>
+                  <CardTitle icon="settings_ethernet" text="Transaction per second"/>
 
                     <div className="line-chart-wrapper">
                         <LineChart
-                            width={1200} height={400} data={data03}
+                            width={1200} height={400} data={this.state.data03}
                             margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
                         >
                             <CartesianGrid vertical={true} />
@@ -306,7 +338,7 @@ export default class Reporting extends Component {
                             <Tooltip />
                             <Line dataKey="price" stroke="#ff7300" dot={true} />
 
-                            <Brush dataKey="date" startIndex={data03.length - 40}>
+                            <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
                                 <AreaChart>
                                     <CartesianGrid />
                                     <YAxis hide domain={['auto', 'auto']} />
