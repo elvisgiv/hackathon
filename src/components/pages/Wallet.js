@@ -6,15 +6,21 @@ import CardTitle from "../shared_components/CardTitle";
 import SectionText from "../shared_components/SectionText";
 import CardInfo from "../shared_components/CardInfo";
 
+import SendModal from "../page_components/wallet/SendModal";
+
 import TransactionsHistory from "../page_components/wallet/TransactionsHistory";
 
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import {Button, ButtonIcon} from 'rmwc/Button';
+import {Snackbar} from 'rmwc/Snackbar';
 import {Modal} from 'reactstrap';
 
 const skale = require('@skale-labs/skale-api');
 import ethLogo from '../../images/coins/eth.png';
 import skaleLogo from '../../images/coins/skale.jpg';
+import ReceiveModal from "../page_components/wallet/ReceiveModal";
+
 // import FromSkale from "./fromSkale";
 
 export default class BotExchange extends React.Component {
@@ -22,14 +28,14 @@ export default class BotExchange extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      collapse: false,
       timer: null,
+      receiveModal: false,
+      sendModal: false,
     };
 
-    this.toggle = this.toggle.bind(this);
-    this.toggleColl = this.toggleColl.bind(this);
-
+    this.toggleReceive = this.toggleReceive.bind(this);
+    this.toggleSend = this.toggleSend.bind(this);
+    this.showSnackbar = this.showSnackbar.bind(this);
   }
 
   componentWillReceiveProps() {
@@ -90,16 +96,24 @@ export default class BotExchange extends React.Component {
     });
   }
 
-  toggle() {
+
+  toggleReceive() {
     this.setState({
-      modal: !this.state.modal
+      receiveModal: !this.state.receiveModal
     });
   }
 
-  toggleColl() {
+  toggleSend() {
     this.setState({
-      collapse: !this.state.collapse
+      sendModal: !this.state.sendModal
     });
+  }
+
+  showSnackbar(message) {
+    this.setState({
+      snackbarIsOpen: !this.state.snackbarIsOpen,
+      snackbarMessage: message
+    })
   }
 
   render() {
@@ -158,28 +172,35 @@ export default class BotExchange extends React.Component {
                   <div className="fl-col padd-ri-md">
                     <Button unelevated className="grdeen-btn" onClick={this.toggleSend} style={{minWidth: "135px"}}>
                       <ButtonIcon use="call_made"/>Send</Button>
-                    <Modal isOpen={this.state.modalSend} toggle={this.toggleSend}>
-                      dddddddddddd
+                    <Modal isOpen={this.state.sendModal} toggle={this.toggleSend}>
+                      <SendModal showSnackbar={this.showSnackbar} ToggleSend={this.toggleSend} web3Connector={this.props.web3Connector}/>
                     </Modal>
                   </div>
                   <div className="fl-col padd-ri-md">
-                    <Button unelevated className="redd-btn" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
-                      <ButtonIcon use="call_received"/>Receive</Button>
-                    <Modal isOpen={this.state.modalReceive} toggle={this.toggleReceive}>
-                      dddddddddddd
+                    <CopyToClipboard text={this.state.account}
+                                     onCopy={() => this.setState({copied: true})}>
+                      <Button unelevated className="redd-btn" style={{minWidth: "135px"}}
+                              onClick={evt => this.setState({
+                                snackbarIsOpen: !this.state.snackbarIsOpen,
+                                snackbarMessage: "Address copied to clipboard"
+                              })}>
+                        <ButtonIcon use="call_received"/>Receive</Button>
+                    </CopyToClipboard>
+                    <Modal isOpen={this.state.receiveModal} toggle={this.toggleReceive}>
+                      <ReceiveModal/>
                     </Modal>
                   </div>
                   <div className="fl-col padd-ri-md">
-                    <Button unelevated className="lite-btn" onClick={this.toggleReceive} style={{minWidth: "135px"}}>
-                      <ButtonIcon use="shopping_cart"/>Buy</Button>
+                    <Link to='/marketplace' className="undec">
+                      <Button unelevated className="lite-btn" style={{minWidth: "135px"}}>
+                        <ButtonIcon use="shopping_cart"/>
+                        Buy
+                      </Button>
+                    </Link>
                   </div>
                 </div>
-
               </div>
-
-
             </div>
-
 
             <div className="divider"></div>
             <CardTitle icon="compare_arrows" text="Transactions"/>
@@ -188,6 +209,16 @@ export default class BotExchange extends React.Component {
             </div>
           </div>
         </div>
+
+        <Snackbar
+          show={this.state.snackbarIsOpen}
+          onHide={evt => this.setState({snackbarIsOpen: false})}
+          //message={`Address ${this.state.account} copied to clipboard`}
+          message={this.state.snackbarMessage}
+          actionText="Hide"
+          actionHandler={() => {
+          }}
+        />
 
       </div>
 
