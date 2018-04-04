@@ -327,7 +327,7 @@ export default class Reporting extends Component {
                 <div className="skale-card marg-bott-30 padd-30 marg-top-30">
                   <CardTitle icon="settings_ethernet" text="Transaction per second"/>
 
-                    <div className="line-chart-wrapper">
+                    <div className="line-chart-wrapper padd-bott-30">
                         <LineChart
                             width={1200} height={400} data={this.state.data03}
                             margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
@@ -347,7 +347,31 @@ export default class Reporting extends Component {
                             </Brush>
                         </LineChart>
                     </div>
+                    <CardTitle icon="settings_ethernet" text="CPU Time"/>
+
+                        <div className="line-chart-wrapper">
+                            <LineChart
+                                width={1200} height={400} data={this.state.data03}
+                                margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
+                            >
+                                <CartesianGrid vertical={true} />
+                                <XAxis dataKey="date" label="" />
+                                <YAxis domain={['auto', 'auto']} label="" />
+                                <Tooltip />
+                                <Line dataKey="price" stroke="#2196F3" dot={true} />
+
+                                <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
+                                    <AreaChart>
+                                        <CartesianGrid />
+                                        <YAxis hide domain={['auto', 'auto']} />
+                                        <Area dataKey="price" stroke="#2196F3" fill="#2196F3" dot={false} />
+                                    </AreaChart>
+                                </Brush>
+                            </LineChart>
+                        </div>
                 </div>
+
+
             </div>
         );
     }
