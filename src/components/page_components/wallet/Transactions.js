@@ -1,13 +1,14 @@
 import React from 'react'
 import Identicon from "../../shared_components/Identicon";
 import SectionTitle from "../../shared_components/SectionTitle";
+import TransactionTo from "./TransactionTo";
+import TransactionFrom from "./TransactionFrom";
 
 const skale = require('@skale-labs/skale-api');
 
 export default class Transactions extends React.Component {
 
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       transactions: []
@@ -30,7 +31,7 @@ export default class Transactions extends React.Component {
     });
   }
 
-  transformTransactions(transactions){
+  transformTransactions(transactions) {
     let transactionsRes = [];
     transactions.map((transaction) => {
       let floatValue = skale.w3.web3.utils.fromWei(transaction.returnValues._value);
@@ -45,33 +46,17 @@ export default class Transactions extends React.Component {
   }
 
   render() {
+    let from = this.props.from;
     let transactions = this.state.transactions.map((transaction, i) => {
-      return (
-        <div className="transaction fl-cont fl-center-vert padd-top-15 padd-bott-15 padd-left-10 bord-bott" key={i}>
-          <div className="fl-col padd-ri-md">
-            <Identicon size={40} hash={transaction.to}/>
-          </div>
-          <div className="fl-col fl-grow">
-            {/*  <h6 className="g-2 fw-5 fs-4 inl">To </h6>*/}
-            <h6 className="g-6 fw-5 fs-4 inl">{transaction.to}</h6> <br/>
-
-            <h6 className="g-4 fw-4 fs-2 no-marg padd-top-sm">
-              From: {transaction.from}
-            </h6>
-          </div>
-          <div className="fl-col padd-ri-10" style={{textAlign: "right"}}>
-            <h6 className="g-6 fw-6 fs-4">{transaction.floatValue} SKALE</h6>
-            <h6 className="g-4 fw-4 fs-2 no-marg">{(transaction.floatValue / 850).toFixed(5)} ETH</h6>
-          </div>
-
-        </div>);
+      return from ? <TransactionFrom transaction={transaction} key={i}/> :
+        <TransactionTo transaction={transaction} key={i}/>
     });
-
     return (
       <div>
         <div className="padd-top-md padd-bott-md padd-left-md">
           {transactions}
-          {(transactions.length === 0) ? <h6 className="padd-left-md padd-top-10 g-6 fw-5 fs-2">No transactions found</h6> : null}
+          {(transactions.length === 0) ?
+            <h6 className="padd-left-md padd-top-10 g-6 fw-5 fs-2">No transactions found</h6> : null}
         </div>
       </div>
     );
