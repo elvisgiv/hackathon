@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import update from 'react-addons-update';
 import {Link} from 'react-router-dom'
 
 import PageTitle from "../shared_components/PageTitle";
@@ -266,23 +267,27 @@ const data03 = [
     { date: 'Dec 27 2016', price: 117.26 },
     { date: 'Dec 28 2016', price: 116.76 },
     { date: 'Dec 29 2016', price: 116.73 },
-    { date: 'Dec 30 2016', price: 115.82 },
+    { date: 'Dec 30 2016', price: 130.82 },
 ];
 
-
 let sampleData = [
-  { date: 'Jan 1 2017', price: 115.19 },
-  { date: 'Jan 2 2017', price: 115.82 },
-  { date: 'Jan 3 2017', price: 115.97 },
-  { date: 'Jan 4 2017', price: 116.64 },
-  { date: 'Jan 5 2017', price: 116.95 },
-  { date: 'Jan 6 2017', price: 117.06 },
-  { date: 'Jan 7 2017', price: 116.29 },
-  { date: 'Jan 8 2017', price: 116.52 },
-  { date: 'Jan 9 2017', price: 117.26 },
-  { date: 'Jan 10 2017', price: 116.76 },
-  { date: 'Jan 11 2017', price: 116.73 },
-  { date: 'Jan 12 2017', price: 115.82 },
+    { date: 'Jan 01 2017', price: 115.19 },
+    { date: 'Jan 02 2017', price: 115.82 },
+    { date: 'Jan 03 2017', price: 115.97 },
+    { date: 'Jan 04 2017', price: 116.64 },
+    { date: 'Jan 05 2017', price: 116.95 },
+    { date: 'Jan 06 2017', price: 117.06 },
+    { date: 'Jan 07 2017', price: 116.29 },
+    { date: 'Jan 08 2017', price: 116.52 },
+    { date: 'Jan 09 2017', price: 117.26 },
+    { date: 'Jan 10 2017', price: 116.76 },
+    { date: 'Jan 11 2017', price: 153.73 },
+    { date: 'Jan 13 2017', price: 141.82 },
+    { date: 'Jan 14 2017', price: 112.82 },
+    { date: 'Jan 15 2017', price: 87.82 },
+    { date: 'Jan 16 2017', price: 67.82 },
+    { date: 'Jan 17 2017', price: 135.82 },
+    { date: 'Jan 18 2017', price: 115.82 },
 ];
 
 
@@ -295,7 +300,9 @@ export default class Reporting extends Component {
             anotherState: false,
             timer: null,
             data03: data03
+
         };
+
 
     }
 
@@ -303,15 +310,16 @@ export default class Reporting extends Component {
       this.addSampleData();
     }
 
+    addSampleData() {
 
-    async addSampleData() {
-        for(let unit of sampleData){
-            await skale.helper.timeout(3000);
-            let data = this.state.data03;
-            data.push(unit);
-            this.setState(data);
+        let data03 = this.state.data03.slice();
+
+        for (let i = 0; i < sampleData.length; i++) {
+            data03.push(sampleData[i]);
         }
+        this.setState({ data03: data03 });
     }
+
 
 
     render() {
