@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom'
 
 import PageTitle from "../shared_components/PageTitle";
 import CardTitle from "../shared_components/CardTitle";
-import CardInfo from "../shared_components/CardInfo";
 
-import {Button, ButtonIcon} from 'rmwc/Button';
+import { Accordion, AccordionPart, AccordionHeader, AccordionContent } from '../shared_components/accordion/Accordion'
+import SkaleCard from '../shared_components/SkaleCard'
 
 
 const skale = require('@skale-labs/skale-api');
@@ -301,7 +301,6 @@ export default class Reporting extends Component {
       anotherState: false,
       timer: null,
       data03: data03
-
     };
   }
 
@@ -314,18 +313,11 @@ export default class Reporting extends Component {
       let data03 = this.state.data03.slice();
       await skale.helper.timeout(3000);
       data03.push(sampleData[i]);
-
-      console.log(this.state.data03.length);
-      console.log(data03.length);
-
       this.setState({data03: data03});
     }
-
   }
 
-
   render() {
-
     return (
       <div className="marg-30">
         <PageTitle
@@ -334,54 +326,90 @@ export default class Reporting extends Component {
           nopadd={true}
         />
 
-        <div className="skale-card marg-bott-30 padd-30 marg-top-30">
-          <CardTitle icon="settings_ethernet" text="Transaction per second"/>
 
-          <div className="line-chart-wrapper padd-bott-30">
-            <LineChart
-              width={1200} height={400} data={this.state.data03}
-              margin={{top: 40, right: 40, bottom: 20, left: 20}}
-            >
-              <CartesianGrid vertical={true}/>
-              <XAxis dataKey="date" label=""/>
-              <YAxis domain={['auto', 'auto']} label=""/>
-              <Tooltip/>
-              <Line dataKey="price" stroke="#ff7300" dot={true}/>
+        <SkaleCard className='marg-top-30'>
+          <Accordion>
 
-              <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
-                <AreaChart>
-                  <CartesianGrid/>
-                  <YAxis hide domain={['auto', 'auto']}/>
-                  <Area dataKey="price" stroke="#ff7300" fill="#ff7300" dot={false}/>
-                </AreaChart>
-              </Brush>
-            </LineChart>
-          </div>
-          <CardTitle icon="settings_ethernet" text="CPU Time"/>
+            <AccordionPart collapse={true}>
+              <AccordionHeader icon="settings_ethernet" text="Transaction per second"/>
+              <AccordionContent>
+                <div className="line-chart-wrapper">
+                  <LineChart
+                    width={1200} height={400} data={this.state.data03}
+                    margin={{top: 40, right: 40, bottom: 20, left: 20}}
+                  >
+                    <CartesianGrid vertical={true}/>
+                    <XAxis dataKey="date" label=""/>
+                    <YAxis domain={['auto', 'auto']} label=""/>
+                    <Tooltip/>
+                    <Line dataKey="price" stroke="#ff7300" dot={true}/>
 
-          <div className="line-chart-wrapper">
-            <LineChart
-              width={1200} height={400} data={this.state.data03}
-              margin={{top: 40, right: 40, bottom: 20, left: 20}}
-            >
-              <CartesianGrid vertical={true}/>
-              <XAxis dataKey="date" label=""/>
-              <YAxis domain={['auto', 'auto']} label=""/>
-              <Tooltip/>
-              <Line dataKey="price" stroke="#2196F3" dot={true}/>
+                    <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
+                      <AreaChart>
+                        <CartesianGrid/>
+                        <YAxis hide domain={['auto', 'auto']}/>
+                        <Area dataKey="price" stroke="#ff7300" fill="#ff7300" dot={false}/>
+                      </AreaChart>
+                    </Brush>
+                  </LineChart>
+                </div>
+              </AccordionContent>
+            </AccordionPart>
 
-              <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
-                <AreaChart>
-                  <CartesianGrid/>
-                  <YAxis hide domain={['auto', 'auto']}/>
-                  <Area dataKey="price" stroke="#2196F3" fill="#2196F3" dot={false}/>
-                </AreaChart>
-              </Brush>
-            </LineChart>
-          </div>
-        </div>
+            <AccordionPart collapse={true}>
+              <AccordionHeader icon="donut_large" text="CPU Time"/>
+              <AccordionContent>
+                <div className="line-chart-wrapper">
+                  <LineChart
+                    width={1200} height={400} data={this.state.data03}
+                    margin={{top: 40, right: 40, bottom: 20, left: 20}}
+                  >
+                    <CartesianGrid vertical={true}/>
+                    <XAxis dataKey="date" label=""/>
+                    <YAxis domain={['auto', 'auto']} label=""/>
+                    <Tooltip/>
+                    <Line dataKey="price" stroke="#2196F3" dot={true}/>
 
+                    <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
+                      <AreaChart>
+                        <CartesianGrid/>
+                        <YAxis hide domain={['auto', 'auto']}/>
+                        <Area dataKey="price" stroke="#2196F3" fill="#2196F3" dot={false}/>
+                      </AreaChart>
+                    </Brush>
+                  </LineChart>
+                </div>
+              </AccordionContent>
+            </AccordionPart>
 
+            <AccordionPart last={true}>
+              <AccordionHeader icon="dns" text="Storage usage"/>
+              <AccordionContent>
+                <div className="line-chart-wrapper">
+                  <LineChart
+                    width={1200} height={400} data={this.state.data03}
+                    margin={{top: 40, right: 40, bottom: 20, left: 20}}
+                  >
+                    <CartesianGrid vertical={true}/>
+                    <XAxis dataKey="date" label=""/>
+                    <YAxis domain={['auto', 'auto']} label=""/>
+                    <Tooltip/>
+                    <Line dataKey="price" stroke="#2196F3" dot={true}/>
+
+                    <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
+                      <AreaChart>
+                        <CartesianGrid/>
+                        <YAxis hide domain={['auto', 'auto']}/>
+                        <Area dataKey="price" stroke="#2196F3" fill="#2196F3" dot={false}/>
+                      </AreaChart>
+                    </Brush>
+                  </LineChart>
+                </div>
+              </AccordionContent>
+            </AccordionPart>
+
+          </Accordion>
+        </SkaleCard>
       </div>
     );
   }

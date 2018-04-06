@@ -1,5 +1,5 @@
 import React from 'react'
-import CardTitle from "./CardTitle";
+import CardTitle from "../CardTitle";
 
 import { Ripple } from 'rmwc/Ripple';
 import {Icon} from 'rmwc/Icon';

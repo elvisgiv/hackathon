@@ -1,15 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import PageTitle from "../shared_components/PageTitle";
-import SectionText from "../shared_components/SectionText";
-import CardInfo from "../shared_components/CardInfo";
-
 import SendModal from "../page_components/wallet/SendModal";
 import Transactions from "../page_components/wallet/Transactions";
 import ReceiveModal from "../page_components/wallet/ReceiveModal";
 import Account from "../page_components/wallet/Account";
 
+import PageTitle from "../shared_components/PageTitle";
+import SectionText from "../shared_components/SectionText";
+import CardInfo from "../shared_components/CardInfo";
+import { Accordion, AccordionPart, AccordionHeader, AccordionContent } from '../shared_components/accordion/Accordion'
+import SkaleCard from '../shared_components/SkaleCard'
 
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
@@ -21,8 +22,6 @@ const skale = require('@skale-labs/skale-api');
 import ethLogo from '../../images/coins/eth.png';
 import skaleLogo from '../../images/coins/skale.jpg';
 
-import { Accordion, AccordionPart, AccordionHeader, AccordionContent } from '../shared_components/Accordion'
-import SkaleCard from '../shared_components/SkaleCard'
 
 export default class BotExchange extends React.Component {
 
@@ -204,7 +203,7 @@ export default class BotExchange extends React.Component {
       <div className='marg-30'>
         <PageTitle
           title="Wallet"
-          subtitle="Here you can see your balance in the MetaMask."
+          subtitle="Manage SKALE tokens: Send, receive, buy and view transactions"
         />
 
         <SkaleCard>
@@ -233,15 +232,12 @@ export default class BotExchange extends React.Component {
         <Snackbar
           show={this.state.snackbarIsOpen}
           onHide={evt => this.setState({snackbarIsOpen: false})}
-          //message={`Address ${this.state.account} copied to clipboard`}
           message={this.state.snackbarMessage}
           actionText="Hide"
           actionHandler={() => {
           }}
         />
-
       </div>
-
     )
   }
 }
