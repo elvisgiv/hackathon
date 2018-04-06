@@ -15,8 +15,8 @@ export default class Web3Connector extends React.Component {
         let self = this;
         setTimeout(function () {
             self.Web3Connector();
-            self.interval = setInterval(() => self.Web3Connector(), 2000);
-        }, 500);
+            self.interval = setInterval(() => self.Web3Connector(), 10000);
+        }, 2000);
     }
 
     componentDidUpdate() {

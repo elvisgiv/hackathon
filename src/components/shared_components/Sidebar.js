@@ -43,11 +43,11 @@ export default class Sidebar extends React.Component {
   }
 
   sChainsPage() {
-    return this.isItemSelected('/schains') || this.isItemSelected('/') || this.isItemSelected('/schains/create')
+    return this.isItemSelected('/schains')  || this.isItemSelected('/schains/create')
   }
 
   walletPage() {
-    return this.isItemSelected('/wallet')
+    return this.isItemSelected('/wallet') || this.isItemSelected('/')
   }
 
   marketPage() {
