@@ -16,7 +16,7 @@ import SChains from './components/pages/SChains';
 import CreateSChain from './components/pages/CreateSChain';
 
 // for wallet
-import BotExchange from './components/pages/Wallet';
+import Wallet from './components/pages/Wallet';
 import FromEth from './components/page_components/maketplace/FromEth';
 import FromSkale from './components/page_components/maketplace/FromSkale';
 //
@@ -114,7 +114,7 @@ export default class App extends Component {
             <div className="fl-wrap fl-grow main-content">
               <div className="skale-page-content">
                 <Switch>
-                  <Route exact path='/' render={() => <SChains web3Connector={web3Connector}/>}/>
+                  <Route exact path='/' render={() => <Wallet web3Connector={web3Connector}/>}/>
                   <Route exact path='/schains' render={() => <SChains web3Connector={web3Connector}/>}/>
                   <Route exact path='/schains/create' render={() => <CreateSChain web3Connector={web3Connector}/>}/>
 
@@ -122,7 +122,7 @@ export default class App extends Component {
                   <Route exact path='/reporting' render={() => <Reporting web3Connector={web3Connector}/>}/>
                   <Route exact path='/dapps' render={() => <Dapps web3Connector={web3Connector}/>}/>
 
-                  <Route path='/wallet' render={() => <BotExchange web3Connector={web3Connector}/>}/>
+                  <Route path='/wallet' render={() => <Wallet web3Connector={web3Connector}/>}/>
                   <Route path='/exchange-eth' render={() => <FromSkale web3Connector={web3Connector}/>}/>
                   <Route path='/exchange-skl' render={() => <FromEth web3Connector={web3Connector}/>}/>
                   <Route path='/dapps/upload' render={() => <UploadDapp web3Connector={web3Connector}/>}/>

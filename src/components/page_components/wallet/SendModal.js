@@ -4,16 +4,18 @@ import CardTitle from "../../shared_components/CardTitle";
 import SectionText from "../../shared_components/SectionText";
 
 import {Button} from 'rmwc/Button';
-import { Input } from 'reactstrap';
+import {Input} from 'reactstrap';
+import Admonition from "../../shared_components/Admonition";
 
 const skale = require('@skale-labs/skale-api');
 
 export default class SendModal extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
+      gasFee: 0.008
       //skaleVal: 0
     }
   }
@@ -39,6 +41,12 @@ export default class SendModal extends React.Component {
       <div className="padd-30">
         <CardTitle icon="call_made" text="Send SKALE"/>
 
+        <Admonition className='marg-top-30'
+                    type="warning"
+                    title="Warning"
+                    text="Please verify recipient address. We cannot refund an incorrect transaction."/>
+
+
         <div className="padd-top-30 padd-bott-10">
           <SectionText
             text="Amount of SKALE"
@@ -46,11 +54,21 @@ export default class SendModal extends React.Component {
           />
         </div>
 
-        <Input className="new-input" id="buySkl" type="number" size="150" placeholder="
+
+        <div className='new-input fl-cont fl-center-h'>
+          <div className='fl-col fl-grow'>
+            <Input className='flat-input' type="number" placeholder="
                         SKALE amount"
-               onChange={(num) =>
-                 this.setState({skaleVal: num.target.value})}
-               value={this.state.skaleVal}/>
+                   onChange={(num) =>
+                     this.setState({skaleVal: num.target.value})}
+                   value={this.state.skaleVal}/>
+          </div>
+          <div className='fl-col padd-left-10'>
+            <p className='no-marg fw-8 g-6 fs-4'>
+              SKALE
+            </p>
+          </div>
+        </div>
 
         <div className="padd-top-30 padd-bott-10">
           <SectionText
@@ -58,9 +76,7 @@ export default class SendModal extends React.Component {
             nopadd={true}
           />
         </div>
-
-
-        <div className="bord-bott padd-bott-30">
+        <div className="">
           <Input className="new-input" id="buySkl" type="text" size="150" placeholder="
                         ETH address"
                  onChange={(num) =>
@@ -68,20 +84,41 @@ export default class SendModal extends React.Component {
                  value={this.state.address}/>
         </div>
 
-        <div className="padd-top-md">
-          {/*<SectionText
-            text="Confirm the transaction"
-            //tooltipText="todo: short explanation for the metamask popup"
+
+        <div className="padd-top-30 padd-bott-30 bord-bott">
+          <SectionText
+            text="Gas fee"
+            tooltipText="We calculate the suggested gas prices based on network success rates."
             nopadd={true}
           />
-*/}
+
+          <div className='new-input disabled-input fl-cont fl-center-h marg-top-10'>
+            <div className='fl-col fl-grow'>
+              <Input disabled className='flat-input' type="number" placeholder="
+                        SKALE amount"
+                     onChange={(num) =>
+                       this.setState({gasFee: num.target.value})}
+                     value={this.state.gasFee}/>
+            </div>
+            <div className='fl-col padd-left-10'>
+              <p className='no-marg fw-8 g-6 fs-4'>
+                ETH
+              </p>
+            </div>
+          </div>
+
+          {/*<p className='no-marg padd-top-sm g-6 fw-6 fs-6'>0.0008 ETH</p>*/}
+
+        </div>
+
+
+        <div className="padd-top-md">
           <div className="padd-top-10">
             <Button unelevated className="green-btn"
                     onClick={() => {
                       this.sendSkale();
                     }}
-                    disabled={!this.state.libInit}
-            >
+                    disabled={!this.state.libInit}>
               Confirm
             </Button>
             <Button color="secondary" onClick={this.props.ToggleSend}>Cancel</Button>

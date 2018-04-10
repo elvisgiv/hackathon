@@ -1,27 +1,27 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import SendModal from "../page_components/wallet/SendModal";
+import Transactions from "../page_components/wallet/Transactions";
+import ReceiveModal from "../page_components/wallet/ReceiveModal";
+import Account from "../page_components/wallet/Account";
+
 import PageTitle from "../shared_components/PageTitle";
-import CardTitle from "../shared_components/CardTitle";
 import SectionText from "../shared_components/SectionText";
 import CardInfo from "../shared_components/CardInfo";
-
-import SendModal from "../page_components/wallet/SendModal";
-
-import TransactionsHistory from "../page_components/wallet/TransactionsHistory";
+import { Accordion, AccordionPart, AccordionHeader, AccordionContent } from '../shared_components/accordion/Accordion'
+import SkaleCard from '../shared_components/SkaleCard'
 
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import {Button, ButtonIcon} from 'rmwc/Button';
 import {Snackbar} from 'rmwc/Snackbar';
-import {Modal} from 'reactstrap';
+import {Modal, Collapse} from 'reactstrap';
 
 const skale = require('@skale-labs/skale-api');
 import ethLogo from '../../images/coins/eth.png';
 import skaleLogo from '../../images/coins/skale.jpg';
-import ReceiveModal from "../page_components/wallet/ReceiveModal";
 
-// import FromSkale from "./fromSkale";
 
 export default class BotExchange extends React.Component {
 
@@ -31,10 +31,12 @@ export default class BotExchange extends React.Component {
       timer: null,
       receiveModal: false,
       sendModal: false,
+      collapse: false
     };
 
     this.toggleReceive = this.toggleReceive.bind(this);
     this.toggleSend = this.toggleSend.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.showSnackbar = this.showSnackbar.bind(this);
   }
 
@@ -116,112 +118,126 @@ export default class BotExchange extends React.Component {
     })
   }
 
+  toggle() {
+    this.setState({ collapse: !this.state.collapse });
+  }
+
   render() {
-    /*
-          let buySkl = <FromEth web3Connector={this.props.web3Connector} fatherToggle={this.toggle}/>;
-          let sellSkl = <FromSkale web3Connector={this.props.web3Connector} fatherToggleColl={this.toggleColl}/>;*/
+
+    let account = (
+      <div className="card-content padd-top-30 padd-bott-md padd-left-md">
+        <CardInfo
+          k="Web3 provider"
+          value="Metamask"
+        />
+        <CardInfo
+          k="Balance for the account"
+          value={this.state.account}
+          tooltipText="Balance for the account currently selected in Metamask"
+        />
+
+        <div className="padd-left-md padd-bott-10">
+          <div className="fl-cont fl-center-vert padd-top-10">
+            <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
+              <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
+            </div>
+            <div className="fl-col">
+              <h5 className="no-marg inl">{this.state.eth}</h5>
+              <h5 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h5>
+            </div>
+          </div>
+          <div className="fl-cont fl-center-vert padd-top-md">
+            <div className="fl-col padd-ri-10">
+              <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
+            </div>
+            <div className="fl-col">
+              <h5 className="no-marg inl">{this.state.skl} </h5>
+              <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="padd-top-md">
+          <SectionText
+            text="Send and receive SKALE tokens"
+          />
+
+          <div className="fl-cont padd-left-md">
+            <div className="fl-col padd-ri-md">
+              <Button unelevated className="grdeen-btn" onClick={this.toggleSend} style={{minWidth: "135px"}}>
+                <ButtonIcon use="call_made"/>Send</Button>
+              <Modal isOpen={this.state.sendModal} toggle={this.toggleSend}>
+                <SendModal showSnackbar={this.showSnackbar} ToggleSend={this.toggleSend} web3Connector={this.props.web3Connector}/>
+              </Modal>
+            </div>
+            <div className="fl-col padd-ri-md">
+              <CopyToClipboard text={this.state.account}
+                               onCopy={() => this.setState({copied: true})}>
+                <Button unelevated className="redd-btn" style={{minWidth: "135px"}}
+                        onClick={evt => this.setState({
+                          snackbarIsOpen: !this.state.snackbarIsOpen,
+                          snackbarMessage: "Address copied to clipboard"
+                        })}>
+                  <ButtonIcon use="call_received"/>Receive</Button>
+              </CopyToClipboard>
+              <Modal isOpen={this.state.receiveModal} toggle={this.toggleReceive}>
+                <ReceiveModal/>
+              </Modal>
+            </div>
+            <div className="fl-col padd-ri-md">
+              <Link to='/marketplace' className="undec">
+                <Button unelevated className="lite-btn" style={{minWidth: "135px"}}>
+                  <ButtonIcon use="shopping_cart"/>
+                  Buy
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
 
     return (
       <div className='marg-30'>
         <PageTitle
           title="Wallet"
-          subtitle="Here you can see your balance in the MetaMask."
+          subtitle="Manage SKALE tokens: Send, receive, buy and view transactions"
         />
-        <div className="skale-card padd-30 marg-bott-30">
-          <div className="padd-bott-10">
-            <CardTitle icon="account_balance_wallet" text="Account"/>
-            <div className="card-content padd-top-30 padd-left-md">
-              <CardInfo
-                k="Web3 provider"
-                value="Metamask"
-              />
-              <CardInfo
-                k="Balance for the account"
-                value={this.state.account}
-                tooltipText="Balance for the account currently selected in Metamask"
-              />
 
-              <div className="padd-left-md padd-bott-10">
-                <div className="fl-cont fl-center-vert padd-top-10">
-                  <div className="fl-col padd-ri-10 fl-center" style={{width: "40px"}}>
-                    <img src={ethLogo} className="wallet-coin" style={{height: "30px"}}/>
-                  </div>
-                  <div className="fl-col">
-                    <h5 className="no-marg inl">{this.state.eth}</h5>
-                    <h5 className="no-marg padd-left-sm lite-gr-col inl"> ETH </h5>
-                  </div>
-                </div>
-                <div className="fl-cont fl-center-vert padd-top-md">
-                  <div className="fl-col padd-ri-10">
-                    <img src={skaleLogo} className="wallet-coin" style={{height: "30px"}}/>
-                  </div>
-                  <div className="fl-col">
-                    <h5 className="no-marg inl">{this.state.skl} </h5>
-                    <h5 className="no-marg padd-left-sm lite-gr-col inl"> SKALE </h5>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className="padd-top-md">
-                <SectionText
-                  text="Send and receive SKALE tokens"
-                />
-
-                <div className="fl-cont padd-left-md">
-                  <div className="fl-col padd-ri-md">
-                    <Button unelevated className="grdeen-btn" onClick={this.toggleSend} style={{minWidth: "135px"}}>
-                      <ButtonIcon use="call_made"/>Send</Button>
-                    <Modal isOpen={this.state.sendModal} toggle={this.toggleSend}>
-                      <SendModal showSnackbar={this.showSnackbar} ToggleSend={this.toggleSend} web3Connector={this.props.web3Connector}/>
-                    </Modal>
-                  </div>
-                  <div className="fl-col padd-ri-md">
-                    <CopyToClipboard text={this.state.account}
-                                     onCopy={() => this.setState({copied: true})}>
-                      <Button unelevated className="redd-btn" style={{minWidth: "135px"}}
-                              onClick={evt => this.setState({
-                                snackbarIsOpen: !this.state.snackbarIsOpen,
-                                snackbarMessage: "Address copied to clipboard"
-                              })}>
-                        <ButtonIcon use="call_received"/>Receive</Button>
-                    </CopyToClipboard>
-                    <Modal isOpen={this.state.receiveModal} toggle={this.toggleReceive}>
-                      <ReceiveModal/>
-                    </Modal>
-                  </div>
-                  <div className="fl-col padd-ri-md">
-                    <Link to='/marketplace' className="undec">
-                      <Button unelevated className="lite-btn" style={{minWidth: "135px"}}>
-                        <ButtonIcon use="shopping_cart"/>
-                        Buy
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="divider"></div>
-            <CardTitle icon="compare_arrows" text="Transactions"/>
-            <div className="card-content">
-              <TransactionsHistory transactions={this.state.transactions}/>
-            </div>
-          </div>
-        </div>
+        <SkaleCard>
+          <Accordion>
+            <AccordionPart collapse={true}>
+              <AccordionHeader icon="account_balance_wallet" text="Account"/>
+              <AccordionContent>
+                {account}
+              </AccordionContent>
+            </AccordionPart>
+            <AccordionPart>
+              <AccordionHeader icon="call_made" text="Outgoing transactions"/>
+              <AccordionContent>
+                <Transactions from transactions={this.state.transactions}/>
+              </AccordionContent>
+            </AccordionPart>
+            <AccordionPart last={true}>
+              <AccordionHeader icon="call_received" text="Incoming transactions"/>
+              <AccordionContent>
+                <Transactions to transactions={this.state.transactions}/>
+              </AccordionContent>
+            </AccordionPart>
+          </Accordion>
+        </SkaleCard>
 
         <Snackbar
           show={this.state.snackbarIsOpen}
           onHide={evt => this.setState({snackbarIsOpen: false})}
-          //message={`Address ${this.state.account} copied to clipboard`}
           message={this.state.snackbarMessage}
           actionText="Hide"
           actionHandler={() => {
           }}
         />
-
       </div>
-
     )
   }
 }
