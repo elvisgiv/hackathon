@@ -15,7 +15,15 @@ const Helper = {
             'max': 1100
         });
         return num
-    }
+    },
+
+    getCpu() {
+        let num = faker.random.number({
+            'min': 10,
+            'max': 95
+        });
+        return num
+    },
 
 };
 

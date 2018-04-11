@@ -292,6 +292,26 @@ const data04 = [
     {date: "2018/04/11 12:50:59", price: 751},
 ];
 
+const data05 = [
+    {date: "2018/04/11 12:50:11", price: 50},
+    {date: "2018/04/11 12:50:14", price: 11},
+    {date: "2018/04/11 12:50:17", price: 44},
+    {date: "2018/04/11 12:50:20", price: 88},
+    {date: "2018/04/11 12:50:23", price: 89},
+    {date: "2018/04/11 12:50:26", price: 49},
+    {date: "2018/04/11 12:50:29", price: 39},
+    {date: "2018/04/11 12:50:32", price: 91},
+    {date: "2018/04/11 12:50:35", price: 42},
+    {date: "2018/04/11 12:50:38", price: 63},
+    {date: "2018/04/11 12:50:41", price: 31},
+    {date: "2018/04/11 12:50:44", price: 71},
+    {date: "2018/04/11 12:50:47", price: 32},
+    {date: "2018/04/11 12:50:50", price: 42},
+    {date: "2018/04/11 12:50:53", price: 12},
+    {date: "2018/04/11 12:50:56", price: 10},
+    {date: "2018/04/11 12:50:59", price: 51},
+];
+
 let sampleData = [
     { date: 'Jan 01 2017', price: 115.19 },
     { date: 'Jan 02 2017', price: 115.82 },
@@ -323,6 +343,7 @@ export default class Reporting extends Component {
             timer: null,
             data03: data03,
             data04: data04,
+            data05: data05,
 
 
         };
@@ -332,10 +353,6 @@ export default class Reporting extends Component {
 
     }
 
-/*    componentDidMount() {
-      //this.addSampleData();
-      this.getData();
-    }*/
     componentDidMount() {
         this.setState({
             timer: setInterval(() => {
@@ -344,34 +361,25 @@ export default class Reporting extends Component {
         });
     }
 
-  async addSampleData() {
-    for (let i = 0; i < sampleData.length; i++) {
-      let data03 = this.state.data03.slice();
-      await skale.helper.timeout(3000);
-      data03.push(sampleData[i]);
-      this.setState({data03: data03});
-    }
-  }
-
   async getData() {
 
       let date = await report.getDate();
-      console.log(date);
 
       let tps = await report.getTps();
-      console.log(tps);
+
+      let cpu = await report.getCpu();
 
       let hash = { date: date+'', price: tps };
-
+      let hashCpu = { date: date+'', price: cpu };
 
       let data04 = this.state.data04.slice();
+      let data05 = this.state.data05.slice();
 
       data04.push(hash);
       this.setState({data04: data04});
 
-      console.log('!!!!!!!!!!!!!!!!!!1');
-      console.log(this.state.data04);
-
+      data05.push(hashCpu);
+      this.setState({data05: data05});
 
   }
 
@@ -422,7 +430,7 @@ export default class Reporting extends Component {
               <AccordionContent>
                 <div className="line-chart-wrapper">
                   <LineChart
-                    width={1200} height={400} data={this.state.data03}
+                    width={1200} height={400} data={this.state.data05}
                     margin={{top: 40, right: 40, bottom: 20, left: 20}}
                   >
                     <CartesianGrid vertical={true}/>
@@ -431,7 +439,7 @@ export default class Reporting extends Component {
                     <Tooltip/>
                     <Line dataKey="price" stroke="#2196F3" dot={true}/>
 
-                    <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
+                    <Brush dataKey="date" startIndex={this.state.data05.length > 50 ? this.state.data05.length - 40 : 0}>
                       <AreaChart>
                         <CartesianGrid/>
                         <YAxis hide domain={['auto', 'auto']}/>
