@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import update from 'react-addons-update';
 import {Link} from 'react-router-dom'
 
@@ -8,6 +8,8 @@ import CardTitle from "../shared_components/CardTitle";
 import { Accordion, AccordionPart, AccordionHeader, AccordionContent } from '../shared_components/accordion/Accordion'
 import SkaleCard from '../shared_components/SkaleCard'
 
+
+const report = require('../helpers/ReportGenerator');
 
 const skale = require('@skale-labs/skale-api');
 
@@ -270,62 +272,129 @@ const data03 = [
   {date: 'Dec 29 2016', price: 116.73},
   {date: 'Dec 30 2016', price: 130.82},
 ];
+const data04 = [
+    {date: "2018/04/11 12:50:11", price: 901},
+    {date: "2018/04/11 12:50:14", price: 963},
+    {date: "2018/04/11 12:50:17", price: 1097},
+    {date: "2018/04/11 12:50:20", price: 1033},
+    {date: "2018/04/11 12:50:23", price: 889},
+    {date: "2018/04/11 12:50:26", price: 1049},
+    {date: "2018/04/11 12:50:29", price: 939},
+    {date: "2018/04/11 12:50:32", price: 1091},
+    {date: "2018/04/11 12:50:35", price: 1042},
+    {date: "2018/04/11 12:50:38", price: 963},
+    {date: "2018/04/11 12:50:41", price: 731},
+    {date: "2018/04/11 12:50:44", price: 771},
+    {date: "2018/04/11 12:50:47", price: 932},
+    {date: "2018/04/11 12:50:50", price: 942},
+    {date: "2018/04/11 12:50:53", price: 812},
+    {date: "2018/04/11 12:50:56", price: 910},
+    {date: "2018/04/11 12:50:59", price: 751},
+];
+
+const data05 = [
+    {date: "2018/04/11 12:50:11", price: 50},
+    {date: "2018/04/11 12:50:14", price: 11},
+    {date: "2018/04/11 12:50:17", price: 44},
+    {date: "2018/04/11 12:50:20", price: 88},
+    {date: "2018/04/11 12:50:23", price: 89},
+    {date: "2018/04/11 12:50:26", price: 49},
+    {date: "2018/04/11 12:50:29", price: 39},
+    {date: "2018/04/11 12:50:32", price: 91},
+    {date: "2018/04/11 12:50:35", price: 42},
+    {date: "2018/04/11 12:50:38", price: 63},
+    {date: "2018/04/11 12:50:41", price: 31},
+    {date: "2018/04/11 12:50:44", price: 71},
+    {date: "2018/04/11 12:50:47", price: 32},
+    {date: "2018/04/11 12:50:50", price: 42},
+    {date: "2018/04/11 12:50:53", price: 12},
+    {date: "2018/04/11 12:50:56", price: 10},
+    {date: "2018/04/11 12:50:59", price: 51},
+];
 
 let sampleData = [
-  {date: 'Jan 01 2017', price: 115.19},
-  {date: 'Jan 02 2017', price: 115.82},
-  {date: 'Jan 03 2017', price: 115.97},
-  {date: 'Jan 04 2017', price: 116.64},
-  {date: 'Jan 05 2017', price: 116.95},
-  {date: 'Jan 06 2017', price: 117.06},
-  {date: 'Jan 07 2017', price: 116.29},
-  {date: 'Jan 08 2017', price: 116.52},
-  {date: 'Jan 09 2017', price: 117.26},
-  {date: 'Jan 10 2017', price: 116.76},
-  {date: 'Jan 11 2017', price: 153.73},
-  {date: 'Jan 13 2017', price: 141.82},
-  {date: 'Jan 14 2017', price: 112.82},
-  {date: 'Jan 15 2017', price: 87.82},
-  {date: 'Jan 16 2017', price: 67.82},
-  {date: 'Jan 17 2017', price: 135.82},
-  {date: 'Jan 18 2017', price: 115.82},
+    { date: 'Jan 01 2017', price: 115.19 },
+    { date: 'Jan 02 2017', price: 115.82 },
+    { date: 'Jan 03 2017', price: 118.97 },
+    { date: 'Jan 04 2017', price: 116.64 },
+    { date: 'Jan 05 2017', price: 112.95 },
+    { date: 'Jan 06 2017', price: 117.06 },
+    { date: 'Jan 07 2017', price: 116.29 },
+    { date: 'Jan 08 2017', price: 111.52 },
+    { date: 'Jan 09 2017', price: 117.26 },
+    { date: 'Jan 10 2017', price: 116.76 },
+    { date: 'Jan 11 2017', price: 153.73 },
+    { date: 'Jan 13 2017', price: 141.82 },
+    { date: 'Jan 14 2017', price: 112.82 },
+    { date: 'Jan 15 2017', price: 87.82 },
+    { date: 'Jan 16 2017', price: 67.82 },
+    { date: 'Jan 17 2017', price: 135.82 },
+    { date: 'Jan 18 2017', price: 115.82 },
 ];
 
 
 export default class Reporting extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      opacity: 1,
-      anotherState: false,
-      timer: null,
-      data03: data03
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            opacity: 1,
+            anotherState: false,
+            timer: null,
+            data03: data03,
+            data04: data04,
+            data05: data05,
 
-  componentDidMount() {
-    this.addSampleData();
-  }
 
-  async addSampleData() {
-    for (let i = 0; i < sampleData.length; i++) {
-      let data03 = this.state.data03.slice();
-      await skale.helper.timeout(3000);
-      data03.push(sampleData[i]);
-      this.setState({data03: data03});
+        };
+
+        this.getData = this.getData.bind(this);
+
+
     }
+
+    componentDidMount() {
+        this.setState({
+            timer: setInterval(() => {
+                this.getData()
+            }, 3000),
+        });
+    }
+
+  async getData() {
+
+      let date = await report.getDate();
+
+      let tps = await report.getTps();
+
+      let cpu = await report.getCpu();
+
+      let hash = { date: date+'', price: tps };
+      let hashCpu = { date: date+'', price: cpu };
+
+      let data04 = this.state.data04.slice();
+      let data05 = this.state.data05.slice();
+
+      data04.push(hash);
+      this.setState({data04: data04});
+
+      data05.push(hashCpu);
+      this.setState({data05: data05});
+
   }
+
+
 
   render() {
     return (
       <div className="marg-30">
+
         <PageTitle
           title="Reporting"
           subtitle="Dashboard with real-time performance of your sChains."
           nopadd={true}
-        />
 
+        />
 
         <SkaleCard className='marg-top-30'>
           <Accordion>
@@ -335,7 +404,7 @@ export default class Reporting extends Component {
               <AccordionContent>
                 <div className="line-chart-wrapper">
                   <LineChart
-                    width={1200} height={400} data={this.state.data03}
+                    width={1200} height={400} data={this.state.data04}
                     margin={{top: 40, right: 40, bottom: 20, left: 20}}
                   >
                     <CartesianGrid vertical={true}/>
@@ -344,7 +413,7 @@ export default class Reporting extends Component {
                     <Tooltip/>
                     <Line dataKey="price" stroke="#ff7300" dot={true}/>
 
-                    <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
+                    <Brush dataKey="date" startIndex={this.state.data04.length > 50 ? this.state.data04.length - 40 : 0}>
                       <AreaChart>
                         <CartesianGrid/>
                         <YAxis hide domain={['auto', 'auto']}/>
@@ -361,7 +430,7 @@ export default class Reporting extends Component {
               <AccordionContent>
                 <div className="line-chart-wrapper">
                   <LineChart
-                    width={1200} height={400} data={this.state.data03}
+                    width={1200} height={400} data={this.state.data05}
                     margin={{top: 40, right: 40, bottom: 20, left: 20}}
                   >
                     <CartesianGrid vertical={true}/>
@@ -370,7 +439,7 @@ export default class Reporting extends Component {
                     <Tooltip/>
                     <Line dataKey="price" stroke="#2196F3" dot={true}/>
 
-                    <Brush dataKey="date" startIndex={this.state.data03.length - 40}>
+                    <Brush dataKey="date" startIndex={this.state.data05.length > 50 ? this.state.data05.length - 40 : 0}>
                       <AreaChart>
                         <CartesianGrid/>
                         <YAxis hide domain={['auto', 'auto']}/>
