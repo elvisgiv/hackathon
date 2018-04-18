@@ -349,15 +349,13 @@ export default class Reporting extends Component {
         };
 
         this.getData = this.getData.bind(this);
-
-
     }
 
     componentDidMount() {
         this.setState({
             timer: setInterval(() => {
                 this.getData()
-            }, 3000),
+            }, 10000),
         });
     }
 
@@ -426,7 +424,7 @@ export default class Reporting extends Component {
             </AccordionPart>
 
             <AccordionPart collapse={true}>
-              <AccordionHeader icon="donut_large" text="CPU Time"/>
+              <AccordionHeader icon="donut_large" text="CPU Time, %"/>
               <AccordionContent>
                 <div className="line-chart-wrapper">
                   <LineChart
