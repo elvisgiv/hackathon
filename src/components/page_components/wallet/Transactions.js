@@ -56,7 +56,7 @@ export default class Transactions extends React.Component {
         <div className="padd-top-md padd-bott-md padd-left-md">
           {transactions}
           {(transactions.length === 0) ?
-            <h6 className="padd-left-md padd-top-10 g-6 fw-5 fs-2">No transactions found</h6> : null}
+            <h6 className="padd-left-md padd-top-md g-6 fw-5 fs-2">No transactions found</h6> : null}
         </div>
       </div>
     );
