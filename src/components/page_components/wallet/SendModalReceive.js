@@ -19,7 +19,7 @@ export default class SendModalReceive extends React.Component {
       <div className="padd-30">
         <CardTitle icon="call_received" text="Address copying"/>
 
-        <Admonition className='marg-top-30 info-icon'
+        <Admonition className='marg-top-30 blue-col'
                     type="info"
                     title="Info"
                     text="Address copied to clipboard."/>
