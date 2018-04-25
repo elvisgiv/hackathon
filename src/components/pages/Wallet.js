@@ -21,6 +21,7 @@ import {Modal, Collapse} from 'reactstrap';
 const skale = require('@skale-labs/skale-api');
 import ethLogo from '../../images/coins/eth.png';
 import skaleLogo from '../../images/coins/skale.jpg';
+import SendModalReceive from "../page_components/wallet/SendModalReceive";
 
 
 export default class BotExchange extends React.Component {
@@ -31,11 +32,13 @@ export default class BotExchange extends React.Component {
       timer: null,
       receiveModal: false,
       sendModal: false,
+      sendModalS: false,
       collapse: false
     };
 
     this.toggleReceive = this.toggleReceive.bind(this);
     this.toggleSend = this.toggleSend.bind(this);
+    this.toggleSendS = this.toggleSendS.bind(this);
     this.toggle = this.toggle.bind(this);
     this.showSnackbar = this.showSnackbar.bind(this);
   }
@@ -111,6 +114,12 @@ export default class BotExchange extends React.Component {
     });
   }
 
+  toggleSendS() {
+    this.setState({
+      sendModalS: !this.state.sendModalS
+    });
+  }
+
   showSnackbar(message) {
     this.setState({
       snackbarIsOpen: !this.state.snackbarIsOpen,
@@ -174,12 +183,17 @@ export default class BotExchange extends React.Component {
             <div className="fl-col padd-ri-md">
               <CopyToClipboard text={this.state.account}
                                onCopy={() => this.setState({copied: true})}>
-                <Button unelevated className="redd-btn" style={{minWidth: "135px"}}
+{/*                <Button unelevated className="redd-btn" style={{minWidth: "135px"}}
                         onClick={evt => this.setState({
                           snackbarIsOpen: !this.state.snackbarIsOpen,
                           snackbarMessage: "Address copied to clipboard"
-                        })}>
-                  <ButtonIcon use="call_received"/>Receive</Button>
+                        })}>*/}
+                <Button unelevated className="redd-btn" onClick={this.toggleSendS} style={{minWidth: "135px"}}>
+                  <ButtonIcon use="call_received"/>Receive
+                  <Modal isOpen={this.state.sendModalS} toggle={this.toggleSendS}>
+                    <SendModalReceive showSnackbar={this.showSnackbar} ToggleSend={this.toggleSendS}/>
+                  </Modal>
+                </Button>
               </CopyToClipboard>
               <Modal isOpen={this.state.receiveModal} toggle={this.toggleReceive}>
                 <ReceiveModal/>

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import update from 'react-addons-update';
-import {Link} from 'react-router-dom'
 
 import PageTitle from "../shared_components/PageTitle";
-import CardTitle from "../shared_components/CardTitle";
 
 import { Accordion, AccordionPart, AccordionHeader, AccordionContent } from '../shared_components/accordion/Accordion'
-import SkaleCard from '../shared_components/SkaleCard'
+import SkaleCard from '../shared_components/SkaleCard';
 
 
 const report = require('../helpers/ReportGenerator');
-
-const skale = require('@skale-labs/skale-api');
 
 import {
   LineChart, Line, XAxis, YAxis,
@@ -291,7 +286,6 @@ const data04 = [
     {date: "2018/04/11 12:50:56", price: 910},
     {date: "2018/04/11 12:50:59", price: 751},
 ];
-
 const data05 = [
     {date: "2018/04/11 12:50:11", price: 50},
     {date: "2018/04/11 12:50:14", price: 11},
@@ -312,26 +306,6 @@ const data05 = [
     {date: "2018/04/11 12:50:59", price: 51},
 ];
 
-let sampleData = [
-    { date: 'Jan 01 2017', price: 115.19 },
-    { date: 'Jan 02 2017', price: 115.82 },
-    { date: 'Jan 03 2017', price: 118.97 },
-    { date: 'Jan 04 2017', price: 116.64 },
-    { date: 'Jan 05 2017', price: 112.95 },
-    { date: 'Jan 06 2017', price: 117.06 },
-    { date: 'Jan 07 2017', price: 116.29 },
-    { date: 'Jan 08 2017', price: 111.52 },
-    { date: 'Jan 09 2017', price: 117.26 },
-    { date: 'Jan 10 2017', price: 116.76 },
-    { date: 'Jan 11 2017', price: 153.73 },
-    { date: 'Jan 13 2017', price: 141.82 },
-    { date: 'Jan 14 2017', price: 112.82 },
-    { date: 'Jan 15 2017', price: 87.82 },
-    { date: 'Jan 16 2017', price: 67.82 },
-    { date: 'Jan 17 2017', price: 135.82 },
-    { date: 'Jan 18 2017', price: 115.82 },
-];
-
 
 export default class Reporting extends Component {
 
@@ -344,7 +318,6 @@ export default class Reporting extends Component {
             data03: data03,
             data04: data04,
             data05: data05,
-
 
         };
 
@@ -382,7 +355,6 @@ export default class Reporting extends Component {
   }
 
 
-
   render() {
     return (
       <div className="marg-30">
@@ -391,7 +363,6 @@ export default class Reporting extends Component {
           title="Reporting"
           subtitle="Dashboard with real-time performance of your sChains."
           nopadd={true}
-
         />
 
         <SkaleCard className='marg-top-30'>
