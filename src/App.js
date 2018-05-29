@@ -20,7 +20,7 @@ import Wallet from './components/pages/Wallet';
 import FromEth from './components/page_components/maketplace/FromEth';
 import FromSkale from './components/page_components/maketplace/FromSkale';
 //
-import Marketplace from "./components/pages/Marketplace";
+// import Marketplace from "./components/pages/Marketplace";
 
 import 'material-components-web/dist/material-components-web.min.css';
 const Identicon = require('identicon.js');
@@ -38,7 +38,7 @@ const ROUTES = {
   '/exchange-skl': {title: 'Exchange SKL'},
   '/dapps': {title: 'dApps'},
   '/dapps/upload': {title: 'Upload Dapp'},
-  '/marketplace': {title: 'Marketplace'},
+  // '/marketplace': {title: 'Marketplace'},
 };
 
 
@@ -126,7 +126,7 @@ export default class App extends Component {
                   <Route path='/exchange-eth' render={() => <FromSkale web3Connector={web3Connector}/>}/>
                   <Route path='/exchange-skl' render={() => <FromEth web3Connector={web3Connector}/>}/>
                   <Route path='/dapps/upload' render={() => <UploadDapp web3Connector={web3Connector}/>}/>
-                  <Route path='/marketplace' render={() => <Marketplace web3Connector={web3Connector}/>}/>
+                  {/*<Route path='/marketplace' render={() => <Marketplace web3Connector={web3Connector}/>}/>*/}
 
                   <Route exact path='/mchains/:name'
                          render={(props) => <SChain web3Connector={web3Connector} props={props}/>}/>

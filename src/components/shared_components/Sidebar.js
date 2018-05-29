@@ -50,9 +50,9 @@ export default class Sidebar extends React.Component {
     return this.isItemSelected('/wallet') || this.isItemSelected('/')
   }
 
-  marketPage() {
+/*  marketPage() {
     return this.isItemSelected('/marketplace') || this.isItemSelected('/sell-skl') || this.isItemSelected('/buy-skl')
-  }
+  }*/
 
   render() {
     return (
@@ -69,7 +69,7 @@ export default class Sidebar extends React.Component {
               </ListItem>
           </Link>
 
-          <Link to='/marketplace' className="undec">
+{/*          <Link to='/marketplace' className="undec">
               <ListItem className={"fl-cont fl-center-vert "+ (this.marketPage() ? 'selected-item' : '')}>
                   <div className="fl-wrap gx-icon padd-left-10">
                       <Icon strategy="ligature" className="gray-icon">shopping_cart</Icon>
@@ -78,7 +78,7 @@ export default class Sidebar extends React.Component {
                       Marketplace
                   </ListItemText>
               </ListItem>
-          </Link>
+          </Link>*/}
 
           <Link to='/schains' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.sChainsPage() ? 'selected-item' : '')}>
