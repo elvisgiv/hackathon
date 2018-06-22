@@ -1,10 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const postcssCssnext = require('postcss-cssnext')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const postcssCssnext = require('postcss-cssnext');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const env = process.env.NODE_ENV || 'prod'
-const env = 'dev'
+const env = process.env.NODE_ENV || 'prod';
+//const env = 'dev'
+
+console.log('ENV: ' + env);
 
 function plugins() {
     if(env === 'prod'){

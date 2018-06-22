@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "react-scripts build",
+    "build": "NODE_ENV=prod webpack",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -58,6 +58,6 @@
     "gh-pages": "^1.1.0",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
-    "webpack": "^3.8.1"
+    "webpack": "^4.12.0"
   }
 }
