@@ -9,7 +9,7 @@ const env = 'dev'
 function plugins() {
     if(env === 'prod'){
         return [
-            new ExtractTextPlugin('style.css', { allChunks: true }),
+            new ExtractTextPlugin('./src/index.scss', { allChunks: true }),
             new webpack.optimize.DedupePlugin(),
             new webpack.DefinePlugin({ 'process.env':{ 'NODE_ENV': JSON.stringify('production')} }),
             //new webpack.optimize.UglifyJsPlugin({ minimize: true, compress: { warnings: false } }),
@@ -31,7 +31,7 @@ function loaders() {
         },
         {
             test: /\.css$/,
-            use: [ 'style-loader', 'css-loader' ]
+            use: [ 'style-loader', 'css-loader' , 'postcss-loader' ]
         },
         {
             test: /\.(jpg|png|svg)$/,
@@ -48,6 +48,7 @@ function loaders() {
             }, {
                 loader: "sass-loader" // compiles Sass to CSS
             }]
+
         }
 
     ]
@@ -88,7 +89,10 @@ module.exports = {
     entry: entry(),
     output: output(),
     module: { loaders: loaders() },
+    // module: { rules: loaders() },
     //postcss: [ postcssCssnext({ browsers: ['last 2 versions'] }) ],
     devServer: { historyApiFallback: true, port: 3003 },
     plugins: plugins()
 }
+
+

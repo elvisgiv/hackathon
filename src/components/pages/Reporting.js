@@ -6,12 +6,13 @@ import { Accordion, AccordionPart, AccordionHeader, AccordionContent } from '../
 import SkaleCard from '../shared_components/SkaleCard';
 
 
-const report = require('../helpers/ReportGenerator');
 
 import {
   LineChart, Line, XAxis, YAxis,
   Tooltip, CartesianGrid, Brush, AreaChart, Area,
 } from 'recharts';
+
+const report = require('../helpers/ReportGenerator');
 
 const data03 = [
   {date: 'Jan 04 2016', price: 105.35},

@@ -18,10 +18,11 @@ import {Button, ButtonIcon} from 'rmwc/Button';
 import {Snackbar} from 'rmwc/Snackbar';
 import {Modal, Collapse} from 'reactstrap';
 
-const skale = require('@skale-labs/skale-api');
 import ethLogo from '../../images/coins/eth.png';
 import skaleLogo from '../../images/coins/skale.jpg';
 import SendModalReceive from "../page_components/wallet/SendModalReceive";
+
+const skale = require('@skale-labs/skale-api');
 
 
 export default class BotExchange extends React.Component {
@@ -89,15 +90,15 @@ export default class BotExchange extends React.Component {
     let accountEthWeiBalance = await skale.w3.web3.eth.getBalance(account);
     let accountEthBalance = skale.w3.web3.utils.fromWei(accountEthWeiBalance.toString());
 
-    let skaleBotSkaleBalance = skale.w3.web3.utils.fromWei(skaleBotAccountInfo.sendGex.toString());
-    let skaleBotEthBalance = skale.w3.web3.utils.fromWei(skaleBotAccountInfo.sendEth.toString());
+    // let skaleBotSkaleBalance = skale.w3.web3.utils.fromWei(skaleBotAccountInfo.sendGex.toString());
+    // let skaleBotEthBalance = skale.w3.web3.utils.fromWei(skaleBotAccountInfo.sendEth.toString());
 
     this.setState({
       account: account,
       skl: parseFloat(accountSkaleBalance).toFixed(3),
       eth: parseFloat(accountEthBalance).toFixed(3),
-      botEth: parseFloat(skaleBotEthBalance).toFixed(3),
-      botSkale: parseFloat(skaleBotSkaleBalance).toFixed(3)
+      // botEth: parseFloat(skaleBotEthBalance).toFixed(3),
+      // botSkale: parseFloat(skaleBotSkaleBalance).toFixed(3)
     });
   }
 
@@ -169,7 +170,7 @@ export default class BotExchange extends React.Component {
 
         <div className="padd-top-md">
           <SectionText
-            text="Send and receive SKALE tokens"
+            text="Buy, send and receive SKALE tokens"
           />
 
           <div className="fl-cont padd-left-md">
@@ -199,14 +200,14 @@ export default class BotExchange extends React.Component {
                 <ReceiveModal/>
               </Modal>
             </div>
-            {/*<div className="fl-col padd-ri-md">
+            <div className="fl-col padd-ri-md">
               <Link to='/marketplace' className="undec">
                 <Button unelevated className="lite-btn" style={{minWidth: "135px"}}>
                   <ButtonIcon use="shopping_cart"/>
-                  Buy
+                  Buy SKALE
                 </Button>
               </Link>
-            </div>*/}
+            </div>
           </div>
         </div>
       </div>

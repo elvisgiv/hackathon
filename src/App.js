@@ -23,6 +23,7 @@ import FromSkale from './components/page_components/maketplace/FromSkale';
 // import Marketplace from "./components/pages/Marketplace";
 
 import 'material-components-web/dist/material-components-web.min.css';
+
 const Identicon = require('identicon.js');
 
 const skale = require('@skale-labs/skale-api');

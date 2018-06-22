@@ -3,6 +3,10 @@
 // all commons //
 @import "commons/commons.scss";
 
+/*:global {
+  @import 'commons/commons.scss';
+}*/
+
 // custom styles //
 @import "markets";
 @import "bootstap_overwrites";

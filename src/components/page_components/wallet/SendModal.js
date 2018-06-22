@@ -78,7 +78,7 @@ export default class SendModal extends React.Component {
         </div>
         <div className="">
           <Input className="new-input" id="buySkl" type="text" size="150" placeholder="
-                        ETH address"
+                        MetaMask address"
                  onChange={(num) =>
                    this.setState({address: num.target.value})}
                  value={this.state.address}/>
