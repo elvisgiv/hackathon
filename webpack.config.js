@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const postcssCssnext = require('postcss-cssnext');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const env = process.env.NODE_ENV || 'prod';
+const env = process.env.NODE_ENV || 'dev';
 //const env = 'dev'
 
 console.log('ENV: ' + env);
@@ -12,7 +12,7 @@ function plugins() {
     if(env === 'prod'){
         return [
             new ExtractTextPlugin('./src/index.scss', { allChunks: true }),
-            new webpack.optimize.DedupePlugin(),
+            // new webpack.optimize.DedupePlugin(),
             new webpack.DefinePlugin({ 'process.env':{ 'NODE_ENV': JSON.stringify('production')} }),
             //new webpack.optimize.UglifyJsPlugin({ minimize: true, compress: { warnings: false } }),
             new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
