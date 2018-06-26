@@ -175,7 +175,7 @@ export default class BotExchange extends React.Component {
 
           <div className="fl-cont padd-left-md">
             <div className="fl-col padd-ri-md">
-              <Button unelevated className="grdeen-btn" onClick={this.toggleSend} style={{minWidth: "135px"}}>
+              <Button unelevated className="green-btn" onClick={this.toggleSend} style={{minWidth: "135px"}}>
                 <ButtonIcon use="call_made"/>Send</Button>
               <Modal isOpen={this.state.sendModal} toggle={this.toggleSend}>
                 <SendModal showSnackbar={this.showSnackbar} ToggleSend={this.toggleSend} web3Connector={this.props.web3Connector}/>
@@ -189,7 +189,7 @@ export default class BotExchange extends React.Component {
                           snackbarIsOpen: !this.state.snackbarIsOpen,
                           snackbarMessage: "Address copied to clipboard"
                         })}>*/}
-                <Button unelevated className="redd-btn" onClick={this.toggleSendS} style={{minWidth: "135px"}}>
+                <Button unelevated className="red-btn" onClick={this.toggleSendS} style={{minWidth: "135px"}}>
                   <ButtonIcon use="call_received"/>Receive
                   <Modal isOpen={this.state.sendModalS} toggle={this.toggleSendS}>
                     <SendModalReceive showSnackbar={this.showSnackbar} ToggleSend={this.toggleSendS}/>
