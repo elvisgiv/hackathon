@@ -5,7 +5,7 @@ repo = Repo(rw_dir)
 
 add = repo.git.add(".")
 
-commit =  repo.git.commit("-m test python commit")
+commit =  repo.git.commit("-m", "test python commit")
 
 
 origin = repo.remote(name='origin')
