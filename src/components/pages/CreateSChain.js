@@ -62,7 +62,7 @@ export default class CreateMchain extends React.Component {
 
   initMChainListener() {
     let self = this;
-    let listener = new gex.listener(gex.managerEv().events.MchainCreated(), function (event) {
+    let listener = new gex.listener(gex.managerEv().events.SchainCreated(), async function (event) {
       console.log('EVENT');
       console.log(event.returnValues);
       self.setState({nonceFromEvent: event.returnValues.nonce})
@@ -73,11 +73,13 @@ export default class CreateMchain extends React.Component {
   isFilled(basName, basStorageBytes, basLifetime, basMaxNodes,
            basDeposit, basCpuTime, basTransPerSec) {
     if (basName.length > 0 && basStorageBytes.length > 0 && basLifetime.length > 0 && basMaxNodes.length > 0 &&
-      basDeposit.length > 0 && basCpuTime.length > 0 && basTransPerSec.length > 0) {
+      basDeposit > 0 && basCpuTime.length > 0 && basTransPerSec.length > 0) {
       console.log(basName);
       return true
     } else {
-      return false
+        console.log('false');
+
+        return false
     }
   }
 
@@ -96,7 +98,7 @@ export default class CreateMchain extends React.Component {
 
     let mChain = {
       storageBytes: basStorageBytes, cpu: basCpuTime, transactionThroughput: basTransPerSec, lifetime: basLifetime,
-      maxNodes: basMaxNodes, deposit: weiVal, name: basName
+      typeOfNodes: basMaxNodes, deposit: weiVal, name: basName
     };
 
     //
@@ -104,10 +106,11 @@ export default class CreateMchain extends React.Component {
     // todo: remove it - doesn't work for float
     let isFilled = this.isFilled(basName, basStorageBytes, basLifetime, basMaxNodes,
       basDeposit, basCpuTime, basTransPerSec);
-    isFilled = true;
+    // isFilled = true;
     //
     if (isFilled) {
-      isAvailable = await gex.manager().isMchainIdAvailable(basName);
+      isAvailable = await gex.manager().isSchainIdAvailable(basName);
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!")
     } else {
       return (
         swal({
@@ -121,8 +124,11 @@ export default class CreateMchain extends React.Component {
     }
     //
     if (isAvailable) {
-      let nonce = await gex.manager().createMchain(mChain);
-      // clear fields
+      console.log("before schainCreate before schainCreate before schainCreate ")
+      let nonce = await gex.manager().createSchain(mChain);
+      console.log("after schainCreate after schainCreate after schainCreate ")
+
+        // clear fields
       this.setState({
         basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: "",
         basCpuTime: "", basTransPerSec: "", snackbarIsOpen: true, sChainsPage: true

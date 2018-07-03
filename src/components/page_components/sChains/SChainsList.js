@@ -53,7 +53,7 @@ export default class MchainsList extends React.Component {
   }
 
   async getMchainsList() {
-    let channelsInfo = await gex.manager().getMchainListInfo();
+    let channelsInfo = await gex.manager().getSchainListInfo();
     //
     this.setState({channelsInfo: channelsInfo});
     //

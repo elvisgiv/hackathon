@@ -1,6 +1,6 @@
 from git import Repo,remote
 
-commit_name = raw_input("Enter Commit name: ")
+commit_name = raw_input("Enter Commit Name: ")
 
 rw_dir = '/mnt/elvisdata/work/exchange-ui'
 repo = Repo(rw_dir)
