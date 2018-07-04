@@ -201,7 +201,7 @@ export default class BotExchange extends React.Component {
               </Modal>
             </div>
             <div className="fl-col padd-ri-md">
-              <Link to='/marketplace' className="undec">
+              <Link to='/wallet' className="undec">
                 <Button unelevated className="lite-btn" style={{minWidth: "135px"}}>
                   <ButtonIcon use="shopping_cart"/>
                   Buy SKALE

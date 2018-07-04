@@ -332,7 +332,9 @@ export default class CreateMchain extends React.Component {
                       {this.state.basDeposit} SKALE
                     </h3>
                   </div>
-                  <Button raised onClick={this.createMchain} disabled={!this.state.libInit}>Create sChain</Button>
+                  <Button className="btn-md" unelevated raised onClick={this.createMchain} disabled={!this.state.libInit}>
+                      Create sChain
+                  </Button>
 
                 </div>
               </div>
