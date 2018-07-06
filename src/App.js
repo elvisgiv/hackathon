@@ -62,7 +62,7 @@ export default class App extends Component {
 
     if (web3Connector) {
       if(!this.state.libInit){
-        skale.initBothProviders('51.0.1.99', '8546', web3Connector.provider);
+        skale.initBothProviders('18.222.171.172', '8546', web3Connector.provider);
         this.setState({libInit: true});
       }
       if(this.state.libInit) {

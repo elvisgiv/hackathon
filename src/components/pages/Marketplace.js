@@ -38,7 +38,8 @@ export default class Marketplace extends React.Component {
   componentWillReceiveProps() {
     if (!this.state.libInit && this.props.web3Connector) {
       let provider = this.props.web3Connector.provider;
-      skale.initBothProviders('51.0.1.99', '8546', provider);
+      //skale.initBothProviders('51.0.1.99', '8546', provider);
+      skale.initBothProviders('18.222.171.172', '8546', provider);
       this.setState({libInit: true});
       this.initBalanceChecker();
     }

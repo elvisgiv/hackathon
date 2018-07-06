@@ -37,7 +37,7 @@ export default class FromEth extends React.Component {
     if (!this.state.libInit && this.props.web3Connector) {
       let provider = this.props.web3Connector.provider;
       //gex.initWithProvider(provider);
-      let ip = '51.0.1.99';
+      let ip = '18.222.171.172';
       let port = '8546';
       gex.initBothProviders(ip, port, provider);
       this.setState({libInit: true});
