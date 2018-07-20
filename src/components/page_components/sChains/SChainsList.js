@@ -12,6 +12,7 @@ import "react-table/react-table.css";
 // for alerts
 import swal from 'sweetalert';
 
+const jsonCustom = require('../../../abi.json');
 
 const gex = require('@skale-labs/skale-api');
 const moment = require('moment');
@@ -38,9 +39,9 @@ export default class MchainsList extends React.Component {
       showFilters: false,
     };
     //
-    let ip = '18.222.171.172';
+    let ip = '18.221.98.79';
     let port = '8546';
-    gex.init(ip, port);
+    gex.init(ip, port, jsonCustom);
     //
     this.isExpired = this.isExpired.bind(this);
     //this.countdown = this.countdown.bind(this);

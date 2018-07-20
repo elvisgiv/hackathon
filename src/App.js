@@ -24,6 +24,9 @@ import FromSkale from './components/page_components/maketplace/FromSkale';
 
 import 'material-components-web/dist/material-components-web.min.css';
 
+const jsonCustom = require('./abi.json');
+
+
 const Identicon = require('identicon.js');
 
 const skale = require('@skale-labs/skale-api');
@@ -62,7 +65,7 @@ export default class App extends Component {
 
     if (web3Connector) {
       if(!this.state.libInit){
-        skale.initBothProviders('18.222.171.172', '8546', web3Connector.provider);
+        skale.initBothProviders('51.0.1.99', '8546', web3Connector.provider, jsonCustom);
         this.setState({libInit: true});
       }
       if(this.state.libInit) {

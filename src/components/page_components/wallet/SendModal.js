@@ -25,7 +25,7 @@ export default class SendModal extends React.Component {
       let provider = this.props.web3Connector.provider;
       //skale.initBothProviders('51.0.1.99', '8546', provider);
       // for amzon test
-      skale.initBothProviders('18.222.171.172', '8546', provider);
+      skale.initBothProviders('51.0.1.99', '8546', provider, );
       this.setState({libInit: true});
     }
   }

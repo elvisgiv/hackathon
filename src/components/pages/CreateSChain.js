@@ -15,6 +15,9 @@ import SectionText from "../shared_components/SectionText";
 
 import swal from 'sweetalert';
 
+const jsonCustom = require('../../abi.json');
+
+
 
 const gex = require('@skale-labs/skale-api');
 //const gex = require('@skale-labs/skale-api/src/index');
@@ -51,9 +54,9 @@ export default class CreateMchain extends React.Component {
     if (!this.state.libInit && this.props.web3Connector) {
       let provider = this.props.web3Connector.provider;
       //gex.initWithProvider(provider);
-      let ip = '18.222.171.172';
+      let ip = '51.0.1.99';
       let port = '8546';
-      gex.initBothProviders(ip, port, provider);
+      gex.initBothProviders(ip, port, provider, jsonCustom);
       this.setState({libInit: true});
       ///
       this.initMChainListener();
@@ -93,12 +96,12 @@ export default class CreateMchain extends React.Component {
     let basCpuTime = this.state.basCpuTime;
     let basTransPerSec = this.state.basTransPerSec;
     // to hash
-
-    let weiVal = gex.w3.web3.utils.toWei(basDeposit.toString());
+    // what for to Wei if deposit in skale????
+    //let weiVal = gex.w3.web3.utils.toWei(basDeposit.toString());
 
     let mChain = {
       storageBytes: basStorageBytes, cpu: basCpuTime, transactionThroughput: basTransPerSec, lifetime: basLifetime,
-      typeOfNodes: basMaxNodes, deposit: weiVal, name: basName
+      typeOfNodes: basMaxNodes, deposit: basDeposit, name: basName
     };
 
     //
@@ -109,7 +112,8 @@ export default class CreateMchain extends React.Component {
     // isFilled = true;
     //
     if (isFilled) {
-      isAvailable = await gex.manager().isSchainIdAvailable(basName);
+      //isAvailable = await gex.manager().isSchainIdAvailable(basName);
+      isAvailable = true
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!")
     } else {
       return (
