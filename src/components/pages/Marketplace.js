@@ -54,6 +54,11 @@ export default class Marketplace extends React.Component {
     });
   }
 
+
+  componentWillUnmount() {
+      clearInterval(this.state.timer);
+  }
+
   async checkBalances() {
     let accounts = await skale.w3.getAccounts();
     let account = accounts[0];

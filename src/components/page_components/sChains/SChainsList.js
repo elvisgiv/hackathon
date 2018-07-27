@@ -39,7 +39,7 @@ export default class MchainsList extends React.Component {
       showFilters: false,
     };
     //
-    let ip = '18.221.98.79';
+    let ip = '51.0.1.99';
     let port = '8546';
     gex.init(ip, port, jsonCustom);
     //
@@ -52,6 +52,7 @@ export default class MchainsList extends React.Component {
     this.toggleFilters = this.toggleFilters.bind(this);
 
   }
+
 
   async getMchainsList() {
     let channelsInfo = await gex.manager().getSchainListInfo();
@@ -147,7 +148,7 @@ export default class MchainsList extends React.Component {
   }
 
   withdrawFrom(name) {
-    swal("Are you sure you want withdraw deposit and destroy '" + name + "' mchain?", {
+    swal("Are you sure you want withdraw deposit and destroy '" + name + "' Schain?", {
       icon: "warning",
       buttons: {
         cancel: "No",
@@ -160,7 +161,7 @@ export default class MchainsList extends React.Component {
       .then((value) => {
         switch (value) {
           case 'ddd':
-            swal("After a while, the funds withdrawn from the '" + name + "' mchain deposit " +
+            swal("After a while, the funds withdrawn from the '" + name + "' Schain deposit " +
               "will go to your wallet.", {
               icon: "success"
             });
@@ -320,6 +321,9 @@ export default class MchainsList extends React.Component {
           pgination={false}
           showPagination={false}
           className="-striped -highlight"
+          defaultSorted={[
+              { id: "mChainCreatedAt", desc: true },
+          ]}
         />
         <Snackbar
           show={this.state.snackbarIsOpen}
