@@ -92,7 +92,7 @@ export default class Sidebar extends React.Component {
           </Link>
 
           <Link to='/spanding-list' className="undec">
-            <ListItem className={"fl-cont fl-center-vert "+ (this.sChainsPage() ? 'selected-item' : '')}>
+            <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/spanding-list') ? 'selected-item' : '')}>
               <div className="fl-wrap gx-icon padd-left-10">
                 <Icon strategy="ligature" className="gray-icon">pregnant_woman</Icon>
               </div>

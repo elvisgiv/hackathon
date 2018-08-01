@@ -72,6 +72,10 @@ export default class LogsList extends React.Component {
     this.setState({logs: logs});
   }
 
+  componentWillMount() {
+      localStorage.setItem('schains', 'some text')
+  }
+
   componentDidMount() {
     this.getLogsList();
     this.setState({
