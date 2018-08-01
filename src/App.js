@@ -15,6 +15,9 @@ import SChain from './components/pages/SChain';
 import SChains from './components/pages/SChains';
 import CreateSChain from './components/pages/CreateSChain';
 
+import SpendingList from './components/pages/SpendingList';
+
+
 // for wallet
 import Wallet from './components/pages/Wallet';
 import FromEth from './components/page_components/maketplace/FromEth';
@@ -42,6 +45,7 @@ const ROUTES = {
   '/exchange-skl': {title: 'Exchange SKL'},
   '/dapps': {title: 'dApps'},
   '/dapps/upload': {title: 'Upload Dapp'},
+  '/spanding-list': {title: 'Schain panding list'},
   // '/marketplace': {title: 'Marketplace'},
 };
 
@@ -134,6 +138,9 @@ export default class App extends Component {
 
                   <Route exact path='/mchains/:name'
                          render={(props) => <SChain web3Connector={web3Connector} props={props}/>}/>
+
+                  <Route exact path='/spanding-list' render={() => <SpendingList web3Connector={web3Connector}/>}/>
+
                 </Switch>
               </div>
             </div>
