@@ -267,7 +267,7 @@ export default class MchainsList extends React.Component {
         accessor: "mChainStorage",
       },
       {
-        Header: () => this.headerTooltip('Nodes', "Max number of nodes in this mChain"),
+        Header: () => this.headerTooltip('Nodes', "Max number of nodes in this Schain"),
         accessor: "mChainNodeNumber",
       },
       {

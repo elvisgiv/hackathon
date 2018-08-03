@@ -3,11 +3,8 @@ import {Redirect} from 'react-router'
 
 import {Input, Container, Tooltip} from 'reactstrap';
 
-import {TextField, TextFieldHelperText} from 'rmwc/TextField';
-import {Icon} from 'rmwc/Icon';
 import {Button} from 'rmwc/Button';
 
-import CardInfo from "../shared_components/CardInfo";
 import PageTitle from "../shared_components/PageTitle";
 import CardTitle from "../shared_components/CardTitle";
 import SectionText from "../shared_components/SectionText";
@@ -15,12 +12,13 @@ import SectionText from "../shared_components/SectionText";
 
 import swal from 'sweetalert';
 
+
+const moment = require('moment');
 const jsonCustom = require('../../abi.json');
 
 
 
 const gex = require('@skale-labs/skale-api');
-//const gex = require('@skale-labs/skale-api/src/index');
 
 export default class CreateMchain extends React.Component {
 
@@ -104,6 +102,7 @@ export default class CreateMchain extends React.Component {
       typeOfNodes: basMaxNodes, deposit: basDeposit, name: basName
     };
 
+
     //
     let isAvailable = false;
     // todo: remove it - doesn't work for float
@@ -113,7 +112,7 @@ export default class CreateMchain extends React.Component {
     //
     if (isFilled) {
       //isAvailable = await gex.manager().isSchainIdAvailable(basName);
-      isAvailable = true
+      isAvailable = true;
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!")
     } else {
       return (
@@ -128,11 +127,13 @@ export default class CreateMchain extends React.Component {
     }
     //
     if (isAvailable) {
+      // set to local storage
+      this.setToLocalStorage(mChain);
       console.log("before schainCreate before schainCreate before schainCreate ")
       let nonce = await gex.manager().createSchain(mChain);
       console.log("after schainCreate after schainCreate after schainCreate ")
 
-        // clear fields
+      // clear fields
       this.setState({
         basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: "",
         basCpuTime: "", basTransPerSec: "", snackbarIsOpen: true, sChainsPage: true
@@ -168,6 +169,14 @@ export default class CreateMchain extends React.Component {
             this.setState({mChainNonces: arrayNonces,});*/
   }
 
+  setToLocalStorage(obj) {
+    // add date to pending log
+    let date = moment.utc(moment.now()).format("YYYY/MM/DD HH:mm:ss");
+    obj['date'] = date;
+    obj['status'] = 'pending';
+    // set to browser local storage
+    localStorage.setItem(obj['name'],JSON.stringify(obj));
+  }
 
   toggle(fieldName) {
     if (this.state[fieldName] !== undefined) {
@@ -176,7 +185,6 @@ export default class CreateMchain extends React.Component {
       this.setState(newState);
     }
   }
-
 
   calcDeposit(params) {
     params.basDeposit = 150 + this.state.basStorageBytes * 0.1 + this.state.basMaxNodes * 30 + this.state.basLifetime * 0.05 + this.state.basCpuTime * 20 + this.state.basTransPerSec * 10;

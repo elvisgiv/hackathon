@@ -10,7 +10,7 @@ export default class Logs extends React.Component {
     return (
       <div className="marg-30">
         <PageTitle
-          title="Logs"
+          title="Schain pending list"
           nopadd={true}
         />
 

@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom'
 
 import {Tooltip} from 'reactstrap';
 
-import {Button, ButtonIcon} from 'rmwc/Button';
-
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -12,7 +10,6 @@ import "react-table/react-table.css";
 const jsonCustom = require('../../../abi.json');
 
 const gex = require('@skale-labs/skale-api');
-const moment = require('moment');
 
 export default class LogsList extends React.Component {
 
@@ -21,6 +18,9 @@ export default class LogsList extends React.Component {
     this.state = {
       timer: null,
       mChainName1: null,
+      arrayOfPending: [],
+      schainNames: null,
+
 
       showFilters: false,
     };
@@ -31,7 +31,6 @@ export default class LogsList extends React.Component {
     //
     this.headerTooltip = this.headerTooltip.bind(this);
     this.toggle = this.toggle.bind(this);
-    this._onClick = this._onClick.bind(this);
     this.toggleFilters = this.toggleFilters.bind(this);
 
   }
@@ -40,6 +39,8 @@ export default class LogsList extends React.Component {
       let channelsInfo = await gex.manager().getSchainListInfo();
       //
       this.setState({channelsInfo: channelsInfo});
+      //
+      this.getFromLocalStorage();
       //
       this.initLogsListener();
   }
@@ -52,28 +53,42 @@ export default class LogsList extends React.Component {
       fromBlock: 0,
       toBlock: 'latest'
     }, function(error, events){ if (error) console.error(error); });
-
-    console.log(from);
-    console.log('+++++++++EVENT++++++++');
-
-
-    let logs = [];
-
+    //
+    let schainNames = [];
     for (let i = 0; i < from.length; i ++) {
       let log = from[i];
       //
       let retValue = log.returnValues;
       let sChainName = retValue.schainId;
 
-      };
-
-      logs.push(sChainName);
+      schainNames.push(sChainName);
+    };
     //
-    this.setState({logs: logs});
+    this.setState({schainNames: schainNames});
+    // check if event is came
+    this.deleteFromLocalStorageIfEventCame();
   }
 
+  deleteFromLocalStorageIfEventCame() {
+    let pendings = this.state.arrayOfPending;
+    let schainNames = this.state.schainNames;
+    console.log(schainNames);
+    //
+    for (let i=0; i < pendings.length; i ++) {
+      let item = pendings[i];
+      let schainName = item.name;
+      //
+      if(schainNames.includes(schainName)) {
+        localStorage.removeItem(schainName);
+      } else {
+        console.log('no matches found', schainName)
+      }
+    }
+
+  };
+
   componentWillMount() {
-      localStorage.setItem('schains', 'some text')
+    this.getFromLocalStorage();
   }
 
   componentDidMount() {
@@ -87,6 +102,21 @@ export default class LogsList extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.state.timer);
+  }
+
+  getFromLocalStorage() {
+      let arr = [];
+      for(let i =0; i < localStorage.length; i++){
+          let key = localStorage.key(i);
+          console.log(key, localStorage.getItem(key));
+          if(key != 'loglevel:webpack-dev-server') {
+              arr.push(JSON.parse(localStorage.getItem(key)));
+          }
+      }
+
+      this.setState({arrayOfPending: arr});
+
+      console.log(arr)
   }
 
   // for tooltip
@@ -119,11 +149,6 @@ export default class LogsList extends React.Component {
     );
   }
 
-  _onClick(name) {
-
-  }
-
-
   toggleFilters() {
     this.setState({showFilters: !this.state.showFilters});
   }
@@ -133,38 +158,34 @@ export default class LogsList extends React.Component {
 
   render() {
 
-    const items = this.state.logs;
+    const items = this.state.arrayOfPending;
     // for react-table
     const columns = [
       {
         Header: () => this.headerTooltip('Date', "Date of log creation"),
-        width: 250,
-        accessor: "logDate",
+        width: 200,
+        accessor: "date",
         filterable: true,
       },
       {
-        Header: () => this.headerTooltip('Level', "Log level"),
-        width: 100,
-        accessor: "logLevel",
+        Header: () => this.headerTooltip('Status', "Schain status"),
+        accessor: "status",
         filterable: true,
       },
       {
-        Header: () => this.headerTooltip('Log Name', "Log Name"),
-        accessor: "logName",
-        // filterable: true,
+          Header: () => this.headerTooltip('Name', "Unique Schain Name"),
+          accessor: "name",
+          filterable: true,
+
       },
-/*      {
-        Header: () => this.headerTooltip('Message', "Log Message"),
-        accessor: "logMessage",
-        filterable: true,
-      },*/
-
-        {
-            Header: () => this.headerTooltip('More', "Full log message"),
-            width: 100,
-            expander: true,
-
-        }
+      {
+          Header: () => this.headerTooltip('Nodes', "Max number of nodes in this Schain"),
+          accessor: "typeOfNodes",
+      },
+      {
+          Header: () => this.headerTooltip('Deposit', "Deposit in SkaleTokens (SKL)"),
+          accessor: "deposit",
+      },
     ];
 
 
@@ -178,22 +199,9 @@ export default class LogsList extends React.Component {
               showPagination={false}
               className="-striped -highlight"
               defaultSorted={[
-                  { id: "logDate", desc: true },
+                  { id: "date", desc: true },
               ]}
               filterable
-              SubComponent={row => {
-                  return (
-                      <div style={{padding: '10px'}}>
-
-                          {console.log(row.original.logMessage)}
-                          {row.original.logMessage}
-
-
-
-                      </div>
-                  );
-              }}
-
           />
       </div>
     )
