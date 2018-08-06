@@ -171,8 +171,10 @@ export default class CreateMchain extends React.Component {
 
   setToLocalStorage(obj) {
     // add date to pending log
-    let date = moment.utc(moment.now()).format("YYYY/MM/DD HH:mm:ss");
+    let datetime = moment.now();
+    let date = moment.utc(datetime).format("YYYY/MM/DD HH:mm:ss");
     obj['date'] = date;
+    obj['dateInMiliSec'] = datetime;
     obj['status'] = 'pending';
     // set to browser local storage
     localStorage.setItem(obj['name'],JSON.stringify(obj));

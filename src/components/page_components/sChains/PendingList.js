@@ -11,6 +11,9 @@ const jsonCustom = require('../../../abi.json');
 
 const gex = require('@skale-labs/skale-api');
 
+const moment = require('moment');
+
+
 export default class LogsList extends React.Component {
 
   constructor(props) {
@@ -36,9 +39,6 @@ export default class LogsList extends React.Component {
   }
 
   async getLogsList() {
-      let channelsInfo = await gex.manager().getSchainListInfo();
-      //
-      this.setState({channelsInfo: channelsInfo});
       //
       this.getFromLocalStorage();
       //
@@ -79,9 +79,13 @@ export default class LogsList extends React.Component {
       let schainName = item.name;
       //
       if(schainNames.includes(schainName)) {
+        console.log('match found', schainName);
         localStorage.removeItem(schainName);
+      } else if (moment.now() > (parseInt(item.dateInMiliSec, 10) + 3600000)) {
+          console.log("time's up, baby, time's up");
+          localStorage.removeItem(schainName);
       } else {
-        console.log('no matches found', schainName)
+          console.log('no matches found', schainName);
       }
     }
 
