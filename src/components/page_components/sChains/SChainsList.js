@@ -167,7 +167,7 @@ export default class MchainsList extends React.Component {
               "will go to your wallet.", {
               icon: "success"
             });
-            gex.contract('manager').withdrawFromMchain(name);
+            gex.contract('manager').withdrawFromSchain(name);
             break;
           default:
             swal("Withdraw from '" + name + "' mchain are rejected.");
