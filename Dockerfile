@@ -15,6 +15,9 @@ RUN npm install -g serve
 CMD serve -s public
 EXPOSE 5000
 
+# Copy npm config
+COPY .npmrc .npmrc
+
 # Install all dependencies of the current project.
 COPY package.json package.json
 RUN npm install

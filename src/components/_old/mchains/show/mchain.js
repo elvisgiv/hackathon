@@ -171,7 +171,7 @@ export default class Mchain extends React.Component {
     }
 
     async getMchain (name) {
-        let mChain = await skale.manager().getMchain(name);
+        let mChain = await skale.contract('manager').getMchain(name);
         //
         let mChainOwner = mChain.owner;
         let mChainName = mChain.name;

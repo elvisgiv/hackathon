@@ -130,7 +130,7 @@ export default class AggrMchainsList extends React.Component {
 
     async getAggrMchainsList(){
         //
-        let channelsInfo = await gex.manager().getAggregationMchainListInfo();
+        let channelsInfo = await gex.contract('manager').getAggregationMchainListInfo();
         //
         this.setState({channelsInfo: channelsInfo});
         //
@@ -212,7 +212,7 @@ export default class AggrMchainsList extends React.Component {
     }
 
     async mChainForAggregation(id) {
-        let mChains = await gex.manager().getMchainListInfoFromAggregationMchain(id);
+        let mChains = await gex.contract('manager').getMchainListInfoFromAggregationMchain(id);
 
         let arrOfMchain = this.initMchains(mChains);
 /*
@@ -255,7 +255,7 @@ export default class AggrMchainsList extends React.Component {
     }
 
     withdrowFrom(index) {
-        gex.manager().withdrawFromAggregationMchain(index);
+        gex.contract('manager').withdrawFromAggregationMchain(index);
         console.log(index)
     }
 

@@ -35,7 +35,7 @@ export default class CreateAggregationMchain extends React.Component {
     }
 
     initAggrMChainListener(){
-        let listener = new gex.listener(gex.managerEv().events.AggregationMchainCreated(), function (event) {
+        let listener = new gex.listener(gex.contractEv('manager').events.AggregationMchainCreated(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
             //
@@ -56,7 +56,7 @@ export default class CreateAggregationMchain extends React.Component {
         //
         this.initAggrMChainListener();
         // invoke contract from lib
-        let nonce = gex.manager().createAggregationMchain(agrStorageBytes, agrLifetime, agrMaxNodes, agrDeposit, agrName);
+        let nonce = gex.contract('manager').createAggregationMchain(agrStorageBytes, agrLifetime, agrMaxNodes, agrDeposit, agrName);
         // clear fields
         this.setState({agrStorageBytes: "", agrLifetime: "", agrMaxNodes: "", agrDeposit: "", agrName: "",});
 

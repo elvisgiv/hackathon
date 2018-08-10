@@ -62,7 +62,7 @@ export default class CreateMchain extends React.Component {
 
   initMChainListener() {
     let self = this;
-    let listener = new gex.listener(gex.managerEv().events.MchainCreated(), function (event) {
+    let listener = new gex.listener(gex.contract('managerEv')().events.MchainCreated(), function (event) {
       console.log('EVENT');
       console.log(event.returnValues);
       self.setState({nonceFromEvent: event.returnValues.nonce})
@@ -102,7 +102,7 @@ export default class CreateMchain extends React.Component {
       basDeposit, basCpuTime, basTransPerSec);
     //
     if (isFilled) {
-      isAvailable = await gex.manager().isMchainIdAvailable(basName);
+      isAvailable = await gex.contract('manager').isMchainIdAvailable(basName);
     } else {
       return (
         swal({
@@ -116,7 +116,7 @@ export default class CreateMchain extends React.Component {
     }
     //
     if (isAvailable) {
-      let nonce = await gex.manager().createMchain(mChain);
+      let nonce = await gex.contract('manager').createMchain(mChain);
       // clear fields
       this.setState({
         basStorageBytes: "", basLifetime: "", basMaxNodes: "", basDeposit: "", basName: "",

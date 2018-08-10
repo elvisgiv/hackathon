@@ -54,6 +54,8 @@ export default class CreateMchain extends React.Component {
       //gex.initWithProvider(provider);
       let ip = '51.0.1.99';
       let port = '8546';
+      console.log('inside componentWillReceiveProps');
+
       gex.initBothProviders(ip, port, provider, jsonCustom);
       this.setState({libInit: true});
       ///
@@ -62,8 +64,10 @@ export default class CreateMchain extends React.Component {
   }
 
   initMChainListener() {
+    console.log('inside initMChainListener');
+
     let self = this;
-    let listener = new gex.listener(gex.managerEv().events.SchainCreated(), async function (event) {
+    let listener = new gex.listener(gex.contract('schains').events.SchainCreated(), async function (event) {
       console.log('EVENT');
       console.log(event.returnValues);
       self.setState({nonceFromEvent: event.returnValues.nonce})
@@ -102,6 +106,7 @@ export default class CreateMchain extends React.Component {
       typeOfNodes: basMaxNodes, deposit: basDeposit, name: basName
     };
 
+    console.log('inside createMchain method');
 
     //
     let isAvailable = false;
@@ -111,7 +116,7 @@ export default class CreateMchain extends React.Component {
     // isFilled = true;
     //
     if (isFilled) {
-      //isAvailable = await gex.manager().isSchainIdAvailable(basName);
+      //isAvailable = await gex.contract('manager').isSchainIdAvailable(basName);
       isAvailable = true;
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!")
     } else {
@@ -130,7 +135,9 @@ export default class CreateMchain extends React.Component {
       // set to local storage
       this.setToLocalStorage(mChain);
       console.log("before schainCreate before schainCreate before schainCreate ")
-      let nonce = await gex.manager().createSchain(mChain);
+
+      let res = await gex.contract('manager').createSchain(mChain);
+
       console.log("after schainCreate after schainCreate after schainCreate ")
 
       // clear fields

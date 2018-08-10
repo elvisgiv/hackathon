@@ -1,0 +1,3 @@
+2018-08-08 13:48:55,027 - tools.dockertools - INFO - Building container: dapp-ui
+2018-08-08 13:48:55,027 - tools.dockertools - INFO - Bumping dapp-ui container version: 0.0.1 => 0.0.2
+2018-08-08 13:48:55,027 - tools.dockertools - INFO - Building image: skalelabshub/dapp-ui:0.0.2

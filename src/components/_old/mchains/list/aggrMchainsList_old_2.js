@@ -30,7 +30,7 @@ export default class AggrMchainsList extends React.Component {
 
     async getAggrMchainsList(){
         //
-        let channelsInfo = await gex.manager().getAggregationMchainListInfo();
+        let channelsInfo = await gex.contract('manager').getAggregationMchainListInfo();
         console.log(channelsInfo.length);
         //
         this.setState({channelsInfo: channelsInfo});
@@ -54,7 +54,7 @@ export default class AggrMchainsList extends React.Component {
         //
         let events = [];
         //
-        let listener = new gex.listener(gex.manager().events.AggregationMchainCreated(gex.w3.allEventsOpt()), function (event) {
+        let listener = new gex.listener(gex.contract('manager').events.AggregationMchainCreated(gex.w3.allEventsOpt()), function (event) {
             //
             events.push(event.returnValues,);
             //events.push({'mChainName': name, 'mChainID': event.returnValues.mchainID});
@@ -143,7 +143,7 @@ export default class AggrMchainsList extends React.Component {
     }
 
     withdrowFrom(index) {
-        gex.manager().withdrawFromAggregationMchain(index);
+        gex.contract('manager').withdrawFromAggregationMchain(index);
         console.log(index)
     }
 

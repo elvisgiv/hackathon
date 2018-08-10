@@ -53,7 +53,7 @@ export default class MchainsList extends React.Component {
   }
 
   async getMchainsList() {
-    let channelsInfo = await gex.manager().getSchainListInfo();
+    let channelsInfo = await gex.contract('manager').getSchainListInfo();
     //
     this.setState({channelsInfo: channelsInfo});
     //
@@ -163,7 +163,7 @@ export default class MchainsList extends React.Component {
               "will go to your wallet.", {
               icon: "success"
             });
-            gex.manager().withdrawFromMchain(name);
+            gex.contract('manager').withdrawFromMchain(name);
             break;
           default:
             swal("Withdraw from '" + name + "' mchain are rejected.");

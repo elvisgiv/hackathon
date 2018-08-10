@@ -30,7 +30,7 @@ export default class AddToAggregation extends React.Component {
 
     initMchainAddedListener(){
         console.log('doshlo')
-        let listener = new gex.listener(gex.managerEv().events.MchainAdded(), function (event) {
+        let listener = new gex.listener(gex.contractEv('manager').events.MchainAdded(), function (event) {
             console.log('EVENT');
             console.log(event.returnValues);
         });
@@ -45,7 +45,7 @@ export default class AddToAggregation extends React.Component {
         this.initMchainAddedListener();
 
         this.setState({add: "add"});
-        let test = await gex.manager().addToAggregationMchain(aggrMchainID, mChainID);
+        let test = await gex.contract('manager').addToAggregationMchain(aggrMchainID, mChainID);
         // clear fields
         this.setState({mChainID: "", aggrMchainID: "", });
 
