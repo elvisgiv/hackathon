@@ -33,6 +33,8 @@ export default class LogsList extends React.Component {
         this.toggle = this.toggle.bind(this);
         this._onClick = this._onClick.bind(this);
         this.toggleFilters = this.toggleFilters.bind(this);
+        this.filterCaseInsensitive = this.filterCaseInsensitive.bind(this);
+
 
     }
 
@@ -124,6 +126,18 @@ export default class LogsList extends React.Component {
     }
 
 
+
+    filterCaseInsensitive(filter, row) {
+        const id = filter.pivotId || filter.id;
+        return (
+            row[id] !== undefined ?
+                String(row[id].toLowerCase()).startsWith(filter.value.toLowerCase())
+                :
+                true
+        );
+    }
+
+
     /////////////////////////////
 
     render() {
@@ -170,6 +184,7 @@ export default class LogsList extends React.Component {
                     columns={columns}
                     defaultPageSize={10}
                     filterable
+                    defaultFilterMethod={this.filterCaseInsensitive}
                     // pgination={true}
                     // showPagination={false}
 

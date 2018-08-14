@@ -50,7 +50,6 @@ export default class MchainsList extends React.Component {
         this.linkTo = this.linkTo.bind(this);
         this._onClick = this._onClick.bind(this);
         this.toggleFilters = this.toggleFilters.bind(this);
-
     }
 
 
@@ -247,7 +246,6 @@ export default class MchainsList extends React.Component {
     toggleFilters() {
         this.setState({showFilters: !this.state.showFilters});
     }
-
 
     /////////////////////////////
 
