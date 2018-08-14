@@ -259,7 +259,7 @@ export default class MchainsList extends React.Component {
             {
                 Header: () => this.headerTooltip('Name', "Unique Schain Name"),
                 accessor: "mChainName",
-                filterable: true,
+                filterable: false,
                 //width: 140,
                 Cell: ({value}) => this.linkTo(value)
 
@@ -320,7 +320,7 @@ export default class MchainsList extends React.Component {
                 <ReactTable
                     data={items}
                     columns={columns}
-                    //defaultPageSize={10}
+                    defaultPageSize={10}
                     pgination={false}
                     showPagination={false}
                     className="-striped -highlight"
