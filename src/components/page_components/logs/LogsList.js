@@ -8,9 +8,9 @@ import {Button, ButtonIcon} from 'rmwc/Button';
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import {initLogs} from './LogsReader';
 
 const jsonCustom = require('../../../abi.json');
-
 const gex = require('@skale-labs/skale-api');
 const moment = require('moment');
 
@@ -45,30 +45,8 @@ export default class LogsList extends React.Component {
     }
 
     async initLogsListener() {
-        let accounts = await gex.w3.getAccounts();
-        let account = accounts[0];
-        let from = [];
-        //
-        let nodes = await gex.contract('nodes').web3contract.getPastEvents('NodeCreated', {
-            filter: {_from: account},
-            fromBlock: 0,
-            toBlock: 'latest'
-        }, function (error, events) {
-            if (error) console.error(error);
-        });
-        //
-        let schains = await gex.contract('schains').web3contract.getPastEvents('SchainCreated', {
-            filter: {_from: account},
-            fromBlock: 0,
-            toBlock: 'latest'
-        }, function (error, events) {
-            if (error) console.error(error);
-        });
-        from.push(nodes, schains);
 
-        console.log(from);
-        console.log('+++++++++EVENT++++++++');
-
+        let from = await initLogs();
 
         let logs = [];
 
@@ -80,7 +58,7 @@ export default class LogsList extends React.Component {
                 //
                 let retValue = log.returnValues;
                 let logName = log.event;
-                let logDate = moment.utc(retValue.time * 1000).format("YYYY/MM/DD HH:mm:ss");;
+                let logDate = moment.utc(retValue.time * 1000).format("YYYY/MM/DD HH:mm:ss");
                 let logLevel = 'INFO';
 
                 logs.push({
@@ -190,9 +168,9 @@ export default class LogsList extends React.Component {
                 <ReactTable
                     data={items}
                     columns={columns}
-                    //defaultPageSize={10}
-                    pgination={false}
-                    showPagination={false}
+                    defaultPageSize={10}
+                    pgination={true}
+                    showPagination={true}
                     className="-striped -highlight"
                     defaultSorted={[
                         {id: "logDate", desc: true},
