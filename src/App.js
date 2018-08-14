@@ -43,8 +43,8 @@ const ROUTES = {
   '/logs': {title: 'Logs'},
   '/exchange-eth': {title: 'Exchange ETH'},
   '/exchange-skl': {title: 'Exchange SKL'},
-  '/dapps': {title: 'dApps'},
-  '/dapps/upload': {title: 'Upload Dapp'},
+  // '/dapps': {title: 'dApps'},
+  // '/dapps/upload': {title: 'Upload Dapp'},
   '/spanding-list': {title: 'Schain panding list'},
   // '/marketplace': {title: 'Marketplace'},
 };
@@ -128,7 +128,9 @@ export default class App extends Component {
 
                   <Route exact path='/logs' render={() => <Logs web3Connector={web3Connector}/>}/>
                   <Route exact path='/reporting' render={() => <Reporting web3Connector={web3Connector}/>}/>
+{/*
                   <Route exact path='/dapps' render={() => <Dapps web3Connector={web3Connector}/>}/>
+*/}
 
                   <Route path='/wallet' render={() => <Wallet web3Connector={web3Connector}/>}/>
                   <Route path='/exchange-eth' render={() => <FromSkale web3Connector={web3Connector}/>}/>

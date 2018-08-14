@@ -102,7 +102,7 @@ export default class Sidebar extends React.Component {
             </ListItem>
           </Link>
 
-          <Link to='/dapps' className="undec">
+{/*          <Link to='/dapps' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/dapps') || this.isItemSelected('/dapps/upload') ? 'selected-item' : '')}>
               <div className="fl-wrap gx-icon padd-left-10">
                 <Icon strategy="ligature" className="gray-icon">extension</Icon>
@@ -111,7 +111,7 @@ export default class Sidebar extends React.Component {
                 dApps
               </ListItemText>
             </ListItem>
-          </Link>
+          </Link>*/}
 
           <Link to='/reporting' className="undec">
             <ListItem className={"fl-cont fl-center-vert "+ (this.isItemSelected('/reporting') ? 'selected-item' : '')}>
