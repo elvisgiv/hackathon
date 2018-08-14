@@ -22,12 +22,12 @@
   background-color: #eaeaea !important;
 }
 
-
+/*
 .hideFilters{
   .rt-thead.-filters{
     display: none !important;
   }
-}
+}*/
 
 
 
@@ -53,7 +53,8 @@
 
 
 .ReactTable .-pagination .-btn {
-  background: #868e96 !important;
+  background: #3592e6 !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 .ReactTable.-striped .rt-tr.-odd {
@@ -63,10 +64,10 @@
 /*.ReactTable.-striped .rt-tr.-even {
   background: rgba(5, 150, 19, 0.05) !important;
 }*/
-
+/*
 .ReactTable.-striped .rt-tr.-even{
   background: white !important;
-}
+}*/
 
 .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
   background: white !important;

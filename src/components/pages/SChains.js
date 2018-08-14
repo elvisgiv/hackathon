@@ -22,7 +22,7 @@ export default class sChains extends React.Component {
             <div className="fl-col fl-grow">
               <PageTitle
                 title="sChains"
-                subtitle="Please, choose a sChain to view or create a new one."
+                subtitle="Please, choose an sChain to view or create a new one."
                 nopadd={true}
               />
             </div>

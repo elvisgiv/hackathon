@@ -9,7 +9,7 @@ export async function initLogs() {
         {'manager': ['BountyGot']},
         {'nodes': ['NodeCreated', 'WithdrawDepositFromNodeComplete', 'WithdrawDepositFromNodeInit']},
         {'schains': ['SchainCreated', 'SchainNodes', 'WithdrawFromSchain']},
-        {'token': ['Mint', 'Burn', 'Transfer']},
+        // {'token': ['Mint', 'Burn', 'Transfer']},
         {'validators': ['ValidatorCreated', 'ValidatorUpgraded', 'ValidatorsArray', 'VerdictWasSent',
             'MetricsWereCalculated', 'PeriodsWereSet']},
         {'groups': ['GroupAdded', 'ExceptionSet', 'GroupDeleted', 'GroupUpgraded', 'GroupGenerated']},

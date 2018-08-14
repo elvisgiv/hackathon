@@ -137,12 +137,12 @@ export default class LogsList extends React.Component {
                 accessor: "logDate",
                 filterable: true,
             },
-            {
+/*            {
                 Header: () => this.headerTooltip('Level', "Log level"),
                 width: 100,
                 accessor: "logLevel",
-                filterable: true,
-            },
+                // filterable: true,
+            },*/
             {
                 Header: () => this.headerTooltip('Log Name', "Log Name"),
                 accessor: "logName",
@@ -169,18 +169,19 @@ export default class LogsList extends React.Component {
                     data={items}
                     columns={columns}
                     defaultPageSize={10}
-                    pgination={true}
-                    showPagination={true}
+                    filterable
+                    // pgination={true}
+                    // showPagination={false}
+
                     className="-striped -highlight"
                     defaultSorted={[
                         {id: "logDate", desc: true},
                     ]}
-                    filterable
                     SubComponent={row => {
                         return (
                             <div style={{padding: '10px'}}>
 
-                                {console.log(row.original.logMessage)}
+                                {/*{console.log(row.original.logMessage)}*/}
                                 {row.original.logMessage}
 
 

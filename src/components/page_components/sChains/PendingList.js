@@ -171,17 +171,17 @@ export default class LogsList extends React.Component {
                 Header: () => this.headerTooltip('Date', "Date of log creation"),
                 width: 200,
                 accessor: "date",
-                filterable: true,
+                // filterable: true,
             },
             {
                 Header: () => this.headerTooltip('Status', "Schain status"),
                 accessor: "status",
-                filterable: true,
+                // filterable: true,
             },
             {
                 Header: () => this.headerTooltip('Name', "Unique Schain Name"),
                 accessor: "name",
-                filterable: true,
+                // filterable: true,
 
             },
             {
@@ -200,6 +200,8 @@ export default class LogsList extends React.Component {
                 <ReactTable
                     data={items}
                     columns={columns}
+                    filterable={false}
+
                     //defaultPageSize={10}
                     pgination={false}
                     showPagination={false}
@@ -207,7 +209,6 @@ export default class LogsList extends React.Component {
                     defaultSorted={[
                         {id: "date", desc: true},
                     ]}
-                    filterable
                 />
             </div>
         )
