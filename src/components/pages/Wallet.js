@@ -23,6 +23,7 @@ import skaleLogo from '../../images/coins/skale.jpg';
 import SendModalReceive from "../page_components/wallet/SendModalReceive";
 
 const skale = require('@skale-labs/skale-api');
+const jsonCustom = require('../../abi.json');
 
 
 export default class BotExchange extends React.Component {
@@ -47,7 +48,7 @@ export default class BotExchange extends React.Component {
     componentWillReceiveProps() {
         if (!this.state.libInit && this.props.web3Connector) {
             let provider = this.props.web3Connector.provider;
-            skale.initBothProviders('51.0.1.99', '8546', provider);
+            skale.initBothProviders('13.59.228.21', '8546', provider, jsonCustom);
             this.setState({libInit: true});
             this.initBalanceChecker();
             this.initTransactionsChecker();

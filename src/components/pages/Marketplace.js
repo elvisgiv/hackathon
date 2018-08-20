@@ -39,7 +39,7 @@ export default class Marketplace extends React.Component {
     if (!this.state.libInit && this.props.web3Connector) {
       let provider = this.props.web3Connector.provider;
       //skale.initBothProviders('51.0.1.99', '8546', provider);
-      skale.initBothProviders('51.0.1.99', '8546', provider);
+      skale.initBothProviders('13.59.228.21', '8546', provider);
       this.setState({libInit: true});
       this.initBalanceChecker();
     }
@@ -64,7 +64,7 @@ export default class Marketplace extends React.Component {
     let account = accounts[0];
     let skaleBotAccountInfo = await skale.bot().getInfoForAccount(account);
 
-    let accountSkaleWeiBalance = await skale.token().balanceOf(account);
+    let accountSkaleWeiBalance = await skale.contract('token')().balanceOf(account);
     let accountSkaleBalance = skale.w3.web3.utils.fromWei(accountSkaleWeiBalance.toString());
 
     let accountEthWeiBalance = await skale.w3.web3.eth.getBalance(account);

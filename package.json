@@ -8,7 +8,7 @@
     "@amcharts/amcharts3-react": "^3.0.0",
     "@material/drawer": "^0.33.0",
     "@material/ripple": "^0.25.0",
-    "@skale-labs/skale-api": "0.6.9",
+    "@skale-labs/skale-api": "0.7.2",
     "amstock3": "amcharts/amstock3",
     "bootstrap": "^4.0.0-beta.3",
     "faker": "^4.1.0",

@@ -1,5 +1,5 @@
 {
-  "skale_token_address": "0xe532cf23d1595c84cf06268423bdd9607b5680c6",
+  "skale_token_address": "0xfde3939fa81074086708a81605f912779d6c134e",
   "skale_token_abi": [
     {
       "constant": true,
@@ -259,6 +259,16 @@
           "indexed": false,
           "name": "amount",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "time",
+          "type": "uint32"
+        },
+        {
+          "indexed": false,
+          "name": "gasSpend",
+          "type": "uint256"
         }
       ],
       "name": "Mint",
@@ -275,6 +285,16 @@
         {
           "indexed": false,
           "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "time",
+          "type": "uint32"
+        },
+        {
+          "indexed": false,
+          "name": "gasSpend",
           "type": "uint256"
         }
       ],
@@ -303,6 +323,16 @@
           "indexed": false,
           "name": "_data",
           "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "name": "time",
+          "type": "uint32"
+        },
+        {
+          "indexed": false,
+          "name": "gasSpend",
+          "type": "uint256"
         }
       ],
       "name": "Transfer",
@@ -324,6 +354,16 @@
         {
           "indexed": false,
           "name": "_value",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "time",
+          "type": "uint32"
+        },
+        {
+          "indexed": false,
+          "name": "gasSpend",
           "type": "uint256"
         }
       ],
@@ -377,7 +417,7 @@
       "type": "function"
     }
   ],
-  "skale_nodes_address": "0xc8eaa3a515e5ae64bdc401c01083d32c4619302e",
+  "skale_nodes_address": "0x3d132cda60bdbbf0ac2d63caae5faa724d3dc88f",
   "skale_nodes_abi": [
     {
       "constant": true,
@@ -1082,6 +1122,7 @@
       "type": "function"
     }
   ],
+  "skale_groups_address": "0x96fb8de4a1e691d08d58bea23ddceee8a669396b",
   "skale_groups_abi": [
     {
       "inputs": [
@@ -1374,8 +1415,7 @@
       "type": "function"
     }
   ],
-  "skale_groups_address": "0xc45c4afce4a8e816e0b4638827fc1c0e7aa008b4",
-  "skale_validators_address": "0xdebf3837f239d205904af97548075163b31e5b7d",
+  "skale_validators_address": "0xf0363c27d7849e18eed7598e783dd1eaf64ee248",
   "skale_validators_abi": [
     {
       "constant": true,
@@ -1768,7 +1808,7 @@
       "type": "function"
     }
   ],
-  "skale_schains_address": "0xfcddc47f222a6cc0d5a80c53684abaaeecc011c1",
+  "skale_schains_address": "0xc8c2907ef58e0904a20762b776c3393de8439094",
   "skale_schains_abi": [
     {
       "inputs": [
@@ -2112,7 +2152,7 @@
       "type": "function"
     }
   ],
-  "skale_manager_address": "0xd3f209ac23a28a0d6fd9f85376a9b540605e90cb",
+  "skale_manager_address": "0x5a1d6c9eec09c7488b52cb658c6d2a1c3680a349",
   "skale_manager_abi": [
     {
       "constant": true,
@@ -2602,7 +2642,7 @@
       "type": "function"
     }
   ],
-  "skale_bot_address": "0x6a72d27eafb83da48e18d54550856ccca0c55408",
+  "skale_bot_address": "0x6f11dd715845299212817c5694547009db8125da",
   "skale_bot_abi": [
     {
       "constant": true,

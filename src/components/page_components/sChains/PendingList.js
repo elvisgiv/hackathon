@@ -27,7 +27,7 @@ export default class LogsList extends React.Component {
             showFilters: false,
         };
         //
-        let ip = '51.0.1.99';
+        let ip = '13.59.228.21';
         let port = '8546';
         gex.init(ip, port, jsonCustom);
         //
@@ -202,7 +202,7 @@ export default class LogsList extends React.Component {
                     columns={columns}
                     filterable={false}
 
-                    //defaultPageSize={10}
+                    defaultPageSize={10}
                     pgination={false}
                     showPagination={false}
                     className="-striped -highlight"

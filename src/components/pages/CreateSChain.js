@@ -52,9 +52,10 @@ export default class CreateMchain extends React.Component {
     if (!this.state.libInit && this.props.web3Connector) {
       let provider = this.props.web3Connector.provider;
       //gex.initWithProvider(provider);
-      let ip = '51.0.1.99';
+      let ip = '13.59.228.21';
       let port = '8546';
       console.log('inside componentWillReceiveProps');
+      console.log(provider);
 
       gex.initBothProviders(ip, port, provider, jsonCustom);
       this.setState({libInit: true});
@@ -135,6 +136,7 @@ export default class CreateMchain extends React.Component {
       // set to local storage
       this.setToLocalStorage(mChain);
       console.log("before schainCreate before schainCreate before schainCreate ")
+      console.log("before == deeddedededed!!!!!!!!!!!!!!!!!!!!!!! schainCreate before schainCreate ")
 
       let res = await gex.contract('manager').createSchain(mChain);
 

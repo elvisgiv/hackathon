@@ -8,6 +8,9 @@ import {Input} from 'reactstrap';
 import Admonition from "../../shared_components/Admonition";
 
 const skale = require('@skale-labs/skale-api');
+const jsonCustom = require('../../../abi.json');
+
+
 
 export default class SendModal extends React.Component {
 
@@ -24,8 +27,8 @@ export default class SendModal extends React.Component {
     if (!this.state.libInit && this.props.web3Connector) {
       let provider = this.props.web3Connector.provider;
       //skale.initBothProviders('51.0.1.99', '8546', provider);
-      // for amzon test
-      skale.initBothProviders('51.0.1.99', '8546', provider, );
+      // for amazon test
+      skale.initBothProviders('13.59.228.21', '8546', provider, jsonCustom);
       this.setState({libInit: true});
     }
   }
@@ -33,7 +36,7 @@ export default class SendModal extends React.Component {
   async sendSkale() {
     let accounts = await skale.w3.web3.eth.getAccounts();
     let weiVal = skale.w3.web3.utils.toWei(this.state.skaleVal.toString());
-    let res = await skale.token().transfer({from: accounts[0], to: this.state.address, amount: weiVal});
+    let res = await skale.contract('token').transfer({from: accounts[0], to: this.state.address, amount: weiVal});
     this.props.ToggleSend();
     this.props.showSnackbar('Tokens sent');
   }

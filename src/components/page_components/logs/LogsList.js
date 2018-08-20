@@ -14,6 +14,9 @@ const jsonCustom = require('../../../abi.json');
 const gex = require('@skale-labs/skale-api');
 const moment = require('moment');
 
+const Web3 = require('web3');
+
+
 export default class LogsList extends React.Component {
 
     constructor(props) {
@@ -25,7 +28,7 @@ export default class LogsList extends React.Component {
             showFilters: false,
         };
         //
-        let ip = '51.0.1.99';
+        let ip = '13.59.228.21';
         let port = '8546';
         gex.init(ip, port, jsonCustom);
         //
@@ -71,7 +74,9 @@ export default class LogsList extends React.Component {
         }
         //
         this.setState({logs: logs});
+        // console.log(new Web3(window.web3.currentProvider))
     }
+
 
     componentDidMount() {
         this.getLogsList();
