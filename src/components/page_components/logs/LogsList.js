@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom'
 
 import {Tooltip} from 'reactstrap';
 
+// import the react-json-view component
+import ReactJson from 'react-json-view'
+
 import {Button, ButtonIcon} from 'rmwc/Button';
 
 // Import React Table
@@ -67,7 +70,7 @@ export default class LogsList extends React.Component {
                 let logLevel = 'INFO';
 
                 logs.push({
-                        'logName': logName, 'logLevel': logLevel, 'logDate': logDate, 'logMessage': JSON.stringify(retValue),
+                        'logName': logName, 'logLevel': logLevel, 'logDate': logDate, 'logMessage': retValue, //JSON.stringify(retValue),
                     }
                 )
             }
@@ -189,10 +192,10 @@ export default class LogsList extends React.Component {
                     columns={columns}
                     defaultPageSize={10}
                     filterable
+                    freezeWhenExpanded={true}
                     defaultFilterMethod={this.filterCaseInsensitive}
-                    // pgination={true}
-                    // showPagination={false}
-
+                    showPagination={true}
+                    pagination={{ position: 'both' }}
                     className="-striped -highlight"
                     defaultSorted={[
                         {id: "logDate", desc: true},
@@ -202,7 +205,7 @@ export default class LogsList extends React.Component {
                             <div style={{padding: '10px'}}>
 
                                 {/*{console.log(row.original.logMessage)}*/}
-                                {row.original.logMessage}
+                                <ReactJson src={row.original.logMessage} />
 
 
                             </div>

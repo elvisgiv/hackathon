@@ -171,7 +171,7 @@ export default class LogsList extends React.Component {
                 Header: () => this.headerTooltip('Date', "Date of log creation"),
                 width: 200,
                 accessor: "date",
-                // filterable: true,
+                filterable: true,
             },
             {
                 Header: () => this.headerTooltip('Status', "Schain status"),
@@ -200,11 +200,9 @@ export default class LogsList extends React.Component {
                 <ReactTable
                     data={items}
                     columns={columns}
-                    filterable={false}
-
                     defaultPageSize={10}
-                    pgination={false}
-                    showPagination={false}
+                    // pgination={true}
+                    showPagination={true}
                     className="-striped -highlight"
                     defaultSorted={[
                         {id: "date", desc: true},

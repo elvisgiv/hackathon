@@ -50,7 +50,7 @@ export default class Marketplace extends React.Component {
     this.setState({
       timer: setInterval(() => {
         this.checkBalances()
-      }, 5000),
+      }, 25000),
     });
   }
 

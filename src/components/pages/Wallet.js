@@ -73,6 +73,12 @@ export default class BotExchange extends React.Component {
         });
     }
 
+
+    componentWillUnmount() {
+        clearInterval(this.state.timer);
+        clearInterval(this.state.transactionsTimer);
+    }
+
     async getTransactions() {
         let accounts = await skale.w3.getAccounts();
         let account = accounts[0];
