@@ -35,6 +35,7 @@ function loaders() {
             test: /\.css$/,
             use: [ 'style-loader', 'css-loader' , 'postcss-loader' ]
         },
+
         {
             test: /\.(jpg|png|svg)$/,
             loader: 'file-loader',
@@ -51,7 +52,7 @@ function loaders() {
                 loader: "sass-loader" // compiles Sass to CSS
             }]
 
-        }
+        },
 
     ]
 }
@@ -69,9 +70,9 @@ function entry() {
 function output() {
     if(env === 'prod'){
         return {
-            path: path.join(__dirname, 'public'),
+            path: path.join(__dirname, '../public'),
             filename: 'bundle.js',
-            publicPath: '/public/'
+            publicPath: '/'
         }
     }
     return {

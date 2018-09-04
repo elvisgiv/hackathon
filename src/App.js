@@ -156,7 +156,7 @@ export default class App extends Component {
 
                                     {/*<Route path='/marketplace' render={() => <Marketplace web3Connector={web3Connector}/>}/>*/}
 
-                                    <Route exact path='/mchains/:name'
+                                    <Route exact path='/schains/:name'
                                            render={(props) => <SChain web3Connector={web3Connector} props={props}/>}/>
 
                                     <Route exact path='/spanding-list'

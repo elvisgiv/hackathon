@@ -20,7 +20,7 @@ const jsonCustom = require('../../abi.json');
 
 const gex = require('@skale-labs/skale-api');
 
-export default class CreateMchain extends React.Component {
+export default class CreateSchain extends React.Component {
 
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ export default class CreateMchain extends React.Component {
       basCpuTime: '',
       basTransPerSec: '',
       libInit: false,
-      mChainNonces: [],
+      sChainNonces: [],
 
       tooltipStorageBytes: false,
       tooltipLifetime: false,
@@ -43,7 +43,7 @@ export default class CreateMchain extends React.Component {
       tooltipTransPerSec: false,
     };
     //
-    this.createMchain = this.createMchain.bind(this);
+    this.createSchain = this.createSchain.bind(this);
     this.toggle = this.toggle.bind(this);
 
   }
@@ -60,12 +60,12 @@ export default class CreateMchain extends React.Component {
       gex.initBothProviders(ip, port, provider, jsonCustom);
       this.setState({libInit: true});
       ///
-      this.initMChainListener();
+      this.initSchainListener();
     }
   }
 
-  initMChainListener() {
-    console.log('inside initMChainListener');
+  initSchainListener() {
+    console.log('inside initSchainListener');
 
     let self = this;
     let listener = new gex.listener(gex.contract('schains').events.SchainCreated(), async function (event) {
@@ -73,7 +73,7 @@ export default class CreateMchain extends React.Component {
       console.log(event.returnValues);
       self.setState({nonceFromEvent: event.returnValues.nonce})
     });
-    this.setState({mChainListener: listener})
+    this.setState({SchainListener: listener})
   }
 
   isFilled(basName, basStorageBytes, basLifetime, basMaxNodes,
@@ -89,7 +89,7 @@ export default class CreateMchain extends React.Component {
     }
   }
 
-  async createMchain() {
+  async createSchain() {
     // from form
     let basName = this.state.basName;
     let basStorageBytes = this.state.basStorageBytes;
@@ -102,12 +102,12 @@ export default class CreateMchain extends React.Component {
     // what for to Wei if deposit in skale????
     //let weiVal = gex.w3.web3.utils.toWei(basDeposit.toString());
 
-    let mChain = {
+    let sChain = {
       storageBytes: basStorageBytes, cpu: basCpuTime, transactionThroughput: basTransPerSec, lifetime: basLifetime,
       typeOfNodes: basMaxNodes, deposit: basDeposit, name: basName
     };
 
-    console.log('inside createMchain method');
+    console.log('inside createSchain method');
 
     //
     let isAvailable = false;
@@ -134,11 +134,11 @@ export default class CreateMchain extends React.Component {
     //
     if (isAvailable) {
       // set to local storage
-      this.setToLocalStorage(mChain);
+      this.setToLocalStorage(sChain);
       console.log("before schainCreate before schainCreate before schainCreate ")
       console.log("before == deeddedededed!!!!!!!!!!!!!!!!!!!!!!! schainCreate before schainCreate ")
 
-      let res = await gex.contract('manager').createSchain(mChain);
+      let res = await gex.contract('manager').createSchain(sChain);
 
       console.log("after schainCreate after schainCreate after schainCreate ")
 
@@ -155,7 +155,7 @@ export default class CreateMchain extends React.Component {
 
       /*swal({
         title: "Congratulations!",
-        text: "You just created the mchain!",
+        text: "You just created the sChain!",
         icon: "success",
       })*/
 
@@ -163,7 +163,7 @@ export default class CreateMchain extends React.Component {
       return (
         swal({
           title: "Attention!!!",
-          text: "Mchain with name '" + basName + "' already exists!",
+          text: "Schain with name '" + basName + "' already exists!",
           icon: "warning",
           //buttons: true,
           dangerMode: true,
@@ -173,9 +173,9 @@ export default class CreateMchain extends React.Component {
 
 
     //save nonces to array
-    /*        let arrayNonces = this.state.mChainNonces;
+    /*        let arrayNonces = this.state.sChainNonces;
             arrayNonces.push(nonce);
-            this.setState({mChainNonces: arrayNonces,});*/
+            this.setState({sChainNonces: arrayNonces,});*/
   }
 
   setToLocalStorage(obj) {
@@ -355,7 +355,7 @@ export default class CreateMchain extends React.Component {
                       {this.state.basDeposit} SKALE
                     </h3>
                   </div>
-                  <Button className="btn-md" unelevated raised onClick={this.createMchain} disabled={!this.state.libInit}>
+                  <Button className="btn-md" unelevated raised onClick={this.createSchain} disabled={!this.state.libInit}>
                       Create sChain
                   </Button>
 

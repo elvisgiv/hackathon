@@ -17,7 +17,7 @@ const jsonCustom = require('../../../abi.json');
 const gex = require('@skale-labs/skale-api');
 const moment = require('moment');
 
-export default class MchainsList extends React.Component {
+export default class SchainsList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -33,8 +33,8 @@ export default class MchainsList extends React.Component {
             tooltipOpenCpU: false,
             tooltipOpenCreationDate: false,
             tooltipOpenExpirationDate: false,
-            // for pass mchain name to mchain show
-            mChainName1: null,
+            // for pass schain name to schain show
+            sChainName1: null,
 
             showFilters: false,
         };
@@ -54,59 +54,59 @@ export default class MchainsList extends React.Component {
     }
 
 
-    async getMchainsList() {
+    async getSchainsList() {
         let channelsInfo = await gex.contract('manager').getSchainListInfo();
         //
         console.log(channelsInfo);
 
         this.setState({channelsInfo: channelsInfo});
         //
-        this.initMchains();
+        this.initSchains();
     }
 
-    initMchains() {
+    initSchains() {
         let self = this;
         let states = this.state.channelsInfo;
-        let mChains = [];
+        let sChains = [];
         //
         for (let i = 0; i < states.length; i++) {
-            let mChain = states[i];
+            let sChain = states[i];
             //
-            let owner = mChain.owner;
-            let mChainName = mChain.name;
-            let mChainStorage = mChain.storageBytes;
-            let mChainLifetime = mChain.lifetime;
-            let mChainCreatedAtInSec = mChain.creationDate;
-            let mChainNodeNumber = mChain.maxNodes;
-            let mChainDeposit = mChain.deposit;
-            let mChainCpu = mChain.cpu;
-            let mChainTps = mChain.transactionThroughput;
+            let owner = sChain.owner;
+            let sChainName = sChain.name;
+            let sChainStorage = sChain.storageBytes;
+            let sChainLifetime = sChain.lifetime;
+            let sChainCreatedAtInSec = sChain.creationDate;
+            let sChainNodeNumber = sChain.maxNodes;
+            let sChainDeposit = sChain.deposit;
+            let sChainCpu = sChain.cpu;
+            let sChainTps = sChain.transactionThroughput;
             //
-            let date = moment.utc(mChainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
+            let date = moment.utc(sChainCreatedAtInSec * 1000).format("YYYY/MM/DD HH:mm:ss");
             //
-            let dateTo = moment.utc((parseInt(mChainCreatedAtInSec) +
-                parseInt(mChainLifetime)) * 1000).format("YYYY/MM/DD HH:mm:ss");
+            let dateTo = moment.utc((parseInt(sChainCreatedAtInSec) +
+                parseInt(sChainLifetime)) * 1000).format("YYYY/MM/DD HH:mm:ss");
             // countdown run
-            let countdown = MchainsList.countdown(mChainCreatedAtInSec, mChainLifetime);
+            let countdown = SchainsList.countdown(sChainCreatedAtInSec, sChainLifetime);
             //
-            mChains.push({
-                'owner': owner, 'mChainName': mChainName, 'mChainStorage': mChainStorage,
-                'mChainLifetime': dateTo, 'mChainCreatedAt': date, 'mChainNodeNumber': mChainNodeNumber,
-                'mChainCreatedAtInSec': mChainCreatedAtInSec, 'mChainLifetimeInSec': mChainLifetime,
-                'mChainDeposit': mChainDeposit, 'countdown': countdown,
-                'mChainCpu': mChainCpu ? mChainCpu : 'in developing',
-                'mChainTps': mChainTps ? mChainTps : 'in developing',
+            sChains.push({
+                'owner': owner, 'sChainName': sChainName, 'sChainStorage': sChainStorage,
+                'sChainLifetime': dateTo, 'sChainCreatedAt': date, 'sChainNodeNumber': sChainNodeNumber,
+                'sChainCreatedAtInSec': sChainCreatedAtInSec, 'sChainLifetimeInSec': sChainLifetime,
+                'sChainDeposit': sChainDeposit, 'countdown': countdown,
+                'sChainCpu': sChainCpu ? sChainCpu : 'in developing',
+                'sChainTps': sChainTps ? sChainTps : 'in developing',
             });
         }
-        //return mChains;
-        this.setState({mChains: mChains});
+        //return sChains;
+        this.setState({sChains: sChains});
     }
 
     componentDidMount() {
-        this.getMchainsList();
+        this.getSchainsList();
         this.setState({
             timer: setInterval(() => {
-                this.getMchainsList()
+                this.getSchainsList()
             }, 5000),
         });
     }
@@ -115,29 +115,29 @@ export default class MchainsList extends React.Component {
         clearInterval(this.state.timer);
     }
 
-    getFieldsFromMchain(value) {
-        let mChainCreatedAtInSec, mChainLifetimeInSec;
-        let items = this.state.mChains;
+    getFieldsFromSchain(value) {
+        let sChainCreatedAtInSec, sChainLifetimeInSec;
+        let items = this.state.sChains;
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
-            if (item.mChainName === value) {
-                mChainCreatedAtInSec = item.mChainCreatedAtInSec;
-                mChainLifetimeInSec = item.mChainLifetimeInSec;
+            if (item.sChainName === value) {
+                sChainCreatedAtInSec = item.sChainCreatedAtInSec;
+                sChainLifetimeInSec = item.sChainLifetimeInSec;
                 break;
             }
         }
         //
-        return [mChainCreatedAtInSec, mChainLifetimeInSec]
+        return [sChainCreatedAtInSec, sChainLifetimeInSec]
     }
 
     isExpired(value) {
-        let array = this.getFieldsFromMchain(value);
+        let array = this.getFieldsFromSchain(value);
         //
-        let mChainCreatedAtInSec = array[0];
-        let mChainLifetimeInSec = array[1];
+        let sChainCreatedAtInSec = array[0];
+        let sChainLifetimeInSec = array[1];
         //
         let timeNow = Math.round(new Date().getTime() / 1000);
-        let countDownDate = parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetimeInSec);
+        let countDownDate = parseInt(sChainCreatedAtInSec) + parseInt(sChainLifetimeInSec);
         //
         return (
             <div style={{textAlign: "right"}}>
@@ -170,15 +170,15 @@ export default class MchainsList extends React.Component {
                         gex.contract('manager').withdrawFromSchain(name);
                         break;
                     default:
-                        swal("Withdraw from '" + name + "' mchain are rejected.");
+                        swal("Withdraw from '" + name + "' sChain are rejected.");
                 }
             })
     }
 
-    static countdown(mChainCreatedAtInSec, mChainLifetime) {
+    static countdown(sChainCreatedAtInSec, sChainLifetime) {
         let str;
         // set countDownDate in ms
-        let countDownDate = (parseInt(mChainCreatedAtInSec) + parseInt(mChainLifetime)) * 1000;
+        let countDownDate = (parseInt(sChainCreatedAtInSec) + parseInt(sChainLifetime)) * 1000;
         // Get todays date and time in ms
         let now = new Date().getTime();
         // Find the distance between now an the count down date
@@ -237,7 +237,7 @@ export default class MchainsList extends React.Component {
     linkTo(name) {
         return (
             <div style={{fontWeight: 600, fontSize: "12pt"}} className="padd-ri-md">
-                <Link to={`/mchains/${name}`}>
+                <Link to={`/sChains/${name}`}>
                     {name}
                 </Link>
             </div>
@@ -252,12 +252,12 @@ export default class MchainsList extends React.Component {
 
     render() {
 
-        const items = this.state.mChains;
+        const items = this.state.sChains;
         // for react-table
         const columns = [
             {
                 Header: () => this.headerTooltip('Name', "Unique Schain Name"),
-                accessor: "mChainName",
+                accessor: "sChainName",
                 filterable: true,
                 //width: 140,
 
@@ -266,38 +266,38 @@ export default class MchainsList extends React.Component {
             },
             {
                 Header: () => this.headerTooltip('Storage', "Storage in bytes"),
-                accessor: "mChainStorage",
+                accessor: "sChainStorage",
             },
             {
                 Header: () => this.headerTooltip('Nodes', "Max number of nodes in this Schain"),
-                accessor: "mChainNodeNumber",
+                accessor: "sChainNodeNumber",
             },
 
             {
                 Header: () => this.headerTooltip('CpU', "Central Processing Unit time in % or units"),
-                accessor: "mChainCpu",
+                accessor: "sChainCpu",
                 //width: 100
 
             },
             {
                 Header: () => this.headerTooltip('TpS', "Transaction Per Second"),
-                accessor: "mChainTps",
+                accessor: "sChainTps",
                 //width: 100
 
             },
             {
                 Header: () => this.headerTooltip('Creation Date', "Creation Date"),
-                accessor: "mChainCreatedAt",
+                accessor: "sChainCreatedAt",
                 //width: 160
             },
             {
                 Header: () => this.headerTooltip('Expiration Date', "Expiration Date"),
-                accessor: "mChainLifetime",
+                accessor: "sChainLifetime",
                 //width: 160
             },
             {
                 Header: () => this.headerTooltip('Deposit', "Deposit in SkaleTokens (SKL)"),
-                accessor: "mChainDeposit",
+                accessor: "sChainDeposit",
             },
             /*{
               Header: () => this.headerTooltip('Expires', "Expires after"),
@@ -307,7 +307,7 @@ export default class MchainsList extends React.Component {
                 Header: "",
                 // add custom value to "Commands" column
                 id: 'button',
-                accessor: 'mChainName', //value
+                accessor: 'sChainName', //value
                 //width: 120,
                 sortable: false,
                 Cell: ({value}) => this.isExpired(value)
@@ -324,7 +324,7 @@ export default class MchainsList extends React.Component {
                     showPagination={true}
                     className="-striped -highlight"
                     defaultSorted={[
-                        {id: "mChainCreatedAt", desc: true},
+                        {id: "sChainCreatedAt", desc: true},
                     ]}
                 />
                 <Snackbar

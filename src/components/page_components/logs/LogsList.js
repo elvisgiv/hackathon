@@ -26,7 +26,7 @@ export default class LogsList extends React.Component {
         super(props);
         this.state = {
             timer: null,
-            mChainName1: null,
+            sChainName1: null,
 
             showFilters: false,
         };
