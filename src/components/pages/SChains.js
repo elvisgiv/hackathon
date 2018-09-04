@@ -21,14 +21,14 @@ export default class sChains extends React.Component {
           <div className="fl-cont fl-center-vert padd-bott-30">
             <div className="fl-col fl-grow">
               <PageTitle
-                title="sChains"
-                subtitle="Please, choose an sChain to view or create a new one."
+                title="S-chains"
+                subtitle="Please, choose an S-chain to view or create a new one."
                 nopadd={true}
               />
             </div>
             <div className="fl-wrap">
               <Link to='/schains/create' className="undec">
-                <Button className="btn-md" unelevated>Create sChain</Button>
+                <Button className="btn-md" unelevated>Create S-chain</Button>
               </Link>
             </div>
           </div>

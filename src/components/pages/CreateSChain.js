@@ -213,8 +213,8 @@ export default class CreateSchain extends React.Component {
       <div className="marg-30">
 
         <PageTitle
-          title="Create sChain"
-          subtitle="Create your own sChain with custom parameters."
+          title="Create S-chain"
+          subtitle="Create your own S-chain with custom parameters."
         />
 
         {/*<div className='fl-wrap padd-md clickable lite-gx-border choice-card'>

@@ -274,13 +274,13 @@ export default class SchainsList extends React.Component {
             },
 
             {
-                Header: () => this.headerTooltip('CpU', "Central Processing Unit time in % or units"),
+                Header: () => this.headerTooltip('CPU', "Central Processing Unit time in % or units"),
                 accessor: "sChainCpu",
                 //width: 100
 
             },
             {
-                Header: () => this.headerTooltip('TpS', "Transaction Per Second"),
+                Header: () => this.headerTooltip('TPS', "Transaction Per Second"),
                 accessor: "sChainTps",
                 //width: 100
 
@@ -296,7 +296,7 @@ export default class SchainsList extends React.Component {
                 //width: 160
             },
             {
-                Header: () => this.headerTooltip('Deposit', "Deposit in SkaleTokens (SKL)"),
+                Header: () => this.headerTooltip('Deposit', "Deposit in SKALE tokens"),
                 accessor: "sChainDeposit",
             },
             /*{

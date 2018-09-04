@@ -86,7 +86,7 @@ export default class Sidebar extends React.Component {
                 <Icon strategy="ligature" className="gray-icon">group_work</Icon>
               </div>
               <ListItemText className="fl-wrap padd-left-md">
-                sChains
+                S-chains
               </ListItemText>
             </ListItem>
           </Link>
@@ -97,7 +97,7 @@ export default class Sidebar extends React.Component {
                 <Icon strategy="ligature" className="gray-icon">pregnant_woman</Icon>
               </div>
               <ListItemText className="fl-wrap padd-left-md">
-                  Pending sChains
+                  Pending S-chains
               </ListItemText>
             </ListItem>
           </Link>
