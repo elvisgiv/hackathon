@@ -117,7 +117,7 @@ export default class CreateSchain extends React.Component {
     // isFilled = true;
     //
     if (isFilled) {
-      //isAvailable = await gex.contract('manager').isSchainIdAvailable(basName);
+      // isAvailable = await gex.contract('schains').isSchainIdAvailable(basName);
       isAvailable = true;
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!")
     } else {

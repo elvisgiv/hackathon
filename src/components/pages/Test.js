@@ -34,7 +34,7 @@ export default class Test extends React.Component {
     }
 
     async getLogsList() {
-        let channelsInfo = await gex.contract('manager').getSchainListInfo();
+        let channelsInfo = await gex.contract('schains').getSchainListInfo();
         //
         this.setState({channelsInfo: channelsInfo});
         //

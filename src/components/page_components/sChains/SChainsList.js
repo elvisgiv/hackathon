@@ -55,6 +55,9 @@ export default class SchainsList extends React.Component {
 
 
     async getSchainsList() {
+        // for @skale_lib 0.11.0^
+        // let channelsInfo = await gex.contract('schains').getSchainListInfo();
+        // for @skalelib 0.10.0
         let channelsInfo = await gex.contract('manager').getSchainListInfo();
         //
         console.log(channelsInfo);

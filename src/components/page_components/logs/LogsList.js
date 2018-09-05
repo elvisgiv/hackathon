@@ -45,6 +45,9 @@ export default class LogsList extends React.Component {
     }
 
     async getLogsList() {
+        // for @skale_lib 0.11.0^
+        // let channelsInfo = await gex.contract('schains').getSchainListInfo();
+        // for @skalelib 0.10.0
         let channelsInfo = await gex.contract('manager').getSchainListInfo();
         //
         this.setState({channelsInfo: channelsInfo});
