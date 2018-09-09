@@ -19,15 +19,9 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            walletConnector: {},
         };
     }
 
-    componentWillReceiveProps(){
-        if (this.props.walletConnector){
-            this.setState({walletConnector: this.props.walletConnector})
-        }
-    }
 
     render() {
         return (
@@ -35,7 +29,7 @@ export default class Header extends React.Component {
               <ToolbarRow>
                   <ToolbarSection alignStart>
                       <ToolbarTitle className="no-padd no-marg">
-                          <Link to='/' className="undec">
+                          <Link to='/users' className="undec">
                               <img src={logo} className="header-logo"/>
                           </Link>
                       </ToolbarTitle>
@@ -53,7 +47,6 @@ export default class Header extends React.Component {
                                                           src={"data:image/png;base64," + this.props.avatarData}/> : null}
                           </div>
                       </div>
-
 
                   </ToolbarSection>
               </ToolbarRow>

@@ -6,26 +6,12 @@ import Header from "./components/shared_components/Header";
 import Sidebar from './components/shared_components/Sidebar';
 import Web3Connection from './components/shared_components/Web3Connection';
 
-import Logs from './components/pages/Logs';
-import Reporting from './components/pages/Reporting';
-import Dapps from './components/pages/DApps';
-import UploadDapp from './components/page_components/dapps/UploadDApp';
 
-import SChain from './components/pages/SChain';
-import SChains from './components/pages/SChains';
-import CreateSChain from './components/pages/CreateSChain';
-
-import SpendingList from './components/pages/SpendingList';
+import User from './components/pages/User';
+import Users from './components/pages/Users';
+import CreateUser from './components/pages/CreateUser';
 
 import Test from './components/pages/Test';
-
-
-// for wallet
-import Wallet from './components/pages/Wallet';
-import FromEth from './components/page_components/maketplace/FromEth';
-import FromSkale from './components/page_components/maketplace/FromSkale';
-//
-// import Marketplace from "./components/pages/Marketplace";
 
 import 'material-components-web/dist/material-components-web.min.css';
 
@@ -34,21 +20,14 @@ const jsonCustom = require('./abi.json');
 
 const Identicon = require('identicon.js');
 
-const skale = require('@skale-labs/skale-api');
+import Web3 from 'web3';
+
+const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
 const ROUTES = {
-    '/': {title: 'sChains'},
-    '/schains': {title: 'sChains'},
-    '/schains/create': {title: 'Create sChain'},
-    '/wallet': {title: 'Wallet'},
-    '/reporting': {title: 'Reporting'},
-    '/logs': {title: 'Logs'},
-    '/exchange-eth': {title: 'Exchange ETH'},
-    '/exchange-skl': {title: 'Exchange SKL'},
-    // '/dapps': {title: 'dApps'},
-    // '/dapps/upload': {title: 'Upload Dapp'},
-    '/spanding-list': {title: 'Schain panding list'},
-    // '/marketplace': {title: 'Marketplace'},
+    '/': {title: 'Users'},
+    '/users': {title: 'Users'},
+    '/users/create': {title: 'Create User'},
 };
 
 
@@ -71,11 +50,11 @@ export default class App extends Component {
 
         if (web3Connector) {
             if (!this.state.libInit) {
-                skale.initBothProviders('13.59.228.21', '8546', web3Connector.provider, jsonCustom);
+                web3
                 this.setState({libInit: true});
             }
             if (this.state.libInit) {
-                this.initAvatarData();
+                // this.initAvatarData();
             }
         }
     }
@@ -99,19 +78,19 @@ export default class App extends Component {
         this.persistentOpen = this.persistentOpen === undefined ? false : !this.persistentOpen;
     }
 
-    async initAvatarData() {
-        let accounts = await skale.w3.getAccounts();
-        let account = accounts[0];
-        this.setState({
-            avatarData: new Identicon(account, {
-                margin: 0.22,
-                size: 35,
-                background: [216, 216, 216, 255],
-                brightness: 0.4,
-                saturation: 1
-            }).toString()
-        });
-    }
+    // async initAvatarData() {
+    //     let accounts = await skale.w3.getAccounts();
+    //     let account = accounts[0];
+    //     this.setState({
+    //         avatarData: new Identicon(account, {
+    //             margin: 0.22,
+    //             size: 35,
+    //             background: [216, 216, 216, 255],
+    //             brightness: 0.4,
+    //             saturation: 1
+    //         }).toString()
+    //     });
+    // }
 
     render() {
         let web3Connector = this.state.web3Connector;
@@ -131,36 +110,17 @@ export default class App extends Component {
                             <div className="skale-page-content">
                                 <Switch>
                                     <Route exact path='/' render={() => <Wallet web3Connector={web3Connector}/>}/>
-                                    <Route exact path='/schains'
-                                           render={() => <SChains web3Connector={web3Connector}/>}/>
-                                    <Route exact path='/schains/create'
-                                           render={() => <CreateSChain web3Connector={web3Connector}/>}/>
-
-                                    <Route exact path='/logs' render={() => <Logs web3Connector={web3Connector}/>}/>
-                                    <Route exact path='/reporting'
-                                           render={() => <Reporting web3Connector={web3Connector}/>}/>
-                                    {/*
-                  <Route exact path='/dapps' render={() => <Dapps web3Connector={web3Connector}/>}/>
-*/}
-
-                                    <Route path='/wallet' render={() => <Wallet web3Connector={web3Connector}/>}/>
-                                    <Route path='/exchange-eth'
-                                           render={() => <FromSkale web3Connector={web3Connector}/>}/>
-                                    <Route path='/exchange-skl'
-                                           render={() => <FromEth web3Connector={web3Connector}/>}/>
-                                    <Route path='/dapps/upload'
-                                           render={() => <UploadDapp web3Connector={web3Connector}/>}/>
+                                    <Route exact path='/users'
+                                           render={() => <Users web3Connector={web3Connector}/>}/>
+                                    <Route exact path='/users/create'
+                                           render={() => <CreateUser web3Connector={web3Connector}/>}/>
 
 
                                     <Route path='/test' render={() => <Test web3Connector={web3Connector}/>}/>
 
-                                    {/*<Route path='/marketplace' render={() => <Marketplace web3Connector={web3Connector}/>}/>*/}
+                                    <Route exact path='/users/:name'
+                                           render={(props) => <User web3Connector={web3Connector} props={props}/>}/>
 
-                                    <Route exact path='/schains/:name'
-                                           render={(props) => <SChain web3Connector={web3Connector} props={props}/>}/>
-
-                                    <Route exact path='/spanding-list'
-                                           render={() => <SpendingList web3Connector={web3Connector}/>}/>
 
                                 </Switch>
                             </div>
